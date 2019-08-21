@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "malum:blocks/dark_roofing",
+    "top": "malum:blocks/dark_roofing",
+    "side": "malum:blocks/dark_roofing"
+  }
+}

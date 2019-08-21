@@ -1,0 +1,8 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "malum:blocks/wooden_casing",
+    "top": "malum:blocks/wooden_casing",
+    "side": "malum:blocks/wooden_casing"
+  }
+}
