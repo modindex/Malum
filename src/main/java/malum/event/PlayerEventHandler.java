@@ -8,9 +8,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.WitherSkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraftforge.event.TickEvent;
@@ -103,16 +106,40 @@ public class PlayerEventHandler
         if (event.getSource().getTrueSource() instanceof LivingEntity)
         {
             LivingEntity entityLivingBase = (LivingEntity) event.getSource().getTrueSource();
-            if (entityLivingBase != null) {
+            if (entityLivingBase != null)
+            {
                 Hand hand = entityLivingBase.swingingHand;
-                if (entityLivingBase.getHeldItem(entityLivingBase.swingingHand).getItem() == Items.WOODEN_SWORD) {
+                if (entityLivingBase.getHeldItem(entityLivingBase.swingingHand).getItem() == Items.WOODEN_SWORD)
+                {
                     Entity target = event.getEntityLiving();
-                    if (target instanceof WitherSkeletonEntity) {
-                        if (((WitherSkeletonEntity) target).getHealth() <= 0) {
+                    if (target instanceof WitherSkeletonEntity)
+                    {
+                        if (((WitherSkeletonEntity) target).getHealth() <= 0)
+                        {
                             entityLivingBase.getHeldItem(hand).setDamage(entityLivingBase.getHeldItem(hand).getMaxDamage());
                             entityLivingBase.setHeldItem(hand, ModItems.withering_rapier.getDefaultInstance());
                         }
                     }
+                }
+                if (entityLivingBase.getHeldItem(entityLivingBase.swingingHand).getItem() == ModItems.withering_rapier)
+                {
+                    LivingEntity target = event.getEntityLiving();
+                    if (target.getHealth() <= 0)
+                    {
+                        ItemEntity spawnedItem = (new ItemEntity(target.world, target.posX, target.posY, target.posZ, new ItemStack(ModItems.evil_spirit)));
+                        ItemStack spawnedStack = spawnedItem.getItem();
+                        if (spawnedStack.getTag() == null)
+                        {
+                            spawnedStack.setTag(new CompoundNBT());
+                        }
+                        CompoundNBT spawnedNBT = spawnedStack.getTag();
+                        assert spawnedNBT != null;
+                        spawnedNBT.putInt("swordPower", 1);
+                        spawnedNBT.putString("entityDisplayName", target.getDisplayName().getString());
+                        target.getEntityWorld().addEntity(spawnedItem);
+
+                    }
+
                 }
             }
         }

@@ -5,6 +5,7 @@ import malum.MalumMod;
 import malum.items.armor.ItemArmorCatastrophe;
 import malum.items.curios.*;
 import malum.items.gadgets.*;
+import malum.items.special.ItemEvilSpirit;
 import malum.items.tools.ItemTransmutationPowder;
 import malum.items.tools.ItemWitheringRapier;
 import net.minecraft.block.Block;
@@ -36,7 +37,7 @@ public class ModItems
     public static Item metal_necklace = null;
     public static Item metal_belt = null;
     public static Item cursed_flare = null;
-    public static Item evil_essence = null;
+    public static Item evil_spirit = null;
 
     //curios
     public static Item leather_ring = null;
@@ -60,6 +61,8 @@ public class ModItems
     public static Item dark_roofing_stairs = null;
     public static Item refined_bricks = null;
     public static Item refined_pathway = null;
+    public static Item refined_bricks_stairs = null;
+    public static Item refined_pathway_stairs = null;
     public static Item wooden_beam = null;
     public static Item wooden_casing = null;
     public static Item wooden_casing_stairs = null;
@@ -86,15 +89,22 @@ public class ModItems
                 thorns_belt = setup(new ItemThornsBelt(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "thorns_belt"),
                 healing_belt = setup(new ItemHealingBelt(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "healing_belt"),
                 air_necklace = setup(new ItemAirNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "air_necklace"),
+
                 end_forged_ingot = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_forged_ingot"),
                 end_forged_nugget = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_forged_nugget"),
                 metal_necklace = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "metal_necklace"),
                 metal_belt = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "metal_belt"),
                 cursed_flare = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "cursed_flare"),
+                evil_spirit = setup(new ItemEvilSpirit(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_spirit"),
+
                 dark_roofing = setup(new BlockItem(ModBlocks.dark_roofing, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing"),
                 wooden_beam = setup(new BlockItem(ModBlocks.wooden_beam, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_beam"),
                 dark_roofing_stairs = setup(new BlockItem(ModBlocks.dark_roofing_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing_stairs"),
                 wooden_casing = setup(new BlockItem(ModBlocks.wooden_casing, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_casing"),
+                refined_bricks = setup(new BlockItem(ModBlocks.refined_bricks, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_bricks"),
+                refined_bricks_stairs = setup(new BlockItem(ModBlocks.refined_bricks_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_bricks_stairs"),
+                refined_pathway = setup(new BlockItem(ModBlocks.refined_pathway, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_pathway"),
+                refined_pathway_stairs = setup(new BlockItem(ModBlocks.refined_pathway_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_pathway_stairs"),
                 wooden_casing_stairs = setup(new BlockItem(ModBlocks.wooden_casing_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_casing_stairs")
         );
     }
