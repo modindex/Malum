@@ -54,7 +54,7 @@ public class ItemEvilSpirit extends Item
     }
     else
     {
-      addStringToTooltip(I18n.format("sneak for more info"), tooltip);
+      addStringToTooltip(I18n.format("sneak_info_tooltip"), tooltip);
     }
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }
