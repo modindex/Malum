@@ -32,7 +32,8 @@ public class ItemEvilSpirit extends Item
     if (Screen.hasShiftDown())
     {
       CompoundNBT tag = stack.getTag();
-      if (tag != null) {
+      if (tag != null)
+      {
         int swordPower = tag.getInt("swordPower");
         String entityDisplayName = tag.getString("entityDisplayName");
         int dimensionID = tag.getInt("dimensionID");
@@ -47,9 +48,20 @@ public class ItemEvilSpirit extends Item
                         "sword_power_uncontrorable" //4
                 };
         //main aspects
-        addStringToTooltip(TextFormatting.GRAY + I18n.format("sword_power_tooltip: ") + swordPowerString[swordPower], tooltip);
-        addStringToTooltip(I18n.format("entity_type_tooltip: ") + entityDisplayName, tooltip);
+        if (swordPower >= 1)
+        {
+          addStringToTooltip(TextFormatting.ITALIC + I18n.format("sword_power_tooltip: ") + swordPowerString[swordPower], tooltip);
+        }
 
+        if (swordPower >= 2) {
+          addStringToTooltip(TextFormatting.ITALIC + I18n.format("entity_type_tooltip: ") + entityDisplayName, tooltip);
+        }
+        if (swordPower >= 3) {
+          addStringToTooltip(TextFormatting.ITALIC + I18n.format("dimension_id_tooltip: ") + dimensionID, tooltip);
+        }
+        if (swordPower >= 4) {
+          addStringToTooltip(TextFormatting.ITALIC + I18n.format("biome_display_name_tooltip: ") + biomeDisplayName, tooltip);
+        }
       }
     }
     else

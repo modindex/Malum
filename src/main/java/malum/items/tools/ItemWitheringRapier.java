@@ -14,7 +14,7 @@ public class ItemWitheringRapier extends SwordItem {
   }
   public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker)
   {
-    //target.addPotionEffect(new EffectInstance(Effects.WITHER, 30, 1));
+    target.addPotionEffect(new EffectInstance(Effects.WITHER, 30, 1));
     return true;
   }
 }

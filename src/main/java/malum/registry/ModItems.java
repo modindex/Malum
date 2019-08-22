@@ -6,6 +6,7 @@ import malum.items.armor.ItemArmorCatastrophe;
 import malum.items.curios.*;
 import malum.items.gadgets.*;
 import malum.items.special.ItemEvilSpirit;
+import malum.items.special.ItemWeaponAttunementCore;
 import malum.items.tools.ItemTransmutationPowder;
 import malum.items.tools.ItemWitheringRapier;
 import net.minecraft.block.Block;
@@ -38,6 +39,10 @@ public class ModItems
     public static Item metal_belt = null;
     public static Item cursed_flare = null;
     public static Item evil_spirit = null;
+    public static Item weapon_attunement_core_weak = null;
+    public static Item weapon_attunement_core_avarge = null;
+    public static Item weapon_attunement_core_strong = null;
+    public static Item weapon_attunement_core_uncontrorable = null;
 
     //curios
     public static Item leather_ring = null;
@@ -96,6 +101,10 @@ public class ModItems
                 metal_belt = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "metal_belt"),
                 cursed_flare = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "cursed_flare"),
                 evil_spirit = setup(new ItemEvilSpirit(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_spirit"),
+                weapon_attunement_core_weak = setup(new ItemWeaponAttunementCore(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "weapon_attunement_core_weak"),
+                weapon_attunement_core_avarge = setup(new ItemWeaponAttunementCore(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "weapon_attunement_core_avarge"),
+                weapon_attunement_core_strong = setup(new ItemWeaponAttunementCore(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "weapon_attunement_core_strong"),
+                weapon_attunement_core_uncontrorable = setup(new ItemWeaponAttunementCore(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "weapon_attunement_core_uncontrorable"),
 
                 dark_roofing = setup(new BlockItem(ModBlocks.dark_roofing, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing"),
                 wooden_beam = setup(new BlockItem(ModBlocks.wooden_beam, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_beam"),
