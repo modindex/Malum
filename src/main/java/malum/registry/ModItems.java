@@ -51,7 +51,8 @@ public class ModItems
     public static Item air_necklace = null;
     public static Item thorns_belt = null;
     public static Item healing_belt = null;
-
+    public static Item nether_necklace = null;
+    public static Item wither_necklace = null;
     //gadgets
     public static Item evil_lantern = null;
     public static Item voodoo_doll = null;
@@ -84,7 +85,7 @@ public class ModItems
                 catastrophe_leggings = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.LEGS,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_leggings"),
                 catastrophe_chestplate = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_chestplate"),
                 catastrophe_hood = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_hood"),
-                withering_rapier = setup(new ItemWitheringRapier(ItemTier.IRON, 1, 0.5f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "withering_rapier"),
+                withering_rapier = setup(new ItemWitheringRapier(ItemTier.IRON, 2, 0.25f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "withering_rapier"),
                 transmutation_powder = setup(new ItemTransmutationPowder(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "transmutation_powder"),
                 evil_lantern = setup(new ItemEvilLantern(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_lantern"),
                 voodoo_doll = setup(new ItemVoodoDoll(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "voodoo_doll"),
@@ -98,6 +99,8 @@ public class ModItems
                 thorns_belt = setup(new ItemThornsBelt(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "thorns_belt"),
                 healing_belt = setup(new ItemHealingBelt(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "healing_belt"),
                 air_necklace = setup(new ItemAirNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "air_necklace"),
+                wither_necklace = setup(new ItemWitherNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wither_necklace"),
+                nether_necklace = setup(new ItemNetherNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "nether_necklace"),
 
                 end_forged_ingot = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_forged_ingot"),
                 end_forged_nugget = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_forged_nugget"),

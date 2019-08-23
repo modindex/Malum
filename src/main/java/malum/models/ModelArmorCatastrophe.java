@@ -25,13 +25,13 @@ public class ModelArmorCatastrophe extends ModelArmor {
 
 		rightleg = new RendererModel(this);
 		rightleg.setRotationPoint(-2.0F, 12.0F, 0.0F);
-		rightleg.cubeList.add(new ModelBox(rightleg, 0, 16, -2.0F, 0.0F, -2.0F, 4, 12, 4, 0.1F, false));
-		rightleg.cubeList.add(new ModelBox(rightleg, 0, 32, -2.0F, 0.0F, -2.0F, 4, 8, 4, 0.35F, false));
+		rightleg.cubeList.add(new ModelBox(rightleg, 0, 16, -2.0F, 0.0F, -2.0F, 4, 12, 4, 0.05F, false));
+		rightleg.cubeList.add(new ModelBox(rightleg, 0, 32, -2.0F, 0.0F, -2.0F, 4, 8, 4, 0.15F, false));
 
 		leftleg = new RendererModel(this);
 		leftleg.setRotationPoint(2.0F, 12.0F, 0.0F);
-		leftleg.cubeList.add(new ModelBox(leftleg, 0, 16, -2.0F, 0.0F, -2.0F, 4, 12, 4, 0.1F, true));
-		leftleg.cubeList.add(new ModelBox(leftleg, 0, 32, -2.0F, 0.0F, -2.0F, 4, 8, 4, 0.35F, true));
+		leftleg.cubeList.add(new ModelBox(leftleg, 0, 16, -2.0F, 0.0F, -2.0F, 4, 12, 4, 0.05F, true));
+		leftleg.cubeList.add(new ModelBox(leftleg, 0, 32, -2.0F, 0.0F, -2.0F, 4, 8, 4, 0.15F, true));
 
 		body = new RendererModel(this);
 		body.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -41,7 +41,7 @@ public class ModelArmorCatastrophe extends ModelArmor {
 		head = new RendererModel(this);
 		head.setRotationPoint(0.0F, 0.0F, 0.0F);
 		head.cubeList.add(new ModelBox(head, 0, 0, -4.0F, -8.0F, -4.0F, 8, 8, 8, 0.1F, false));
-		head.cubeList.add(new ModelBox(head, 32, 0, -4.0F, -8.0F, -4.0F, 8, 8, 8, 0.35F, false));
+		head.cubeList.add(new ModelBox(head, 32, 0, -4.0F, -8.0F, -4.0F, 8, 8, 8, 0.15F, false));
 
 		leftarm = new RendererModel(this);
 		leftarm.setRotationPoint(4.0F, 2.0F, 0.0F);
@@ -55,7 +55,7 @@ public class ModelArmorCatastrophe extends ModelArmor {
 
 		belt = new RendererModel(this);
 		belt.setRotationPoint(0.0F, 0f, 0.0F);
-		belt.cubeList.add(new ModelBox(belt, 16, 48, -4.0F, 6F, -2.0F, 8, 1, 4, 0.45F, false));
+		belt.cubeList.add(new ModelBox(belt, 16, 48, -4.0F, 12F, -2.0F, 8, 1, 4, 0.45F, false));
 
 		leftboot = new RendererModel(this);
 		leftboot.setRotationPoint(0.0F, 24.0F, 0.0F);

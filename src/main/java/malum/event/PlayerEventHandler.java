@@ -1,8 +1,6 @@
 package malum.event;
 
-import malum.items.curios.ItemHealingBelt;
-import malum.items.curios.ItemThornsBelt;
-import malum.items.curios.ItemWaterNecklace;
+import malum.items.curios.*;
 import malum.registry.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -16,6 +14,8 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -99,6 +99,27 @@ public class PlayerEventHandler
             float value = (maxhealth - health) * modifier;
             entityLivingBase.setAbsorptionAmount(entityLivingBase.getAbsorptionAmount() + value);
         }
+        if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemNetherNecklace, entityLivingBase).isPresent() || CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemWitherNecklace, entityLivingBase).isPresent())
+        {
+            if (event.getSource() == DamageSource.ON_FIRE || event.getSource() == DamageSource.IN_FIRE)
+            {
+                entityLivingBase.playSound(SoundEvents.ENTITY_BLAZE_BURN, 0.6f, 1.4f);
+                event.setAmount(event.getAmount() / 2);
+            }
+            if (entityLivingBase.isInLava())
+            {
+                entityLivingBase.playSound(SoundEvents.ENTITY_BLAZE_HURT, 0.8f, 1.2f);
+                event.setAmount(event.getAmount() / 3);
+
+            }
+        }
+        if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemWitherNecklace, entityLivingBase).isPresent())
+        {
+            entityLivingBase.playSound(SoundEvents.ENTITY_WITHER_HURT, 0.5f, 1.5f);
+            entityLivingBase.playSound(SoundEvents.ENTITY_WITHER_SKELETON_HURT, 0.5f, 1.5f);
+            event.setAmount(event.getAmount() * 0.85f);
+
+        }
     }
     @SubscribeEvent
     public static void Death(LivingDeathEvent event)
@@ -109,12 +130,16 @@ public class PlayerEventHandler
             if (entityLivingBase != null)
             {
                 Hand hand = entityLivingBase.swingingHand;
-                if (hand != null) {
+                if (hand != null)
+                {
                     ItemStack stack = entityLivingBase.getHeldItem(hand);
-                    if (stack.getItem() == Items.WOODEN_SWORD) {
+                    if (stack.getItem() == Items.WOODEN_SWORD)
+                    {
                         Entity target = event.getEntityLiving();
-                        if (target instanceof WitherSkeletonEntity) {
-                            if (((WitherSkeletonEntity) target).getHealth() <= 0) {
+                        if (target instanceof WitherSkeletonEntity)
+                        {
+                            if (((WitherSkeletonEntity) target).getHealth() <= 0)
+                            {
                                 stack.setDamage(entityLivingBase.getHeldItem(hand).getMaxDamage());
                                 entityLivingBase.setHeldItem(hand, ModItems.withering_rapier.getDefaultInstance());
                             }
@@ -122,30 +147,39 @@ public class PlayerEventHandler
                     }
 
                     CompoundNBT nbt = stack.getTag();
-                    if (nbt != null) {
-                        if (nbt.get("swordPower") != null) {
+                    if (nbt != null)
+                    {
+                        if (nbt.get("swordPower") != null)
+                        {
                             int swordPower = nbt.getInt("swordPower");
                             LivingEntity target = event.getEntityLiving();
-                            if (target.getHealth() <= 0) {
+                            if (target.getHealth() <= 0)
+                            {
                                 ItemEntity spawnedItem = (new ItemEntity(target.world, target.posX, target.posY, target.posZ, new ItemStack(ModItems.evil_spirit)));
                                 ItemStack spawnedStack = spawnedItem.getItem();
-                                if (spawnedStack.getTag() == null) {
+                                if (spawnedStack.getTag() == null)
+                                {
                                     spawnedStack.setTag(new CompoundNBT());
                                 }
                                 CompoundNBT spawnedNBT = spawnedStack.getTag();
                                 assert spawnedNBT != null;
 
                                 spawnedNBT.putInt("swordPower", swordPower);
-                                if (swordPower >= 1) {
+                                if (swordPower >= 1)
+                                {
                                     spawnedNBT.putString("entityDisplayName", target.getDisplayName().getString());
                                 }
-                                if (swordPower >= 2) {
-                                    spawnedNBT.putString("biomeDisplayName", entityLivingBase.world.getBiome(entityLivingBase.getPosition()).getDisplayName().getString());
-                                }
-                                if (swordPower >= 3) {
+                                if (swordPower >= 2)
+                                {
                                     spawnedNBT.putInt("dimensionID", entityLivingBase.dimension.getId());
                                 }
-                                if (swordPower >= 4) {
+                                if (swordPower >= 3)
+                                {
+                                    spawnedNBT.putString("biomeDisplayName", entityLivingBase.world.getBiome(entityLivingBase.getPosition()).getDisplayName().getString());
+
+                                }
+                                if (swordPower >= 4)
+                                {
                                     //   spawnedNBT.putString("entityDisplayName", target.getDisplayName().getString());
                                 }
                                 target.getEntityWorld().addEntity(spawnedItem);

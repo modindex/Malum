@@ -37,7 +37,7 @@ public class ChunkloadCursedEntity
             {
                 if (entity.getTags().contains("cursed"))
                 {
-                    entity.world.getBlockState(entity.getPosition());
+                   ((ServerWorld) event.world).forceChunk(entity.chunkCoordX, entity.chunkCoordZ, true);
                 }
             }
         }
