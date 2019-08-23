@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "malum:block/dark_roofing_slab" },
+        "type=top": { "model": "malum:block/dark_roofing_slab_top" },
+        "type=double": { "model": "malum:block/dark_roofing" }
+    }
+}

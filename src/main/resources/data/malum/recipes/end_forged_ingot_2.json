@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "type": "forge:nbt",
+      "item": "malum:evil_spirit",
+      "nbt": {
+        "entityDisplayName": "Enderman",
+        "dimensionID": 1
+      }
+    }
+  ],
+  "result": {
+    "item": "malum:end_forged_ingot",
+    "count": 1
+  }
+}

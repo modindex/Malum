@@ -37,24 +37,24 @@ public class AnvilEvent
                 CompoundNBT nbt = innercopy.getTag();
                 if (nbt != null)
                 {
-                    int tier = 0;
+                    int tier = -1;
                     if (modifier.getItem() == ModItems.weapon_attunement_core_weak)
                     {
-                        tier = 1;
+                        tier = 0;
                     }
                     if (modifier.getItem() == ModItems.weapon_attunement_core_avarge)
                     {
-                        tier = 2;
+                        tier = 1;
                     }
                     if (modifier.getItem() == ModItems.weapon_attunement_core_strong)
                     {
-                        tier = 3;
+                        tier = 2;
                     }
                     if (modifier.getItem() == ModItems.weapon_attunement_core_uncontrorable)
                     {
-                        tier = 4;
+                        tier = 3;
                     }
-                    if (tier == 0)
+                    if (tier == -1)
                     {
                         return;
                     }
@@ -68,24 +68,24 @@ public class AnvilEvent
                 CompoundNBT nbt = innercopy.getTag();
                 if (nbt != null)
                 {
-                    int tier = 0;
+                    int tier = -1;
                     if (modifier.getItem() == ModItems.weapon_attunement_core_weak)
                     {
-                        tier = 1;
+                        tier = 0;
                     }
                     if (modifier.getItem() == ModItems.weapon_attunement_core_avarge)
                     {
-                        tier = 2;
+                        tier = 1;
                     }
                     if (modifier.getItem() == ModItems.weapon_attunement_core_strong)
                     {
-                        tier = 3;
+                        tier = 2;
                     }
                     if (modifier.getItem() == ModItems.weapon_attunement_core_uncontrorable)
                     {
-                        tier = 4;
+                        tier = 3;
                     }
-                    if (tier == 0)
+                    if (tier == -1)
                     {
                         return;
                     }

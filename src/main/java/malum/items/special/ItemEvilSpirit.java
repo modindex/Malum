@@ -41,25 +41,24 @@ public class ItemEvilSpirit extends Item
 
         String[] swordPowerString = new String[]
                 {
-                        "sword_power_none", //0
-                        "sword_power_weak",
+                        "sword_power_weak",//0
                         "sword_power_avarge",
                         "sword_power_strong",
-                        "sword_power_uncontrorable" //4
+                        "sword_power_uncontrorable" //3
                 };
         //main aspects
-        if (swordPower >= 1)
+        if (swordPower >= 0 && !(swordPower >= swordPowerString.length))
         {
           addStringToTooltip(TextFormatting.ITALIC + I18n.format("sword_power_tooltip: ") + swordPowerString[swordPower], tooltip);
         }
 
-        if (swordPower >= 2) {
+        if (swordPower >= 1) {
           addStringToTooltip(TextFormatting.ITALIC + I18n.format("entity_type_tooltip: ") + entityDisplayName, tooltip);
         }
-        if (swordPower >= 3) {
-          addStringToTooltip(TextFormatting.ITALIC + I18n.format("dimension_id_tooltip: ") + dimensionID, tooltip);
+        if (swordPower >= 2) {
+          addStringToTooltip(TextFormatting.ITALIC + I18n.format("dimension_name_tooltip: ") + dimensionID, tooltip);
         }
-        if (swordPower >= 4) {
+        if (swordPower >= 3) {
           addStringToTooltip(TextFormatting.ITALIC + I18n.format("biome_display_name_tooltip: ") + biomeDisplayName, tooltip);
         }
       }

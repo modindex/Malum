@@ -55,7 +55,7 @@ public class ModelArmorCatastrophe extends ModelArmor {
 
 		belt = new RendererModel(this);
 		belt.setRotationPoint(0.0F, 0f, 0.0F);
-		belt.cubeList.add(new ModelBox(belt, 16, 48, -4.0F, -1.5F, -2.0F, 8, 1, 4, 0.45F, false));
+		belt.cubeList.add(new ModelBox(belt, 16, 48, -4.0F, 6F, -2.0F, 8, 1, 4, 0.45F, false));
 
 		leftboot = new RendererModel(this);
 		leftboot.setRotationPoint(0.0F, 24.0F, 0.0F);

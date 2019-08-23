@@ -64,13 +64,17 @@ public class ModItems
     //blocks
     public static Item dark_roofing = null;
     public static Item dark_roofing_stairs = null;
+    public static Item dark_roofing_slab = null;
     public static Item refined_bricks = null;
-    public static Item refined_pathway = null;
     public static Item refined_bricks_stairs = null;
+    public static Item refined_bricks_slab = null;
+    public static Item refined_pathway = null;
     public static Item refined_pathway_stairs = null;
+    public static Item refined_pathway_slab = null;
     public static Item wooden_beam = null;
     public static Item wooden_casing = null;
     public static Item wooden_casing_stairs = null;
+    public static Item wooden_casing_slab = null;
     @SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event)
     {
@@ -108,14 +112,21 @@ public class ModItems
 
                 dark_roofing = setup(new BlockItem(ModBlocks.dark_roofing, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing"),
                 wooden_beam = setup(new BlockItem(ModBlocks.wooden_beam, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_beam"),
-                dark_roofing_stairs = setup(new BlockItem(ModBlocks.dark_roofing_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing_stairs"),
                 wooden_casing = setup(new BlockItem(ModBlocks.wooden_casing, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_casing"),
                 refined_bricks = setup(new BlockItem(ModBlocks.refined_bricks, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_bricks"),
-                refined_bricks_stairs = setup(new BlockItem(ModBlocks.refined_bricks_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_bricks_stairs"),
                 refined_pathway = setup(new BlockItem(ModBlocks.refined_pathway, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_pathway"),
-                refined_pathway_stairs = setup(new BlockItem(ModBlocks.refined_pathway_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_pathway_stairs"),
-                wooden_casing_stairs = setup(new BlockItem(ModBlocks.wooden_casing_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_casing_stairs")
-        );
+
+                dark_roofing_slab = setup(new BlockItem(ModBlocks.dark_roofing_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing_slab"),
+                wooden_casing_slab = setup(new BlockItem(ModBlocks.wooden_casing_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_casing_slab"),
+                refined_pathway_slab = setup(new BlockItem(ModBlocks.refined_pathway_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_pathway_slab"),
+                refined_bricks_slab = setup(new BlockItem(ModBlocks.refined_bricks_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_bricks_slab"),
+
+                dark_roofing_stairs = setup(new BlockItem(ModBlocks.dark_roofing_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing_stairs"),
+                wooden_casing_stairs = setup(new BlockItem(ModBlocks.wooden_casing_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_casing_stairs"),
+                refined_bricks_stairs = setup(new BlockItem(ModBlocks.refined_bricks_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_bricks_stairs"),
+                refined_pathway_stairs = setup(new BlockItem(ModBlocks.refined_pathway_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_pathway_stairs")
+
+                );
     }
     @Nonnull
     private static <T extends IForgeRegistryEntry<T>> T setup(@Nonnull final T entry, @Nonnull final String name) {

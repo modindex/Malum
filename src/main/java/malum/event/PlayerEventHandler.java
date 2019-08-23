@@ -103,57 +103,53 @@ public class PlayerEventHandler
     @SubscribeEvent
     public static void Death(LivingDeathEvent event)
     {
-        if (event.getSource().getTrueSource() instanceof LivingEntity)
+        if (event.getSource().getTrueSource() != null && event.getSource().getTrueSource() instanceof LivingEntity)
         {
             LivingEntity entityLivingBase = (LivingEntity) event.getSource().getTrueSource();
             if (entityLivingBase != null)
             {
                 Hand hand = entityLivingBase.swingingHand;
-                ItemStack stack = entityLivingBase.getHeldItem(hand);
-                if (stack.getItem() == Items.WOODEN_SWORD)
-                {
-                    Entity target = event.getEntityLiving();
-                    if (target instanceof WitherSkeletonEntity)
-                    {
-                        if (((WitherSkeletonEntity) target).getHealth() <= 0)
-                        {
-                            stack.setDamage(entityLivingBase.getHeldItem(hand).getMaxDamage());
-                            entityLivingBase.setHeldItem(hand, ModItems.withering_rapier.getDefaultInstance());
+                if (hand != null) {
+                    ItemStack stack = entityLivingBase.getHeldItem(hand);
+                    if (stack.getItem() == Items.WOODEN_SWORD) {
+                        Entity target = event.getEntityLiving();
+                        if (target instanceof WitherSkeletonEntity) {
+                            if (((WitherSkeletonEntity) target).getHealth() <= 0) {
+                                stack.setDamage(entityLivingBase.getHeldItem(hand).getMaxDamage());
+                                entityLivingBase.setHeldItem(hand, ModItems.withering_rapier.getDefaultInstance());
+                            }
                         }
                     }
-                }
-                CompoundNBT nbt = stack.getTag();
-                if (nbt != null)
-                {
-                    if (nbt.get("swordPower") != null)
-                    {
-                        int swordPower = nbt.getInt("swordPower");
-                        LivingEntity target = event.getEntityLiving();
-                        if (target.getHealth() <= 0)
-                        {
-                            ItemEntity spawnedItem = (new ItemEntity(target.world, target.posX, target.posY, target.posZ, new ItemStack(ModItems.evil_spirit)));
-                            ItemStack spawnedStack = spawnedItem.getItem();
-                            if (spawnedStack.getTag() == null)
-                            {
-                                spawnedStack.setTag(new CompoundNBT());
-                            }
-                            CompoundNBT spawnedNBT = spawnedStack.getTag();
-                            assert spawnedNBT != null;
 
-                            spawnedNBT.putInt("swordPower", swordPower);
-                            if (swordPower >= 1) {
-                                spawnedNBT.putString("entityDisplayName", target.getDisplayName().getString());
+                    CompoundNBT nbt = stack.getTag();
+                    if (nbt != null) {
+                        if (nbt.get("swordPower") != null) {
+                            int swordPower = nbt.getInt("swordPower");
+                            LivingEntity target = event.getEntityLiving();
+                            if (target.getHealth() <= 0) {
+                                ItemEntity spawnedItem = (new ItemEntity(target.world, target.posX, target.posY, target.posZ, new ItemStack(ModItems.evil_spirit)));
+                                ItemStack spawnedStack = spawnedItem.getItem();
+                                if (spawnedStack.getTag() == null) {
+                                    spawnedStack.setTag(new CompoundNBT());
+                                }
+                                CompoundNBT spawnedNBT = spawnedStack.getTag();
+                                assert spawnedNBT != null;
+
+                                spawnedNBT.putInt("swordPower", swordPower);
+                                if (swordPower >= 1) {
+                                    spawnedNBT.putString("entityDisplayName", target.getDisplayName().getString());
+                                }
+                                if (swordPower >= 2) {
+                                    spawnedNBT.putString("biomeDisplayName", entityLivingBase.world.getBiome(entityLivingBase.getPosition()).getDisplayName().getString());
+                                }
+                                if (swordPower >= 3) {
+                                    spawnedNBT.putInt("dimensionID", entityLivingBase.dimension.getId());
+                                }
+                                if (swordPower >= 4) {
+                                    //   spawnedNBT.putString("entityDisplayName", target.getDisplayName().getString());
+                                }
+                                target.getEntityWorld().addEntity(spawnedItem);
                             }
-                            if (swordPower >= 2) {
-                                spawnedNBT.putString("biomeDisplayName", entityLivingBase.world.getBiome(entityLivingBase.getPosition()).getDisplayName().getString());
-                            }
-                            if (swordPower >= 3) {
-                                spawnedNBT.putInt("dimensionID", entityLivingBase.dimension.getId());
-                            }
-                            if (swordPower >= 4) {
-                             //   spawnedNBT.putString("entityDisplayName", target.getDisplayName().getString());
-                            }
-                            target.getEntityWorld().addEntity(spawnedItem);
                         }
                     }
                 }
