@@ -10,6 +10,7 @@ import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
+import net.minecraft.util.text.StringTextComponent;
 import top.theillusivec4.curios.api.CuriosAPI;
 
 import static net.minecraft.block.EnderChestBlock.field_220115_d;
@@ -24,18 +25,20 @@ public class ItemEndermanDoll extends ItemVoodoDoll
     {
         if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemDarkArtsRing, attacker).isPresent())
         {
-            VoodooPower = 2f;
+            VoodooPower = 1f;
         }
         else
         {
-            VoodooPower = 1f;
+            VoodooPower = 0.25f;
         }
-        if (VoodooPower == 1f)
+        if (random.nextDouble() < VoodooPower)
         {
-            if (target.world.isRemote()) //warn target that their enderchest is being pick pocketed
+            if (target instanceof PlayerEntity)
             {
-
+                StringTextComponent warnMessage = new StringTextComponent(attacker.getDisplayName() + "has tried to search your ender chest but failed");
+                target.sendMessage(warnMessage);
             }
+            return;
         }
         if (attacker instanceof PlayerEntity)
         {

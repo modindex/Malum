@@ -1,5 +1,7 @@
 package malum.items.gadgets;
 
+import malum.items.curios.ItemDarkArtsRing;
+import net.minecraft.client.audio.Sound;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,11 +13,19 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import top.theillusivec4.curios.api.CuriosAPI;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 public class ItemVoodoDoll extends Item
 {
@@ -43,15 +53,14 @@ public class ItemVoodoDoll extends Item
                 if (worldServer.getEntityByUuid(uuid) != null && Objects.requireNonNull(worldServer.getEntityByUuid(uuid)).isAlive())
                 {
                     Effect(worldServer.getEntityByUuid(uuid), playerIn, itemstack, handIn);
-                    return new ActionResult<>(ActionResultType.SUCCESS, itemstack);
                 }
             }
+            return new ActionResult<>(ActionResultType.SUCCESS, itemstack);
         }
         return new ActionResult<>(ActionResultType.FAIL, itemstack);
     }
 
-    @Override
-    public boolean itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand)
+    public void Bind(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand)
     {
         if (!stack.hasTag())
         {
@@ -65,12 +74,9 @@ public class ItemVoodoDoll extends Item
             UUID uuid = nbt.getUniqueId("entity");
             if (uuid != null)
             {
-                if (!(worldServer.getEntityByUuid(uuid) instanceof PlayerEntity))
+                if (worldServer.getEntityByUuid(uuid) != null)
                 {
-                    if (worldServer.getEntityByUuid(uuid) != null)
-                    {
-                        Objects.requireNonNull(worldServer.getEntityByUuid(uuid)).removeTag("cursed");
-                    }
+                    Objects.requireNonNull(worldServer.getEntityByUuid(uuid)).removeTag("cursed");
                 }
             }
         }
@@ -79,6 +85,32 @@ public class ItemVoodoDoll extends Item
         {
             target.addTag("cursed");
         }
+    }
+    public void AttemptBind(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand)
+    {
+        double chance = 0.01D;
+        if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemDarkArtsRing, playerIn).isPresent())
+        {
+            chance += 0.25D;
+        }
+        if(playerIn.isInvisible() || random.nextDouble() < chance) // success!
+        {
+            Bind(stack, playerIn, target, hand);
+            //doStuff
+        }
+        else //fail :(
+        {
+            if (target instanceof PlayerEntity)
+            {
+                StringTextComponent warnMessage = new StringTextComponent(playerIn.getDisplayName() + "has tried to bind your soul to a voodoo doll");
+                playerIn.sendMessage(warnMessage);
+            }
+        }
+    }
+    @Override
+    public boolean itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand)
+    {
+        AttemptBind(stack, playerIn, target, hand);
         return super.itemInteractionForEntity(stack, playerIn, target, hand);
     }
 }

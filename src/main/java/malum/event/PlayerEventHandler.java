@@ -14,11 +14,10 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosAPI;
@@ -71,12 +70,9 @@ public class PlayerEventHandler
                 }
             }
         }
-        if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemThornsBelt, entityLivingBase).isPresent())
-        {
-        }
     }
     @SubscribeEvent
-    public static void Hurt(LivingHurtEvent event)
+    public static void Hurt(LivingDamageEvent event)
     {
         LivingEntity entityLivingBase = event.getEntityLiving();
         if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemThornsBelt, entityLivingBase).isPresent())
@@ -118,7 +114,6 @@ public class PlayerEventHandler
             entityLivingBase.playSound(SoundEvents.ENTITY_WITHER_HURT, 0.5f, 1.5f);
             entityLivingBase.playSound(SoundEvents.ENTITY_WITHER_SKELETON_HURT, 0.5f, 1.5f);
             event.setAmount(event.getAmount() * 0.85f);
-
         }
     }
     @SubscribeEvent
@@ -176,7 +171,6 @@ public class PlayerEventHandler
                                 if (swordPower >= 3)
                                 {
                                     spawnedNBT.putString("biomeDisplayName", entityLivingBase.world.getBiome(entityLivingBase.getPosition()).getDisplayName().getString());
-
                                 }
                                 if (swordPower >= 4)
                                 {
