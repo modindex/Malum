@@ -4,19 +4,24 @@ import malum.capabilities.PlayerMadeDoll;
 import malum.capabilities.PlayerProperties;
 import malum.items.curios.*;
 import malum.items.gadgets.ItemVoodoDoll;
+import malum.network.NetworkManager;
 import net.minecraft.client.GameSettings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosAPI;
@@ -71,8 +76,8 @@ public class ClientPlayerEventHandler
     {
         ClientPlayerEntity clientPlayer = Minecraft.getInstance().player;
         float returnValue;
+        //send a packet here from target to clientPlayer
         returnValue = target.getCapability(PlayerProperties.PLAYER_MADE_DOLL).map(PlayerMadeDoll::hasPlayerMadeDoll).orElse(0);
-
         for (int i = 0; i < (target).inventory.getSizeInventory(); ++i)
         {
             ItemStack itemstack = (target).inventory.getStackInSlot(i);
@@ -108,8 +113,9 @@ public class ClientPlayerEventHandler
         {
             return;
         }
+
         PlayerEntity targetPlayer = event.player;
-        float dangerLevel = getDangerLevel(targetPlayer);
+            float dangerLevel = getDangerLevel(targetPlayer);
         if (clientPlayer != null)
         {
             if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemEnderSightNecklace, clientPlayer).isPresent())

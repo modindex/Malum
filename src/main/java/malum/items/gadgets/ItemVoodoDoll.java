@@ -1,5 +1,6 @@
 package malum.items.gadgets;
 
+import malum.capabilities.PlayerMadeDoll;
 import malum.capabilities.PlayerProperties;
 import malum.items.curios.ItemDarkArtsRing;
 import malum.items.curios.ItemLuckRing;
@@ -150,13 +151,24 @@ public class ItemVoodoDoll extends Item
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand)
     {
-		playerIn.getCapability(PlayerProperties.PLAYER_MADE_DOLL).ifPresent(note ->
+        if (hand == Hand.OFF_HAND)
         {
-            if (note.hasPlayerMadeDoll() < 2)
+            return super.itemInteractionForEntity(stack, playerIn, target, hand);
+        }
+        if (target instanceof PlayerEntity) {
+            playerIn.getCapability(PlayerProperties.PLAYER_MADE_DOLL).ifPresent(note ->
             {
-                note.setPlayerMadeDoll(2);
-            }
-        });
+                if (note.hasPlayerMadeDoll() < 2) {
+                    note.setPlayerMadeDoll(2);
+                }
+            });
+        }
+        if (playerIn.isServerWorld())
+        {
+            int returnValue = playerIn.getCapability(PlayerProperties.PLAYER_MADE_DOLL).map(PlayerMadeDoll::hasPlayerMadeDoll).orElse(0);
+            TranslationTextComponent serverSideMessage = new TranslationTextComponent("server_side: " + returnValue);
+            playerIn.sendMessage(serverSideMessage);
+        }
         if (stack.hasTag())
         {
             CompoundNBT nbt = stack.getTag();

@@ -1,8 +1,15 @@
 package malum;
 
+import malum.ingredients.SpiritIngredient;
+import malum.network.DangerLevelPacket;
+import malum.network.NetworkManager;
 import malum.recipes.BlockTransmutationRecipes;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
@@ -39,7 +46,18 @@ public class MalumMod
     }
     private void setup(final FMLCommonSetupEvent event)
     {
+        // register packets
+        int packetID=0;
+        NetworkManager.INSTANCE.registerMessage(packetID++,
+            DangerLevelPacket.class,
+            DangerLevelPacket::encode,
+            DangerLevelPacket::decode,
+            DangerLevelPacket::whenThisPacketIsReceived
+        );
         BlockTransmutationRecipes.initRecipes();
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, (RegistryEvent.Register<IRecipeSerializer<?>> e) -> {
+            CraftingHelper.register(new ResourceLocation("spirit"), SpiritIngredient.Serializer.INSTANCE);
+        });
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
@@ -65,7 +83,8 @@ public class MalumMod
     }
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event) {
+    public void onServerStarting(FMLServerStartingEvent event)
+    {
         // do something when the server starts
         LOGGER.info("HELLO from server starting");
     }

@@ -6,11 +6,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.logging.Logger;
 
 @Mod.EventBusSubscriber
 public class ForgeEventHandlers
@@ -47,6 +50,11 @@ public class ForgeEventHandlers
                 note.setPlayerMadeDoll(1);
             }
         });
-
+        if (event.getPlayer().isServerWorld())
+        {
+            int returnValue = event.getPlayer().getCapability(PlayerProperties.PLAYER_MADE_DOLL).map(PlayerMadeDoll::hasPlayerMadeDoll).orElse(0);
+            TranslationTextComponent serverSideMessage = new TranslationTextComponent("server_side: " + returnValue);
+            event.getPlayer().sendMessage(serverSideMessage);
+        }
     }
 }
