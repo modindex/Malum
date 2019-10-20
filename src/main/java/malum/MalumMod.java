@@ -1,10 +1,8 @@
 package malum;
 
 import malum.recipes.BlockTransmutationRecipes;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
@@ -39,7 +37,6 @@ public class MalumMod
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
-
     private void setup(final FMLCommonSetupEvent event)
     {
         BlockTransmutationRecipes.initRecipes();

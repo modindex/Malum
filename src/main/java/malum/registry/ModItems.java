@@ -9,9 +9,11 @@ import malum.items.special.ItemEvilSpirit;
 import malum.items.special.ItemWeaponAttunementCore;
 import malum.items.tools.ItemTransmutationPowder;
 import malum.items.tools.ItemWitheringRapier;
-import net.minecraft.block.Block;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemTier;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -39,13 +41,13 @@ public class ModItems
     public static Item metal_belt = null;
     public static Item cursed_flare = null;
     public static Item evil_spirit = null;
-    public static Item weapon_attunement_core_weak = null;
-    public static Item weapon_attunement_core_avarge = null;
+    public static Item weapon_attunement_core = null;
     public static Item weapon_attunement_core_strong = null;
-    public static Item weapon_attunement_core_uncontrorable = null;
 
     //curios
     public static Item leather_ring = null;
+    public static Item luck_ring = null;
+    public static Item ender_sight_necklace = null;
     public static Item dark_arts_ring = null;
     public static Item water_necklace = null;
     public static Item air_necklace = null;
@@ -53,6 +55,7 @@ public class ModItems
     public static Item healing_belt = null;
     public static Item nether_necklace = null;
     public static Item wither_necklace = null;
+    public static Item arcane_sight_ring = null;
     //gadgets
     public static Item evil_lantern = null;
     public static Item voodoo_doll = null;
@@ -88,13 +91,19 @@ public class ModItems
                 withering_rapier = setup(new ItemWitheringRapier(ItemTier.IRON, 2, 0.25f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "withering_rapier"),
                 transmutation_powder = setup(new ItemTransmutationPowder(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "transmutation_powder"),
                 evil_lantern = setup(new ItemEvilLantern(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_lantern"),
+
                 voodoo_doll = setup(new ItemVoodoDoll(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "voodoo_doll"),
                 rending_doll = setup(new ItemRendingDoll(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxDamage(200)), "rending_doll"),
                 enderman_doll = setup(new ItemEndermanDoll(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxDamage(8)), "enderman_doll"),
                 control_doll = setup(new ItemControlDoll(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxDamage(500)), "control_doll"),
+
                 ender_artifact = setup(new ItemEnderArtifact(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxDamage(250)), "ender_artifact"),
+
                 leather_ring = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "leather_ring"),
                 dark_arts_ring = setup(new ItemDarkArtsRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_arts_ring"),
+                ender_sight_necklace = setup(new ItemEnderSightNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ender_sight_necklace"),
+                luck_ring = setup(new ItemLuckRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "luck_ring"),
+                arcane_sight_ring = setup(new ItemArcaneSightRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "arcane_sight_ring"),
                 water_necklace = setup(new ItemWaterNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "water_necklace"),
                 thorns_belt = setup(new ItemThornsBelt(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "thorns_belt"),
                 healing_belt = setup(new ItemHealingBelt(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "healing_belt"),
@@ -108,10 +117,8 @@ public class ModItems
                 metal_belt = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "metal_belt"),
                 cursed_flare = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "cursed_flare"),
                 evil_spirit = setup(new ItemEvilSpirit(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_spirit"),
-                weapon_attunement_core_weak = setup(new ItemWeaponAttunementCore(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "weapon_attunement_core_weak"),
-                weapon_attunement_core_avarge = setup(new ItemWeaponAttunementCore(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "weapon_attunement_core_avarge"),
+                weapon_attunement_core = setup(new ItemWeaponAttunementCore(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "weapon_attunement_core"),
                 weapon_attunement_core_strong = setup(new ItemWeaponAttunementCore(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "weapon_attunement_core_strong"),
-                weapon_attunement_core_uncontrorable = setup(new ItemWeaponAttunementCore(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "weapon_attunement_core_uncontrorable"),
 
                 dark_roofing = setup(new BlockItem(ModBlocks.dark_roofing, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing"),
                 wooden_beam = setup(new BlockItem(ModBlocks.wooden_beam, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_beam"),

@@ -1,8 +1,5 @@
 package malum.items.curios;
 
-import net.minecraft.client.GameSettings;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,9 +9,9 @@ import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import top.theillusivec4.curios.api.capability.ICurio;
 
-public class ItemAirNecklace extends Item implements ICurio
+public class ItemArcaneSightRing extends Item implements ICurio
 {
-    public ItemAirNecklace(Item.Properties builder) {
+    public ItemArcaneSightRing(Properties builder) {
         super(builder);
     }
 
@@ -24,7 +21,7 @@ public class ItemAirNecklace extends Item implements ICurio
             @Override
             public void playEquipSound(LivingEntity entityLivingBase) {
                 entityLivingBase.world.playSound(null, entityLivingBase.getPosition(),
-                        SoundEvents.ITEM_ARMOR_EQUIP_GOLD, SoundCategory.NEUTRAL,
+                        SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.NEUTRAL,
                         1.0f, 1.0f);
             }
 

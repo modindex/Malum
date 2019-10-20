@@ -1,7 +1,10 @@
 package malum.items.special;
 
+import malum.items.curios.ItemArcaneSightRing;
+import malum.items.curios.ItemDarkArtsRing;
 import net.minecraft.client.GameSettings;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
@@ -14,7 +17,10 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.GuiScreenEvent;
+import top.theillusivec4.curios.api.CuriosAPI;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -25,48 +31,32 @@ public class ItemEvilSpirit extends Item
   {
     super(properties);
   }
-
+  @OnlyIn(Dist.CLIENT)
   @Override
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
   {
-    if (Screen.hasShiftDown())
-    {
-      CompoundNBT tag = stack.getTag();
-      if (tag != null)
-      {
-        int swordPower = tag.getInt("swordPower");
-        String entityDisplayName = tag.getString("entityDisplayName");
-        int dimensionID = tag.getInt("dimensionID");
-        String biomeDisplayName = tag.getString("biomeDisplayName");
+      ClientPlayerEntity player = Minecraft.getInstance().player;
 
-        String[] swordPowerString = new String[]
-                {
-                        "sword_power_weak",//0
-                        "sword_power_avarge",
-                        "sword_power_strong",
-                        "sword_power_uncontrorable" //3
-                };
-        //main aspects
-        if (swordPower >= 0 && !(swordPower >= swordPowerString.length))
-        {
-          addStringToTooltip(TextFormatting.ITALIC + I18n.format("sword_power_tooltip: ") + swordPowerString[swordPower], tooltip);
-        }
-
-        if (swordPower >= 1) {
-          addStringToTooltip(TextFormatting.ITALIC + I18n.format("entity_type_tooltip: ") + entityDisplayName, tooltip);
-        }
-        if (swordPower >= 2) {
-          addStringToTooltip(TextFormatting.ITALIC + I18n.format("dimension_name_tooltip: ") + dimensionID, tooltip);
-        }
-        if (swordPower >= 3) {
-          addStringToTooltip(TextFormatting.ITALIC + I18n.format("biome_display_name_tooltip: ") + biomeDisplayName, tooltip);
-        }
+      if (player != null) {
+          if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemArcaneSightRing, player).isPresent()) {
+              if (Screen.hasShiftDown()) {
+                  CompoundNBT tag = stack.getTag();
+                  if (tag != null) {
+                      int swordPower = tag.getInt("swordPower");
+                      String entityDisplayName = tag.getString("eNam");
+                      String biomeDisplayName = tag.getString("bCat");
+                      if (swordPower >= 0) {
+                          addStringToTooltip(TextFormatting.ITALIC + I18n.format("entity_type_tooltip: ") + entityDisplayName, tooltip);
+                      }
+                      if (swordPower >= 1) {
+                          addStringToTooltip(TextFormatting.ITALIC + I18n.format("biome_display_name_tooltip: ") + biomeDisplayName, tooltip);
+                      }
+                  }
+              } else {
+                  addStringToTooltip(I18n.format("sneak_info_tooltip"), tooltip);
+              }
+          }
       }
-    }
-    else
-    {
-      addStringToTooltip(I18n.format("sneak_info_tooltip"), tooltip);
-    }
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }
   public void addStringToTooltip(String s, List<ITextComponent> tooltip) {

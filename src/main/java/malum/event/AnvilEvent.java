@@ -38,21 +38,13 @@ public class AnvilEvent
                 if (nbt != null)
                 {
                     int tier = -1;
-                    if (modifier.getItem() == ModItems.weapon_attunement_core_weak)
+                    if (modifier.getItem() == ModItems.weapon_attunement_core)
                     {
                         tier = 0;
                     }
-                    if (modifier.getItem() == ModItems.weapon_attunement_core_avarge)
-                    {
-                        tier = 1;
-                    }
                     if (modifier.getItem() == ModItems.weapon_attunement_core_strong)
                     {
-                        tier = 2;
-                    }
-                    if (modifier.getItem() == ModItems.weapon_attunement_core_uncontrorable)
-                    {
-                        tier = 3;
+                        tier = 1;
                     }
                     if (tier == -1)
                     {
@@ -69,21 +61,13 @@ public class AnvilEvent
                 if (nbt != null)
                 {
                     int tier = -1;
-                    if (modifier.getItem() == ModItems.weapon_attunement_core_weak)
+                    if (modifier.getItem() == ModItems.weapon_attunement_core)
                     {
                         tier = 0;
                     }
-                    if (modifier.getItem() == ModItems.weapon_attunement_core_avarge)
-                    {
-                        tier = 1;
-                    }
                     if (modifier.getItem() == ModItems.weapon_attunement_core_strong)
                     {
-                        tier = 2;
-                    }
-                    if (modifier.getItem() == ModItems.weapon_attunement_core_uncontrorable)
-                    {
-                        tier = 3;
+                        tier = 1;
                     }
                     if (tier == -1)
                     {

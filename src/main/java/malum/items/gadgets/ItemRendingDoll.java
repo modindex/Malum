@@ -3,6 +3,7 @@ package malum.items.gadgets;
 import malum.items.curios.ItemDarkArtsRing;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -15,16 +16,8 @@ public class ItemRendingDoll extends ItemVoodoDoll
     {
         super(builder);
     }
-    public void Effect(Entity target, LivingEntity attacker, ItemStack stack, Hand handIn)
+    public void Effect(Entity target, PlayerEntity attacker, ItemStack stack, Hand handIn, float chance, float strength)
     {
-        if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemDarkArtsRing, attacker).isPresent())
-        {
-            VoodooPower = 2f;
-        }
-        else
-        {
-            VoodooPower = 1f;
-        }
-        target.attackEntityFrom(DamageSource.causeIndirectDamage(attacker, (LivingEntity) target), 1f * VoodooPower);
+        target.attackEntityFrom(DamageSource.causeIndirectDamage(target, attacker), 1f * strength);
     }
 }
