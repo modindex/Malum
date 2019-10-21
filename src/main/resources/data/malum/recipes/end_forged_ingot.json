@@ -2,15 +2,12 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "minecraft:gold_ingot"
-    },
-    {
-      "type": "malum:evil_spirit",
+      "type": "malum:spirit",
       "soul": "minecraft:enderman",
       "grave": "the_end"
     }
   ],
   "result": {
-    "item": "malum:end_forged_ingot"
+    "item": "minecraft:golden_apple"
   }
 }

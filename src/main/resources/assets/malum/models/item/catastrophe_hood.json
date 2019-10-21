@@ -14,5 +14,13 @@
       "translation": [ 0, 4, 2 ],
       "scale": [ 1.7, 1.7, 1.7 ]
     }
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "dimension": 1
+      },
+      "model": "malum:item/catastrophe_hood_glow"
+    }
+  ]
 }

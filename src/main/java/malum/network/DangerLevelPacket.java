@@ -13,8 +13,8 @@ import java.util.function.Supplier;
 
 public class DangerLevelPacket
 {
-    private UUID uuid;
     private int dangerLevel;
+    private UUID uuid;
     public DangerLevelPacket(int dangerLevel, UUID uuid)
     {
         this.dangerLevel = dangerLevel;
@@ -38,5 +38,6 @@ public class DangerLevelPacket
                 note.setPlayerMadeDoll(this.dangerLevel);
             });
         });
+        context.get().setPacketHandled(true);
     }
 }

@@ -41,6 +41,9 @@ public class MalumMod
         // Register the doClientStuff method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, (RegistryEvent.Register<IRecipeSerializer<?>> e) -> {
+            CraftingHelper.register(new ResourceLocation("spirit"), SpiritIngredient.Serializer.INSTANCE);
+        });
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -55,12 +58,7 @@ public class MalumMod
             DangerLevelPacket::whenThisPacketIsReceived
         );
         BlockTransmutationRecipes.initRecipes();
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, (RegistryEvent.Register<IRecipeSerializer<?>> e) -> {
-            CraftingHelper.register(new ResourceLocation("spirit"), SpiritIngredient.Serializer.INSTANCE);
-        });
         // some preinit code
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

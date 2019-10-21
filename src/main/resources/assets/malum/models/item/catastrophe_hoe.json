@@ -1,0 +1,14 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "malum:items/catastrophe_hoe"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "dimension": 1
+      },
+      "model": "malum:item/catastrophe_hoe_glow"
+    }
+  ]
+}

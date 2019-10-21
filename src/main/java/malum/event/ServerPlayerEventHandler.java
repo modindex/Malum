@@ -45,11 +45,8 @@ public class ServerPlayerEventHandler
     }
     public static void send(PlayerEntity player)
     {
-        if (!player.world.isRemote())
-        {
-            PacketDistributor.TRACKING_ENTITY.with(() -> player);
-            int value = player.getCapability(PlayerProperties.PLAYER_MADE_DOLL).map(PlayerMadeDoll::hasPlayerMadeDoll).orElse(0);
-            NetworkManager.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> player), new DangerLevelPacket(value, player.getUniqueID()));
-        }
+        PacketDistributor.TRACKING_ENTITY.with(() -> player);
+        int value = player.getCapability(PlayerProperties.PLAYER_MADE_DOLL).map(PlayerMadeDoll::hasPlayerMadeDoll).orElse(0);
+        NetworkManager.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> player), new DangerLevelPacket(value, player.getUniqueID()));
     }
 }

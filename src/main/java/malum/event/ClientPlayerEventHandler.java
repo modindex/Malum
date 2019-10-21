@@ -115,7 +115,7 @@ public class ClientPlayerEventHandler
         }
 
         PlayerEntity targetPlayer = event.player;
-            float dangerLevel = getDangerLevel(targetPlayer);
+        float dangerLevel = getDangerLevel(targetPlayer);
         if (clientPlayer != null)
         {
             if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemEnderSightNecklace, clientPlayer).isPresent())

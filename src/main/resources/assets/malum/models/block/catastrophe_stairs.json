@@ -1,0 +1,8 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "malum:blocks/catastrophe_bricks",
+    "top": "malum:blocks/catastrophe_bricks",
+    "side": "malum:blocks/catastrophe_bricks"
+  }
+}

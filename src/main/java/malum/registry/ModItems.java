@@ -7,13 +7,11 @@ import malum.items.curios.*;
 import malum.items.gadgets.*;
 import malum.items.special.ItemEvilSpirit;
 import malum.items.special.ItemWeaponAttunementCore;
-import malum.items.tools.ItemTransmutationPowder;
-import malum.items.tools.ItemWitheringRapier;
+import malum.items.tools.*;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemTier;
+import net.minecraft.item.*;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.LazyLoadBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -22,6 +20,10 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
+
+import java.util.function.Supplier;
+
+import static malum.MalumMod.MODID;
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class ModItems
@@ -34,6 +36,11 @@ public class ModItems
 
     //weapons
     public static Item withering_rapier = null;
+    public static Item catastrophe_hoe = null;
+    public static Item catastrophe_sword = null;
+    public static Item catastrophe_axe = null;
+    public static Item catastrophe_pickaxe = null;
+    public static Item catastrophe_shovel = null;
     //crafting
     public static Item end_forged_ingot = null;
     public static Item end_forged_nugget = null;
@@ -79,6 +86,52 @@ public class ModItems
     public static Item wooden_casing = null;
     public static Item wooden_casing_stairs = null;
     public static Item wooden_casing_slab = null;
+    public static Item catastrophe_bricks = null;
+    public static Item catastrophe_stairs = null;
+    public static Item catastrophe_slab = null;
+    public static Item catastrophe_block = null;
+
+    public static final ToolMaterial CATASTROPHE = new ToolMaterial(4, 3122, 10.0F, 4.0F, 40, () -> Ingredient.fromItems(Items.DIAMOND));
+    private static class ToolMaterial implements IItemTier {
+        private final int harvestLevel;
+        private final int maxUses;
+        private final float efficiency;
+        private final float attackDamage;
+        private final int enchantability;
+        private final LazyLoadBase<Ingredient> repair;
+        public ToolMaterial(int harvestLevel, int maxUses, float efficiency, float attackDamage, int enchantability, Supplier<Ingredient> supplier) {
+            this.harvestLevel = harvestLevel;
+            this.maxUses = maxUses;
+            this.efficiency = efficiency;
+            this.attackDamage = attackDamage;
+            this.enchantability = enchantability;
+            this.repair = new LazyLoadBase<Ingredient>(supplier);
+        }
+        @Override
+        public int getMaxUses() {
+            return maxUses;
+        }
+        @Override
+        public float getEfficiency() {
+            return efficiency;
+        }
+        @Override
+        public float getAttackDamage() {
+            return attackDamage;
+        }
+        @Override
+        public int getHarvestLevel() {
+            return harvestLevel;
+        }
+        @Override
+        public int getEnchantability() {
+            return enchantability;
+        }
+        @Override
+        public Ingredient getRepairMaterial() {
+            return repair.getValue();
+        }
+    }
     @SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event)
     {
@@ -88,7 +141,14 @@ public class ModItems
                 catastrophe_leggings = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.LEGS,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_leggings"),
                 catastrophe_chestplate = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_chestplate"),
                 catastrophe_hood = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_hood"),
+
                 withering_rapier = setup(new ItemWitheringRapier(ItemTier.IRON, 2, 0.25f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "withering_rapier"),
+
+                catastrophe_axe = setup(new ItemCatastropheAxe(CATASTROPHE, 9, -3f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_axe"),
+                catastrophe_sword = setup(new ItemCatastropheSword(CATASTROPHE, 0, 0f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_sword"),
+                catastrophe_shovel = setup(new ItemCatastropheShovel(CATASTROPHE, 0, 0f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_shovel"),
+                catastrophe_pickaxe = setup(new ItemCatastrophePickaxe(CATASTROPHE, 0, 0f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_pickaxe"),
+
                 transmutation_powder = setup(new ItemTransmutationPowder(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "transmutation_powder"),
                 evil_lantern = setup(new ItemEvilLantern(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_lantern"),
 
@@ -125,23 +185,27 @@ public class ModItems
                 wooden_casing = setup(new BlockItem(ModBlocks.wooden_casing, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_casing"),
                 refined_bricks = setup(new BlockItem(ModBlocks.refined_bricks, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_bricks"),
                 refined_pathway = setup(new BlockItem(ModBlocks.refined_pathway, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_pathway"),
+                catastrophe_bricks = setup(new BlockItem(ModBlocks.catastrophe_bricks, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_bricks"),
 
                 dark_roofing_slab = setup(new BlockItem(ModBlocks.dark_roofing_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing_slab"),
                 wooden_casing_slab = setup(new BlockItem(ModBlocks.wooden_casing_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_casing_slab"),
                 refined_pathway_slab = setup(new BlockItem(ModBlocks.refined_pathway_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_pathway_slab"),
                 refined_bricks_slab = setup(new BlockItem(ModBlocks.refined_bricks_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_bricks_slab"),
+                catastrophe_slab = setup(new BlockItem(ModBlocks.catastrophe_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_slab"),
 
                 dark_roofing_stairs = setup(new BlockItem(ModBlocks.dark_roofing_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing_stairs"),
                 wooden_casing_stairs = setup(new BlockItem(ModBlocks.wooden_casing_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_casing_stairs"),
                 refined_bricks_stairs = setup(new BlockItem(ModBlocks.refined_bricks_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_bricks_stairs"),
-                refined_pathway_stairs = setup(new BlockItem(ModBlocks.refined_pathway_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_pathway_stairs")
+                refined_pathway_stairs = setup(new BlockItem(ModBlocks.refined_pathway_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_pathway_stairs"),
+                catastrophe_stairs = setup(new BlockItem(ModBlocks.catastrophe_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_stairs"),
+                catastrophe_block = setup(new BlockItem(ModBlocks.catastrophe_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_block")
 
                 );
     }
     @Nonnull
     private static <T extends IForgeRegistryEntry<T>> T setup(@Nonnull final T entry, @Nonnull final String name) {
         Preconditions.checkNotNull(name, "Name to assign to entry cannot be null!");
-        return setup(entry, new ResourceLocation(MalumMod.MODID, name));
+        return setup(entry, new ResourceLocation(MODID, name));
     }
 
     @Nonnull

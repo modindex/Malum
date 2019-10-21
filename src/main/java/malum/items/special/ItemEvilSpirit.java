@@ -42,15 +42,15 @@ public class ItemEvilSpirit extends Item
               if (Screen.hasShiftDown()) {
                   CompoundNBT tag = stack.getTag();
                   if (tag != null) {
-                      int swordPower = tag.getInt("swordPower");
-                      String entityDisplayName = tag.getString("eNam");
-                      String biomeDisplayName = tag.getString("bCat");
-                      if (swordPower >= 0) {
+                      String entityDisplayName = tag.getString("soul");
+                      String biomeDisplayName = tag.getString("grave");
+                      if (tag.getString("soul") != null) {
                           addStringToTooltip(TextFormatting.ITALIC + I18n.format("entity_type_tooltip: ") + entityDisplayName, tooltip);
                       }
-                      if (swordPower >= 1) {
+                      if (tag.getString("grave") != null) {
                           addStringToTooltip(TextFormatting.ITALIC + I18n.format("biome_display_name_tooltip: ") + biomeDisplayName, tooltip);
                       }
+
                   }
               } else {
                   addStringToTooltip(I18n.format("sneak_info_tooltip"), tooltip);

@@ -5,6 +5,7 @@ import malum.blocks.ModSlabBlock;
 import malum.blocks.ModStairsBlock;
 import malum.blocks.PolishedStone;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.LogBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -31,10 +32,14 @@ public class ModBlocks
     public static Block wooden_casing = null;
     public static Block wooden_casing_stairs = null;
     public static Block wooden_casing_slab = null;
+    public static Block catastrophe_bricks = null;
+    public static Block catastrophe_block = null;
+    public static Block catastrophe_stairs = null;
+    public static Block catastrophe_slab = null;
 
-    public static Block.Properties wooden_beam_properties = Block.Properties.create(Material.WOOD).hardnessAndResistance(1F).harvestTool(ToolType.AXE).sound(SoundType.WOOD);
-    public static Block.Properties dark_roofing_properties = Block.Properties.create(Material.ROCK).hardnessAndResistance(2F).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL);
-    public static Block.Properties refined_stone_properties = Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE);
+    public static Block.Properties wooden_beam_properties = Block.Properties.create(Material.WOOD).hardnessAndResistance(3F).harvestTool(ToolType.AXE).sound(SoundType.WOOD);
+    public static Block.Properties dark_roofing_properties = Block.Properties.create(Material.ROCK).hardnessAndResistance(4F).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL);
+    public static Block.Properties refined_stone_properties = Block.Properties.create(Material.ROCK).hardnessAndResistance(3F).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE);
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)
@@ -44,6 +49,12 @@ public class ModBlocks
         dark_roofing = registerBlock(registry, new Block(dark_roofing_properties), "dark_roofing");
         dark_roofing_slab = registerBlock(registry, new ModSlabBlock(() -> dark_roofing.getDefaultState(), dark_roofing_properties), "dark_roofing_slab");
         dark_roofing_stairs = registerBlock(registry, new ModStairsBlock(() -> dark_roofing.getDefaultState(), dark_roofing_properties), "dark_roofing_stairs");
+
+        catastrophe_block = registerBlock(registry, new Block(Block.Properties.from(Blocks.IRON_BLOCK)), "catastrophe_block");
+
+        catastrophe_bricks = registerBlock(registry, new Block(dark_roofing_properties), "catastrophe_bricks");
+        catastrophe_slab = registerBlock(registry, new ModSlabBlock(() -> dark_roofing.getDefaultState(), dark_roofing_properties), "catastrophe_slab");
+        catastrophe_stairs = registerBlock(registry, new ModStairsBlock(() -> dark_roofing.getDefaultState(), dark_roofing_properties), "catastrophe_stairs");
 
         refined_pathway = registerBlock(registry, new PolishedStone(refined_stone_properties), "refined_pathway");
         refined_pathway_slab = registerBlock(registry, new ModSlabBlock(() -> refined_pathway.getDefaultState(), refined_stone_properties), "refined_pathway_slab");

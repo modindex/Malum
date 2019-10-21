@@ -68,17 +68,14 @@ public class SpiritDropEvent
 
                                 if (swordPower >= 0)
                                 {
-                                    spawnedNBT.putString("eNam", target.getType().getRegistryType().toString());
+                                    spawnedNBT.putString("soul", Objects.requireNonNull(target.getType().getRegistryName()).toString());
                                 }
                                 if (swordPower >= 1)
                                 {
-                                    spawnedNBT.putString("bCat", target.world.getBiome(target.getPosition()).getCategory().getName());
-                                }
-                                if (swordPower >= 2) //player variable stuff
-                                {
+                                    spawnedNBT.putString("grave", target.world.getBiome(target.getPosition()).getCategory().getName());
                                 }
 
-                                GenerateLatinName(spawnedItem.getItem(), target, swordPower);
+                                //GenerateLatinName(spawnedItem.getItem(), target, swordPower);
                                 target.getEntityWorld().addEntity(spawnedItem);
                             }
                         }
