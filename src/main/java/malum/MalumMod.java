@@ -1,5 +1,6 @@
 package malum;
 
+import malum.event.ServerPlayerEventHandler;
 import malum.ingredients.SpiritIngredient;
 import malum.network.DangerLevelPacket;
 import malum.network.NetworkManager;
@@ -55,6 +56,7 @@ public class MalumMod
             DangerLevelPacket::whenThisPacketIsReceived
         );
         BlockTransmutationRecipes.initRecipes();
+        new ServerPlayerEventHandler();
         // some preinit code
     }
 

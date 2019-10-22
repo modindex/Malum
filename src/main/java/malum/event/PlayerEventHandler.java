@@ -1,43 +1,30 @@
 package malum.event;
 
-import malum.capabilities.PlayerMadeDoll;
-import malum.capabilities.PlayerProperties;
+import malum.ClientRefferences;
 import malum.items.curios.*;
-import malum.items.gadgets.ItemVoodoDoll;
 import malum.registry.ModItems;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.GameSettings;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.WitherSkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.particles.IParticleData;
-import net.minecraft.particles.ParticleType;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosAPI;
 
 import java.util.Objects;
-import java.util.Random;
 import java.util.UUID;
 
 import static net.minecraft.entity.LivingEntity.SWIM_SPEED;
@@ -45,6 +32,47 @@ import static net.minecraft.entity.LivingEntity.SWIM_SPEED;
 @Mod.EventBusSubscriber
 public class PlayerEventHandler
 {
+    static float Cooldown = 0;
+    static float GlideCharge = 0;
+    @SubscribeEvent
+    public static void AirNecklaceFlight(TickEvent.PlayerTickEvent event) {
+        PlayerEntity entity = event.player;
+        if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemAirNecklace, entity).isPresent()) {
+
+            GameSettings settings = ClientRefferences.getClientSettings();
+            KeyBinding jump = settings.keyBindJump;
+            if (Cooldown > 0) {
+                if (!jump.isKeyDown()) {
+                    Cooldown = 0;
+                }
+            }
+            if (entity.onGround) {
+                Cooldown = 1;
+                GlideCharge = 25;
+            } else {
+                if (GlideCharge != 0) {
+                    if (jump.isKeyDown()) {
+                        if (Cooldown == 0) {
+                            if (entity.getMotion().y < 0.2) {
+                                entity.addVelocity(0, 0.1, 0);
+                            }
+                            entity.addVelocity(0, 0.05, 0);
+                            GlideCharge -= 1;
+                        }
+                    }
+                }
+            }
+            if (GlideCharge == 0) {
+                if (jump.isKeyDown()) {
+                    if (Cooldown == 0) {
+                        if (entity.getMotion().y < -0.1) {
+                            entity.addVelocity(0, 0.1, 0);
+                        }
+                    }
+                }
+            }
+        }
+    }
     private static final UUID ID = UUID.fromString("6d3be89e-37e6-453f-8654-2fd37d85b2ab");
     @SubscribeEvent
     public static void Tick (TickEvent.PlayerTickEvent event)

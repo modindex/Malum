@@ -24,6 +24,7 @@ import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 import static malum.MalumMod.MODID;
+import static malum.registry.ModItemTiers.CATASTROPHE;
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class ModItems
@@ -70,7 +71,7 @@ public class ModItems
     public static Item control_doll = null;
     public static Item enderman_doll = null;
     public static Item ender_artifact = null;
-    public static Item transmutation_powder = null;
+    public static Item transmutation_gem = null;
 
     //blocks
     public static Item dark_roofing = null;
@@ -90,48 +91,6 @@ public class ModItems
     public static Item catastrophe_stairs = null;
     public static Item catastrophe_slab = null;
     public static Item catastrophe_block = null;
-
-    public static final ToolMaterial CATASTROPHE = new ToolMaterial(4, 3122, 10.0F, 4.0F, 40, () -> Ingredient.fromItems(Items.DIAMOND));
-    private static class ToolMaterial implements IItemTier {
-        private final int harvestLevel;
-        private final int maxUses;
-        private final float efficiency;
-        private final float attackDamage;
-        private final int enchantability;
-        private final LazyLoadBase<Ingredient> repair;
-        public ToolMaterial(int harvestLevel, int maxUses, float efficiency, float attackDamage, int enchantability, Supplier<Ingredient> supplier) {
-            this.harvestLevel = harvestLevel;
-            this.maxUses = maxUses;
-            this.efficiency = efficiency;
-            this.attackDamage = attackDamage;
-            this.enchantability = enchantability;
-            this.repair = new LazyLoadBase<Ingredient>(supplier);
-        }
-        @Override
-        public int getMaxUses() {
-            return maxUses;
-        }
-        @Override
-        public float getEfficiency() {
-            return efficiency;
-        }
-        @Override
-        public float getAttackDamage() {
-            return attackDamage;
-        }
-        @Override
-        public int getHarvestLevel() {
-            return harvestLevel;
-        }
-        @Override
-        public int getEnchantability() {
-            return enchantability;
-        }
-        @Override
-        public Ingredient getRepairMaterial() {
-            return repair.getValue();
-        }
-    }
     @SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event)
     {
@@ -142,14 +101,14 @@ public class ModItems
                 catastrophe_chestplate = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_chestplate"),
                 catastrophe_hood = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_hood"),
 
-                withering_rapier = setup(new ItemWitheringRapier(ItemTier.IRON, 2, 0.25f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "withering_rapier"),
+                withering_rapier = setup(new ItemWitheringRapier(ItemTier.IRON, 2, -1.8f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "withering_rapier"),
 
-                catastrophe_axe = setup(new ItemCatastropheAxe(CATASTROPHE, 9, -3f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_axe"),
-                catastrophe_sword = setup(new ItemCatastropheSword(CATASTROPHE, 0, 0f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_sword"),
-                catastrophe_shovel = setup(new ItemCatastropheShovel(CATASTROPHE, 0, 0f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_shovel"),
-                catastrophe_pickaxe = setup(new ItemCatastrophePickaxe(CATASTROPHE, 0, 0f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_pickaxe"),
+                catastrophe_axe = setup(new ItemCatastropheAxe(CATASTROPHE, 6, -3f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_axe"),
+                catastrophe_sword = setup(new ItemCatastropheSword(CATASTROPHE, 3, -2.4f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_sword"),
+                catastrophe_shovel = setup(new ItemCatastropheShovel(CATASTROPHE, 1, -3.0f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_shovel"),
+                catastrophe_pickaxe = setup(new ItemCatastrophePickaxe(CATASTROPHE, 1, -2.8f,  new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_pickaxe"),
 
-                transmutation_powder = setup(new ItemTransmutationPowder(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "transmutation_powder"),
+                transmutation_gem = setup(new ItemTransmutationGem(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "transmutation_gem"),
                 evil_lantern = setup(new ItemEvilLantern(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_lantern"),
 
                 voodoo_doll = setup(new ItemVoodoDoll(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "voodoo_doll"),

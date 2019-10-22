@@ -9,18 +9,18 @@ import net.minecraftforge.fml.network.NetworkEvent;
 import java.util.UUID;
 import java.util.function.Supplier;
 
-public class DangerLevelPacket
+public class HatePacket
 {
-    private int dangerLevel;
+    private float hate;
     private UUID uuid;
-    public DangerLevelPacket(int dangerLevel, UUID uuid)
+    public HatePacket(float hate, UUID uuid)
     {
-        this.dangerLevel = dangerLevel;
+        this.hate = hate;
         this.uuid = uuid;
     }
     public void encode(PacketBuffer buf)
     {
-        buf.writeInt(dangerLevel);
+        buf.writeFloat(hate);
         buf.writeUniqueId(uuid);
     }
     public void whenThisPacketIsReceived(Supplier<NetworkEvent.Context> context)
@@ -29,15 +29,15 @@ public class DangerLevelPacket
             PlayerEntity player = ClientRefferences.getClientPlayerByUUID(uuid);
             player.getCapability(PlayerProperties.CAPABILITY).ifPresent(note ->
             {
-                note.setDangerLevel(this.dangerLevel);
+                note.setHate(this.hate);
             });
         });
         context.get().setPacketHandled(true);
     }
-    public static DangerLevelPacket decode(PacketBuffer buf)
+    public static HatePacket decode(PacketBuffer buf)
     {
         int dangerLevel = buf.readInt();
         UUID uniqueID = buf.readUniqueId();
-        return new DangerLevelPacket(dangerLevel, uniqueID);
+        return new HatePacket(dangerLevel, uniqueID);
     }
 }

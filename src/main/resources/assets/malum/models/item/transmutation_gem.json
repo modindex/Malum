@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "malum:items/air_necklace"
+    "layer0": "malum:items/transmutation_gem"
   }
 }

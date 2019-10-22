@@ -26,9 +26,9 @@ import net.minecraft.world.World;
 
 import java.util.Objects;
 
-public class ItemTransmutationPowder extends Item
+public class ItemTransmutationGem extends Item
 {
-  public ItemTransmutationPowder(Item.Properties builder)
+  public ItemTransmutationGem(Item.Properties builder)
   {
     super(builder);
   }

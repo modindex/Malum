@@ -1,14 +1,12 @@
 package malum.items.gadgets;
 
-import malum.capabilities.PlayerMadeDoll;
 import malum.capabilities.PlayerProperties;
+import malum.event.ServerPlayerEventHandler;
 import malum.items.curios.ItemDarkArtsRing;
 import malum.items.curios.ItemLuckRing;
-import net.minecraft.client.audio.Sound;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EnderChestInventory;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,10 +17,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import top.theillusivec4.curios.api.CuriosAPI;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 public class ItemVoodoDoll extends Item
 {
@@ -156,16 +152,19 @@ public class ItemVoodoDoll extends Item
             return super.itemInteractionForEntity(stack, playerIn, target, hand);
         }
         if (target instanceof PlayerEntity) {
-            playerIn.getCapability(PlayerProperties.PLAYER_MADE_DOLL).ifPresent(note ->
+            playerIn.getCapability(PlayerProperties.CAPABILITY).ifPresent(note ->
             {
-                if (note.hasPlayerMadeDoll() < 2) {
-                    note.setPlayerMadeDoll(2);
+                if (note.getDangerLevel() < 2) {
+                    note.setDangerLevel(2);
                 }
             });
         }
+        if (!playerIn.world.isRemote()) {
+            ServerPlayerEventHandler.send(playerIn);
+        }
         if (playerIn.isServerWorld())
         {
-            int returnValue = playerIn.getCapability(PlayerProperties.PLAYER_MADE_DOLL).map(PlayerMadeDoll::hasPlayerMadeDoll).orElse(0);
+            int returnValue = PlayerProperties.getDangerLevel(playerIn);
             TranslationTextComponent serverSideMessage = new TranslationTextComponent("server_side: " + returnValue);
             playerIn.sendMessage(serverSideMessage);
         }
