@@ -3,6 +3,7 @@ package malum;
 import malum.event.ServerPlayerEventHandler;
 import malum.ingredients.SpiritIngredient;
 import malum.network.DangerLevelPacket;
+import malum.network.HatePacket;
 import malum.network.NetworkManager;
 import malum.recipes.BlockTransmutationRecipes;
 import net.minecraft.block.Blocks;
@@ -55,34 +56,28 @@ public class MalumMod
             DangerLevelPacket::decode,
             DangerLevelPacket::whenThisPacketIsReceived
         );
+        NetworkManager.INSTANCE.registerMessage(packetID++,
+            HatePacket.class,
+            HatePacket::encode,
+            HatePacket::decode,
+            HatePacket::whenThisPacketIsReceived
+        );
         BlockTransmutationRecipes.initRecipes();
         new ServerPlayerEventHandler();
-        // some preinit code
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
-        // do something that can only be done on the client
-        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
     {
-        // some example code to dispatch IMC to another mod
-        InterModComms.sendTo("examplemod", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
     }
 
     private void processIMC(final InterModProcessEvent event)
     {
-        // some example code to receive and process InterModComms from other mods
-        LOGGER.info("Got IMC {}", event.getIMCStream().
-                map(m->m.getMessageSupplier().get()).
-                collect(Collectors.toList()));
     }
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event)
     {
-        // do something when the server starts
-        LOGGER.info("HELLO from server starting");
     }
 }
