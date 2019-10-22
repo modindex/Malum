@@ -27,31 +27,37 @@ public class ModelArmorCatastrophe extends ModelArmor {
 		rightleg.setRotationPoint(-2.0F, 12.0F, 0.0F);
 		rightleg.cubeList.add(new ModelBox(rightleg, 0, 16, -2.0F, 0.0F, -2.0F, 4, 12, 4, 0.35F, false));
 		rightleg.cubeList.add(new ModelBox(rightleg, 0, 32, -2.0F, 0.0F, -2.0F, 4, 8, 4, 0.45F, false));
+        rightleg.cubeList.add(new ModelBox(rightleg, 0, 32, -2.0F, 0.0F, -2.0F, 4, 8, 4, 0.75F, false));
 
 		leftleg = new RendererModel(this);
 		leftleg.setRotationPoint(2.0F, 12.0F, 0.0F);
 		leftleg.cubeList.add(new ModelBox(leftleg, 0, 16, -2.0F, 0.0F, -2.0F, 4, 12, 4, 0.35F, true));
 		leftleg.cubeList.add(new ModelBox(leftleg, 0, 32, -2.0F, 0.0F, -2.0F, 4, 8, 4, 0.45F, true));
+        leftleg.cubeList.add(new ModelBox(leftleg, 0, 32, -2.0F, 0.0F, -2.0F, 4, 8, 4, 0.75F, true));
 
 		body = new RendererModel(this);
 		body.setRotationPoint(0.0F, 0.0F, 0.0F);
 		body.cubeList.add(new ModelBox(body, 16, 16, -4.0F, 0.0F, -2.0F, 8, 12, 4, 0.4F, false));
 		body.cubeList.add(new ModelBox(body, 16, 32, -4.0F, 0.0F, -2.0F, 8, 12, 4, 0.7F, false));
+        body.cubeList.add(new ModelBox(body, 16, 32, -4.0F, 0.0F, -2.0F, 8, 12, 4, 1F, false));
 
 		head = new RendererModel(this);
 		head.setRotationPoint(0.0F, 0.0F, 0.0F);
 		head.cubeList.add(new ModelBox(head, 0, 0, -4.0F, -8.0F, -4.0F, 8, 8, 8, 0.4F, false));
 		head.cubeList.add(new ModelBox(head, 32, 0, -4.0F, -8.0F, -4.0F, 8, 8, 8, 0.45F, false));
+        head.cubeList.add(new ModelBox(head, 32, 0, -4.0F, -8.0F, -4.0F, 8, 8, 8, 0.75F, false));
 
 		leftarm = new RendererModel(this);
 		leftarm.setRotationPoint(4.0F, 2.0F, 0.0F);
 		leftarm.cubeList.add(new ModelBox(leftarm, 40, 16, -1F, -2.0F, -2.0F, 4, 12, 4, 0.4F, true));
 		leftarm.cubeList.add(new ModelBox(leftarm, 56, 16, -1F, -2.0F, -2.0F, 4, 12, 4, 0.75F, true));
+        leftarm.cubeList.add(new ModelBox(leftarm, 56, 16, -1F, -2.0F, -2.0F, 4, 12, 4, 1.05F, true));
 
 		rightarm = new RendererModel(this);
 		rightarm.setRotationPoint(-4.0F, 2.0F, 0.0F);
 		rightarm.cubeList.add(new ModelBox(rightarm, 40, 16, -3F, -2.0F, -2.0F, 4, 12, 4, 0.4F, false));
 		rightarm.cubeList.add(new ModelBox(rightarm, 56, 16, -3F, -2.0F, -2.0F, 4, 12, 4, 0.75F, false));
+        rightarm.cubeList.add(new ModelBox(rightarm, 56, 16, -3F, -2.0F, -2.0F, 4, 12, 4, 1.05F, false));
 
 		belt = new RendererModel(this);
 		belt.setRotationPoint(0.0F, 0f, 0.0F);
@@ -60,11 +66,13 @@ public class ModelArmorCatastrophe extends ModelArmor {
 		leftboot = new RendererModel(this);
 		leftboot.setRotationPoint(0.0F, 24.0F, 0.0F);
 		leftboot.cubeList.add(new ModelBox(leftboot, 0, 44, 0.0F, 8.0F, -2.0F, 4, 4, 4, 0.4F, true));
+        leftboot.cubeList.add(new ModelBox(leftboot, 0, 44, 0.0F, 8.0F, -2.0F, 4, 4, 4, 0.7F, true));
 
 		rightboot = new RendererModel(this);
 		rightboot.setRotationPoint(0.0F, 24.0F, 0.0F);
 		rightboot.cubeList.add(new ModelBox(rightboot, 0, 44, -4.0F, 8.0F, -2.0F, 4, 4, 4, 0.4F, false));
-	}
+        rightboot.cubeList.add(new ModelBox(rightboot, 0, 44, -4.0F, 8.0F, -2.0F, 4, 4, 4, 0.7F, false));
+    }
 	@Override
 	public void render(LivingEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		head.showModel = slot == EquipmentSlotType.HEAD;

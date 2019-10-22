@@ -1,5 +1,6 @@
 package malum.event;
 
+import malum.MalumMod;
 import malum.capabilities.PlayerMadeDoll;
 import malum.capabilities.PlayerProperties;
 import malum.items.curios.ItemAirNecklace;
@@ -27,7 +28,7 @@ import top.theillusivec4.curios.api.CuriosAPI;
 
 import java.util.Random;
 
-@Mod.EventBusSubscriber(Dist.DEDICATED_SERVER)
+@Mod.EventBusSubscriber(modid = MalumMod.MODID)
 public class ServerPlayerEventHandler
 {
     @SubscribeEvent
@@ -39,7 +40,8 @@ public class ServerPlayerEventHandler
             Entity target = event.getTarget();
             if (target instanceof PlayerEntity)
             {
-                send(toUpdate);
+                MalumMod.LOGGER.info(toUpdate.getDisplayName() + "is tracking" + target.getDisplayName());
+                send((PlayerEntity) target);
             }
         }
     }

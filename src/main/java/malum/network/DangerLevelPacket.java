@@ -1,6 +1,7 @@
 package malum.network;
 
 import malum.ClientRefferences;
+import malum.MalumMod;
 import malum.capabilities.PlayerProperties;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
@@ -22,6 +23,7 @@ public class DangerLevelPacket
     }
     public void encode(PacketBuffer buf)
     {
+        MalumMod.LOGGER.info(dangerLevel + uuid.toString());
         buf.writeInt(dangerLevel);
         buf.writeUniqueId(uuid);
     }

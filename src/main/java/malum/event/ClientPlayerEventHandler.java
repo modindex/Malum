@@ -1,5 +1,6 @@
 package malum.event;
 
+import malum.ClientRefferences;
 import malum.capabilities.PlayerMadeDoll;
 import malum.capabilities.PlayerProperties;
 import malum.items.curios.*;
@@ -28,7 +29,7 @@ import top.theillusivec4.curios.api.CuriosAPI;
 
 import java.util.Random;
 
-@Mod.EventBusSubscriber(Dist.CLIENT)
+@Mod.EventBusSubscriber()
 public class ClientPlayerEventHandler
 {
     static float Cooldown = 0;
@@ -38,7 +39,7 @@ public class ClientPlayerEventHandler
         PlayerEntity entity = event.player;
         if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemAirNecklace, entity).isPresent()) {
 
-            GameSettings settings = Minecraft.getInstance().gameSettings;
+            GameSettings settings = ClientRefferences.getClientSettings();
             KeyBinding jump = settings.keyBindJump;
             if (Cooldown > 0) {
                 if (!jump.isKeyDown()) {
@@ -74,7 +75,7 @@ public class ClientPlayerEventHandler
     }
     public static float getDangerLevel(PlayerEntity target)
     {
-        ClientPlayerEntity clientPlayer = Minecraft.getInstance().player;
+        PlayerEntity player = ClientRefferences.getClientPlayer();
         float returnValue;
         //send a packet here from target to clientPlayer
         returnValue = target.getCapability(PlayerProperties.PLAYER_MADE_DOLL).map(PlayerMadeDoll::hasPlayerMadeDoll).orElse(0);
@@ -89,9 +90,9 @@ public class ClientPlayerEventHandler
                 }
             }
         }
-        if (clientPlayer != null)
+        if (player != null)
         {
-            if (clientPlayer.getDisplayName().getFormattedText().equals(target.getDisplayName().getFormattedText()))
+            if (player.getDisplayName().getFormattedText().equals(target.getDisplayName().getFormattedText()))
             {
                 returnValue = 0;
             }
@@ -108,7 +109,7 @@ public class ClientPlayerEventHandler
     @SubscribeEvent
     public static void TellDangerLevel(TickEvent.PlayerTickEvent event)
     {
-        ClientPlayerEntity clientPlayer = Minecraft.getInstance().player;
+        PlayerEntity player = ClientRefferences.getClientPlayer();
         if (event.player == null)
         {
             return;
@@ -116,21 +117,21 @@ public class ClientPlayerEventHandler
 
         PlayerEntity targetPlayer = event.player;
         float dangerLevel = getDangerLevel(targetPlayer);
-        if (clientPlayer != null)
+        if (player != null)
         {
-            if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemEnderSightNecklace, clientPlayer).isPresent())
+            if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemEnderSightNecklace, player).isPresent())
             {
                 double basePosX = targetPlayer.posX;
                 double basePosY = targetPlayer.posY + targetPlayer.getHeight();
                 double basePosZ = targetPlayer.posZ;
                 if (dangerLevel >= 1) {
-                    clientPlayer.getEntityWorld().addParticle(ParticleTypes.SMOKE, randomizePos(basePosX), randomizePos(basePosY), randomizePos(basePosZ), 0, 0, 0);
+                    player.getEntityWorld().addParticle(ParticleTypes.SMOKE, randomizePos(basePosX), randomizePos(basePosY), randomizePos(basePosZ), 0, 0, 0);
                 }
                 if (dangerLevel >= 2) {
-                    clientPlayer.getEntityWorld().addParticle(ParticleTypes.LARGE_SMOKE, randomizePos(basePosX), randomizePos(basePosY), randomizePos(basePosZ), 0, 0, 0);
+                    player.getEntityWorld().addParticle(ParticleTypes.LARGE_SMOKE, randomizePos(basePosX), randomizePos(basePosY), randomizePos(basePosZ), 0, 0, 0);
                 }
                 if (dangerLevel >= 3) {
-                    clientPlayer.getEntityWorld().addParticle(ParticleTypes.FLAME, randomizePos(basePosX), randomizePos(basePosY), randomizePos(basePosZ), 0, 0, 0);
+                    player.getEntityWorld().addParticle(ParticleTypes.FLAME, randomizePos(basePosX), randomizePos(basePosY), randomizePos(basePosZ), 0, 0, 0);
                 }
             }
         }

@@ -1,5 +1,6 @@
 package malum;
 
+import net.minecraft.client.GameSettings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
@@ -17,7 +18,10 @@ public class ClientRefferences
 
         return Minecraft.getInstance().world;
     }
+    public static GameSettings getClientSettings() {
 
+        return Minecraft.getInstance().gameSettings;
+    }
     public static PlayerEntity getClientPlayerByUUID(UUID uuid) {
 
         return Minecraft.getInstance().world.getPlayerByUuid(uuid);

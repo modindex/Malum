@@ -48,7 +48,6 @@ public class ModelArmor extends BipedModel {
 			this.bipedRightLeg.rotateAngleZ = 0.017453292F * entityarmorstand.getRightLegRotation().getZ();
 			this.bipedRightLeg.setRotationPoint(-1.9F, 11.0F, 0.0F);
 		}
-		super.setRotationAngles((LivingEntity) entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
 	}
 
 

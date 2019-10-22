@@ -1,5 +1,6 @@
 package malum.items.armor;
 
+import malum.ClientRefferences;
 import malum.items.curios.ItemArcaneSightRing;
 import malum.models.ModelArmorCatastrophe;
 import malum.registry.ModItems;
@@ -38,7 +39,7 @@ public class ItemArmorCatastrophe extends ArmorItem {
     public ItemArmorCatastrophe(IArmorMaterial materialIn, EquipmentSlotType slot, Item.Properties builder) {
         super(materialIn, slot, builder);
         this.addPropertyOverride(new ResourceLocation("dimension"), (p_210309_0_, p_210309_1_, p_210309_2_) -> {
-            return p_210309_2_ != null && p_210309_2_.dimension == DimensionType.THE_END ? 1.0F : 0.0F;
+            return ClientRefferences.getClientWorld() != null && ClientRefferences.getClientPlayer().dimension == DimensionType.THE_END ? 1.0F : 0.0F;
         });
     }
 

@@ -1,6 +1,7 @@
 package malum.capabilities;
 
 
+import malum.MalumMod;
 import net.minecraft.nbt.CompoundNBT;
 
 public class PlayerMadeDoll {
@@ -16,6 +17,7 @@ public class PlayerMadeDoll {
 
     public void setPlayerMadeDoll(int playerMadeDoll) {
         this.playerMadeDoll = playerMadeDoll;
+        MalumMod.LOGGER.info("set playerMadeDoll to: " + hasPlayerMadeDoll());
     }
 
     public void copyFrom(PlayerMadeDoll source) {
