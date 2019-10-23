@@ -9,18 +9,18 @@ import net.minecraftforge.fml.network.NetworkEvent;
 import java.util.UUID;
 import java.util.function.Supplier;
 
-public class HatePacket
+public class PermaHatePacket
 {
-    private float hate;
+    private float permaHate;
     private UUID uuid;
-    public HatePacket(float hate, UUID uuid)
+    public PermaHatePacket(float permaHate, UUID uuid)
     {
-        this.hate = hate;
+        this.permaHate = permaHate;
         this.uuid = uuid;
     }
     public void encode(PacketBuffer buf)
     {
-        buf.writeFloat(hate);
+        buf.writeFloat(permaHate);
         buf.writeUniqueId(uuid);
     }
     public void whenThisPacketIsReceived(Supplier<NetworkEvent.Context> context)
@@ -29,15 +29,15 @@ public class HatePacket
             PlayerEntity player = ClientRefferences.getClientPlayerByUUID(uuid);
             player.getCapability(PlayerProperties.CAPABILITY).ifPresent(note ->
             {
-                note.setHate(this.hate);
+                note.setPermaHate(this.permaHate);
             });
         });
         context.get().setPacketHandled(true);
     }
-    public static HatePacket decode(PacketBuffer buf)
+    public static PermaHatePacket decode(PacketBuffer buf)
     {
-        float hate = buf.readFloat();
+        float permaHate = buf.readFloat();
         UUID uniqueID = buf.readUniqueId();
-        return new HatePacket(hate, uniqueID);
+        return new PermaHatePacket(permaHate, uniqueID);
     }
 }

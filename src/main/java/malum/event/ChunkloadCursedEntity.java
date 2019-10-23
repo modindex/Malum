@@ -9,7 +9,6 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 import static net.minecraftforge.event.TickEvent.Phase.START;
@@ -17,11 +16,9 @@ import static net.minecraftforge.event.TickEvent.Phase.START;
 @Mod.EventBusSubscriber
 public class ChunkloadCursedEntity
 {
-    static Random random;
     @SubscribeEvent
     public static void Load(TickEvent.WorldTickEvent event)
     {
-        random = new Random();
         if (event.phase == START && event.world instanceof ServerWorld)
         {
             List<LivingEntity> entities = new ArrayList<>();

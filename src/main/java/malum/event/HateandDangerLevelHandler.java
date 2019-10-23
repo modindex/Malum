@@ -1,6 +1,7 @@
 package malum.event;
 
 import malum.ClientRefferences;
+import malum.MalumMod;
 import malum.capabilities.PlayerProperties;
 import malum.items.curios.*;
 import malum.items.gadgets.ItemVoodoDoll;
@@ -97,12 +98,19 @@ public class HateandDangerLevelHandler
             double basePosX = targetPlayer.posX;
             double basePosY = targetPlayer.posY + randomizePos(0, targetPlayer.getHeight());
             double basePosZ = targetPlayer.posZ;
-            int value = 100 - (int)hate;
+            double basePosXClient = player.posX;
+            double basePosYClient = player.posY + randomizePos(0, player.getHeight());
+            double basePosZClient = player.posZ;
+            if (hate > 100)
+            {
+                hate = 100;
+            }
+            int value = 101 - (int)hate;
             Random random = new Random();
             int rand = random.nextInt(value);
-            if (rand == 0)
+            if (rand == 0 || rand == 1)
             {
-                player.getEntityWorld().addParticle(ParticleTypes.SMOKE, randomizePos(basePosX, 0.4D), randomizePos(basePosY, 0.4D), randomizePos(basePosZ, 0.4D), 0, 0, 0);
+                player.getEntityWorld().addParticle(ParticleTypes.SMOKE, randomizePos(basePosXClient, 0.4D), randomizePos(basePosYClient, 0.4D), randomizePos(basePosZClient, 0.4D), 0, 0, 0);
                 if (!player.getDisplayName().getFormattedText().equals(targetPlayer.getDisplayName().getFormattedText()))
                 {
                     player.getEntityWorld().addParticle(ParticleTypes.LARGE_SMOKE, randomizePos(basePosX, 0.4D), randomizePos(basePosY, 0.4D), randomizePos(basePosZ, 0.4D), 0, 0, 0);

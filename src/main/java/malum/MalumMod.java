@@ -1,12 +1,16 @@
 package malum;
 
+import malum.blocks.InfuserBlockScreen;
 import malum.event.ServerPlayerEventHandler;
 import malum.ingredients.SpiritIngredient;
 import malum.network.DangerLevelPacket;
 import malum.network.HatePacket;
 import malum.network.NetworkManager;
+import malum.network.PermaHatePacket;
 import malum.recipes.BlockTransmutationRecipes;
+import malum.registry.ModBlocks;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -34,6 +38,7 @@ public class MalumMod
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "malum";
     public MalumMod() {
+        ScreenManager.registerFactory(ModBlocks.infuser_container, InfuserBlockScreen::new);
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
@@ -62,11 +67,18 @@ public class MalumMod
             HatePacket::decode,
             HatePacket::whenThisPacketIsReceived
         );
+        NetworkManager.INSTANCE.registerMessage(packetID++,
+            PermaHatePacket.class,
+            PermaHatePacket::encode,
+            PermaHatePacket::decode,
+            PermaHatePacket::whenThisPacketIsReceived
+        );
         BlockTransmutationRecipes.initRecipes();
         new ServerPlayerEventHandler();
     }
 
-    private void doClientStuff(final FMLClientSetupEvent event) {
+    private void doClientStuff(final FMLClientSetupEvent event)
+    {
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

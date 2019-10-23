@@ -11,6 +11,8 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import static malum.capabilities.PlayerProperties.*;
+
 @Mod.EventBusSubscriber
 public class ForgeEventHandlers
 {
@@ -40,16 +42,7 @@ public class ForgeEventHandlers
     }
     @SubscribeEvent
     public static void onCraft(PlayerEvent.ItemCraftedEvent event) {
-
-        event.getPlayer().getCapability(PlayerProperties.CAPABILITY).ifPresent(note ->
-        {
-            if (note.getDangerLevel() < 1)
-            {
-                note.setDangerLevel(1);
-            }
-        });
-        if (!event.getPlayer().world.isRemote()) {
-            ServerPlayerEventHandler.send(event.getPlayer());
-        }
+        setDangerLevelCapped(event.getPlayer(), 1, 1);
+        setHate(event.getPlayer(), getHate(event.getPlayer()) + 1);
     }
 }

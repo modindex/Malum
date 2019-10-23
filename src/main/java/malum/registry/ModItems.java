@@ -91,6 +91,7 @@ public class ModItems
     public static Item catastrophe_stairs = null;
     public static Item catastrophe_slab = null;
     public static Item catastrophe_block = null;
+    public static Item infuser_block = null;
     @SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event)
     {
@@ -145,6 +146,7 @@ public class ModItems
                 refined_bricks = setup(new BlockItem(ModBlocks.refined_bricks, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_bricks"),
                 refined_pathway = setup(new BlockItem(ModBlocks.refined_pathway, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_pathway"),
                 catastrophe_bricks = setup(new BlockItem(ModBlocks.catastrophe_bricks, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_bricks"),
+                infuser_block = setup(new BlockItem(ModBlocks.infuser, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "infuser_block"),
 
                 dark_roofing_slab = setup(new BlockItem(ModBlocks.dark_roofing_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing_slab"),
                 wooden_casing_slab = setup(new BlockItem(ModBlocks.wooden_casing_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_casing_slab"),

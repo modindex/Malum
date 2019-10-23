@@ -10,6 +10,8 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.network.PacketDistributor;
 
+import static malum.capabilities.PlayerProperties.*;
+
 public class ServerPlayerEventHandler
 {
     public ServerPlayerEventHandler()
@@ -19,16 +21,12 @@ public class ServerPlayerEventHandler
     @SubscribeEvent
     public void onTracking(PlayerEvent.StartTracking event)
     {
-        PlayerEntity toUpdate = event.getPlayer();
         if (event.getTarget() instanceof PlayerEntity && event.getPlayer() != null)
         {
             Entity target = event.getTarget();
-            send((PlayerEntity) target);
+            sendDangerLevelPacket((PlayerEntity) target);
+            sendHatePacket((PlayerEntity) target);
+            sendPermaHatePacket((PlayerEntity) target);
         }
-    }
-    public static void send(PlayerEntity player)
-    {
-        int value = PlayerProperties.getDangerLevel(player);
-        NetworkManager.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> player), new DangerLevelPacket(value, player.getUniqueID()));
     }
 }

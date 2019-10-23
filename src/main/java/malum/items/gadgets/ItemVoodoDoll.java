@@ -20,6 +20,8 @@ import top.theillusivec4.curios.api.CuriosAPI;
 import java.util.Objects;
 import java.util.UUID;
 
+import static malum.capabilities.PlayerProperties.setDangerLevelCapped;
+
 public class ItemVoodoDoll extends Item
 {
     public ItemVoodoDoll(Item.Properties builder)
@@ -147,41 +149,28 @@ public class ItemVoodoDoll extends Item
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand)
     {
-        if (hand == Hand.OFF_HAND)
-        {
-            return super.itemInteractionForEntity(stack, playerIn, target, hand);
-        }
-        if (target instanceof PlayerEntity) {
-            playerIn.getCapability(PlayerProperties.CAPABILITY).ifPresent(note ->
-            {
-                if (note.getDangerLevel() < 2) {
-                    note.setDangerLevel(2);
-                }
-            });
-        }
-        if (!playerIn.world.isRemote()) {
-            ServerPlayerEventHandler.send(playerIn);
-        }
-        if (playerIn.isServerWorld())
-        {
-            int returnValue = PlayerProperties.getDangerLevel(playerIn);
-            TranslationTextComponent serverSideMessage = new TranslationTextComponent("server_side: " + returnValue);
-            playerIn.sendMessage(serverSideMessage);
-        }
-        if (stack.hasTag())
-        {
-            CompoundNBT nbt = stack.getTag();
-            assert nbt != null;
-            UUID uuid = nbt.getUniqueId("entity");
-            if (uuid != null)
-            {
-                if (uuid == target.getUniqueID())
-                {
-                    return super.itemInteractionForEntity(stack, playerIn, target, hand);
+        if (hand == Hand.MAIN_HAND) {
+
+            if (target instanceof PlayerEntity) {
+                setDangerLevelCapped(playerIn, 2, 2);
+            }
+            if (playerIn.isServerWorld()) {
+                int returnValue = PlayerProperties.getDangerLevel(playerIn);
+                TranslationTextComponent serverSideMessage = new TranslationTextComponent("server_side: " + returnValue);
+                playerIn.sendMessage(serverSideMessage);
+            }
+            if (stack.hasTag()) {
+                CompoundNBT nbt = stack.getTag();
+                assert nbt != null;
+                UUID uuid = nbt.getUniqueId("entity");
+                if (uuid != null) {
+                    if (uuid == target.getUniqueID()) {
+                        return super.itemInteractionForEntity(stack, playerIn, target, hand);
+                    }
                 }
             }
+            AttemptBind(stack, playerIn, target, hand);
         }
-        AttemptBind(stack, playerIn, target, hand);
         return super.itemInteractionForEntity(stack, playerIn, target, hand);
     }
 }

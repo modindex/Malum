@@ -1,20 +1,21 @@
 package malum.registry;
 
 import malum.MalumMod;
-import malum.blocks.ModSlabBlock;
-import malum.blocks.ModStairsBlock;
-import malum.blocks.PolishedStone;
+import malum.blocks.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LogBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.ObjectHolder;
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks
@@ -37,6 +38,10 @@ public class ModBlocks
     public static Block catastrophe_stairs = null;
     public static Block catastrophe_slab = null;
 
+    public static InfuserBlock infuser = null;
+    public static TileEntityType<InfuserBlockTile> infuser_tile;
+    public static ContainerType<InfuserBlockContainer> infuser_container;
+
     public static Block.Properties wooden_beam_properties = Block.Properties.create(Material.WOOD).hardnessAndResistance(3F).harvestTool(ToolType.AXE).sound(SoundType.WOOD);
     public static Block.Properties dark_roofing_properties = Block.Properties.create(Material.ROCK).hardnessAndResistance(4F).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL);
     public static Block.Properties refined_stone_properties = Block.Properties.create(Material.ROCK).hardnessAndResistance(3F).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE);
@@ -51,6 +56,7 @@ public class ModBlocks
         dark_roofing_stairs = registerBlock(registry, new ModStairsBlock(() -> dark_roofing.getDefaultState(), dark_roofing_properties), "dark_roofing_stairs");
 
         catastrophe_block = registerBlock(registry, new Block(Block.Properties.from(Blocks.IRON_BLOCK)), "catastrophe_block");
+        infuser = registerBlock(registry, new InfuserBlock(), "infuser");
 
         catastrophe_bricks = registerBlock(registry, new Block(dark_roofing_properties), "catastrophe_bricks");
         catastrophe_slab = registerBlock(registry, new ModSlabBlock(() -> dark_roofing.getDefaultState(), dark_roofing_properties), "catastrophe_slab");
