@@ -14,19 +14,5 @@ public class PolishedStone extends Block {
     public PolishedStone(Properties properties)
     {
         super(properties);
-        this.hasTileEntity(this.getDefaultState());
-    }
-
-    @Override
-    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
-    {
-        if (entityIn instanceof PlayerEntity)
-        {
-            if (!entityIn.getEntityWorld().isRemote && entityIn.ticksExisted % 40 == 0)
-            {
-                ((PlayerEntity) entityIn).addPotionEffect(new EffectInstance(Effects.SPEED, 40, 2));
-            }
-        }
-        super.onEntityWalk(worldIn, pos, entityIn);
     }
 }

@@ -1,6 +1,5 @@
 package malum;
 
-import malum.blocks.InfuserBlockScreen;
 import malum.event.ServerPlayerEventHandler;
 import malum.ingredients.SpiritIngredient;
 import malum.network.DangerLevelPacket;
@@ -8,16 +7,21 @@ import malum.network.HatePacket;
 import malum.network.NetworkManager;
 import malum.network.PermaHatePacket;
 import malum.recipes.BlockTransmutationRecipes;
+import malum.recipes.RitualRecipes;
 import malum.registry.ModBlocks;
+import malum.tileentities.RitualBlockTileEntity;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -38,11 +42,8 @@ public class MalumMod
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "malum";
     public MalumMod() {
-        ScreenManager.registerFactory(ModBlocks.infuser_container, InfuserBlockScreen::new);
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, (RegistryEvent.Register<IRecipeSerializer<?>> e) -> {
@@ -74,22 +75,12 @@ public class MalumMod
             PermaHatePacket::whenThisPacketIsReceived
         );
         BlockTransmutationRecipes.initRecipes();
+        RitualRecipes.initRecipes();
         new ServerPlayerEventHandler();
     }
-
+    @OnlyIn(Dist.CLIENT)
     private void doClientStuff(final FMLClientSetupEvent event)
     {
-    }
-
-    private void enqueueIMC(final InterModEnqueueEvent event)
-    {
-    }
-
-    private void processIMC(final InterModProcessEvent event)
-    {
-    }
-    @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event)
-    {
+        ClientRegistry.bindTileEntitySpecialRenderer(RitualBlockTileEntity.class, new SpriteRenderer());
     }
 }

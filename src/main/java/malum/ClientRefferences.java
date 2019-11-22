@@ -9,6 +9,9 @@ import java.util.UUID;
 
 public class ClientRefferences
 {
+
+    public static final Minecraft minecraft = Minecraft.getInstance();
+
     public static PlayerEntity getClientPlayer() {
 
         return Minecraft.getInstance().player;

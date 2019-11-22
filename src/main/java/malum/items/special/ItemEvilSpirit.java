@@ -27,40 +27,51 @@ import java.util.List;
 
 public class ItemEvilSpirit extends Item
 {
-  public ItemEvilSpirit(Item.Properties properties)
-  {
-    super(properties);
-  }
-  @OnlyIn(Dist.CLIENT)
-  @Override
-  public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
-  {
-      ClientPlayerEntity player = Minecraft.getInstance().player;
+    public ItemEvilSpirit(Item.Properties properties)
+    {
+        super(properties);
+    }
 
-      if (player != null) {
-          if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemArcaneSightRing, player).isPresent()) {
-              if (Screen.hasShiftDown()) {
-                  CompoundNBT tag = stack.getTag();
-                  if (tag != null) {
-                      String entityDisplayName = tag.getString("soul");
-                      String biomeDisplayName = tag.getString("grave");
-                      if (tag.getString("soul") != null) {
-                          addStringToTooltip(TextFormatting.ITALIC + I18n.format("entity_type_tooltip: ") + entityDisplayName, tooltip);
-                      }
-                      if (tag.getString("grave") != null) {
-                          addStringToTooltip(TextFormatting.ITALIC + I18n.format("biome_display_name_tooltip: ") + biomeDisplayName, tooltip);
-                      }
+    @OnlyIn(Dist.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
+    {
+        ClientPlayerEntity player = Minecraft.getInstance().player;
 
-                  }
-              } else {
-                  addStringToTooltip(I18n.format("sneak_info_tooltip"), tooltip);
-              }
-          }
-      }
-    super.addInformation(stack, worldIn, tooltip, flagIn);
-  }
-  public void addStringToTooltip(String s, List<ITextComponent> tooltip) {
-    TranslationTextComponent string = new TranslationTextComponent(s);
-    tooltip.add(string);
-  }
+        if (player != null)
+        {
+            if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemArcaneSightRing, player).isPresent())
+            {
+                if (Screen.hasShiftDown())
+                {
+                    CompoundNBT tag = stack.getTag();
+                    if (tag != null)
+                    {
+                        String entityDisplayName = tag.getString("soul");
+                        String biomeDisplayName = tag.getString("grave");
+                        if (tag.getString("soul") != null)
+                        {
+                            addStringToTooltip(TextFormatting.ITALIC + I18n.format("entity_type_tooltip: ") + entityDisplayName, tooltip);
+                        }
+                        if (tag.getString("grave") != null)
+                        {
+                            addStringToTooltip(TextFormatting.ITALIC + I18n.format("biome_display_name_tooltip: ") + biomeDisplayName, tooltip);
+                        }
+
+                    }
+                }
+                else
+                {
+                    addStringToTooltip(I18n.format("sneak_info_tooltip"), tooltip);
+                }
+            }
+        }
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+    }
+
+    public void addStringToTooltip(String s, List<ITextComponent> tooltip)
+    {
+        TranslationTextComponent string = new TranslationTextComponent(s);
+        tooltip.add(string);
+    }
 }
