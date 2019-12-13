@@ -66,6 +66,8 @@ public class ModItems
     public static Item nether_necklace = null;
     public static Item wither_necklace = null;
     public static Item arcane_sight_ring = null;
+    public static Item rotten_belt = null;
+    public static Item shulker_necklace = null;
     //gadgets
     public static Item evil_lantern = null;
     public static Item voodoo_doll = null;
@@ -146,6 +148,8 @@ public class ModItems
             air_necklace = setup(new ItemAirNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "air_necklace"),
             wither_necklace = setup(new ItemWitherNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wither_necklace"),
             nether_necklace = setup(new ItemNetherNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "nether_necklace"),
+            shulker_necklace = setup(new ItemShulkerNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "shulker_necklace"),
+            rotten_belt = setup(new ItemRottenBelt(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "rotten_belt"),
 
             channeled_anomaly_modifier = setup(new ItemModifier(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "channeled_anomaly_modifier"),
             tainted_heart_modifier = setup(new ItemModifier(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "tainted_heart_modifier"),

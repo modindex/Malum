@@ -19,7 +19,6 @@ public class ItemControlDoll extends ItemVoodoDoll
     {
         super(builder);
     }
-    @OnlyIn(Dist.CLIENT)
     public void Effect(Entity target, PlayerEntity attacker, ItemStack stack, Hand handIn, float chance, float strength)
     {
         double velX = (random.nextDouble() * 0.5 * (random.nextDouble() > 0.5 ? -1 : 1)) * 0.7D * strength;double velY = (random.nextDouble() * 0.5 * (random.nextDouble() > 0.5 ? -1 : 1)) * 0.4D * strength;double velZ = (random.nextDouble() * 0.5 * (random.nextDouble() > 0.5 ? -1 : 1)) * 0.7D * strength;

@@ -48,6 +48,7 @@ public class ModBlocks
     public static Block evil_grass;
 
     public static Block ritual_block;
+    public static Block evil_anvil;
 
     public static Block animated_block_ascend = null;
     public static Block animated_block_harming = null;
@@ -90,6 +91,8 @@ public class ModBlocks
 
         evil_dirt = registerBlock(registry, new Block(evil_earth_properties), "evil_dirt");
         evil_grass = registerBlock(registry, new Block(evil_earth_properties), "evil_grass");
+
+        evil_anvil = registerBlock(registry, new EvilAnvil(evil_earth_properties), "evil_anvil");
 
         animated_block_ascend = registerBlock(registry, new AnimatedStoneAscend(refined_stone_properties), "animated_block_ascend");
         animated_block_containing = registerBlock(registry, new AnimatedStoneHarming(refined_stone_properties), "animated_block_containing");

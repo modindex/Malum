@@ -23,6 +23,13 @@ public class PlayerProperties {
     public static float getHate(PlayerEntity player) {
         return player.getCapability(PlayerProperties.CAPABILITY).map(Capabilities::getHate).orElse(0f);
     }
+
+    public static double[] getCurioArray(PlayerEntity player)
+    {
+        double[] empty = new double[0];
+        return player.getCapability(PlayerProperties.CAPABILITY).map(Capabilities::getCurioArray).orElse(empty);
+    }
+
     public static float getPermaHate(PlayerEntity player) {
         return player.getCapability(PlayerProperties.CAPABILITY).map(Capabilities::getPermaHate).orElse(0f);
     }
@@ -35,7 +42,13 @@ public class PlayerProperties {
             sendDangerLevelPacket(player);
         }
     }
-
+    public static void setCurioArrayArgument(PlayerEntity player, int i, double d)
+    {
+        player.getCapability(PlayerProperties.CAPABILITY).ifPresent(note ->
+        {
+            note.setCurioArrayArgumenr(i, d);
+        });
+    }
     public static void setDangerLevelCapped(PlayerEntity player, int amount, int cap) {
         player.getCapability(PlayerProperties.CAPABILITY).ifPresent(note ->
         {

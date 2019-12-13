@@ -3,15 +3,36 @@ package malum.capabilities;
 
 import net.minecraft.nbt.CompoundNBT;
 
+import javax.annotation.Nonnull;
+import java.lang.reflect.Array;
+
 public class Capabilities {
 
     private int dangerLevel = 0;
     private float hate = 0;
     private float permaHate = 0;
+    double[] curioArray = new double[10];
 
     public Capabilities() {
     }
 
+    @Nonnull
+    public double[] getCurioArray()
+    {
+        return curioArray;
+    }
+    public double getCurioArrayArgument(int arg)
+    {
+        return curioArray[arg];
+    }
+    public void setCurioArray(double[] newCurioArray)
+    {
+        curioArray = newCurioArray;
+    }
+    public void setCurioArrayArgumenr(int arg, double value)
+    {
+        curioArray[arg] = value;
+    }
     public int getDangerLevel() {
         return dangerLevel;
     }
@@ -41,6 +62,7 @@ public class Capabilities {
         dangerLevel = source.dangerLevel;
         hate = source.hate;
         permaHate = source.permaHate;
+        curioArray = source.curioArray;
     }
 
 
