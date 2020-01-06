@@ -22,6 +22,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,7 +40,6 @@ public class ItemRitualActivator extends Item
     {
         ItemStack stack = playerIn.getHeldItem(handIn);
         RayTraceResult raytraceresult = rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.SOURCE_ONLY);
-
         if (raytraceresult.getType() == RayTraceResult.Type.MISS)
         {
             return new ActionResult<>(ActionResultType.PASS, stack);
@@ -56,18 +56,22 @@ public class ItemRitualActivator extends Item
                 {
                     return new ActionResult<>(ActionResultType.SUCCESS, stack);
                 }
+                if (stack.hasTag())
+                {
+                    if (stack.getTag().hasUniqueId("uuid") || stack.getTag().getIntArray("data") != null)
+                    {
+                        return new ActionResult<>(ActionResultType.FAIL, stack);
+                    }
+                }
                 stack.setTag(new CompoundNBT());
                 CompoundNBT nbt = stack.getTag();
                 int[] position = {blockpos.getX(), blockpos.getY(), blockpos.getZ()};
-                assert nbt != null;
 
-                int[] pos = nbt.getIntArray("data");
-                if (position == pos)
-                {
-                    return new ActionResult<>(ActionResultType.FAIL, stack);
-                }
+                assert nbt != null;
                 nbt.putIntArray("data", position);
+
                 return new ActionResult<>(ActionResultType.SUCCESS, stack);
+
             }
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
@@ -76,6 +80,13 @@ public class ItemRitualActivator extends Item
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand)
     {
+        if (stack.hasTag())
+        {
+            if (stack.getTag().hasUniqueId("uuid") || stack.getTag().getIntArray("data") != null)
+            {
+                return false;
+            }
+        }
         stack.setTag(new CompoundNBT());
         CompoundNBT nbt = stack.getTag();
         assert nbt != null;
@@ -84,7 +95,7 @@ public class ItemRitualActivator extends Item
         {
             if (uuid == target.getUniqueID())
             {
-                return super.itemInteractionForEntity(stack, playerIn, target, hand);
+                return false;
             }
         }
         nbt.putUniqueId("uuid", target.getUniqueID());

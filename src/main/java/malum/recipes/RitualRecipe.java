@@ -1,5 +1,6 @@
 package malum.recipes;
 
+import malum.rituals.RitualEffect;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -10,24 +11,24 @@ import java.util.List;
 public class RitualRecipe {
 
     private ArrayList<Item> ingredients = new ArrayList<>();
-  private int ritualID;
-  private String name;
+  private RitualEffect ritualEffect;
+  private String target;
 
-  public RitualRecipe(ArrayList<Item> ingredients, int ritualID, String name) {
+  public RitualRecipe(ArrayList<Item> ingredients, RitualEffect ritualEffect, String target) {
     this.ingredients = ingredients;
-    this.ritualID = ritualID;
-    this.name = name;
+    this.ritualEffect = ritualEffect;
+    this.target = target;
   }
 
   public ArrayList<Item> getIngredients() {
     return ingredients;
   }
 
-  public int getRitualID() {
-    return ritualID;
+  public RitualEffect getRitualEffect() {
+    return ritualEffect;
   }
 
-  public String getName() {
-    return name;
+  public String getTarget() {
+    return target;
   }
 }

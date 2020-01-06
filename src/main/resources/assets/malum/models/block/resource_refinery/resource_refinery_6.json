@@ -1,0 +1,43 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "malum:blocks/resource_refinery/6",
+		"particle": "malum:blocks/resource_refinery/6"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 4, 16],
+			"faces": {
+				"north": {"uv": [4, 9.5, 8, 10.5], "texture": "#0"},
+				"east": {"uv": [0, 9.5, 4, 10.5], "texture": "#0"},
+				"south": {"uv": [12, 9.5, 16, 10.5], "texture": "#0"},
+				"west": {"uv": [8, 9.5, 12, 10.5], "texture": "#0"},
+				"up": {"uv": [8, 9.5, 4, 5.5], "texture": "#0"},
+				"down": {"uv": [12, 5.5, 8, 9.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0, 10, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [4, 4, 8, 5.5], "texture": "#0"},
+				"east": {"uv": [0, 4, 4, 5.5], "texture": "#0"},
+				"south": {"uv": [12, 4, 16, 5.5], "texture": "#0"},
+				"west": {"uv": [8, 4, 12, 5.5], "texture": "#0"},
+				"up": {"uv": [8, 4, 4, 0], "texture": "#0"},
+				"down": {"uv": [12, 0, 8, 4], "texture": "#0"}
+			}
+		},
+		{
+			"from": [2, 4, 2],
+			"to": [14, 10, 14],
+			"faces": {
+				"north": {"uv": [3, 10.75, 6, 12.25], "texture": "#0"},
+				"east": {"uv": [3, 10.75, 6, 12.25], "texture": "#0"},
+				"south": {"uv": [3, 10.75, 6, 12.25], "texture": "#0"},
+				"west": {"uv": [3, 10.75, 6, 12.25], "texture": "#0"}
+			}
+		}
+	]
+}

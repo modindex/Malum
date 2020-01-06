@@ -45,20 +45,26 @@ import java.util.stream.Collectors;
 
 import java.util.stream.Stream;
 
-public class SpiritIngredient extends Ingredient {
+public class SpiritIngredient extends Ingredient
+{
     private static final String SOUL = "soul";
     private static final String GRAVE = "grave";
     private static final Map<String, Biome.Category> CAT_BY_NAME = ObfuscationReflectionHelper.getPrivateValue(Biome.Category.class, null, "field_222354_r");
     private final ResourceLocation soul;
     private final Biome.Category grave;
-    protected SpiritIngredient(final ResourceLocation soul, final Biome.Category grave) {
+
+    protected SpiritIngredient(final ResourceLocation soul, final Biome.Category grave)
+    {
         super(Stream.of(new SpiritList(soul, grave)));
         this.soul = soul;
         this.grave = grave;
     }
+
     @Override
-    public boolean test(final @Nullable ItemStack input) {
-        if (input == null || input.getItem() != ModItems.evil_spirit) {
+    public boolean test(final @Nullable ItemStack input)
+    {
+        if (input == null || input.getItem() != ModItems.evil_spirit)
+        {
             return false;
         }
         final CompoundNBT tag = input.getTag();
@@ -68,25 +74,29 @@ public class SpiritIngredient extends Ingredient {
             if (this.grave != Biome.Category.NONE)
             {
                 return tag.contains(GRAVE, Constants.NBT.TAG_STRING) &&
-                    getCategoryByName(tag.getString(GRAVE)).filter(this.grave::equals).isPresent();
+                       getCategoryByName(tag.getString(GRAVE)).filter(this.grave::equals).isPresent();
             }
             return true;
         }
         return false;
     }
+
     @Override
     public boolean isSimple()
     {
         return false;
     }
+
     @Override
     public IIngredientSerializer<? extends Ingredient> getSerializer()
     {
         return Serializer.INSTANCE;
     }
+
     public static class Serializer implements IIngredientSerializer<SpiritIngredient>
     {
         public static final Serializer INSTANCE = new Serializer();
+
         @Override
         public SpiritIngredient parse(final JsonObject json)
         {
@@ -97,37 +107,53 @@ public class SpiritIngredient extends Ingredient {
                 getCategoryByName(biome).orElseThrow(() -> new JsonSyntaxException("Unknown biome category: " + biome))
             );
         }
+
         @Override
-        public void write(final PacketBuffer buffer, final SpiritIngredient ingredient) {
+        public void write(final PacketBuffer buffer, final SpiritIngredient ingredient)
+        {
             buffer.writeResourceLocation(ingredient.soul);
             buffer.writeString(ingredient.grave.getName());
         }
+
         @Override
-        public SpiritIngredient parse(final PacketBuffer buffer) {
+        public SpiritIngredient parse(final PacketBuffer buffer)
+        {
             final ResourceLocation entity = buffer.readResourceLocation();
             final String biome = buffer.readString(40);
             return new SpiritIngredient(entity, getCategoryByName(biome).orElse(Biome.Category.NONE));
         }
     }
-    private static Optional<Biome.Category> getCategoryByName(final String name) {
+
+    private static Optional<Biome.Category> getCategoryByName(final String name)
+    {
         return Optional.ofNullable(CAT_BY_NAME.get(name));
     }
-    private static final class SpiritList implements IItemList {
+
+    private static final class SpiritList implements IItemList
+    {
         private final ResourceLocation soul;
         private final Biome.Category grave;
-        private SpiritList(final ResourceLocation soul, final Biome.Category grave) {
+
+        private SpiritList(final ResourceLocation soul, final Biome.Category grave)
+        {
             this.soul = soul;
             this.grave = grave;
         }
+
         @Override
-        public Collection<ItemStack> getStacks() {
+        public Collection<ItemStack> getStacks()
+        {
             final Stream<Biome.Category> biomes;
-            if (this.grave == Biome.Category.NONE) {
+            if (this.grave == Biome.Category.NONE)
+            {
                 biomes = Arrays.stream(Biome.Category.values()).filter(b -> b != Biome.Category.NONE);
-            } else {
+            }
+            else
+            {
                 biomes = Stream.of(this.grave);
             }
-            return biomes.map(biome -> {
+            return biomes.map(biome ->
+            {
                 final ItemStack stack = new ItemStack(Items.APPLE);
                 final CompoundNBT tag = stack.getOrCreateTag();
                 tag.putString(SOUL, this.soul.toString());
@@ -135,8 +161,10 @@ public class SpiritIngredient extends Ingredient {
                 return stack;
             }).collect(Collectors.toList());
         }
+
         @Override
-        public JsonObject serialize() {
+        public JsonObject serialize()
+        {
             final JsonObject json = new JsonObject();
             json.addProperty(SOUL, this.soul.toString());
             json.addProperty(GRAVE, this.grave.getName());

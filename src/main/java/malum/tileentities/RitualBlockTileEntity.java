@@ -5,29 +5,23 @@ import malum.MalumMod;
 import malum.recipes.RitualRecipe;
 import malum.registry.ModRecipes;
 import malum.registry.ModTileEntities;
-import net.minecraft.block.Block;
+import malum.rituals.RitualEffect;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.entity.SpriteRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.entity.item.minecart.TNTMinecartEntity;
-import net.minecraft.entity.projectile.FireballEntity;
-import net.minecraft.inventory.Inventory;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
-import java.util.*;
-
-import static net.minecraft.block.Block.spawnAsEntity;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.UUID;
 
 public class RitualBlockTileEntity extends TileEntity implements ITickableTileEntity
 {
@@ -87,7 +81,7 @@ public class RitualBlockTileEntity extends TileEntity implements ITickableTileEn
         super.write(compound);
         if (position != null)
         {
-            compound.putIntArray("position", position);
+                compound.putIntArray("position", position);
         }
         if (uuid != null)
         {
@@ -133,52 +127,63 @@ public class RitualBlockTileEntity extends TileEntity implements ITickableTileEn
         }
         return ingredients;
     }
-
+    public void emptyInventory(ItemStackHandler inventory)
+    {
+        for (int counter=0; counter < inventory.getSlots(); counter++)
+        {
+            if (!inventory.getStackInSlot(counter).isEmpty())
+            {
+                inventory.setStackInSlot(counter, ItemStack.EMPTY);
+            }
+        }
+    }
     @Override
     public void tick()
     {
-        if (crafting > 1)
+        if (crafting >= 1)
         {
-            crafting -= 1;
-            MalumMod.LOGGER.info("counting down");
-            assert this.world != null;
-            this.world.addParticle(ParticleTypes.DRAGON_BREATH, this.pos.getX(), this.pos.getY(), this.pos.getZ(), 0, 0.2, 0);
+            crafting += 1;
+            assert world != null;
+            world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
+            MalumMod.LOGGER.info(crafting);
         }
-        if (crafting == 1)
+        if (crafting >= 300)
         {
             RitualRecipe recipe = ModRecipes.getRitualRecipe(listEveryItem(inventory));
             if (recipe != null)
             {
-                assert this.world != null;
-                if (position != null)
+                assert world != null;
+                BlockPos pos = new BlockPos(position[0], position[1], position[2]);
+                if (uuid != null && recipe.getTarget().equals("uuid"))
                 {
-                    if (recipe.getRitualID() == 1)
-                    {
-                        for (int a = 0; a <= 100; a += 1)
-                        {
-                            this.world.addEntity(new FireballEntity(this.world, position[0], position[1], position[2], 0.0, -0.01, 0.0));
-                            this.world.addEntity(new TNTMinecartEntity(this.world, position[0], position[1], position[2]));
-                        }
-                    }
+                    doRitualEffect(uuid, pos, recipe.getRitualEffect());
                 }
-                if (uuid != null)
+                if (position != null && recipe.getTarget().equals("position"))
                 {
-                    if (recipe.getRitualID() == 0)
-                    {
-                        if (this.world instanceof ServerWorld)
-                        {
-                            ServerWorld worldServer = (ServerWorld) this.world;
-                            if (worldServer.getEntityByUuid(uuid) != null && Objects.requireNonNull(worldServer.getEntityByUuid(uuid)).isAlive())
-                            {
-                                Objects.requireNonNull(worldServer.getEntityByUuid(uuid)).setVelocity(0, 5, 0);
-                            }
-                        }
-                    }
+                    doRitualEffect(uuid, pos, recipe.getRitualEffect());
                 }
             }
             uuid = null;
             position = null;
             crafting = 0;
+            emptyInventory(inventory);
         }
+    }
+    public void doRitualEffect(UUID uuid, BlockPos pos, RitualEffect effect)
+    {
+        BlockPos offsetPos = new BlockPos(1, 0, 1);
+        BlockPos TopRightPos = pos.add(offsetPos);
+        BlockPos BottomLeftPos = pos.subtract(offsetPos);
+        assert world != null;
+        int strenght = 1;
+        for(BlockPos cycle : BlockPos.getAllInBoxMutable(TopRightPos, BottomLeftPos))
+        {
+            if (world.getBlockState(cycle).getBlock() == Blocks.REDSTONE_WIRE)
+            {
+                strenght += 2;
+                world.setBlockState(cycle, Blocks.AIR.getDefaultState());
+            }
+        }
+        effect.doRitualEffect(strenght, uuid, position, this);
     }
 }

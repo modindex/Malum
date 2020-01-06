@@ -68,6 +68,7 @@ public class ModItemTiers
         }
     }
 
-
     public static final ItemTier CATASTROPHE = new ItemTier(4, 3122, 10.0F, 4.0F, 40, () -> Ingredient.fromItems(Items.DIAMOND));
+
+    public static final ItemTier NUMINOUS_CATASTROPHE = new ItemTier(5, 15610, 13.0F, 6.0F, 60, () -> Ingredient.fromItems(Items.DIAMOND));
 }

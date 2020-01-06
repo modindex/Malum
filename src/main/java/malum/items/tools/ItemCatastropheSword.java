@@ -12,10 +12,6 @@ public class ItemCatastropheSword extends SwordItem
 {
     public ItemCatastropheSword(IItemTier material, int attackDamage, float attackSpeed, Properties properties) {
         super(material, attackDamage, attackSpeed, properties);
-
-        this.addPropertyOverride(new ResourceLocation("dimension"), (p_210309_0_, p_210309_1_, p_210309_2_) -> {
-            return p_210309_2_ != null && p_210309_2_.dimension == DimensionType.THE_END ? 1.0F : 0.0F;
-        });
     }
 }
 

@@ -2,13 +2,5 @@
   "parent": "item/handheld",
   "textures": {
     "layer0": "malum:items/catastrophe_pickaxe"
-  },
-  "overrides": [
-    {
-      "predicate": {
-        "dimension": 1
-      },
-      "model": "malum:item/catastrophe_pickaxe_glow"
-    }
-  ]
+  }
 }

@@ -3,6 +3,7 @@ package malum.registry;
 import com.google.common.base.Preconditions;
 import malum.MalumMod;
 import malum.items.armor.ItemArmorCatastrophe;
+import malum.items.armor.ItemArmorNuminousCatastrophe;
 import malum.items.curios.*;
 import malum.items.gadgets.*;
 import malum.items.special.ItemEvilSpirit;
@@ -10,6 +11,7 @@ import malum.items.special.ItemModifier;
 import malum.items.special.ItemRitualActivator;
 import malum.items.special.ItemWeaponAttunementCore;
 import malum.items.tools.*;
+import net.minecraft.block.Block;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
@@ -27,6 +29,7 @@ import java.util.function.Supplier;
 
 import static malum.MalumMod.MODID;
 import static malum.registry.ModItemTiers.CATASTROPHE;
+import static malum.registry.ModItemTiers.NUMINOUS_CATASTROPHE;
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class ModItems
@@ -37,6 +40,10 @@ public class ModItems
     public static Item catastrophe_leggings = null;
     public static Item catastrophe_shoes = null;
 
+    public static Item numinous_catastrophe_hood = null;
+    public static Item numinous_catastrophe_chestplate = null;
+    public static Item numinous_catastrophe_leggings = null;
+    public static Item numinous_catastrophe_shoes = null;
     //weapons
     public static Item withering_rapier = null;
     public static Item catastrophe_hoe = null;
@@ -44,6 +51,12 @@ public class ModItems
     public static Item catastrophe_axe = null;
     public static Item catastrophe_pickaxe = null;
     public static Item catastrophe_shovel = null;
+
+    public static Item numinous_catastrophe_hoe = null;
+    public static Item numinous_catastrophe_sword = null;
+    public static Item numinous_catastrophe_axe = null;
+    public static Item numinous_catastrophe_pickaxe = null;
+    public static Item numinous_catastrophe_shovel = null;
     //crafting
     public static Item end_forged_ingot = null;
     public static Item end_forged_nugget = null;
@@ -69,14 +82,16 @@ public class ModItems
     public static Item rotten_belt = null;
     public static Item shulker_necklace = null;
     //gadgets
-    public static Item evil_lantern = null;
     public static Item voodoo_doll = null;
     public static Item rending_doll = null;
     public static Item control_doll = null;
     public static Item zombie_doll = null;
     public static Item enderman_doll = null;
+
     public static Item ender_artifact = null;
     public static Item transmutation_gem = null;
+    public static Item evil_lantern = null;
+
 
     //modifiers
     public static Item channeled_anomaly_modifier = null;
@@ -86,26 +101,48 @@ public class ModItems
     public static Item animated_block_ascend = null;
     public static Item animated_block_harming = null;
     public static Item animated_block_containing = null;
+
     public static Item evil_grass = null;
     public static Item evil_dirt = null;
+    public static Item evil_pumpkin;
+    public static Item lit_evil_pumpkin;
+
     public static Item dark_roofing = null;
     public static Item dark_roofing_stairs = null;
     public static Item dark_roofing_slab = null;
+
     public static Item refined_bricks = null;
     public static Item refined_bricks_stairs = null;
     public static Item refined_bricks_slab = null;
+
     public static Item refined_pathway = null;
     public static Item refined_pathway_stairs = null;
     public static Item refined_pathway_slab = null;
+
+    public static Item wooden_planks = null;
+    public static Item wooden_planks_stairs = null;
+    public static Item wooden_planks_slab = null;
+
     public static Item wooden_beam = null;
+
+    public static Item refined_smooth_stone = null;
+    public static Item refined_smooth_stone_stairs = null;
+    public static Item refined_smooth_stone_slab = null;
+
     public static Item wooden_casing = null;
     public static Item wooden_casing_stairs = null;
     public static Item wooden_casing_slab = null;
-    public static Item catastrophe_bricks = null;
-    public static Item catastrophe_stairs = null;
-    public static Item catastrophe_slab = null;
-    public static Item catastrophe_block = null;
-    public static Item ritual_block = null;
+
+    public static Item catastrophe_bricks;
+    public static Item catastrophe_stairs;
+    public static Item catastrophe_slab;
+
+    public static Item catastrophe_block;
+
+    public static Item smooth_stone_stairs;
+
+    public static Item ritual_block;
+    public static Item crafting_block;
     public static Item ritual_activator;
 
     @SubscribeEvent
@@ -118,6 +155,11 @@ public class ModItems
             catastrophe_chestplate = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_chestplate"),
             catastrophe_hood = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_hood"),
 
+            numinous_catastrophe_shoes = setup(new ItemArmorNuminousCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_shoes"),
+            numinous_catastrophe_leggings = setup(new ItemArmorNuminousCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_leggings"),
+            numinous_catastrophe_chestplate = setup(new ItemArmorNuminousCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_chestplate"),
+            numinous_catastrophe_hood = setup(new ItemArmorNuminousCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_hood"),
+
             withering_rapier = setup(new ItemWitheringRapier(ItemTier.IRON, 2, -1.8f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "withering_rapier"),
 
             catastrophe_hoe = setup(new ItemCatastropheHoe(CATASTROPHE, 3f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_hoe"),
@@ -125,6 +167,12 @@ public class ModItems
             catastrophe_sword = setup(new ItemCatastropheSword(CATASTROPHE, 3, -2.4f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_sword"),
             catastrophe_shovel = setup(new ItemCatastropheShovel(CATASTROPHE, 1, -3.0f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_shovel"),
             catastrophe_pickaxe = setup(new ItemCatastrophePickaxe(CATASTROPHE, 1, -2.8f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_pickaxe"),
+
+            numinous_catastrophe_hoe = setup(new ItemCatastropheHoe(NUMINOUS_CATASTROPHE, 3f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_hoe"),
+            numinous_catastrophe_axe = setup(new ItemCatastropheAxe(NUMINOUS_CATASTROPHE, 6, -3f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_axe"),
+            numinous_catastrophe_sword = setup(new ItemCatastropheSword(NUMINOUS_CATASTROPHE, 3, -2.4f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_sword"),
+            numinous_catastrophe_shovel = setup(new ItemCatastropheShovel(NUMINOUS_CATASTROPHE, 1, -3.0f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_shovel"),
+            numinous_catastrophe_pickaxe = setup(new ItemCatastrophePickaxe(NUMINOUS_CATASTROPHE, 1, -2.8f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_pickaxe"),
 
             ritual_activator = setup(new ItemRitualActivator(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ritual_activator"),
             transmutation_gem = setup(new ItemTransmutationGem(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "transmutation_gem"),
@@ -151,6 +199,8 @@ public class ModItems
             shulker_necklace = setup(new ItemShulkerNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "shulker_necklace"),
             rotten_belt = setup(new ItemRottenBelt(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "rotten_belt"),
 
+
+
             channeled_anomaly_modifier = setup(new ItemModifier(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "channeled_anomaly_modifier"),
             tainted_heart_modifier = setup(new ItemModifier(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "tainted_heart_modifier"),
             ancient_hieroglyph_modifier = setup(new ItemModifier(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ancient_hieroglyph_modifier"),
@@ -165,6 +215,7 @@ public class ModItems
             weapon_attunement_core_strong = setup(new ItemWeaponAttunementCore(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "weapon_attunement_core_strong"),
 
             ritual_block = setup(new BlockItem(ModBlocks.ritual_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ritual_block"),
+            crafting_block = setup(new BlockItem(ModBlocks.crafting_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "crafting_block"),
             evil_dirt = setup(new BlockItem(ModBlocks.evil_dirt, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_dirt"),
             evil_grass = setup(new BlockItem(ModBlocks.evil_grass, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_grass"),
 
@@ -172,21 +223,37 @@ public class ModItems
             wooden_beam = setup(new BlockItem(ModBlocks.wooden_beam, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_beam"),
             wooden_casing = setup(new BlockItem(ModBlocks.wooden_casing, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_casing"),
             refined_bricks = setup(new BlockItem(ModBlocks.refined_bricks, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_bricks"),
+
             refined_pathway = setup(new BlockItem(ModBlocks.refined_pathway, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_pathway"),
+            refined_pathway_slab = setup(new BlockItem(ModBlocks.refined_pathway_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_pathway_slab"),
+            refined_pathway_stairs = setup(new BlockItem(ModBlocks.refined_pathway_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_pathway_stairs"),
+
+            wooden_planks = setup(new BlockItem(ModBlocks.wooden_planks, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_planks"),
+            wooden_planks_slab = setup(new BlockItem(ModBlocks.wooden_planks_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_planks_slab"),
+            wooden_planks_stairs = setup(new BlockItem(ModBlocks.wooden_planks_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_planks_stairs"),
+
             catastrophe_bricks = setup(new BlockItem(ModBlocks.catastrophe_bricks, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_bricks"),
+            catastrophe_slab = setup(new BlockItem(ModBlocks.catastrophe_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_slab"),
+            catastrophe_stairs = setup(new BlockItem(ModBlocks.catastrophe_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_stairs"),
+
+            refined_smooth_stone = setup(new BlockItem(ModBlocks.refined_smooth_stone, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_smooth_stone"),
+            refined_smooth_stone_slab = setup(new BlockItem(ModBlocks.refined_smooth_stone_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_smooth_stone_slab"),
+            refined_smooth_stone_stairs = setup(new BlockItem(ModBlocks.refined_smooth_stone_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_smooth_stone_stairs"),
+
+            catastrophe_block = setup(new BlockItem(ModBlocks.catastrophe_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_block"),
+
+            smooth_stone_stairs = setup(new BlockItem(ModBlocks.smooth_stone_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "smooth_stone_stairs"),
+
+            evil_pumpkin = setup(new BlockItem(ModBlocks.evil_pumpkin, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_pumpkin"),
+            lit_evil_pumpkin = setup(new BlockItem(ModBlocks.lit_evil_pumpkin, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "lit_evil_pumpkin"),
 
             dark_roofing_slab = setup(new BlockItem(ModBlocks.dark_roofing_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing_slab"),
             wooden_casing_slab = setup(new BlockItem(ModBlocks.wooden_casing_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_casing_slab"),
-            refined_pathway_slab = setup(new BlockItem(ModBlocks.refined_pathway_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_pathway_slab"),
             refined_bricks_slab = setup(new BlockItem(ModBlocks.refined_bricks_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_bricks_slab"),
-            catastrophe_slab = setup(new BlockItem(ModBlocks.catastrophe_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_slab"),
 
             dark_roofing_stairs = setup(new BlockItem(ModBlocks.dark_roofing_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing_stairs"),
             wooden_casing_stairs = setup(new BlockItem(ModBlocks.wooden_casing_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_casing_stairs"),
             refined_bricks_stairs = setup(new BlockItem(ModBlocks.refined_bricks_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_bricks_stairs"),
-            refined_pathway_stairs = setup(new BlockItem(ModBlocks.refined_pathway_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_pathway_stairs"),
-            catastrophe_stairs = setup(new BlockItem(ModBlocks.catastrophe_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_stairs"),
-            catastrophe_block = setup(new BlockItem(ModBlocks.catastrophe_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_block"),
 
             animated_block_ascend = setup(new BlockItem(ModBlocks.animated_block_ascend, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "animated_block_ascend"),
             animated_block_containing = setup(new BlockItem(ModBlocks.animated_block_containing, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "animated_block_containing"),

@@ -2,6 +2,7 @@ package malum.recipes;
 
 import malum.registry.ModBlocks;
 import malum.registry.ModRecipes;
+import malum.rituals.TransmutationRitualEffect;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,14 +17,12 @@ public class RitualRecipes {
 
   public static void initRecipes()
   {
-      ArrayList<Item> ingredients1 = new ArrayList<>();
-      ingredients1.add(Items.STICKY_PISTON);
-      ingredients1.add(Items.EGG);
-      ModRecipes.addRitualRecipe(new RitualRecipe(ingredients1, 1, "boom"));
-
-      ArrayList<Item> ingredients0 = new ArrayList<>();
-      ingredients0.add(Items.EGG);
-      ingredients0.add(Items.STICKY_PISTON);
-      ModRecipes.addRitualRecipe(new RitualRecipe(ingredients0, 0, "jump"));
+      ArrayList<Item> ingredients2 = new ArrayList<>();
+      ingredients2.add(Items.GOLD_INGOT);
+      ingredients2.add(Items.QUARTZ);
+      ingredients2.add(Items.QUARTZ);
+      ingredients2.add(Items.REDSTONE);
+      ingredients2.add(Items.REDSTONE);
+      ModRecipes.addRitualRecipe(new RitualRecipe(ingredients2, new TransmutationRitualEffect(), "position"));
   }
 }

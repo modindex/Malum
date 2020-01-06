@@ -2,6 +2,10 @@ package malum;
 
 import malum.capabilities.*;
 import malum.event.ServerPlayerEventHandler;
+import malum.recipes.BlockTransmutationRecipes;
+import malum.recipes.CraftingRecipes;
+import malum.recipes.ResourceFormingRecipes;
+import malum.recipes.RitualRecipes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
@@ -10,6 +14,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 
 import static malum.capabilities.PlayerProperties.*;
 
@@ -39,6 +44,15 @@ public class ForgeEventHandlers
                 });
             });
         }
+    }
+
+    @SubscribeEvent
+    public static void registerRecipes(FMLServerStartedEvent event)
+    {
+        BlockTransmutationRecipes.initRecipes();
+        RitualRecipes.initRecipes();
+        CraftingRecipes.initRecipes();
+        ResourceFormingRecipes.initRecipes();
     }
     @SubscribeEvent
     public static void onCraft(PlayerEvent.ItemCraftedEvent event) {

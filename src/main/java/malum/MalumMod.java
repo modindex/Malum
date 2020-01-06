@@ -6,8 +6,7 @@ import malum.network.DangerLevelPacket;
 import malum.network.HatePacket;
 import malum.network.NetworkManager;
 import malum.network.PermaHatePacket;
-import malum.recipes.BlockTransmutationRecipes;
-import malum.recipes.RitualRecipes;
+import malum.tileentities.CraftingBlockTileEntity;
 import malum.tileentities.RitualBlockTileEntity;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
@@ -23,6 +22,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Random;
 
 
 @Mod("malum")
@@ -64,13 +65,19 @@ public class MalumMod
             PermaHatePacket::decode,
             PermaHatePacket::whenThisPacketIsReceived
         );
-        BlockTransmutationRecipes.initRecipes();
-        RitualRecipes.initRecipes();
         new ServerPlayerEventHandler();
     }
     @OnlyIn(Dist.CLIENT)
     private void doClientStuff(final FMLClientSetupEvent event)
     {
-        ClientRegistry.bindTileEntitySpecialRenderer(RitualBlockTileEntity.class, new RitualRingRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(CraftingBlockTileEntity.class, new CraftingBlockRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(RitualBlockTileEntity.class, new RitualBlockRenderer());
+    }
+    public static double randomize(double value, double power)
+    {
+        Random random = new Random();
+        double randDouble = random.nextDouble() * power;
+        value += randDouble * (random.nextDouble() > 0.5 ? -1 : 1);
+        return value;
     }
 }
