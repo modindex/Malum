@@ -1,10 +1,11 @@
 package malum.registry;
 
-import malum.MalumMod;
-import malum.recipes.*;
+import malum.recipes.BlockTransmutationRecipe;
+import malum.recipes.CraftingRecipe;
+import malum.recipes.ResourceFormingRecipe;
+import malum.recipes.RitualRecipe;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
-import net.minecraft.item.crafting.Ingredient;
 
 import java.util.ArrayList;
 import java.util.List;

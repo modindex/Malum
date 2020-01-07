@@ -1,20 +1,15 @@
 package malum;
 
 import malum.event.ServerPlayerEventHandler;
-import malum.ingredients.SpiritIngredient;
 import malum.network.DangerLevelPacket;
 import malum.network.HatePacket;
 import malum.network.NetworkManager;
 import malum.network.PermaHatePacket;
 import malum.tileentities.CraftingBlockTileEntity;
 import malum.tileentities.RitualBlockTileEntity;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -36,11 +31,6 @@ public class MalumMod
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, (RegistryEvent.Register<IRecipeSerializer<?>> e) -> {
-            CraftingHelper.register(new ResourceLocation("malum:spirit"), SpiritIngredient.Serializer.INSTANCE);
-        });
-
         MinecraftForge.EVENT_BUS.register(this);
     }
     private void setup(final FMLCommonSetupEvent event)
@@ -70,8 +60,8 @@ public class MalumMod
     @OnlyIn(Dist.CLIENT)
     private void doClientStuff(final FMLClientSetupEvent event)
     {
-        ClientRegistry.bindTileEntitySpecialRenderer(CraftingBlockTileEntity.class, new CraftingBlockRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(RitualBlockTileEntity.class, new RitualBlockRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(CraftingBlockTileEntity.class, new malum.CraftingBlockRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(RitualBlockTileEntity.class, new malum.RitualBlockRenderer());
     }
     public static double randomize(double value, double power)
     {

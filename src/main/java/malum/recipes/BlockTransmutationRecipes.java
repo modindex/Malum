@@ -5,10 +5,6 @@ import malum.registry.ModRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.Tag;
-import net.minecraftforge.common.Tags;
-
-import java.util.Objects;
 
 public class BlockTransmutationRecipes {
 
@@ -22,8 +18,11 @@ public class BlockTransmutationRecipes {
       ModRecipes.addBlockTransmutationRecipe(new BlockTransmutationRecipe(Blocks.STONE_BRICK_STAIRS, ModBlocks.refined_bricks_stairs));
       ModRecipes.addBlockTransmutationRecipe(new BlockTransmutationRecipe(Blocks.STONE_BRICK_SLAB, ModBlocks.refined_bricks_slab));
 
+      ModRecipes.addBlockTransmutationRecipe(new BlockTransmutationRecipe(Blocks.GLOWSTONE, ModBlocks.refined_glowstone_block));
+      ModRecipes.addBlockTransmutationRecipe(new BlockTransmutationRecipe(Blocks.REDSTONE_LAMP, ModBlocks.refined_glowstone_lamp));
+
       ModRecipes.addBlockTransmutationRecipe(new BlockTransmutationRecipe(Blocks.SMOOTH_STONE, ModBlocks.refined_smooth_stone));
-     //ModRecipes.addBlockTransmutationRecipe(new BlockTransmutationRecipe(Blocks.SMOOTH_STONE_STAIRS, ModBlocks.refined_smooth_stone_stairs));
+      ModRecipes.addBlockTransmutationRecipe(new BlockTransmutationRecipe(ModBlocks.smooth_stone_stairs, ModBlocks.refined_smooth_stone_stairs));
       ModRecipes.addBlockTransmutationRecipe(new BlockTransmutationRecipe(Blocks.SMOOTH_STONE_SLAB, ModBlocks.refined_smooth_stone_slab));
 
       ModRecipes.addBlockTransmutationRecipe(new BlockTransmutationRecipe(ModBlocks.wooden_casing, ModBlocks.wooden_beam));

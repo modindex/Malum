@@ -4,57 +4,40 @@ package malum.blocks;
 import malum.recipes.RitualRecipe;
 import malum.registry.ModItems;
 import malum.registry.ModRecipes;
-import malum.registry.ModTileEntities;
 import malum.tileentities.RitualBlockTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.DragonFireballEntity;
-import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.UUID;
 
 import static net.minecraft.block.ChestBlock.WATERLOGGED;
 
 public class RitualBlock extends Block
 {
 
-    public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 
     public RitualBlock(Properties properties)
     {
         super(properties);
-        this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WATERLOGGED, false);
     }
 
     @Override
@@ -177,21 +160,9 @@ public class RitualBlock extends Block
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
 
-    @Nonnull
-    public BlockState rotate(BlockState p_185499_1_, Rotation p_185499_2_)
-    {
-        return p_185499_1_.with(FACING, p_185499_2_.rotate(p_185499_1_.get(FACING)));
-    }
-
-    @Nonnull
-    public BlockState mirror(BlockState p_185471_1_, Mirror p_185471_2_)
-    {
-        return p_185471_1_.rotate(p_185471_2_.toRotation(p_185471_1_.get(FACING)));
-    }
-
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> p_206840_1_)
     {
-        p_206840_1_.add(WATERLOGGED, FACING);
+        p_206840_1_.add(WATERLOGGED);
     }
 
     @Nonnull
@@ -206,7 +177,7 @@ public class RitualBlock extends Block
         IWorld lvt_2_1_ = p_196258_1_.getWorld();
         BlockPos lvt_3_1_ = p_196258_1_.getPos();
         boolean lvt_4_1_ = lvt_2_1_.getFluidState(lvt_3_1_).getFluid() == Fluids.WATER;
-        return this.getDefaultState().with(FACING, p_196258_1_.getPlacementHorizontalFacing()).with(WATERLOGGED, lvt_4_1_);
+        return this.getDefaultState().with(WATERLOGGED, lvt_4_1_);
     }
 
     public int getFirstNotEmptySlot(ItemStackHandler inventory)

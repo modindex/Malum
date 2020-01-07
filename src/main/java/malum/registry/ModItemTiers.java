@@ -1,27 +1,12 @@
 package malum.registry;
 
-import com.google.common.base.Preconditions;
-import malum.items.armor.ItemArmorCatastrophe;
-import malum.items.curios.*;
-import malum.items.gadgets.*;
-import malum.items.special.ItemEvilSpirit;
-import malum.items.special.ItemWeaponAttunementCore;
-import malum.items.tools.*;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.item.IItemTier;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyLoadBase;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
 import java.util.function.Supplier;
-
-import static malum.MalumMod.MODID;
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class ModItemTiers

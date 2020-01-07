@@ -2,15 +2,12 @@ package malum.recipes;
 
 import malum.rituals.RitualEffect;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RitualRecipe {
 
-    private ArrayList<Item> ingredients = new ArrayList<>();
+    private ArrayList<Item> ingredients;
   private RitualEffect ritualEffect;
   private String target;
 
@@ -24,7 +21,7 @@ public class RitualRecipe {
     return ingredients;
   }
 
-  public RitualEffect getRitualEffect() {
+    public RitualEffect getRitualEffect() {
     return ritualEffect;
   }
 

@@ -1,7 +1,6 @@
 package malum.registry;
 
 import com.google.common.base.Preconditions;
-import malum.MalumMod;
 import malum.items.armor.ItemArmorCatastrophe;
 import malum.items.armor.ItemArmorNuminousCatastrophe;
 import malum.items.curios.*;
@@ -11,11 +10,11 @@ import malum.items.special.ItemModifier;
 import malum.items.special.ItemRitualActivator;
 import malum.items.special.ItemWeaponAttunementCore;
 import malum.items.tools.*;
-import net.minecraft.block.Block;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.LazyLoadBase;
+import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemTier;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -25,8 +24,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 
-import java.util.function.Supplier;
-
 import static malum.MalumMod.MODID;
 import static malum.registry.ModItemTiers.CATASTROPHE;
 import static malum.registry.ModItemTiers.NUMINOUS_CATASTROPHE;
@@ -35,107 +32,105 @@ import static malum.registry.ModItemTiers.NUMINOUS_CATASTROPHE;
 public class ModItems
 {
     //armor
-    public static Item catastrophe_hood = null;
-    public static Item catastrophe_chestplate = null;
-    public static Item catastrophe_leggings = null;
-    public static Item catastrophe_shoes = null;
+    public static Item catastrophe_hood;
+    public static Item catastrophe_chestplate;
+    public static Item catastrophe_leggings;
+    public static Item catastrophe_shoes;
 
-    public static Item numinous_catastrophe_hood = null;
-    public static Item numinous_catastrophe_chestplate = null;
-    public static Item numinous_catastrophe_leggings = null;
-    public static Item numinous_catastrophe_shoes = null;
+    public static Item numinous_catastrophe_hood;
+    public static Item numinous_catastrophe_chestplate;
+    public static Item numinous_catastrophe_leggings;
+    public static Item numinous_catastrophe_shoes;
     //weapons
-    public static Item withering_rapier = null;
-    public static Item catastrophe_hoe = null;
-    public static Item catastrophe_sword = null;
-    public static Item catastrophe_axe = null;
-    public static Item catastrophe_pickaxe = null;
-    public static Item catastrophe_shovel = null;
+    public static Item withering_rapier;
+    public static Item catastrophe_hoe;
+    public static Item catastrophe_sword;
+    public static Item catastrophe_axe;
+    public static Item catastrophe_pickaxe;
+    public static Item catastrophe_shovel;
 
-    public static Item numinous_catastrophe_hoe = null;
-    public static Item numinous_catastrophe_sword = null;
-    public static Item numinous_catastrophe_axe = null;
-    public static Item numinous_catastrophe_pickaxe = null;
-    public static Item numinous_catastrophe_shovel = null;
+    public static Item numinous_catastrophe_hoe;
+    public static Item numinous_catastrophe_sword;
+    public static Item numinous_catastrophe_axe;
+    public static Item numinous_catastrophe_pickaxe;
+    public static Item numinous_catastrophe_shovel;
     //crafting
-    public static Item end_forged_ingot = null;
-    public static Item end_forged_nugget = null;
-    public static Item metal_necklace = null;
-    public static Item metal_belt = null;
-    public static Item cursed_flare = null;
-    public static Item evil_spirit = null;
-    public static Item weapon_attunement_core = null;
-    public static Item weapon_attunement_core_strong = null;
+    public static Item end_forged_ingot;
+    public static Item end_forged_nugget;
+    public static Item metal_necklace;
+    public static Item metal_belt;
+    public static Item cursed_flare;
+    public static Item evil_spirit;
+    public static Item weapon_attunement_core;
+    public static Item weapon_attunement_core_strong;
 
     //curios
-    public static Item leather_ring = null;
-    public static Item luck_ring = null;
-    public static Item ender_sight_necklace = null;
-    public static Item dark_arts_ring = null;
-    public static Item water_necklace = null;
-    public static Item air_necklace = null;
-    public static Item thorns_belt = null;
-    public static Item healing_belt = null;
-    public static Item nether_necklace = null;
-    public static Item wither_necklace = null;
-    public static Item arcane_sight_ring = null;
-    public static Item rotten_belt = null;
-    public static Item shulker_necklace = null;
+    public static Item leather_ring;
+    public static Item luck_ring;
+    public static Item ender_sight_necklace;
+    public static Item dark_arts_ring;
+    public static Item water_necklace;
+    public static Item air_necklace;
+    public static Item thorns_belt;
+    public static Item healing_belt;
+    public static Item nether_necklace;
+    public static Item wither_necklace;
+    public static Item arcane_sight_ring;
+    public static Item rotten_belt;
+    public static Item shulker_necklace;
     //gadgets
-    public static Item voodoo_doll = null;
-    public static Item rending_doll = null;
-    public static Item control_doll = null;
-    public static Item zombie_doll = null;
-    public static Item enderman_doll = null;
+    public static Item voodoo_doll;
+    public static Item rending_doll;
+    public static Item control_doll;
+    public static Item zombie_doll;
+    public static Item enderman_doll;
 
-    public static Item ender_artifact = null;
-    public static Item transmutation_gem = null;
-    public static Item evil_lantern = null;
+    public static Item ender_artifact;
+    public static Item transmutation_gem;
+    public static Item evil_lantern;
 
 
     //modifiers
-    public static Item channeled_anomaly_modifier = null;
-    public static Item tainted_heart_modifier = null;
-    public static Item ancient_hieroglyph_modifier = null;
+    public static Item channeled_anomaly_modifier;
+    public static Item tainted_heart_modifier;
+    public static Item ancient_hieroglyph_modifier;
     //blocks
-    public static Item animated_block_ascend = null;
-    public static Item animated_block_harming = null;
-    public static Item animated_block_containing = null;
 
-    public static Item evil_grass = null;
-    public static Item evil_dirt = null;
+    public static Item evil_grass;
+    public static Item evil_dirt;
     public static Item evil_pumpkin;
     public static Item lit_evil_pumpkin;
 
-    public static Item dark_roofing = null;
-    public static Item dark_roofing_stairs = null;
-    public static Item dark_roofing_slab = null;
+    public static Item dark_roofing;
+    public static Item dark_roofing_stairs;
+    public static Item dark_roofing_slab;
 
-    public static Item refined_bricks = null;
-    public static Item refined_bricks_stairs = null;
-    public static Item refined_bricks_slab = null;
+    public static Item refined_bricks;
+    public static Item refined_bricks_stairs;
+    public static Item refined_bricks_slab;
 
-    public static Item refined_pathway = null;
-    public static Item refined_pathway_stairs = null;
-    public static Item refined_pathway_slab = null;
+    public static Item refined_pathway;
+    public static Item refined_pathway_stairs;
+    public static Item refined_pathway_slab;
 
-    public static Item wooden_planks = null;
-    public static Item wooden_planks_stairs = null;
-    public static Item wooden_planks_slab = null;
+    public static Item wooden_planks;
+    public static Item wooden_planks_stairs;
+    public static Item wooden_planks_slab;
 
-    public static Item wooden_beam = null;
+    public static Item wooden_beam;
 
-    public static Item refined_smooth_stone = null;
-    public static Item refined_smooth_stone_stairs = null;
-    public static Item refined_smooth_stone_slab = null;
+    public static Item refined_smooth_stone;
+    public static Item refined_smooth_stone_stairs;
+    public static Item refined_smooth_stone_slab;
 
-    public static Item wooden_casing = null;
-    public static Item wooden_casing_stairs = null;
-    public static Item wooden_casing_slab = null;
+    public static Item wooden_casing;
 
     public static Item catastrophe_bricks;
     public static Item catastrophe_stairs;
     public static Item catastrophe_slab;
+
+    public static Item refined_glowstone_block;
+    public static Item refined_glowstone_lamp;
 
     public static Item catastrophe_block;
 
@@ -248,16 +243,14 @@ public class ModItems
             lit_evil_pumpkin = setup(new BlockItem(ModBlocks.lit_evil_pumpkin, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "lit_evil_pumpkin"),
 
             dark_roofing_slab = setup(new BlockItem(ModBlocks.dark_roofing_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing_slab"),
-            wooden_casing_slab = setup(new BlockItem(ModBlocks.wooden_casing_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_casing_slab"),
             refined_bricks_slab = setup(new BlockItem(ModBlocks.refined_bricks_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_bricks_slab"),
 
             dark_roofing_stairs = setup(new BlockItem(ModBlocks.dark_roofing_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing_stairs"),
-            wooden_casing_stairs = setup(new BlockItem(ModBlocks.wooden_casing_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_casing_stairs"),
             refined_bricks_stairs = setup(new BlockItem(ModBlocks.refined_bricks_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_bricks_stairs"),
 
-            animated_block_ascend = setup(new BlockItem(ModBlocks.animated_block_ascend, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "animated_block_ascend"),
-            animated_block_containing = setup(new BlockItem(ModBlocks.animated_block_containing, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "animated_block_containing"),
-            animated_block_harming = setup(new BlockItem(ModBlocks.animated_block_harming, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "animated_block_harming")
+
+            refined_glowstone_block = setup(new BlockItem(ModBlocks.refined_glowstone_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_glowstone_block"),
+            refined_glowstone_lamp = setup(new BlockItem(ModBlocks.refined_glowstone_lamp, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_glowstone_lamp")
 
         );
     }

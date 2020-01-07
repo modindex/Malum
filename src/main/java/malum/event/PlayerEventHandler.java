@@ -1,113 +1,35 @@
 package malum.event;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
-import com.mojang.blaze3d.platform.GLX;
-import com.mojang.blaze3d.platform.GlStateManager;
-import malum.ClientRefferences;
 import malum.MalumMod;
-import malum.capabilities.PlayerProperties;
 import malum.items.curios.*;
 import malum.registry.ModItems;
-import net.minecraft.client.GameSettings;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.WitherSkeletonEntity;
-import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ShulkerBulletEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.client.event.RenderPlayerEvent;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.lwjgl.opengl.GL11;
 import top.theillusivec4.curios.api.CuriosAPI;
 
-import javax.vecmath.Vector2d;
-import javax.vecmath.Vector3d;
-import java.util.*;
-
-import static com.mojang.blaze3d.platform.GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA;
-import static com.mojang.blaze3d.platform.GlStateManager.SourceFactor.SRC_ALPHA;
-import static net.minecraft.entity.LivingEntity.ENTITY_GRAVITY;
-import static net.minecraft.entity.LivingEntity.SWIM_SPEED;
+import java.util.List;
+import java.util.Objects;
+import java.util.Random;
 
 @Mod.EventBusSubscriber
 public class PlayerEventHandler
 {
-
-    @SubscribeEvent
-    public static void AirNecklaceFlight(TickEvent.PlayerTickEvent event)
-    {
-        PlayerEntity entity = event.player;
-        if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemAirNecklace, entity).isPresent())
-        {
-            GameSettings settings = ClientRefferences.getClientSettings();
-            KeyBinding jump = settings.keyBindJump;
-            double[] curioArray = PlayerProperties.getCurioArray(entity);
-            double cooldown = curioArray[0];
-            double glide = curioArray[1];
-            if (cooldown > 0)
-            {
-                if (!jump.isKeyDown())
-                {
-                    cooldown = 0;
-                }
-            }
-            if (entity.onGround)
-            {
-                cooldown = 1;
-                glide = 25;
-            }
-            else
-            {
-                if (glide != 0)
-                {
-                    if (jump.isKeyDown())
-                    {
-                        if (cooldown == 0)
-                        {
-                            if (entity.getMotion().y < 0.2)
-                            {
-                                entity.addVelocity(0, 0.1, 0);
-                            }
-                            entity.addVelocity(0, 0.05, 0);
-                            glide -= 1;
-                        }
-                    }
-                }
-            }
-            if (glide == 0)
-            {
-                if (jump.isKeyDown())
-                {
-                    if (cooldown == 0)
-                    {
-                        if (entity.getMotion().y < -0.1)
-                        {
-                            entity.addVelocity(0, 0.1, 0);
-                        }
-                    }
-                }
-            }
-        }
-    }
 
     @SubscribeEvent
     public static void Jump(LivingEvent.LivingJumpEvent event)
@@ -164,93 +86,6 @@ public class PlayerEventHandler
                             shulkerBulletEntity.getTags().add("noLevitate");
                         }
                     }
-                }
-            }
-        }
-    }
-
-    private static final UUID ID = UUID.fromString("6d3be89e-37e6-453f-8654-2fd37d85b2ab");
-    @SubscribeEvent
-    public static void Tick(TickEvent.PlayerTickEvent event)
-    {
-        PlayerEntity playerEntity = ClientRefferences.getClientPlayer();
-        PlayerEntity entityLivingBase = event.player;
-        if (playerEntity != null)
-        {
-            double[] curioArray = PlayerProperties.getCurioArray(playerEntity);
-            double jumpStrength = curioArray[2];
-            double canJump = curioArray[3];
-            if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemNetherNecklace, playerEntity).isPresent())
-            {
-                if (canJump != 0)
-                {
-                    PlayerProperties.setCurioArrayArgument(playerEntity, 2, 0);
-                }
-                if (playerEntity.onGround)
-                {
-                    if (canJump == 0)
-                    {
-                        if (ClientRefferences.getClientSettings().keyBindJump.isKeyDown())
-                        {
-                            if (jumpStrength == 0)
-                            {
-                                playerEntity.world.playSound(playerEntity.posX, playerEntity.posY, playerEntity.posZ, SoundEvents.ENTITY_CREEPER_PRIMED, SoundCategory.PLAYERS, 2, 2, true);
-                                playerEntity.world.playSound(playerEntity.posX, playerEntity.posY, playerEntity.posZ, SoundEvents.BLOCK_CAMPFIRE_CRACKLE, SoundCategory.PLAYERS, 2, 2, true);
-                            }
-                            if (jumpStrength <= 0.5)
-                            {
-                                PlayerProperties.setCurioArrayArgument(playerEntity, 2, jumpStrength + 0.01);
-                            }
-                        }
-                    }
-                }
-                if (playerEntity.onGround)
-                {
-                    PlayerProperties.setCurioArrayArgument(playerEntity, 3, 0);
-                }
-                if (playerEntity.onGround && jumpStrength != 0 && !ClientRefferences.getClientSettings().keyBindJump.isKeyDown())
-                {
-                    playerEntity.jump();
-                    PlayerProperties.setCurioArrayArgument(playerEntity, 3, 1);
-                    playerEntity.addVelocity(0, 0.5 + jumpStrength, 0);
-                    playerEntity.world.playSound(playerEntity.posX, playerEntity.posY, playerEntity.posZ, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.PLAYERS, 2, 2, true);
-                    playerEntity.world.playSound(playerEntity.posX, playerEntity.posY, playerEntity.posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 2, 2, true);
-                    PlayerProperties.setCurioArrayArgument(playerEntity, 2, 0);
-                }
-            }
-        }
-        if (entityLivingBase.isInWater())
-        {
-            IAttributeInstance attributeInstance = entityLivingBase.getAttributes().getAttributeInstance(SWIM_SPEED);
-            assert attributeInstance != null;
-            double Y = entityLivingBase.getPosition().getY();
-            double ValueofY = 110 - Y;
-            double swimSpeed = 0.1D;
-            if (ValueofY > 0)
-            {
-                swimSpeed += (float) (ValueofY / 80);
-            }
-            final AttributeModifier SWIM_SPEED_INCREASE = new AttributeModifier(ID, "Swim Speed modifier", swimSpeed, AttributeModifier.Operation.ADDITION);
-
-            if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemWaterNecklace, entityLivingBase).isPresent())
-            {
-                if (!entityLivingBase.getEntityWorld().isRemote && entityLivingBase.ticksExisted % 19 == 0)
-                {
-                    if (attributeInstance.getModifier(ID) != null)
-                    {
-                        attributeInstance.removeModifier(SWIM_SPEED_INCREASE);
-                    }
-                }
-                if (attributeInstance.getModifier(ID) == null)
-                {
-                    attributeInstance.applyModifier(SWIM_SPEED_INCREASE);
-                }
-            }
-            else
-            {
-                if (attributeInstance.getModifier(ID) != null)
-                {
-                    attributeInstance.removeModifier(SWIM_SPEED_INCREASE);
                 }
             }
         }

@@ -1,29 +1,11 @@
 package malum.event;
 
-import malum.ClientRefferences;
-import malum.MalumMod;
-import malum.capabilities.PlayerProperties;
-import malum.items.curios.*;
-import malum.items.gadgets.ItemVoodoDoll;
-import malum.registry.ModBlocks;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import top.theillusivec4.curios.api.CuriosAPI;
-
-import java.util.Random;
 
 @Mod.EventBusSubscriber()
 public class HateandDangerLevelHandler
 {
-    public static float getDangerLevel(PlayerEntity target)
+    /*public static float getDangerLevel(PlayerEntity target)
     {
         PlayerEntity player = ClientRefferences.getClientPlayer();
         float returnValue;
@@ -187,5 +169,5 @@ public class HateandDangerLevelHandler
                 }
             }
         }
-    }
+    }*/
 }
