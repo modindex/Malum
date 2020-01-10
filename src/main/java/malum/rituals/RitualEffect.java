@@ -1,10 +1,9 @@
 package malum.rituals;
 
 import net.minecraft.tileentity.TileEntity;
-
-import java.util.UUID;
+import net.minecraft.util.math.BlockPos;
 
 public interface RitualEffect
 {
-    void doRitualEffect(int strenght, UUID uuid, int[] position, TileEntity tileEntity);
+    void doRitualEffect(int strenght, BlockPos pos, TileEntity tileEntity);
 }

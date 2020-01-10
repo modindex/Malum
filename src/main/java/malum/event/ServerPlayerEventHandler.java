@@ -6,8 +6,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import static malum.capabilities.PlayerProperties.*;
-
 public class ServerPlayerEventHandler
 {
     public ServerPlayerEventHandler()
@@ -20,9 +18,7 @@ public class ServerPlayerEventHandler
         if (event.getTarget() instanceof PlayerEntity && event.getPlayer() != null)
         {
             Entity target = event.getTarget();
-            sendDangerLevelPacket((PlayerEntity) target);
-            sendHatePacket((PlayerEntity) target);
-            sendPermaHatePacket((PlayerEntity) target);
+            //sendDangerLevelPacket((PlayerEntity) target);
         }
     }
 }

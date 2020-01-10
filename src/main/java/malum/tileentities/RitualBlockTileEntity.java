@@ -21,7 +21,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.UUID;
 
 public class RitualBlockTileEntity extends TileEntity implements ITickableTileEntity
 {
@@ -31,8 +30,6 @@ public class RitualBlockTileEntity extends TileEntity implements ITickableTileEn
     }
 
     public int crafting;
-    public UUID uuid = null;
-    public int[] position = null;
     public ItemStackHandler inventory = new ItemStackHandler(12)
     {
         
@@ -79,14 +76,6 @@ public class RitualBlockTileEntity extends TileEntity implements ITickableTileEn
     public CompoundNBT write(CompoundNBT compound)
     {
         super.write(compound);
-        if (position != null)
-        {
-                compound.putIntArray("position", position);
-        }
-        if (uuid != null)
-        {
-            compound.putUniqueId("uuid", uuid);
-        }
         compound.put("inventory", inventory.serializeNBT());
         compound.putInt("crafting", crafting);
         return compound;
@@ -95,22 +84,6 @@ public class RitualBlockTileEntity extends TileEntity implements ITickableTileEn
     @Override
     public void read(CompoundNBT compound)
     {
-        if (compound.get("position") != null)
-        {
-            position = compound.getIntArray("position");
-        }
-        else
-        {
-            position = null;
-        }
-        if (compound.hasUniqueId("uuid"))
-        {
-            uuid = compound.getUniqueId("uuid");
-        }
-        else
-        {
-            uuid = null;
-        }
         inventory.deserializeNBT((CompoundNBT) Objects.requireNonNull(compound.get("inventory")));
         crafting = compound.getInt("crafting");
         super.read(compound);
@@ -153,23 +126,13 @@ public class RitualBlockTileEntity extends TileEntity implements ITickableTileEn
             if (recipe != null)
             {
                 assert world != null;
-                BlockPos pos = new BlockPos(position[0], position[1], position[2]);
-                if (uuid != null && recipe.getTarget().equals("uuid"))
-                {
-                    doRitualEffect(uuid, pos, recipe.getRitualEffect());
-                }
-                if (position != null && recipe.getTarget().equals("position"))
-                {
-                    doRitualEffect(uuid, pos, recipe.getRitualEffect());
-                }
+                doRitualEffect(pos, recipe.getRitualEffect());
             }
-            uuid = null;
-            position = null;
             crafting = 0;
             emptyInventory(inventory);
         }
     }
-    public void doRitualEffect(UUID uuid, BlockPos pos, RitualEffect effect)
+    public void doRitualEffect(BlockPos pos, RitualEffect effect)
     {
         BlockPos offsetPos = new BlockPos(1, 0, 1);
         BlockPos TopRightPos = pos.add(offsetPos);
@@ -184,6 +147,6 @@ public class RitualBlockTileEntity extends TileEntity implements ITickableTileEn
                 world.setBlockState(cycle, Blocks.AIR.getDefaultState());
             }
         }
-        effect.doRitualEffect(strenght, uuid, position, this);
+        effect.doRitualEffect(strenght, pos, this);
     }
 }

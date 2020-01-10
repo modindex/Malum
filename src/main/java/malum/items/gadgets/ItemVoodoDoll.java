@@ -1,7 +1,5 @@
 package malum.items.gadgets;
 
-import malum.capabilities.PlayerProperties;
-import malum.event.ServerPlayerEventHandler;
 import malum.items.curios.ItemDarkArtsRing;
 import malum.items.curios.ItemLuckRing;
 import net.minecraft.entity.Entity;
@@ -11,16 +9,17 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.*;
-import net.minecraft.util.text.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import top.theillusivec4.curios.api.CuriosAPI;
 
 import java.util.Objects;
 import java.util.UUID;
-
-import static malum.capabilities.PlayerProperties.setDangerLevelCapped;
 
 public class ItemVoodoDoll extends Item
 {
@@ -150,15 +149,6 @@ public class ItemVoodoDoll extends Item
     public boolean itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand)
     {
         if (hand == Hand.MAIN_HAND) {
-
-            if (target instanceof PlayerEntity) {
-                setDangerLevelCapped(playerIn, 2, 2);
-            }
-            if (playerIn.isServerWorld()) {
-                int returnValue = PlayerProperties.getDangerLevel(playerIn);
-                TranslationTextComponent serverSideMessage = new TranslationTextComponent("server_side: " + returnValue);
-                playerIn.sendMessage(serverSideMessage);
-            }
             if (stack.hasTag()) {
                 CompoundNBT nbt = stack.getTag();
                 assert nbt != null;

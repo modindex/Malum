@@ -1,19 +1,10 @@
 package malum.network;
 
-import malum.ClientRefferences;
-import malum.capabilities.PlayerProperties;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent;
-
-import java.util.UUID;
-import java.util.function.Supplier;
-
-public class DangerLevelPacket
+public class DummyPacket
 {
-    private int dangerLevel;
+    /*private int dangerLevel;
     private UUID uuid;
-    public DangerLevelPacket(int dangerLevel, UUID uuid)
+    public DummyPacket(int dangerLevel, UUID uuid)
     {
         this.dangerLevel = dangerLevel;
         this.uuid = uuid;
@@ -34,10 +25,10 @@ public class DangerLevelPacket
         });
         context.get().setPacketHandled(true);
     }
-    public static DangerLevelPacket decode(PacketBuffer buf)
+    public static DummyPacket decode(PacketBuffer buf)
     {
         int dangerLevel = buf.readInt();
         UUID uniqueID = buf.readUniqueId();
-        return new DangerLevelPacket(dangerLevel, uniqueID);
-    }
+        return new DummyPacket(dangerLevel, uniqueID);
+    }*/
 }

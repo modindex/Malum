@@ -5,10 +5,7 @@ import malum.items.armor.ItemArmorCatastrophe;
 import malum.items.armor.ItemArmorNuminousCatastrophe;
 import malum.items.curios.*;
 import malum.items.gadgets.*;
-import malum.items.special.ItemEvilSpirit;
 import malum.items.special.ItemModifier;
-import malum.items.special.ItemRitualActivator;
-import malum.items.special.ItemWeaponAttunementCore;
 import malum.items.tools.*;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorMaterial;
@@ -60,9 +57,6 @@ public class ModItems
     public static Item metal_necklace;
     public static Item metal_belt;
     public static Item cursed_flare;
-    public static Item evil_spirit;
-    public static Item weapon_attunement_core;
-    public static Item weapon_attunement_core_strong;
 
     //curios
     public static Item leather_ring;
@@ -169,7 +163,7 @@ public class ModItems
             numinous_catastrophe_shovel = setup(new ItemCatastropheShovel(NUMINOUS_CATASTROPHE, 1, -3.0f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_shovel"),
             numinous_catastrophe_pickaxe = setup(new ItemCatastrophePickaxe(NUMINOUS_CATASTROPHE, 1, -2.8f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_pickaxe"),
 
-            ritual_activator = setup(new ItemRitualActivator(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ritual_activator"),
+            ritual_activator = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ritual_activator"),
             transmutation_gem = setup(new ItemTransmutationGem(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "transmutation_gem"),
             evil_lantern = setup(new ItemEvilLantern(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_lantern"),
 
@@ -205,9 +199,6 @@ public class ModItems
             metal_necklace = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "metal_necklace"),
             metal_belt = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "metal_belt"),
             cursed_flare = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "cursed_flare"),
-            evil_spirit = setup(new ItemEvilSpirit(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_spirit"),
-            weapon_attunement_core = setup(new ItemWeaponAttunementCore(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "weapon_attunement_core"),
-            weapon_attunement_core_strong = setup(new ItemWeaponAttunementCore(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "weapon_attunement_core_strong"),
 
             ritual_block = setup(new BlockItem(ModBlocks.ritual_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ritual_block"),
             crafting_block = setup(new BlockItem(ModBlocks.crafting_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "crafting_block"),

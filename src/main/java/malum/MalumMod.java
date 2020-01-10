@@ -1,10 +1,6 @@
 package malum;
 
 import malum.event.ServerPlayerEventHandler;
-import malum.network.DangerLevelPacket;
-import malum.network.HatePacket;
-import malum.network.NetworkManager;
-import malum.network.PermaHatePacket;
 import malum.tileentities.CraftingBlockTileEntity;
 import malum.tileentities.RitualBlockTileEntity;
 import net.minecraftforge.api.distmarker.Dist;
@@ -35,26 +31,14 @@ public class MalumMod
     }
     private void setup(final FMLCommonSetupEvent event)
     {
-        // register packets
+        /* register packets
         int packetID=0;
         NetworkManager.INSTANCE.registerMessage(packetID++,
-            DangerLevelPacket.class,
-            DangerLevelPacket::encode,
-            DangerLevelPacket::decode,
-            DangerLevelPacket::whenThisPacketIsReceived
-        );
-        NetworkManager.INSTANCE.registerMessage(packetID++,
-            HatePacket.class,
-            HatePacket::encode,
-            HatePacket::decode,
-            HatePacket::whenThisPacketIsReceived
-        );
-        NetworkManager.INSTANCE.registerMessage(packetID++,
-            PermaHatePacket.class,
-            PermaHatePacket::encode,
-            PermaHatePacket::decode,
-            PermaHatePacket::whenThisPacketIsReceived
-        );
+            DummyPacket.class,
+            DummyPacket::encode,
+            DummyPacket::decode,
+            DummyPacket::whenThisPacketIsReceived
+        );*/
         new ServerPlayerEventHandler();
     }
     @OnlyIn(Dist.CLIENT)

@@ -18,7 +18,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -27,7 +26,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.UUID;
 
 import static net.minecraft.block.ChestBlock.WATERLOGGED;
 
@@ -81,42 +79,15 @@ public class RitualBlock extends Block
 
                     if (((RitualBlockTileEntity) entity).crafting == 0)
                     {
-                        if (player.inventory.getCurrentItem().getItem() == ModItems.ritual_activator)
+                        if (stack.getItem() == ModItems.ritual_activator)
                         {
                             if (recipe != null)
                             {
-                                if (!stack.getTag().hasUniqueId("uuid") && recipe.getTarget().equals("uuid"))
-                                {
-                                    StringTextComponent text = new StringTextComponent("this ritual takes an entity, not a world position");
-                                    player.sendMessage(text);
-                                    return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
-                                }
-                                if (!stack.getTag().contains("data") && recipe.getTarget().equals("position"))
-                                {
-                                    StringTextComponent text = new StringTextComponent("this ritual takes a world position, not an entity");
-                                    player.sendMessage(text);
-                                    return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
-                                }
-                                if (stack.getTag().contains("data") && recipe.getTarget().equals("position"))
-                                {
-                                    int[] tag = stack.getTag().getIntArray("data");
-                                    if (tag.length != 0)
-                                    {
-                                        ((RitualBlockTileEntity) entity).position = new int[]{tag[0], tag[1], tag[2]};
-                                        ((RitualBlockTileEntity) entity).crafting = 1;
-                                        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
-                                    }
-                                }
-                                if (stack.getTag().hasUniqueId("uuid") && recipe.getTarget().equals("uuid"))
-                                {
-                                    UUID tag = stack.getTag().getUniqueId("uuid");
-                                    ((RitualBlockTileEntity) entity).uuid = tag;
-                                    ((RitualBlockTileEntity) entity).crafting = 1;
-                                    return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
-                                }
+                                ((RitualBlockTileEntity) entity).crafting = 1;
                             }
                             return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
                         }
+                        //TAKING ITEMS OUT
                         if (player.isSneaking())
                         {
                             int firstNotEmptyStack = getFirstNotEmptySlot(inventory);
@@ -124,33 +95,24 @@ public class RitualBlock extends Block
                             {
                                 return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
                             }
-
                             ItemStack stackToAdd = inventory.getStackInSlot(firstNotEmptyStack);
-
-
                             stackToAdd.setCount(1);
                             player.addItemStackToInventory(stackToAdd);
                             inventory.setStackInSlot(firstNotEmptyStack, ItemStack.EMPTY);
                             return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
                         }
+                        //PUTTING ITEMS IN
                         else
                         {
                             int firstEmptySlot = getFirstEmptySlot(inventory);
-
                             if (firstEmptySlot == -1)
                             {
                                 return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
                             }
 
-                            ItemStack stackToAdd = new ItemStack(player.inventory.getCurrentItem().getItem());
-                            stackToAdd.setTag(player.inventory.getCurrentItem().getTag());
+                            ItemStack stackToAdd = stack.copy();
                             inventory.setStackInSlot(firstEmptySlot, stackToAdd);
-                            player.inventory.getCurrentItem().split(1);
-                            int slot;
-                            for (slot = 0; slot < inventory.getSlots() - 1; slot += 1)
-                            {
-                                LOGGER.info(inventory.getStackInSlot(slot));
-                            }
+                            stack.split(1);
                             return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
                         }
                     }
