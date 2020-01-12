@@ -70,9 +70,15 @@ public class ModItems
     public static Item nether_necklace;
     public static Item wither_necklace;
     public static Item arcane_sight_ring;
+    public static Item spirit_ring;
+    public static Item arcane_spirit_ring;
+
     public static Item rotten_belt;
     public static Item shulker_necklace;
     //gadgets
+
+    public static Item spirit_bottle;
+    public static Item spirit_jar;
     public static Item voodoo_doll;
     public static Item rending_doll;
     public static Item control_doll;
@@ -112,6 +118,7 @@ public class ModItems
     public static Item wooden_planks_slab;
 
     public static Item wooden_beam;
+    public static Item spirit_well;
 
     public static Item refined_smooth_stone;
     public static Item refined_smooth_stone_stairs;
@@ -187,6 +194,8 @@ public class ModItems
             nether_necklace = setup(new ItemNetherNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "nether_necklace"),
             shulker_necklace = setup(new ItemShulkerNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "shulker_necklace"),
             rotten_belt = setup(new ItemRottenBelt(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "rotten_belt"),
+            arcane_spirit_ring = setup(new ItemArcaneSpiritRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "arcane_spirit_ring"),
+            spirit_ring = setup(new ItemSpiritRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "spirit_ring"),
 
 
 
@@ -199,6 +208,9 @@ public class ModItems
             metal_necklace = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "metal_necklace"),
             metal_belt = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "metal_belt"),
             cursed_flare = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "cursed_flare"),
+
+            spirit_bottle = setup(new ItemSpiritContainer(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "spirit_bottle"),
+            spirit_jar = setup(new ItemSpiritContainer(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "spirit_jar"),
 
             ritual_block = setup(new BlockItem(ModBlocks.ritual_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ritual_block"),
             crafting_block = setup(new BlockItem(ModBlocks.crafting_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "crafting_block"),
@@ -236,6 +248,7 @@ public class ModItems
             dark_roofing_slab = setup(new BlockItem(ModBlocks.dark_roofing_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing_slab"),
             refined_bricks_slab = setup(new BlockItem(ModBlocks.refined_bricks_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_bricks_slab"),
 
+            spirit_well = setup(new BlockItem(ModBlocks.spirit_well, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "spirit_well"),
             dark_roofing_stairs = setup(new BlockItem(ModBlocks.dark_roofing_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing_stairs"),
             refined_bricks_stairs = setup(new BlockItem(ModBlocks.refined_bricks_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_bricks_stairs"),
 

@@ -45,6 +45,7 @@ public class ModBlocks
     public static Block catastrophe_slab = null;
 
     public static Block catastrophe_block = null;
+    public static Block spirit_well = null;
 
     public static Block evil_dirt;
     public static Block evil_grass;
@@ -93,7 +94,7 @@ public class ModBlocks
 
         smooth_stone_stairs = registerBlock(registry, new ModStairsBlock(Blocks.SMOOTH_STONE::getDefaultState, Block.Properties.from(Blocks.SMOOTH_STONE)), "smooth_stone_stairs");
 
-        resource_refinery = registerBlock(registry, new ResourceRefinery(metal_properties), "resource_refinery");
+        resource_refinery = registerBlock(registry, new ResourceRefineryBlock(metal_properties), "resource_refinery");
 
         evil_pumpkin = registerBlock(registry, new ModHorizontalBlock(Block.Properties.from(Blocks.CARVED_PUMPKIN)), "evil_pumpkin");
         lit_evil_pumpkin = registerBlock(registry, new ModHorizontalBlock(Block.Properties.from(Blocks.JACK_O_LANTERN)), "lit_evil_pumpkin");
@@ -131,6 +132,7 @@ public class ModBlocks
         wooden_beam = registerBlock(registry, new LogBlock(MaterialColor.BROWN, wood_properties), "wooden_beam");
         wooden_casing = registerBlock(registry, new LogBlock(MaterialColor.BROWN, wood_properties), "wooden_casing");
 
+        spirit_well = registerBlock(registry, new SpiritWellBlock(refined_stone_properties), "spirit_well");
         evil_dirt = registerBlock(registry, new Block(evil_earth_properties), "evil_dirt");
         evil_grass = registerBlock(registry, new Block(evil_earth_properties), "evil_grass");
 

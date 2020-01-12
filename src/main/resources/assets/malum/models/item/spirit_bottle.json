@@ -1,0 +1,20 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "malum:items/spirit_bottle_empty"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "spirit": 1
+      },
+      "model": "malum:item/spirit_bottle_full"
+    },
+    {
+      "predicate": {
+        "spirit": 0
+      },
+      "model": "malum:item/spirit_bottle_empty"
+    }
+  ]
+}

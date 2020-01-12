@@ -1,21 +1,17 @@
 package malum.blocks;
 
 import malum.recipes.ResourceFormingRecipe;
-import malum.registry.ModBlocks;
 import malum.registry.ModRecipes;
 import malum.tileentities.ResourceRefineryTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.client.audio.Sound;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -24,7 +20,7 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class ResourceRefinery extends Block
+public class ResourceRefineryBlock extends Block
 {
     public static final IntegerProperty FUEL = IntegerProperty.create("fuel", 0, 8);
 
@@ -33,7 +29,7 @@ public class ResourceRefinery extends Block
     private static final VoxelShape PART_TOP = Block.makeCuboidShape(0D, 10D, 0D, 16D, 16D, 16D);
     private static final VoxelShape FINAL_SHAPE = VoxelShapes.or(PART_BOTTOM, PART_MIDDLE, PART_TOP);
 
-    public ResourceRefinery(Properties properties)
+    public ResourceRefineryBlock(Properties properties)
     {
         super(properties);
         this.setDefaultState(this.getDefaultState().with(FUEL, 0));
@@ -67,14 +63,13 @@ public class ResourceRefinery extends Block
                 {
                     if (state.get(FUEL) < FUEL.getAllowedValues().size() - 1)
                     {
-                        worldIn.setBlockState(pos, state.with(FUEL, state.get(FUEL) + 1));
+                        worldIn.setBlockState(pos, state.with(FUEL, FUEL.getAllowedValues().size() - 1));
                         player.inventory.getCurrentItem().shrink(1);
-                        worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, SoundCategory.BLOCKS, 1f, 1f, true);
-                        worldIn.addParticle(ParticleTypes.FLAME, pos.getX(), pos.getY(), pos.getZ(), 0, -0.1, 0);
+                        player.swingArm(handIn);
                         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
                     }
                 }
-                if (state.get(FUEL) >= 2)
+                if (state.get(FUEL) >= 0)
                 {
                     ItemStack stack = player.inventory.getCurrentItem();
                     ResourceFormingRecipe recipe = ModRecipes.getResourceFormingRecipe(stack.getItem());
@@ -84,6 +79,7 @@ public class ResourceRefinery extends Block
                         {
                             worldIn.setBlockState(pos.up(), recipe.getBlock().getDefaultState());
                             player.inventory.getCurrentItem().shrink(1);
+                            player.swingArm(handIn);
                             return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
                         }
                         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);

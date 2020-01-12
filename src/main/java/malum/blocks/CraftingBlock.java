@@ -1,33 +1,23 @@
 package malum.blocks;
 
 
-import malum.recipes.CraftingRecipe;
 import malum.recipes.RitualRecipe;
 import malum.registry.ModItems;
 import malum.registry.ModRecipes;
-import malum.tileentities.CraftingBlockTileEntity;
 import malum.tileentities.RitualBlockTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -36,19 +26,17 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.UUID;
 
 import static net.minecraft.block.ChestBlock.WATERLOGGED;
 
 public class CraftingBlock extends Block
 {
 
-    public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+
 
     public CraftingBlock(Properties properties)
     {
         super(properties);
-        this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WATERLOGGED, false);
     }
 
     @Override
@@ -60,7 +48,7 @@ public class CraftingBlock extends Block
     @Override
     public TileEntity createTileEntity(final BlockState state, final IBlockReader world)
     {
-        return new CraftingBlockTileEntity();
+        return new RitualBlockTileEntity();
     }
 
     public ArrayList<Item> listEveryItem(ItemStackHandler inventory)
@@ -82,23 +70,25 @@ public class CraftingBlock extends Block
         TileEntity entity = worldIn.getTileEntity(pos);
         if (!worldIn.isRemote())
         {
-            if (entity instanceof CraftingBlockTileEntity)
+            if (entity instanceof RitualBlockTileEntity)
             {
                 if (handIn != Hand.OFF_HAND)
                 {
-                    ItemStackHandler inventory = ((CraftingBlockTileEntity) entity).inventory;
+                    ItemStackHandler inventory = ((RitualBlockTileEntity) entity).inventory;
                     ItemStack stack = player.inventory.getCurrentItem();
-                    CraftingRecipe recipe = ModRecipes.getCraftingRecipe(listEveryItem(inventory));
-                    if (((CraftingBlockTileEntity) entity).crafting == 0)
+                    RitualRecipe recipe = ModRecipes.getRitualRecipe(listEveryItem(inventory));
+
+                    if (((RitualBlockTileEntity) entity).crafting == 0)
                     {
-                        if (player.inventory.getCurrentItem().getItem() == Items.STICK)
+                        if (stack.getItem() == ModItems.ritual_activator)
                         {
                             if (recipe != null)
                             {
-                                ((CraftingBlockTileEntity) entity).crafting = 1;
+                                ((RitualBlockTileEntity) entity).crafting = 1;
                             }
                             return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
                         }
+                        //TAKING ITEMS OUT
                         if (player.isSneaking())
                         {
                             int firstNotEmptyStack = getFirstNotEmptySlot(inventory);
@@ -106,33 +96,24 @@ public class CraftingBlock extends Block
                             {
                                 return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
                             }
-
                             ItemStack stackToAdd = inventory.getStackInSlot(firstNotEmptyStack);
-
-
                             stackToAdd.setCount(1);
                             player.addItemStackToInventory(stackToAdd);
                             inventory.setStackInSlot(firstNotEmptyStack, ItemStack.EMPTY);
                             return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
                         }
+                        //PUTTING ITEMS IN
                         else
                         {
                             int firstEmptySlot = getFirstEmptySlot(inventory);
-
                             if (firstEmptySlot == -1)
                             {
                                 return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
                             }
 
-                            ItemStack stackToAdd = new ItemStack(player.inventory.getCurrentItem().getItem());
-                            stackToAdd.setTag(player.inventory.getCurrentItem().getTag());
+                            ItemStack stackToAdd = stack.copy();
                             inventory.setStackInSlot(firstEmptySlot, stackToAdd);
-                            player.inventory.getCurrentItem().split(1);
-                            int slot;
-                            for (slot = 0; slot < inventory.getSlots() - 1; slot += 1)
-                            {
-                                LOGGER.info(inventory.getStackInSlot(slot));
-                            }
+                            stack.split(1);
                             return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
                         }
                     }
@@ -142,21 +123,9 @@ public class CraftingBlock extends Block
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
 
-    @Nonnull
-    public BlockState rotate(BlockState p_185499_1_, Rotation p_185499_2_)
-    {
-        return p_185499_1_.with(FACING, p_185499_2_.rotate(p_185499_1_.get(FACING)));
-    }
-
-    @Nonnull
-    public BlockState mirror(BlockState p_185471_1_, Mirror p_185471_2_)
-    {
-        return p_185471_1_.rotate(p_185471_2_.toRotation(p_185471_1_.get(FACING)));
-    }
-
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> p_206840_1_)
     {
-        p_206840_1_.add(WATERLOGGED, FACING);
+        p_206840_1_.add(WATERLOGGED);
     }
 
     @Nonnull
@@ -171,7 +140,7 @@ public class CraftingBlock extends Block
         IWorld lvt_2_1_ = p_196258_1_.getWorld();
         BlockPos lvt_3_1_ = p_196258_1_.getPos();
         boolean lvt_4_1_ = lvt_2_1_.getFluidState(lvt_3_1_).getFluid() == Fluids.WATER;
-        return this.getDefaultState().with(FACING, p_196258_1_.getPlacementHorizontalFacing()).with(WATERLOGGED, lvt_4_1_);
+        return this.getDefaultState().with(WATERLOGGED, lvt_4_1_);
     }
 
     public int getFirstNotEmptySlot(ItemStackHandler inventory)

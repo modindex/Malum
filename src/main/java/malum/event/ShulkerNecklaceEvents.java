@@ -2,45 +2,28 @@ package malum.event;
 
 import com.google.common.collect.Lists;
 import malum.MalumMod;
-import malum.items.curios.*;
-import malum.registry.ModItems;
+import malum.items.curios.ItemShulkerNecklace;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.WitherSkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ShulkerBulletEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingHealEvent;
+import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosAPI;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 @Mod.EventBusSubscriber
-public class PlayerEventHandler
+public class ShulkerNecklaceEvents
 {
-
-    @SubscribeEvent
-    public static void Jump(LivingEvent.LivingJumpEvent event)
-    {
-        LivingEntity entityLivingBase = event.getEntityLiving();
-        if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemNetherNecklace, entityLivingBase).isPresent())
-        {
-            entityLivingBase.setVelocity(entityLivingBase.getMotion().x, 0, entityLivingBase.getMotion().z);
-        }
-    }
-
     @SubscribeEvent
     public static void Heal(LivingHealEvent event)
     {
@@ -116,83 +99,6 @@ public class PlayerEventHandler
         {
             event.getEntityLiving().getTags().remove("removeLevitate");
             event.getEntityLiving().removePotionEffect(Effects.LEVITATION);
-        }
-    }
-    @SubscribeEvent
-    public static void DamageEvent(LivingDamageEvent event)
-    {
-        LivingEntity attacked = event.getEntityLiving(); // you were attacked by a mob
-        Entity attacking = event.getSource().getTrueSource(); //a mob was attacked by you
-        Entity attackingP = event.getSource().getImmediateSource(); //you were attacked by a mobs projectile
-
-        if (event.getSource() == DamageSource.FALL)
-        {
-            if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemNetherNecklace, attacked).isPresent())
-            {
-                event.setCanceled(true);
-            }
-            if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemAirNecklace, attacked).isPresent())
-            {
-                event.setCanceled(true);
-            }
-        }
-        if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemThornsBelt, attacked).isPresent())
-        {
-            float damage = 1f;
-            float health = attacked.getHealth();
-            float value = attacked.getMaxHealth() - health;
-            value *= 0.1;
-            if (health <= attacked.getMaxHealth() / 4)
-            {
-                damage *= 2f;
-            }
-            damage += value;
-            Objects.requireNonNull(event.getSource().getTrueSource()).attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) attacked), damage);
-
-        }
-        if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemWitherNecklace, attacked).isPresent())
-        {
-            attacked.playSound(SoundEvents.ENTITY_WITHER_HURT, 1, 1);
-            attacked.playSound(SoundEvents.ENTITY_WITHER_SKELETON_HURT, 1, 1);
-            event.setAmount(event.getAmount() * 0.85f);
-        }
-        if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemNetherNecklace, attacked).isPresent())
-        {
-            attacked.setSprinting(true);
-        }
-        if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemHealingBelt, attacked).isPresent())
-        {
-            float maxhealth = attacked.getMaxHealth();
-            float health = attacked.getHealth();
-            float modifier = 0.5f;
-            float value = (maxhealth - health) * modifier;
-            attacked.setAbsorptionAmount(attacked.getAbsorptionAmount() + value);
-        }
-    }
-
-    @SubscribeEvent
-    public static void Death(LivingDeathEvent event)
-    {
-        if (event.getSource().getTrueSource() != null && event.getSource().getTrueSource() instanceof PlayerEntity)
-        {
-            PlayerEntity entityLivingBase = (PlayerEntity) event.getSource().getTrueSource();
-            if (entityLivingBase.swingingHand != null)
-            {
-                Hand hand = entityLivingBase.swingingHand;
-
-                ItemStack stack = entityLivingBase.getHeldItem(hand);
-                if (!stack.isEmpty())
-                {
-                    if (stack.getItem() == Items.WOODEN_SWORD)
-                    {
-                        Entity target = event.getEntityLiving();
-                        if (target instanceof WitherSkeletonEntity)
-                        {
-                            entityLivingBase.setHeldItem(hand, ModItems.withering_rapier.getDefaultInstance());
-                        }
-                    }
-                }
-            }
         }
     }
 }

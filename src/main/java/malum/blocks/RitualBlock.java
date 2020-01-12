@@ -84,6 +84,7 @@ public class RitualBlock extends Block
                             if (recipe != null)
                             {
                                 ((RitualBlockTileEntity) entity).crafting = 1;
+                                player.swingArm(handIn);
                             }
                             return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
                         }
@@ -99,6 +100,7 @@ public class RitualBlock extends Block
                             stackToAdd.setCount(1);
                             player.addItemStackToInventory(stackToAdd);
                             inventory.setStackInSlot(firstNotEmptyStack, ItemStack.EMPTY);
+                            player.swingArm(handIn);
                             return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
                         }
                         //PUTTING ITEMS IN
@@ -113,6 +115,7 @@ public class RitualBlock extends Block
                             ItemStack stackToAdd = stack.copy();
                             inventory.setStackInSlot(firstEmptySlot, stackToAdd);
                             stack.split(1);
+                            player.swingArm(handIn);
                             return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
                         }
                     }

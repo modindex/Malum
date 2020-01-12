@@ -2,7 +2,6 @@ package malum.tileentities;
 
 import malum.blocks.ResourceCrystalBlock;
 import malum.registry.ModTileEntities;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -10,11 +9,10 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import org.antlr.v4.runtime.atn.BlockStartState;
 
 import javax.annotation.Nullable;
 
-import static malum.blocks.ResourceRefinery.FUEL;
+import static malum.blocks.ResourceRefineryBlock.FUEL;
 
 public class ResourceRefineryTileEntity extends TileEntity implements ITickableTileEntity
 {

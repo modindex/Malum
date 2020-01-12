@@ -1,20 +1,14 @@
 package malum.recipes;
 
 import malum.registry.ModRecipes;
+import malum.registry.ModSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.IProperty;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
 
 import java.util.Objects;
 
@@ -59,6 +53,28 @@ public class BlockTransmutationRecipe
             Block replacementBlock = recipe.getReplacementBlock();
             BlockState replacementState = replacementBlock.getDefaultState();
             setBlockStateWithExistingProperties(world, pos, replacementState);
+        }
+    }
+    public static void makeTransmutationVisuals(BlockState state, World world, BlockPos pos)
+    {
+        BlockTransmutationRecipe recipe = ModRecipes.getBlockTransmutationRecipe(state);
+        if (recipe != null)
+        {
+            Block replacementBlock = recipe.getReplacementBlock();
+            BlockState replacementState = replacementBlock.getDefaultState();
+            setBlockStateWithExistingProperties(world, pos, replacementState);
+            world.playSound(null, pos, ModSounds.transmutate, SoundCategory.PLAYERS, 1F, (float) (0.2F + randomize(1, 1)));
+            world.playSound(null, pos, state.getSoundType().getBreakSound(), SoundCategory.PLAYERS, 1F, 0.8F);
+            for (int a = 0; a <= 10; a++)
+            {
+                double posX = randomize(pos.getX() + 0.5, 0.6);
+                double posY = randomize(pos.getY() + 0.5, 0.6);
+                double posZ = randomize(pos.getZ() + 0.5, 0.6);
+                double velX = randomize(0, 0.1);
+                double velY = randomize(0, 0.1);
+                double velZ = randomize(0, 0.1);
+                world.addParticle(ParticleTypes.LARGE_SMOKE, posX, posY, posZ, velX, velY, velZ);
+            }
         }
     }
     public static <T extends Comparable<T>> BlockState newStateWithOldProperty(BlockState oldState, BlockState newState, IProperty<T> property)

@@ -1,14 +1,6 @@
 {
-  "parent": "item/handheld",
+  "parent": "item/generated",
   "textures": {
     "layer0": "malum:items/catastrophe_leggings"
-  },
-  "overrides": [
-    {
-      "predicate": {
-        "dimension": 1
-      },
-      "model": "malum:item/catastrophe_leggings_glow"
-    }
-  ]
+  }
 }
