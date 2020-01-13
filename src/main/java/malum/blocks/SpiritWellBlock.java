@@ -1,6 +1,5 @@
 package malum.blocks;
 
-
 import malum.MalumMod;
 import malum.tileentities.SpiritWellTileEntity;
 import net.minecraft.block.Block;
@@ -77,7 +76,6 @@ public class SpiritWellBlock extends Block
                                     ItemStack newStack = stack.getItem().getDefaultInstance();
                                     player.inventory.addItemStackToInventory(newStack);
                                     ((SpiritWellTileEntity) entity).spirits.add(nbt.getString("spirit"));
-                                    nbt.remove("spirit");
                                 }
                             }
                             MalumMod.LOGGER.info(((SpiritWellTileEntity) entity).spirits);
