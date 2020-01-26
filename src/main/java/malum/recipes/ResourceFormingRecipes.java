@@ -1,6 +1,7 @@
 package malum.recipes;
 
 import malum.registry.ModBlocks;
+import malum.registry.ModItems;
 import malum.registry.ModRecipes;
 import net.minecraft.item.Items;
 
@@ -15,6 +16,6 @@ public class ResourceFormingRecipes
         ModRecipes.addResourceFormingRecipe(new ResourceFormingRecipe(ModBlocks.resource_crystal_coal, Items.COAL_ORE));
         ModRecipes.addResourceFormingRecipe(new ResourceFormingRecipe(ModBlocks.resource_crystal_lapis, Items.LAPIS_ORE));
         ModRecipes.addResourceFormingRecipe(new ResourceFormingRecipe(ModBlocks.resource_crystal_redstone, Items.REDSTONE_ORE));
-        ModRecipes.addResourceFormingRecipe(new ResourceFormingRecipe(ModBlocks.resource_crystal_soul, Items.STICK));
+        ModRecipes.addResourceFormingRecipe(new ResourceFormingRecipe(ModBlocks.resource_crystal_soul, ModItems.soul_dust));
     }
 }

@@ -3,10 +3,7 @@ package malum;
 import malum.capabilities.Capabilities;
 import malum.capabilities.PlayerProperties;
 import malum.capabilities.PropertiesDispatcher;
-import malum.recipes.BlockTransmutationRecipes;
-import malum.recipes.CraftingRecipes;
-import malum.recipes.ResourceFormingRecipes;
-import malum.recipes.RitualRecipes;
+import malum.recipes.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -61,6 +58,7 @@ public class ForgeEventHandlers
         RitualRecipes.initRecipes();
         CraftingRecipes.initRecipes();
         ResourceFormingRecipes.initRecipes();
+        SpiritInfusionRecipes.initRecipes();
     }
     @SubscribeEvent
     public static void ChunkLoad(TickEvent.WorldTickEvent event)

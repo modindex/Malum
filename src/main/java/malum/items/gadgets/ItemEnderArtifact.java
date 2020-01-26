@@ -1,8 +1,5 @@
 package malum.items.gadgets;
 
-import malum.items.curios.ItemDarkArtsRing;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EnderChestInventory;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -10,16 +7,10 @@ import net.minecraft.inventory.container.ChestContainer;
 import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-import top.theillusivec4.curios.api.CuriosAPI;
-
-import java.util.Objects;
-import java.util.UUID;
 
 import static net.minecraft.block.EnderChestBlock.field_220115_d;
 

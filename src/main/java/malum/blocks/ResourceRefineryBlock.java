@@ -66,7 +66,7 @@ public class ResourceRefineryBlock extends Block
                         worldIn.setBlockState(pos, state.with(FUEL, FUEL.getAllowedValues().size() - 1));
                         player.inventory.getCurrentItem().shrink(1);
                         player.swingArm(handIn);
-                        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+                        return true;
                     }
                 }
                 if (state.get(FUEL) >= 0)
@@ -80,12 +80,12 @@ public class ResourceRefineryBlock extends Block
                             worldIn.setBlockState(pos.up(), recipe.getBlock().getDefaultState());
                             player.inventory.getCurrentItem().shrink(1);
                             player.swingArm(handIn);
-                            return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+                            return true;
                         }
-                        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+                        return true;
                     }
                 }
-                return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+                return true;
             }
         }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);

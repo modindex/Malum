@@ -4,6 +4,7 @@ package malum.blocks;
 import malum.recipes.RitualRecipe;
 import malum.registry.ModItems;
 import malum.registry.ModRecipes;
+import malum.registry.ModSounds;
 import malum.tileentities.RitualBlockTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -16,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
@@ -26,6 +28,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static net.minecraft.block.ChestBlock.WATERLOGGED;
 
@@ -85,8 +88,10 @@ public class RitualBlock extends Block
                             {
                                 ((RitualBlockTileEntity) entity).crafting = 1;
                                 player.swingArm(handIn);
+                                Objects.requireNonNull(entity.getWorld()).notifyBlockUpdate(pos, state, state, 3);
+                                player.world.playSound(null, pos, ModSounds.ritual_start, SoundCategory.PLAYERS, 1F, 1F);
                             }
-                            return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+                            return true;
                         }
                         //TAKING ITEMS OUT
                         if (player.isSneaking())
@@ -94,14 +99,15 @@ public class RitualBlock extends Block
                             int firstNotEmptyStack = getFirstNotEmptySlot(inventory);
                             if (firstNotEmptyStack == -1)
                             {
-                                return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+                                return true;
                             }
                             ItemStack stackToAdd = inventory.getStackInSlot(firstNotEmptyStack);
                             stackToAdd.setCount(1);
                             player.addItemStackToInventory(stackToAdd);
                             inventory.setStackInSlot(firstNotEmptyStack, ItemStack.EMPTY);
                             player.swingArm(handIn);
-                            return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+                            Objects.requireNonNull(entity.getWorld()).notifyBlockUpdate(pos, state, state, 3);
+                            return true;
                         }
                         //PUTTING ITEMS IN
                         else
@@ -109,14 +115,15 @@ public class RitualBlock extends Block
                             int firstEmptySlot = getFirstEmptySlot(inventory);
                             if (firstEmptySlot == -1)
                             {
-                                return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+                                return true;
                             }
 
                             ItemStack stackToAdd = stack.copy();
                             inventory.setStackInSlot(firstEmptySlot, stackToAdd);
                             stack.split(1);
                             player.swingArm(handIn);
-                            return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+                            Objects.requireNonNull(entity.getWorld()).notifyBlockUpdate(pos, state, state, 3);
+                            return true;
                         }
                     }
                 }

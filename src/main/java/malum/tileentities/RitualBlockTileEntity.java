@@ -4,8 +4,10 @@ package malum.tileentities;
 import malum.MalumMod;
 import malum.recipes.RitualRecipe;
 import malum.registry.ModRecipes;
+import malum.registry.ModSounds;
 import malum.registry.ModTileEntities;
 import malum.rituals.RitualEffect;
+import malum.sounds.RitualLoopTickableSound;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
@@ -15,6 +17,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -115,12 +118,15 @@ public class RitualBlockTileEntity extends TileEntity implements ITickableTileEn
     {
         if (crafting >= 1)
         {
+            if (crafting == 1)
+            {
+                new RitualLoopTickableSound(this);
+            }
             crafting += 1;
             assert world != null;
-            world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
             MalumMod.LOGGER.info(crafting);
         }
-        if (crafting >= 300)
+        if (crafting >= 320)
         {
             RitualRecipe recipe = ModRecipes.getRitualRecipe(listEveryItem(inventory));
             if (recipe != null)
@@ -128,6 +134,7 @@ public class RitualBlockTileEntity extends TileEntity implements ITickableTileEn
                 assert world != null;
                 doRitualEffect(pos, recipe.getRitualEffect());
             }
+            world.playSound(null, pos, ModSounds.ritual_end, SoundCategory.PLAYERS, 1F, 1F);
             crafting = 0;
             emptyInventory(inventory);
         }
@@ -138,7 +145,7 @@ public class RitualBlockTileEntity extends TileEntity implements ITickableTileEn
         BlockPos TopRightPos = pos.add(offsetPos);
         BlockPos BottomLeftPos = pos.subtract(offsetPos);
         assert world != null;
-        int strenght = 1;
+        int strenght = 4;
         for(BlockPos cycle : BlockPos.getAllInBoxMutable(TopRightPos, BottomLeftPos))
         {
             if (world.getBlockState(cycle).getBlock() == Blocks.REDSTONE_WIRE)

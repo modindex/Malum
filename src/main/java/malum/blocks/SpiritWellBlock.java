@@ -1,6 +1,9 @@
 package malum.blocks;
 
 import malum.MalumMod;
+import malum.items.gadgets.ItemSpiritContainer;
+import malum.recipes.SpiritInfusionRecipe;
+import malum.registry.ModRecipes;
 import malum.tileentities.SpiritWellTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -15,6 +18,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -43,6 +49,25 @@ public class SpiritWellBlock extends Block
         return new SpiritWellTileEntity();
     }
 
+    private static final VoxelShape PART_BOTTOM = Block.makeCuboidShape(1D, 0D, 1D, 15D, 4D, 15D);
+
+    private static final VoxelShape PART_BOTTOM_1 = Block.makeCuboidShape(15D, 0D, 4D, 16D, 2D, 12D);
+    private static final VoxelShape PART_BOTTOM_2 = Block.makeCuboidShape(0D, 0D, 4D, 1D, 2D, 12D);
+    private static final VoxelShape PART_BOTTOM_3 = Block.makeCuboidShape(4D, 0D, 15D, 12D, 2D, 16D);
+    private static final VoxelShape PART_BOTTOM_4 = Block.makeCuboidShape(4D, 0D, 0D, 12D, 2D, 1D);
+
+    private static final VoxelShape PART_MIDDLE = Block.makeCuboidShape(6D, 4D, 6D, 10D, 8D, 10D);
+    private static final VoxelShape PART_MIDDLE_1 = Block.makeCuboidShape(10D, 4D, 10D, 13D, 8D, 13D);
+    private static final VoxelShape PART_MIDDLE_2 = Block.makeCuboidShape(3D, 4D, 10D, 6D, 8D, 13D);
+    private static final VoxelShape PART_MIDDLE_3 = Block.makeCuboidShape(3D, 4D, 3D, 6D, 8D, 6D);
+    private static final VoxelShape PART_MIDDLE_4 = Block.makeCuboidShape(10D, 4D, 3D, 13D, 8D, 6D);
+
+    private static final VoxelShape PART_TOP = Block.makeCuboidShape(2D, 8D, 2D, 14D, 10D, 14D);
+    private static final VoxelShape FINAL_SHAPE = VoxelShapes.or(PART_BOTTOM, PART_BOTTOM_1, PART_BOTTOM_2, PART_BOTTOM_3, PART_BOTTOM_4, PART_MIDDLE, PART_MIDDLE_1, PART_MIDDLE_2, PART_MIDDLE_3, PART_MIDDLE_4, PART_TOP);
+
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        return FINAL_SHAPE;
+    }
     @Override
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
@@ -54,35 +79,50 @@ public class SpiritWellBlock extends Block
                 if (handIn != Hand.OFF_HAND)
                 {
                     ItemStack stack = player.inventory.getCurrentItem();
-                    CompoundNBT nbt = stack.getOrCreateTag();
-                    if (nbt.contains("spirit"))
+                    if (stack.getItem() instanceof ItemSpiritContainer)
                     {
-                        if (((SpiritWellTileEntity) entity).spirits.size() < 5)
+                        CompoundNBT nbt = stack.getOrCreateTag();
+                        if (nbt.contains("spirit"))
                         {
-                            player.swingArm(handIn);
-                            if (stack.getCount() == 1)
+                            if (((SpiritWellTileEntity) entity).spirits.size() < 5)
                             {
-                                if (nbt.contains("spirit"))
+                                player.swingArm(handIn);
+                                if (stack.getCount() == 1)
                                 {
-                                    ((SpiritWellTileEntity) entity).spirits.add(nbt.getString("spirit"));
-                                    nbt.remove("spirit");
+                                    if (nbt.contains("spirit"))
+                                    {
+                                        ((SpiritWellTileEntity) entity).spirits.add(nbt.getString("spirit"));
+                                        nbt.remove("spirit");
+                                        return true;
+                                    }
                                 }
-                            }
-                            else
-                            {
-                                if (nbt.contains("spirit"))
+                                else
                                 {
-                                    stack.shrink(1);
-                                    ItemStack newStack = stack.getItem().getDefaultInstance();
-                                    player.inventory.addItemStackToInventory(newStack);
-                                    ((SpiritWellTileEntity) entity).spirits.add(nbt.getString("spirit"));
+                                    if (nbt.contains("spirit"))
+                                    {
+                                        stack.shrink(1);
+                                        ItemStack newStack = stack.getItem().getDefaultInstance();
+                                        player.inventory.addItemStackToInventory(newStack);
+                                        ((SpiritWellTileEntity) entity).spirits.add(nbt.getString("spirit"));
+                                        return true;
+                                    }
                                 }
+                                return true;
                             }
-                            MalumMod.LOGGER.info(((SpiritWellTileEntity) entity).spirits);
-                            return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+                        }
+                    }
+                    else
+                    {
+                        SpiritInfusionRecipe recipe = ModRecipes.getSpiritInfusionRecipe(stack.getItem(), ((SpiritWellTileEntity) entity).spirits);
+                        if (recipe != null)
+                        {
+                            stack.shrink(1);
+                            player.addItemStackToInventory(recipe.getOutput_item().getDefaultInstance());
+                            ((SpiritWellTileEntity) entity).spirits.clear();
                         }
                     }
                 }
+                MalumMod.LOGGER.info(((SpiritWellTileEntity) entity).spirits);
             }
         }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);

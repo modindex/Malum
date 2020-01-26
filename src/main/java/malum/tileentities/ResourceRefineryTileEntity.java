@@ -22,6 +22,7 @@ public class ResourceRefineryTileEntity extends TileEntity implements ITickableT
     }
 
     int progress;
+
     @Override
     public CompoundNBT getUpdateTag()
     {
@@ -62,6 +63,7 @@ public class ResourceRefineryTileEntity extends TileEntity implements ITickableT
         super.read(compound);
         progress = compound.getInt("progress");
     }
+
     @Override
     public void tick()
     {
@@ -70,20 +72,21 @@ public class ResourceRefineryTileEntity extends TileEntity implements ITickableT
         BlockState crystalBlock = world.getBlockState(crystalPos);
         if (crystalBlock.getBlock() instanceof ResourceCrystalBlock)
         {
-            progress += 1;
-            int requiredTicks = 80;
-            if (progress >= requiredTicks)
+            BlockState refinery = world.getBlockState(pos);
+            if (refinery.get(FUEL) > 0)
             {
-                BlockState refinery = world.getBlockState(pos);
-                if (refinery.get(FUEL) > 0)
+                progress += 1;
+                int requiredTicks = 80;
+                if (progress >= requiredTicks)
                 {
                     progress = 0;
                     int tier = crystalBlock.get(ResourceCrystalBlock.TIER);
-                    if (tier < 4)
+                    if (tier < ResourceCrystalBlock.TIER.getAllowedValues().size() - 2)
                     {
                         world.setBlockState(pos, refinery.with(FUEL, world.getBlockState(pos).get(FUEL) - 1));
                         world.setBlockState(crystalPos, crystalBlock.with(ResourceCrystalBlock.TIER, tier + 1));
                     }
+
                 }
             }
         }

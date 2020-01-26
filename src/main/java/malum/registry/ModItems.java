@@ -4,14 +4,12 @@ import com.google.common.base.Preconditions;
 import malum.items.armor.ItemArmorCatastrophe;
 import malum.items.armor.ItemArmorNuminousCatastrophe;
 import malum.items.curios.*;
-import malum.items.gadgets.*;
-import malum.items.special.ItemModifier;
+import malum.items.gadgets.ItemEnderArtifact;
+import malum.items.gadgets.ItemEvilLantern;
+import malum.items.gadgets.ItemSpiritContainer;
 import malum.items.tools.*;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemTier;
+import net.minecraft.item.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -22,8 +20,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import javax.annotation.Nonnull;
 
 import static malum.MalumMod.MODID;
-import static malum.registry.ModItemTiers.CATASTROPHE;
-import static malum.registry.ModItemTiers.NUMINOUS_CATASTROPHE;
+import static malum.registry.ModItemTiers.*;
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class ModItems
@@ -46,6 +43,12 @@ public class ModItems
     public static Item catastrophe_pickaxe;
     public static Item catastrophe_shovel;
 
+    public static Item soul_crystal_hoe;
+    public static Item soul_crystal_sword;
+    public static Item soul_crystal_axe;
+    public static Item soul_crystal_pickaxe;
+    public static Item soul_crystal_shovel;
+
     public static Item numinous_catastrophe_hoe;
     public static Item numinous_catastrophe_sword;
     public static Item numinous_catastrophe_axe;
@@ -54,15 +57,27 @@ public class ModItems
     //crafting
     public static Item end_forged_ingot;
     public static Item end_forged_nugget;
+
+
+    public static Item leather_ring;
+    public static Item metal_ring;
+
+    public static Item leather_necklace;
     public static Item metal_necklace;
+
+    public static Item leather_belt;
     public static Item metal_belt;
-    public static Item cursed_flare;
+
+
+    public static Item bone_stick;
+
+    public static Item soul_fire;
+
+    public static Item soul_dust;
+    public static Item soul_crystal;
+    public static Item soul_crystal_cluster;
 
     //curios
-    public static Item leather_ring;
-    public static Item luck_ring;
-    public static Item ender_sight_necklace;
-    public static Item dark_arts_ring;
     public static Item water_necklace;
     public static Item air_necklace;
     public static Item thorns_belt;
@@ -78,26 +93,12 @@ public class ModItems
     //gadgets
 
     public static Item spirit_bottle;
-    public static Item spirit_jar;
-    public static Item voodoo_doll;
-    public static Item rending_doll;
-    public static Item control_doll;
-    public static Item zombie_doll;
-    public static Item enderman_doll;
 
     public static Item ender_artifact;
     public static Item transmutation_gem;
     public static Item evil_lantern;
 
-
-    //modifiers
-    public static Item channeled_anomaly_modifier;
-    public static Item tainted_heart_modifier;
-    public static Item ancient_hieroglyph_modifier;
     //blocks
-
-    public static Item evil_grass;
-    public static Item evil_dirt;
     public static Item evil_pumpkin;
     public static Item lit_evil_pumpkin;
 
@@ -158,64 +159,63 @@ public class ModItems
 
             withering_rapier = setup(new ItemWitheringRapier(ItemTier.IRON, 2, -1.8f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "withering_rapier"),
 
-            catastrophe_hoe = setup(new ItemCatastropheHoe(CATASTROPHE, 3f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_hoe"),
-            catastrophe_axe = setup(new ItemCatastropheAxe(CATASTROPHE, 6, -3f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_axe"),
-            catastrophe_sword = setup(new ItemCatastropheSword(CATASTROPHE, 3, -2.4f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_sword"),
-            catastrophe_shovel = setup(new ItemCatastropheShovel(CATASTROPHE, 1, -3.0f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_shovel"),
-            catastrophe_pickaxe = setup(new ItemCatastrophePickaxe(CATASTROPHE, 1, -2.8f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_pickaxe"),
+            catastrophe_hoe = setup(new ModHoeItem(CATASTROPHE, 0f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_hoe"),
+            catastrophe_axe = setup(new ModAxeItem(CATASTROPHE, 0, -3f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_axe"),
+            catastrophe_sword = setup(new ModSwordItem(CATASTROPHE, 0, -2.4f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_sword"),
+            catastrophe_shovel = setup(new ModShovelItem(CATASTROPHE, 0, -3.0f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_shovel"),
+            catastrophe_pickaxe = setup(new ModPickaxeItem(CATASTROPHE, 0, -2.8f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_pickaxe"),
 
-            numinous_catastrophe_hoe = setup(new ItemCatastropheHoe(NUMINOUS_CATASTROPHE, 3f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_hoe"),
-            numinous_catastrophe_axe = setup(new ItemCatastropheAxe(NUMINOUS_CATASTROPHE, 6, -3f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_axe"),
-            numinous_catastrophe_sword = setup(new ItemCatastropheSword(NUMINOUS_CATASTROPHE, 3, -2.4f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_sword"),
-            numinous_catastrophe_shovel = setup(new ItemCatastropheShovel(NUMINOUS_CATASTROPHE, 1, -3.0f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_shovel"),
-            numinous_catastrophe_pickaxe = setup(new ItemCatastrophePickaxe(NUMINOUS_CATASTROPHE, 1, -2.8f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_pickaxe"),
+            soul_crystal_hoe = setup(new ModHoeItem(SOUL_CRYSTAL, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_hoe"),
+            soul_crystal_axe = setup(new ModAxeItem(SOUL_CRYSTAL, 0, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_axe"),
+            soul_crystal_sword = setup(new ModSwordItem(SOUL_CRYSTAL, 0, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_sword"),
+            soul_crystal_shovel = setup(new ModShovelItem(SOUL_CRYSTAL, 0, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_shovel"),
+            soul_crystal_pickaxe = setup(new ModPickaxeItem(SOUL_CRYSTAL, 0, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_pickaxe"),
+            numinous_catastrophe_hoe = setup(new ModHoeItem(NUMINOUS_CATASTROPHE, 3f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_hoe"),
+            numinous_catastrophe_axe = setup(new ModAxeItem(NUMINOUS_CATASTROPHE, 6, -3f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_axe"),
+            numinous_catastrophe_sword = setup(new ModSwordItem(NUMINOUS_CATASTROPHE, 3, -2.4f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_sword"),
+            numinous_catastrophe_shovel = setup(new ModShovelItem(NUMINOUS_CATASTROPHE, 1, -3.0f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_shovel"),
+            numinous_catastrophe_pickaxe = setup(new ModPickaxeItem(NUMINOUS_CATASTROPHE, 1, -2.8f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_pickaxe"),
 
             ritual_activator = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ritual_activator"),
-            transmutation_gem = setup(new ItemTransmutationGem(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "transmutation_gem"),
+            transmutation_gem = setup(new TransmutationGemItem(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "transmutation_gem"),
             evil_lantern = setup(new ItemEvilLantern(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_lantern"),
-
-            voodoo_doll = setup(new ItemVoodoDoll(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "voodoo_doll"),
-            rending_doll = setup(new ItemRendingDoll(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxDamage(200)), "rending_doll"),
-            enderman_doll = setup(new ItemEndermanDoll(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxDamage(8)), "enderman_doll"),
-            control_doll = setup(new ItemControlDoll(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxDamage(500)), "control_doll"),
 
             ender_artifact = setup(new ItemEnderArtifact(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxDamage(250)), "ender_artifact"),
 
-            leather_ring = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "leather_ring"),
-            dark_arts_ring = setup(new ItemDarkArtsRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_arts_ring"),
-            ender_sight_necklace = setup(new ItemEnderSightNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ender_sight_necklace"),
-            luck_ring = setup(new ItemLuckRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "luck_ring"),
-            arcane_sight_ring = setup(new ItemArcaneSightRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "arcane_sight_ring"),
-            water_necklace = setup(new ItemWaterNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "water_necklace"),
-            thorns_belt = setup(new ItemThornsBelt(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "thorns_belt"),
-            healing_belt = setup(new ItemHealingBelt(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "healing_belt"),
-            air_necklace = setup(new ItemAirNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "air_necklace"),
-            wither_necklace = setup(new ItemWitherNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wither_necklace"),
-            nether_necklace = setup(new ItemNetherNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "nether_necklace"),
-            shulker_necklace = setup(new ItemShulkerNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "shulker_necklace"),
-            rotten_belt = setup(new ItemRottenBelt(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "rotten_belt"),
-            arcane_spirit_ring = setup(new ItemArcaneSpiritRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "arcane_spirit_ring"),
-            spirit_ring = setup(new ItemSpiritRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "spirit_ring"),
+            leather_necklace = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "leather_necklace"),
+            leather_belt = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "leather_belt"),
+            leather_ring = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "leather_ring"),
 
+            metal_necklace = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "metal_necklace"),
+            metal_belt = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "metal_belt"),
+            metal_ring = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "metal_ring"),
 
-
-            channeled_anomaly_modifier = setup(new ItemModifier(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "channeled_anomaly_modifier"),
-            tainted_heart_modifier = setup(new ItemModifier(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "tainted_heart_modifier"),
-            ancient_hieroglyph_modifier = setup(new ItemModifier(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ancient_hieroglyph_modifier"),
+            arcane_sight_ring = setup(new ItemArcaneSightRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "arcane_sight_ring"),
+            water_necklace = setup(new ItemWaterNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "water_necklace"),
+            thorns_belt = setup(new ItemThornsBelt(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "thorns_belt"),
+            healing_belt = setup(new ItemHealingBelt(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "healing_belt"),
+            air_necklace = setup(new ItemAirNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "air_necklace"),
+            wither_necklace = setup(new ItemWitherNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "wither_necklace"),
+            nether_necklace = setup(new ItemNetherNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "nether_necklace"),
+            shulker_necklace = setup(new ItemShulkerNecklace(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "shulker_necklace"),
+            rotten_belt = setup(new ItemRottenBelt(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "rotten_belt"),
+            arcane_spirit_ring = setup(new ItemArcaneSpiritRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "arcane_spirit_ring"),
+            spirit_ring = setup(new ItemSpiritRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "spirit_ring"),
 
             end_forged_ingot = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_forged_ingot"),
             end_forged_nugget = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_forged_nugget"),
-            metal_necklace = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "metal_necklace"),
-            metal_belt = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "metal_belt"),
-            cursed_flare = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "cursed_flare"),
+
+            bone_stick = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "bone_stick"),
+
+            soul_fire = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_fire"),
+            soul_crystal = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal"),
+            soul_crystal_cluster = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_cluster"),
+            soul_dust = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_dust"),
 
             spirit_bottle = setup(new ItemSpiritContainer(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "spirit_bottle"),
-            spirit_jar = setup(new ItemSpiritContainer(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "spirit_jar"),
 
             ritual_block = setup(new BlockItem(ModBlocks.ritual_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ritual_block"),
             crafting_block = setup(new BlockItem(ModBlocks.crafting_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "crafting_block"),
-            evil_dirt = setup(new BlockItem(ModBlocks.evil_dirt, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_dirt"),
-            evil_grass = setup(new BlockItem(ModBlocks.evil_grass, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_grass"),
 
             dark_roofing = setup(new BlockItem(ModBlocks.dark_roofing, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing"),
             wooden_beam = setup(new BlockItem(ModBlocks.wooden_beam, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_beam"),

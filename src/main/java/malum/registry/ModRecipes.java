@@ -1,9 +1,6 @@
 package malum.registry;
 
-import malum.recipes.BlockTransmutationRecipe;
-import malum.recipes.CraftingRecipe;
-import malum.recipes.ResourceFormingRecipe;
-import malum.recipes.RitualRecipe;
+import malum.recipes.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 
@@ -21,6 +18,8 @@ public class ModRecipes
 
     private static List<BlockTransmutationRecipe> blockTransmutationRecipes = new ArrayList<>();
 
+    private static List<SpiritInfusionRecipe> spiritInfusionRecipes = new ArrayList<>();
+
     public static void addBlockTransmutationRecipe(BlockTransmutationRecipe recipe)
     {
         blockTransmutationRecipes.add(recipe);
@@ -29,6 +28,11 @@ public class ModRecipes
     public static void addResourceFormingRecipe(ResourceFormingRecipe recipe)
     {
         resourceFormingRecipes.add(recipe);
+    }
+
+    public static void addSpiritInfusionRecipe(SpiritInfusionRecipe recipe)
+    {
+        spiritInfusionRecipes.add(recipe);
     }
     public static void addRitualRecipe(RitualRecipe recipe)
     {
@@ -54,7 +58,23 @@ public class ModRecipes
         }
         return null;
     }
-
+    public static SpiritInfusionRecipe getSpiritInfusionRecipe(Item formItem, List<String> spirits)
+    {
+        if (formItem != null)
+        {
+            for (SpiritInfusionRecipe recipe : spiritInfusionRecipes)
+            {
+                if (spirits.containsAll(recipe.getSpirits()) && spirits.size() == recipe.getSpirits().size())
+                {
+                    if (recipe.getInput_item() == formItem)
+                    {
+                        return recipe;
+                    }
+                }
+            }
+        }
+        return null;
+    }
     public static BlockTransmutationRecipe getBlockTransmutationRecipe(BlockState sourceBlock)
     {
         if (sourceBlock != null)

@@ -47,8 +47,6 @@ public class ModBlocks
     public static Block catastrophe_block = null;
     public static Block spirit_well = null;
 
-    public static Block evil_dirt;
-    public static Block evil_grass;
     public static Block evil_pumpkin;
     public static Block lit_evil_pumpkin;
 
@@ -57,7 +55,6 @@ public class ModBlocks
 
     public static Block ritual_block;
     public static Block crafting_block;
-    public static Block evil_anvil;
     public static Block resource_refinery;
 
     public static Block resource_crystal_coal;
@@ -133,11 +130,6 @@ public class ModBlocks
         wooden_casing = registerBlock(registry, new LogBlock(MaterialColor.BROWN, wood_properties), "wooden_casing");
 
         spirit_well = registerBlock(registry, new SpiritWellBlock(refined_stone_properties), "spirit_well");
-        evil_dirt = registerBlock(registry, new Block(evil_earth_properties), "evil_dirt");
-        evil_grass = registerBlock(registry, new Block(evil_earth_properties), "evil_grass");
-
-        evil_anvil = registerBlock(registry, new EvilAnvil(evil_earth_properties), "evil_anvil");
-
     }
 
     private static <T extends Block> T registerBlock(IForgeRegistry<Block> registry, T newBlock, String name)

@@ -9,12 +9,10 @@ public class RitualRecipe {
 
     private ArrayList<Item> ingredients;
   private RitualEffect ritualEffect;
-  private String target;
 
-  public RitualRecipe(ArrayList<Item> ingredients, RitualEffect ritualEffect, String target) {
+  public RitualRecipe(ArrayList<Item> ingredients, RitualEffect ritualEffect) {
     this.ingredients = ingredients;
     this.ritualEffect = ritualEffect;
-    this.target = target;
   }
 
   public ArrayList<Item> getIngredients() {
@@ -23,9 +21,5 @@ public class RitualRecipe {
 
     public RitualEffect getRitualEffect() {
     return ritualEffect;
-  }
-
-  public String getTarget() {
-    return target;
   }
 }

@@ -1,9 +1,11 @@
 package malum.tileentities;
 
+import malum.MalumMod;
 import malum.registry.ModTileEntities;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
@@ -42,7 +44,6 @@ public class SpiritWellTileEntity extends TileEntity implements ITickableTileEnt
         handleUpdateTag(pkt.getNbtCompound());
     }
 
-
     public List<String> spirits = new ArrayList<String>();
     @Override
     public CompoundNBT write(CompoundNBT compound)
@@ -70,6 +71,19 @@ public class SpiritWellTileEntity extends TileEntity implements ITickableTileEnt
     @Override
     public void tick()
     {
-
+        assert world != null;
+        if (world.isRemote())
+        {
+            for (int i = 0; i < spirits.size(); i++)
+            {
+                float rot = i / (float)spirits.size() * 6.28f + (world.getGameTime() % 700f / 700f) * 6.28f;
+                double dist = 0.4;
+                double posY = pos.getY() + 0.5 + Math.sin(world.getGameTime() / 20f) / 22;
+                double posX = pos.getX() + 0.5 - (Math.cos(rot) * dist);
+                double posZ = pos.getZ() + 0.5 - (Math.sin(rot) * dist);
+                world.addParticle(ParticleTypes.FLAME, posX, posY, posZ, 0, 0, 0);
+            }
+        }
+        MalumMod.LOGGER.info(spirits.size());
     }
 }
