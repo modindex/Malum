@@ -40,11 +40,6 @@ public class ModBlocks
 
     public static Block wooden_casing = null;
 
-    public static Block catastrophe_bricks = null;
-    public static Block catastrophe_stairs = null;
-    public static Block catastrophe_slab = null;
-
-    public static Block catastrophe_block = null;
     public static Block spirit_well = null;
 
     public static Block evil_pumpkin;
@@ -101,14 +96,6 @@ public class ModBlocks
 
         refined_glowstone_block = registerBlock(registry, new Block(Block.Properties.from(Blocks.GLOWSTONE)), "refined_glowstone_block");
         refined_glowstone_lamp = registerBlock(registry, new RedstoneLampBlock(Block.Properties.from(Blocks.REDSTONE_LAMP)), "refined_glowstone_lamp");
-
-
-
-        catastrophe_block = registerBlock(registry, new Block(Block.Properties.from(Blocks.IRON_BLOCK)), "catastrophe_block");
-
-        catastrophe_bricks = registerBlock(registry, new Block(metal_properties), "catastrophe_bricks");
-        catastrophe_slab = registerBlock(registry, new ModSlabBlock(() -> dark_roofing.getDefaultState(), metal_properties), "catastrophe_slab");
-        catastrophe_stairs = registerBlock(registry, new ModStairsBlock(() -> dark_roofing.getDefaultState(), metal_properties), "catastrophe_stairs");
 
         refined_smooth_stone = registerBlock(registry, new Block(refined_stone_properties), "refined_smooth_stone");
         refined_smooth_stone_slab = registerBlock(registry, new ModSlabBlock(() -> dark_roofing.getDefaultState(), refined_stone_properties), "refined_smooth_stone_slab");

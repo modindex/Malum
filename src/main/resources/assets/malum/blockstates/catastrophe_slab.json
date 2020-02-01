@@ -1,7 +1,0 @@
-{
-    "variants": {
-        "type=bottom": { "model": "malum:block/catastrophe_slab" },
-        "type=top": { "model": "malum:block/catastrophe_slab_top" },
-        "type=double": { "model": "malum:block/catastrophe_bricks" }
-    }
-}

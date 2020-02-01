@@ -1,6 +1,6 @@
 package malum.items.armor;
 
-import malum.models.ModelArmorCatastrophe;
+import malum.models.ModelArmorSoul;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -14,9 +14,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
-public class ItemArmorCatastrophe extends ArmorItem
+public class ItemArmorSoul extends ArmorItem
 {
-    public ItemArmorCatastrophe(IArmorMaterial materialIn, EquipmentSlotType slot, Item.Properties builder)
+    protected String name;
+
+    public ItemArmorSoul(IArmorMaterial materialIn, EquipmentSlotType slot, Item.Properties builder)
     {
         super(materialIn, slot, builder);
     }
@@ -26,7 +28,7 @@ public class ItemArmorCatastrophe extends ArmorItem
     @Nullable
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type)
     {
-        return "malum:textures/armor/catastrophe_armor.png";
+        return "malum:textures/armor/soul_crystal_armour.png";
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -34,6 +36,6 @@ public class ItemArmorCatastrophe extends ArmorItem
     @Override
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default)
     {
-        return (A) new ModelArmorCatastrophe(slot);
+        return (A) new ModelArmorSoul(slot);
     }
 }

@@ -2,14 +2,17 @@ package malum.registry;
 
 import com.google.common.base.Preconditions;
 import malum.items.armor.ItemArmorCatastrophe;
-import malum.items.armor.ItemArmorNuminousCatastrophe;
+import malum.items.armor.ItemArmorSoul;
 import malum.items.curios.*;
 import malum.items.gadgets.ItemEnderArtifact;
 import malum.items.gadgets.ItemEvilLantern;
 import malum.items.gadgets.ItemSpiritContainer;
 import malum.items.tools.*;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemTier;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -26,22 +29,23 @@ import static malum.registry.ModItemTiers.*;
 public class ModItems
 {
     //armor
-    public static Item catastrophe_hood;
-    public static Item catastrophe_chestplate;
-    public static Item catastrophe_leggings;
-    public static Item catastrophe_shoes;
+    public static Item end_steel_helm;
+    public static Item end_steel_chestplate;
+    public static Item end_steel_leggings;
+    public static Item end_steel_shoes;
 
-    public static Item numinous_catastrophe_hood;
-    public static Item numinous_catastrophe_chestplate;
-    public static Item numinous_catastrophe_leggings;
-    public static Item numinous_catastrophe_shoes;
+    public static Item soul_crystal_helm;
+    public static Item soul_crystal_chestplate;
+    public static Item soul_crystal_leggings;
+    public static Item soul_crystal_shoes;
     //weapons
     public static Item withering_rapier;
-    public static Item catastrophe_hoe;
-    public static Item catastrophe_sword;
-    public static Item catastrophe_axe;
-    public static Item catastrophe_pickaxe;
-    public static Item catastrophe_shovel;
+
+    public static Item end_steel_hoe;
+    public static Item end_steel_sword;
+    public static Item end_steel_axe;
+    public static Item end_steel_pickaxe;
+    public static Item end_steel_shovel;
 
     public static Item soul_crystal_hoe;
     public static Item soul_crystal_sword;
@@ -49,14 +53,9 @@ public class ModItems
     public static Item soul_crystal_pickaxe;
     public static Item soul_crystal_shovel;
 
-    public static Item numinous_catastrophe_hoe;
-    public static Item numinous_catastrophe_sword;
-    public static Item numinous_catastrophe_axe;
-    public static Item numinous_catastrophe_pickaxe;
-    public static Item numinous_catastrophe_shovel;
     //crafting
-    public static Item end_forged_ingot;
-    public static Item end_forged_nugget;
+    public static Item end_steel_ingot;
+    public static Item end_steel_nugget;
 
 
     public static Item leather_ring;
@@ -127,14 +126,8 @@ public class ModItems
 
     public static Item wooden_casing;
 
-    public static Item catastrophe_bricks;
-    public static Item catastrophe_stairs;
-    public static Item catastrophe_slab;
-
     public static Item refined_glowstone_block;
     public static Item refined_glowstone_lamp;
-
-    public static Item catastrophe_block;
 
     public static Item smooth_stone_stairs;
 
@@ -147,34 +140,29 @@ public class ModItems
     {
         final IForgeRegistry<Item> registry = event.getRegistry();
         registry.registerAll(
-            catastrophe_shoes = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_shoes"),
-            catastrophe_leggings = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_leggings"),
-            catastrophe_chestplate = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_chestplate"),
-            catastrophe_hood = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_hood"),
+            end_steel_shoes = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_steel_shoes"),
+            end_steel_leggings = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_steel_leggings"),
+            end_steel_chestplate = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_steel_chestplate"),
+            end_steel_helm = setup(new ItemArmorCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_steel_helm"),
 
-            numinous_catastrophe_shoes = setup(new ItemArmorNuminousCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_shoes"),
-            numinous_catastrophe_leggings = setup(new ItemArmorNuminousCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_leggings"),
-            numinous_catastrophe_chestplate = setup(new ItemArmorNuminousCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_chestplate"),
-            numinous_catastrophe_hood = setup(new ItemArmorNuminousCatastrophe(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_hood"),
+            soul_crystal_shoes = setup(new ItemArmorSoul(ArmorMaterial.DIAMOND, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_shoes"),
+            soul_crystal_leggings = setup(new ItemArmorSoul(ArmorMaterial.DIAMOND, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_leggings"),
+            soul_crystal_chestplate = setup(new ItemArmorSoul(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_chestplate"),
+            soul_crystal_helm = setup(new ItemArmorSoul(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_helm"),
 
             withering_rapier = setup(new ItemWitheringRapier(ItemTier.IRON, 2, -1.8f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "withering_rapier"),
 
-            catastrophe_hoe = setup(new ModHoeItem(CATASTROPHE, 0f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_hoe"),
-            catastrophe_axe = setup(new ModAxeItem(CATASTROPHE, 0, -3f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_axe"),
-            catastrophe_sword = setup(new ModSwordItem(CATASTROPHE, 0, -2.4f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_sword"),
-            catastrophe_shovel = setup(new ModShovelItem(CATASTROPHE, 0, -3.0f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_shovel"),
-            catastrophe_pickaxe = setup(new ModPickaxeItem(CATASTROPHE, 0, -2.8f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_pickaxe"),
+            end_steel_hoe = setup(new ModHoeItem(CATASTROPHE, 0f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_steel_hoe"),
+            end_steel_axe = setup(new ModAxeItem(CATASTROPHE, 0, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_steel_axe"),
+            end_steel_sword = setup(new ModSwordItem(CATASTROPHE, 0, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_steel_sword"),
+            end_steel_shovel = setup(new ModShovelItem(CATASTROPHE, 0, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_steel_shovel"),
+            end_steel_pickaxe = setup(new ModPickaxeItem(CATASTROPHE, 0, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_steel_pickaxe"),
 
             soul_crystal_hoe = setup(new ModHoeItem(SOUL_CRYSTAL, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_hoe"),
             soul_crystal_axe = setup(new ModAxeItem(SOUL_CRYSTAL, 0, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_axe"),
             soul_crystal_sword = setup(new ModSwordItem(SOUL_CRYSTAL, 0, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_sword"),
             soul_crystal_shovel = setup(new ModShovelItem(SOUL_CRYSTAL, 0, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_shovel"),
             soul_crystal_pickaxe = setup(new ModPickaxeItem(SOUL_CRYSTAL, 0, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_pickaxe"),
-            numinous_catastrophe_hoe = setup(new ModHoeItem(NUMINOUS_CATASTROPHE, 3f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_hoe"),
-            numinous_catastrophe_axe = setup(new ModAxeItem(NUMINOUS_CATASTROPHE, 6, -3f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_axe"),
-            numinous_catastrophe_sword = setup(new ModSwordItem(NUMINOUS_CATASTROPHE, 3, -2.4f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_sword"),
-            numinous_catastrophe_shovel = setup(new ModShovelItem(NUMINOUS_CATASTROPHE, 1, -3.0f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_shovel"),
-            numinous_catastrophe_pickaxe = setup(new ModPickaxeItem(NUMINOUS_CATASTROPHE, 1, -2.8f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "numinous_catastrophe_pickaxe"),
 
             ritual_activator = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ritual_activator"),
             transmutation_gem = setup(new TransmutationGemItem(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "transmutation_gem"),
@@ -202,8 +190,8 @@ public class ModItems
             arcane_spirit_ring = setup(new ItemArcaneSpiritRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "arcane_spirit_ring"),
             spirit_ring = setup(new ItemSpiritRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "spirit_ring"),
 
-            end_forged_ingot = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_forged_ingot"),
-            end_forged_nugget = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_forged_nugget"),
+            end_steel_ingot = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_steel_ingot"),
+            end_steel_nugget = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "end_steel_nugget"),
 
             bone_stick = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "bone_stick"),
 
@@ -230,15 +218,9 @@ public class ModItems
             wooden_planks_slab = setup(new BlockItem(ModBlocks.wooden_planks_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_planks_slab"),
             wooden_planks_stairs = setup(new BlockItem(ModBlocks.wooden_planks_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "wooden_planks_stairs"),
 
-            catastrophe_bricks = setup(new BlockItem(ModBlocks.catastrophe_bricks, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_bricks"),
-            catastrophe_slab = setup(new BlockItem(ModBlocks.catastrophe_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_slab"),
-            catastrophe_stairs = setup(new BlockItem(ModBlocks.catastrophe_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_stairs"),
-
             refined_smooth_stone = setup(new BlockItem(ModBlocks.refined_smooth_stone, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_smooth_stone"),
             refined_smooth_stone_slab = setup(new BlockItem(ModBlocks.refined_smooth_stone_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_smooth_stone_slab"),
             refined_smooth_stone_stairs = setup(new BlockItem(ModBlocks.refined_smooth_stone_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_smooth_stone_stairs"),
-
-            catastrophe_block = setup(new BlockItem(ModBlocks.catastrophe_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "catastrophe_block"),
 
             smooth_stone_stairs = setup(new BlockItem(ModBlocks.smooth_stone_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "smooth_stone_stairs"),
 
