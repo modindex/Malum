@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " g ",
+    "ibi",
+    " g "
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:golden_apple"
+    },
+    "b": {
+      "item": "malum:leather_belt"
+    },
+    "i": {
+      "item": "malum:healing_flower"
+    }
+  },
+  "result": {
+    "item": "malum:healing_belt"
+  }
+}

@@ -4,7 +4,6 @@ package malum.blocks;
 import malum.recipes.RitualRecipe;
 import malum.registry.ModItems;
 import malum.registry.ModRecipes;
-import malum.registry.ModSounds;
 import malum.tileentities.RitualBlockTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -17,7 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
@@ -89,7 +87,6 @@ public class RitualBlock extends Block
                                 ((RitualBlockTileEntity) entity).crafting = 1;
                                 player.swingArm(handIn);
                                 Objects.requireNonNull(entity.getWorld()).notifyBlockUpdate(pos, state, state, 3);
-                                player.world.playSound(null, pos, ModSounds.ritual_start, SoundCategory.PLAYERS, 1F, 1F);
                             }
                             return true;
                         }

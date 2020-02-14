@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+		"all": "malum:blocks/drained_steel_block"
+  }
+}

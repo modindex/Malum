@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+  "parent": "block/block",
 	"textures": {
 		"0": "malum:blocks/resource_refinery/2",
 		"particle": "malum:blocks/resource_refinery/2"

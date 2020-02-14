@@ -1,6 +1,6 @@
 package malum;
 
-import malum.capabilities.Capabilities;
+import malum.capabilities.CapabilityData;
 import malum.capabilities.PlayerProperties;
 import malum.capabilities.PropertiesDispatcher;
 import malum.recipes.*;
@@ -42,7 +42,7 @@ public class ForgeEventHandlers
     public static void onPlayerCloned(PlayerEvent.Clone event) {
         if (event.isWasDeath()) {
             // We need to copyFrom the capabilities
-            LazyOptional<Capabilities> capability = event.getOriginal().getCapability(PlayerProperties.CAPABILITY);
+            LazyOptional<CapabilityData> capability = event.getOriginal().getCapability(PlayerProperties.CAPABILITY);
             capability.ifPresent(oldStore -> {
                 event.getEntityPlayer().getCapability(PlayerProperties.CAPABILITY).ifPresent(newStore -> {
                     newStore.copyFrom(oldStore);

@@ -1,9 +1,7 @@
 package malum.rituals;
 
-import malum.ClientRefferences;
 import malum.recipes.BlockTransmutationRecipe;
 import malum.registry.ModRecipes;
-import malum.registry.ModSounds;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.SoundCategory;
@@ -20,7 +18,6 @@ public class TransmutationRitualEffect implements RitualEffect
     public void doRitualEffect(int strenght, BlockPos position, TileEntity tileEntity)
     {
         World world = tileEntity.getWorld();
-        world.playSound(ClientRefferences.getClientPlayer(), position, ModSounds.transmutate, SoundCategory.BLOCKS, 3.0F, 0.25F);
         List<Block> blockList = new ArrayList<>();
         for (BlockPos pos : BlockPos.getAllInBoxMutable(position.subtract(new Vec3i(strenght, strenght, strenght)), position.add(new Vec3i(strenght, strenght, strenght))))
         {

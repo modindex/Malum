@@ -1,6 +1,7 @@
 package malum.tileentities;
 
 
+import malum.ClientRefferences;
 import malum.MalumMod;
 import malum.recipes.RitualRecipe;
 import malum.registry.ModRecipes;
@@ -8,6 +9,7 @@ import malum.registry.ModSounds;
 import malum.registry.ModTileEntities;
 import malum.rituals.RitualEffect;
 import malum.sounds.RitualLoopTickableSound;
+import malum.sounds.RitualStartTickableSound;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
@@ -17,6 +19,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.items.ItemStackHandler;
@@ -120,7 +123,11 @@ public class RitualBlockTileEntity extends TileEntity implements ITickableTileEn
         {
             if (crafting == 1)
             {
-                new RitualLoopTickableSound(this);
+                ClientRefferences.minecraft.getSoundHandler().play(new RitualStartTickableSound(this.getTileEntity()));
+            }
+            if (crafting == 18)
+            {
+                ClientRefferences.minecraft.getSoundHandler().play(new RitualLoopTickableSound(this.getTileEntity()));
             }
             crafting += 1;
             assert world != null;
@@ -134,6 +141,7 @@ public class RitualBlockTileEntity extends TileEntity implements ITickableTileEn
                 assert world != null;
                 doRitualEffect(pos, recipe.getRitualEffect());
             }
+            ClientRefferences.minecraft.getSoundHandler().stop(new ResourceLocation(MalumMod.MODID, "ritual_loop"), SoundCategory.BLOCKS);
             world.playSound(null, pos, ModSounds.ritual_end, SoundCategory.PLAYERS, 1F, 1F);
             crafting = 0;
             emptyInventory(inventory);

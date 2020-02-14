@@ -1,6 +1,5 @@
 package malum.recipes;
 
-import malum.registry.ModItems;
 import malum.registry.ModRecipes;
 import malum.rituals.CrystalGrowthRitualEffect;
 import malum.rituals.TransmutationRitualEffect;
@@ -23,10 +22,11 @@ public class RitualRecipes {
 
       ArrayList<Item> crystalGrowthItems = new ArrayList<>();
       crystalGrowthItems.add(Items.BLAZE_POWDER);
-      crystalGrowthItems.add(ModItems.soul_fire);
       crystalGrowthItems.add(Items.NETHERRACK);
-      crystalGrowthItems.add(Items.FLINT);
       crystalGrowthItems.add(Items.BLAZE_POWDER);
+      crystalGrowthItems.add(Items.IRON_INGOT);
+      crystalGrowthItems.add(Items.BLAZE_POWDER);
+      crystalGrowthItems.add(Items.FLINT);
       ModRecipes.addRitualRecipe(new RitualRecipe(crystalGrowthItems, new CrystalGrowthRitualEffect()));
   }
 }

@@ -15,10 +15,11 @@ public final class ModSounds
     public static final SoundEvent ritual_start = makeSoundEvent("ritual_start");
     public static final SoundEvent ritual_end = makeSoundEvent("ritual_end");
     public static final SoundEvent ritual_loop = makeSoundEvent("ritual_loop");
+    public static final SoundEvent drill_loop = makeSoundEvent("drill_loop");
 	
 	private static SoundEvent makeSoundEvent(String name) {
 		ResourceLocation loc = new ResourceLocation(MalumMod.MODID, name);
-		return new SoundEvent(loc).setRegistryName(loc);
+		return new SoundEvent(loc).setRegistryName(name);
 	}
 	
 	@SubscribeEvent
@@ -28,8 +29,8 @@ public final class ModSounds
         r.register(ritual_start);
         r.register(ritual_end);
         r.register(ritual_loop);
+        r.register(drill_loop);
 
 	}
 
-	private ModSounds() {}
 }

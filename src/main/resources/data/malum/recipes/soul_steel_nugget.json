@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "ingot": "malum:soul_steel"
+    }
+  ],
+  "result": {
+    "item": "malum:soul_steel_nugget",
+    "count": 9
+  }
+}

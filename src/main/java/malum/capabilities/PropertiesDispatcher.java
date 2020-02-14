@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
 
 public class PropertiesDispatcher implements ICapabilityProvider, INBTSerializable<CompoundNBT> {
 
-    private Capabilities capabilities = new Capabilities();
+    private CapabilityData capabilities = new CapabilityData();
 
     @Nonnull
     @Override

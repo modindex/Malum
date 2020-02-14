@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "malum:drained_shard"
+    },
+    {
+      "item": "malum:leather_ring"
+    }
+  ],
+  "result": {
+    "item": "malum:spirit_ring"
+  }
+}

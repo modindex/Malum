@@ -5,6 +5,7 @@ import malum.blocks.*;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.potion.Effects;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -14,13 +15,13 @@ import net.minecraftforge.registries.IForgeRegistry;
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks
 {
-    public static Block dark_roofing = null;
-    public static Block dark_roofing_stairs = null;
-    public static Block dark_roofing_slab = null;
+    public static Block dark_roofing;
+    public static Block dark_roofing_stairs;
+    public static Block dark_roofing_slab;
 
-    public static Block refined_bricks = null;
-    public static Block refined_bricks_stairs = null;
-    public static Block refined_bricks_slab = null;
+    public static Block refined_bricks;
+    public static Block refined_bricks_stairs;
+    public static Block refined_bricks_slab;
 
     public static Block refined_pathway = null;
     public static Block refined_pathway_stairs = null;
@@ -34,13 +35,13 @@ public class ModBlocks
 
     public static Block smooth_stone_stairs = null;
 
-    public static Block wooden_planks = null;
-    public static Block wooden_planks_stairs = null;
-    public static Block wooden_planks_slab = null;
+    public static Block wooden_planks;
+    public static Block wooden_planks_stairs;
+    public static Block wooden_planks_slab;
 
-    public static Block wooden_casing = null;
+    public static Block wooden_casing;
 
-    public static Block spirit_well = null;
+    public static Block spirit_altar;
 
     public static Block evil_pumpkin;
     public static Block lit_evil_pumpkin;
@@ -51,6 +52,8 @@ public class ModBlocks
     public static Block ritual_block;
     public static Block crafting_block;
     public static Block resource_refinery;
+    public static Block arcane_bore;
+    public static Block healing_flower;
 
     public static Block resource_crystal_coal;
     public static Block resource_crystal_iron;
@@ -61,13 +64,13 @@ public class ModBlocks
     public static Block resource_crystal_emerald;
     public static Block resource_crystal_soul;
 
+    public static Block drained_steel_block;
+    public static Block soul_steel_block;
+
     public static Block.Properties wood_properties = Block.Properties.from(Blocks.OAK_WOOD);
     public static Block.Properties metal_properties = Block.Properties.from(Blocks.IRON_BLOCK);
 
     public static Block.Properties refined_stone_properties = Block.Properties.create(Material.ROCK).hardnessAndResistance(3F).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE);
-
-    public static Block.Properties evil_earth_properties = Block.Properties.create(Material.EARTH).hardnessAndResistance(6F).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND).harvestLevel(2).lightValue(1);
-
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)
     {
@@ -87,6 +90,11 @@ public class ModBlocks
         smooth_stone_stairs = registerBlock(registry, new ModStairsBlock(Blocks.SMOOTH_STONE::getDefaultState, Block.Properties.from(Blocks.SMOOTH_STONE)), "smooth_stone_stairs");
 
         resource_refinery = registerBlock(registry, new ResourceRefineryBlock(metal_properties), "resource_refinery");
+
+        healing_flower = registerBlock(registry, new FlowerBlock(Effects.REGENERATION, 5, Block.Properties.from(Blocks.POPPY)), "healing_flower");
+
+        soul_steel_block = registerBlock(registry, new Block(Block.Properties.from(Blocks.IRON_BLOCK)), "soul_steel_block");
+        drained_steel_block = registerBlock(registry, new Block(Block.Properties.from(Blocks.IRON_BLOCK)), "drained_steel_block");
 
         evil_pumpkin = registerBlock(registry, new ModHorizontalBlock(Block.Properties.from(Blocks.CARVED_PUMPKIN)), "evil_pumpkin");
         lit_evil_pumpkin = registerBlock(registry, new ModHorizontalBlock(Block.Properties.from(Blocks.JACK_O_LANTERN)), "lit_evil_pumpkin");
@@ -116,7 +124,8 @@ public class ModBlocks
         wooden_beam = registerBlock(registry, new LogBlock(MaterialColor.BROWN, wood_properties), "wooden_beam");
         wooden_casing = registerBlock(registry, new LogBlock(MaterialColor.BROWN, wood_properties), "wooden_casing");
 
-        spirit_well = registerBlock(registry, new SpiritWellBlock(refined_stone_properties), "spirit_well");
+        spirit_altar = registerBlock(registry, new SpiritAltarBlock(refined_stone_properties), "spirit_altar");
+        arcane_bore = registerBlock(registry, new ArcaneBoreBlock(refined_stone_properties), "arcane_bore");
     }
 
     private static <T extends Block> T registerBlock(IForgeRegistry<Block> registry, T newBlock, String name)

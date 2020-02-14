@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " n ",
+    "rbr",
+    " n "
+  ],
+  "key": {
+    "r": {
+      "item": "minecraft:poppy"
+    },
+    "b": {
+      "item": "malum:leather_belt"
+    },
+    "n": {
+      "item": "minecraft:nether_wart"
+    }
+  },
+  "result": {
+    "item": "malum:thorns_belt"
+  }
+}

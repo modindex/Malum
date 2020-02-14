@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " f ",
+    "rbr",
+    " f "
+  ],
+  "key": {
+    "r": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "b": {
+      "item": "malum:leather_belt"
+    },
+    "f": {
+      "item": "minecraft:fermented_spider_eye"
+    }
+  },
+  "result": {
+    "item": "malum:rotten_belt"
+  }
+}

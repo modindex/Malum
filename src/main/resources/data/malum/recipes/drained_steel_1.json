@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "dsd",
+    "sgs",
+    "dsd"
+  ],
+  "key": {
+    "d": {
+      "item": "malum:drained_shard"
+    },
+    "s": {
+      "item": "malum:soul_dust"
+    },
+    "g": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "malum:drained_steel_ingot"
+  }
+}

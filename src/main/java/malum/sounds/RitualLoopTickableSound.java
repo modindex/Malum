@@ -13,8 +13,9 @@ public class RitualLoopTickableSound extends TickableSound
         super(ModSounds.ritual_loop, SoundCategory.BLOCKS);
         this.tileEntity = tileEntity;
         this.repeat = true;
+
         this.repeatDelay = 0;
-        this.volume = 0.0F;
+        this.volume = 1.0F;
         this.x = (float)tileEntity.getPos().getX();
         this.y = (float)tileEntity.getPos().getY();
         this.z = (float)tileEntity.getPos().getZ();
@@ -23,9 +24,9 @@ public class RitualLoopTickableSound extends TickableSound
         if (this.tileEntity.isRemoved()) {
             this.donePlaying = true;
         }
-        if (this.tileEntity instanceof RitualBlockTileEntity)
+        if (tileEntity instanceof RitualBlockTileEntity)
         {
-            if (((RitualBlockTileEntity) this.tileEntity).crafting >= 320)
+            if (((RitualBlockTileEntity) tileEntity).crafting == 0)
             {
                 this.donePlaying = true;
             }

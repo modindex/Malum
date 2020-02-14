@@ -65,5 +65,5 @@ public class ModItemTiers
         9.0F,
         3.5F,
         24,
-        () -> Ingredient.fromItems(ModItems.end_steel_ingot));
+        () -> Ingredient.fromItems(ModItems.soul_crystal));
 }

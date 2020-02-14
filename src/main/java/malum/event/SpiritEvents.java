@@ -1,8 +1,8 @@
 package malum.event;
 
-import malum.items.curios.ItemArcaneSpiritRing;
 import malum.items.curios.ItemSpiritRing;
 import malum.items.gadgets.ItemSpiritContainer;
+import malum.registry.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,7 +28,8 @@ public class SpiritEvents
         if (attacking instanceof PlayerEntity)
         {
             PlayerEntity attackingPlayer = (PlayerEntity) attacking;
-            if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemSpiritRing, attackingPlayer).isPresent() || CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemArcaneSpiritRing, attackingPlayer).isPresent())
+            if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemSpiritRing, attackingPlayer).isPresent()
+                || attackingPlayer.getHeldItem((attackingPlayer).swingingHand).getItem() == ModItems.sacrificial_dagger)
             {
                 for (ItemStack stack : attackingPlayer.inventory.mainInventory)
                 {

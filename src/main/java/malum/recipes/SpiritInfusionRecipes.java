@@ -4,17 +4,39 @@ import malum.registry.ModItems;
 import malum.registry.ModRecipes;
 import net.minecraft.item.Items;
 
-import java.util.ArrayList;
-
 public class SpiritInfusionRecipes
 {
 
     public static void initRecipes()
     {
-        ArrayList<String> spirits1 = new ArrayList<>();
-        spirits1.add("minecraft:zombie");
-        spirits1.add("minecraft:creeper");
-        spirits1.add("minecraft:skeleton");
-        ModRecipes.addSpiritInfusionRecipe(new SpiritInfusionRecipe(Items.GLOWSTONE_DUST, ModItems.soul_dust, spirits1));
+        ModRecipes.addSpiritInfusionRecipe(new SpiritInfusionRecipe(
+            Items.GLOWSTONE_DUST,
+            ModItems.soul_dust,
+            SpiritInfusionRecipe.createSpiritList
+                ("minecraft:zombie",
+                    "minecraft:skeleton",
+                    "minecraft:creeper")
+        ));
+        ModRecipes.addSpiritInfusionRecipe(new SpiritInfusionRecipe(
+            Items.LEATHER,
+            ModItems.leather_belt,
+            SpiritInfusionRecipe.createSpiritList
+                ("minecraft:cow",
+                    "minecraft:creeper")
+        ));
+        ModRecipes.addSpiritInfusionRecipe(new SpiritInfusionRecipe(
+            Items.LEATHER,
+            ModItems.leather_ring,
+            SpiritInfusionRecipe.createSpiritList
+                ("minecraft:cow",
+                    "minecraft:skeleton")
+        ));
+        ModRecipes.addSpiritInfusionRecipe(new SpiritInfusionRecipe(
+            Items.LEATHER,
+            ModItems.leather_necklace,
+            SpiritInfusionRecipe.createSpiritList
+                ("minecraft:cow",
+                    "minecraft:zombie")
+        ));
     }
 }

@@ -6,19 +6,29 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 
 public class PlayerProperties {
 
-    @CapabilityInject(Capabilities.class)
-    public static Capability<Capabilities> CAPABILITY;
+    @CapabilityInject(CapabilityData.class)
+    public static Capability<CapabilityData> CAPABILITY;
 
-    public static double[] getCurioArray(PlayerEntity player)
+    public static double getFlightTime(PlayerEntity player)
     {
-        double[] empty = new double[0];
-        return player.getCapability(PlayerProperties.CAPABILITY).map(Capabilities::getCurioArray).orElse(empty);
+        return player.getCapability(PlayerProperties.CAPABILITY).map(CapabilityData::getFlightTime).orElse(0d);
     }
-    public static void setCurioArrayArgument(PlayerEntity player, int i, double d)
+    public static boolean getCanFly(PlayerEntity player)
     {
-        player.getCapability(PlayerProperties.CAPABILITY).ifPresent(note ->
+        return player.getCapability(PlayerProperties.CAPABILITY).map(CapabilityData::getCanFly).orElse(false);
+    }
+    public static void setCanFly(PlayerEntity playerEntity, boolean canFly)
+    {
+        playerEntity.getCapability(PlayerProperties.CAPABILITY).ifPresent(note ->
         {
-            note.setCurioArrayArgumenr(i, d);
+            note.setCanFly(canFly);
+        });
+    }
+    public static void setFlightTime(PlayerEntity playerEntity, double flightTime)
+    {
+        playerEntity.getCapability(PlayerProperties.CAPABILITY).ifPresent(note ->
+        {
+            note.setFlightTime(flightTime);
         });
     }
 }

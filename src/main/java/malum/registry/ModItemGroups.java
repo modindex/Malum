@@ -9,7 +9,7 @@ import javax.annotation.Nonnull;
 
 public final class ModItemGroups {
 
-    static final ItemGroup MALUM_MOD_GROUP = new ModItemGroup(MalumMod.MODID, () -> new ItemStack(ModItems.end_steel_ingot));
+    static final ItemGroup MALUM_MOD_GROUP = new ModItemGroup(MalumMod.MODID, () -> new ItemStack(ModItems.soul_crystal));
 
     public static final class ModItemGroup extends ItemGroup {
 

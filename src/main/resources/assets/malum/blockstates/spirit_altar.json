@@ -1,0 +1,48 @@
+{
+  "variants": {
+    "facing=north,spirit=0": { "model": "malum:block/spirit_altar/normal/spirit_altar_0" },
+    "facing=south,spirit=0": { "model": "malum:block/spirit_altar/normal/spirit_altar_0", "y": 180 },
+    "facing=west,spirit=0":  { "model": "malum:block/spirit_altar/normal/spirit_altar_0", "y": 270 },
+    "facing=east,spirit=0":  { "model": "malum:block/spirit_altar/normal/spirit_altar_0", "y": 90 },
+
+    "facing=north,spirit=1": { "model": "malum:block/spirit_altar/normal/spirit_altar_1" },
+    "facing=south,spirit=1": { "model": "malum:block/spirit_altar/normal/spirit_altar_1", "y": 180 },
+    "facing=west,spirit=1":  { "model": "malum:block/spirit_altar/normal/spirit_altar_1", "y": 270 },
+    "facing=east,spirit=1":  { "model": "malum:block/spirit_altar/normal/spirit_altar_1", "y": 90 },
+
+    "facing=north,spirit=2": { "model": "malum:block/spirit_altar/normal/spirit_altar_2" },
+    "facing=south,spirit=2": { "model": "malum:block/spirit_altar/normal/spirit_altar_2", "y": 180 },
+    "facing=west,spirit=2":  { "model": "malum:block/spirit_altar/normal/spirit_altar_2", "y": 270 },
+    "facing=east,spirit=2":  { "model": "malum:block/spirit_altar/normal/spirit_altar_2", "y": 90 },
+
+    "facing=north,spirit=3": { "model": "malum:block/spirit_altar/normal/spirit_altar_3" },
+    "facing=south,spirit=3": { "model": "malum:block/spirit_altar/normal/spirit_altar_3", "y": 180 },
+    "facing=west,spirit=3":  { "model": "malum:block/spirit_altar/normal/spirit_altar_3", "y": 270 },
+    "facing=east,spirit=3":  { "model": "malum:block/spirit_altar/normal/spirit_altar_3", "y": 90 },
+
+    "facing=north,spirit=4": { "model": "malum:block/spirit_altar/normal/spirit_altar_4" },
+    "facing=south,spirit=4": { "model": "malum:block/spirit_altar/normal/spirit_altar_4", "y": 180 },
+    "facing=west,spirit=4":  { "model": "malum:block/spirit_altar/normal/spirit_altar_4", "y": 270 },
+    "facing=east,spirit=4":  { "model": "malum:block/spirit_altar/normal/spirit_altar_4", "y": 90 },
+
+    "facing=north,spirit=5": { "model": "malum:block/spirit_altar/normal/spirit_altar_5" },
+    "facing=south,spirit=5": { "model": "malum:block/spirit_altar/normal/spirit_altar_5", "y": 180 },
+    "facing=west,spirit=5":  { "model": "malum:block/spirit_altar/normal/spirit_altar_5", "y": 270 },
+    "facing=east,spirit=5":  { "model": "malum:block/spirit_altar/normal/spirit_altar_5", "y": 90 },
+
+    "facing=north,spirit=6": { "model": "malum:block/spirit_altar/normal/spirit_altar_6" },
+    "facing=south,spirit=6": { "model": "malum:block/spirit_altar/normal/spirit_altar_6", "y": 180 },
+    "facing=west,spirit=6":  { "model": "malum:block/spirit_altar/normal/spirit_altar_6", "y": 270 },
+    "facing=east,spirit=6":  { "model": "malum:block/spirit_altar/normal/spirit_altar_6", "y": 90 },
+
+    "facing=north,spirit=7": { "model": "malum:block/spirit_altar/normal/spirit_altar_7" },
+    "facing=south,spirit=7": { "model": "malum:block/spirit_altar/normal/spirit_altar_7", "y": 180 },
+    "facing=west,spirit=7":  { "model": "malum:block/spirit_altar/normal/spirit_altar_7", "y": 270 },
+    "facing=east,spirit=7":  { "model": "malum:block/spirit_altar/normal/spirit_altar_7", "y": 90 },
+
+    "facing=north,spirit=8": { "model": "malum:block/spirit_altar/normal/spirit_altar_8" },
+    "facing=south,spirit=8": { "model": "malum:block/spirit_altar/normal/spirit_altar_8", "y": 180 },
+    "facing=west,spirit=8":  { "model": "malum:block/spirit_altar/normal/spirit_altar_8", "y": 270 },
+    "facing=east,spirit=8":  { "model": "malum:block/spirit_altar/normal/spirit_altar_8", "y": 90 }
+  }
+}

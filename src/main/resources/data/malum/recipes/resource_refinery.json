@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sis",
+    "dsd",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:stone"
+    },
+    "i": {
+      "item": "malum:soul_steel_ingot"
+    },
+    "d": {
+      "item": "malum:soul_dust"
+    }
+  },
+  "result": {
+    "item": "malum:ritual_stone"
+  }
+}
