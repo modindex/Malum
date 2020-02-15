@@ -5,7 +5,6 @@ import malum.items.armor.ItemArmorSoulCrystal;
 import malum.items.armor.ItemArmorSoulSteel;
 import malum.items.curios.*;
 import malum.items.gadgets.ItemEnderArtifact;
-import malum.items.gadgets.ItemEvilLantern;
 import malum.items.gadgets.ItemSpirit;
 import malum.items.gadgets.ItemSpiritContainer;
 import malum.items.tools.*;
@@ -170,7 +169,6 @@ public class ModItems
 
             //USEFUL TOOLS
 
-            evil_lantern = setup(new ItemEvilLantern(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_lantern"),
             ender_artifact = setup(new ItemEnderArtifact(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxDamage(250)), "ender_artifact"),
 
             //BELTS

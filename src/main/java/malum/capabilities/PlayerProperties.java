@@ -9,13 +9,17 @@ public class PlayerProperties {
     @CapabilityInject(CapabilityData.class)
     public static Capability<CapabilityData> CAPABILITY;
 
-    public static double getFlightTime(PlayerEntity player)
+    public static double getAvaiableFlightTime(PlayerEntity player)
     {
-        return player.getCapability(PlayerProperties.CAPABILITY).map(CapabilityData::getFlightTime).orElse(0d);
+        return player.getCapability(PlayerProperties.CAPABILITY).map(CapabilityData::getAvaiableFlightTime).orElse(0d);
     }
     public static boolean getCanFly(PlayerEntity player)
     {
         return player.getCapability(PlayerProperties.CAPABILITY).map(CapabilityData::getCanFly).orElse(false);
+    }
+    public static double getTotalFlightTime(PlayerEntity player)
+    {
+        return player.getCapability(PlayerProperties.CAPABILITY).map(CapabilityData::getTotalFlightTime).orElse(0d);
     }
     public static void setCanFly(PlayerEntity playerEntity, boolean canFly)
     {
@@ -24,11 +28,18 @@ public class PlayerProperties {
             note.setCanFly(canFly);
         });
     }
-    public static void setFlightTime(PlayerEntity playerEntity, double flightTime)
+    public static void setAvaiableFlightTime(PlayerEntity playerEntity, double avaiableFlightTime)
     {
         playerEntity.getCapability(PlayerProperties.CAPABILITY).ifPresent(note ->
         {
-            note.setFlightTime(flightTime);
+            note.setAvaiableFlightTime(avaiableFlightTime);
+        });
+    }
+    public static void setTotalFlightTime(PlayerEntity playerEntity, double totalFlightTime)
+    {
+        playerEntity.getCapability(PlayerProperties.CAPABILITY).ifPresent(note ->
+        {
+            note.setTotalFlightTime(totalFlightTime);
         });
     }
 }

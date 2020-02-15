@@ -5,8 +5,9 @@ import org.antlr.v4.runtime.misc.NotNull;
 
 public class CapabilityData
 {
-    double flightTime;
+    double avaiableFlightTime;
     boolean canFly;
+    double totalFlightTime;
 
 
     public CapabilityData()
@@ -14,18 +15,31 @@ public class CapabilityData
     }
 
     @NotNull
-    public double getFlightTime()
+    public double getAvaiableFlightTime()
     {
-        return flightTime;
+        return avaiableFlightTime;
+    }
+    @NotNull
+    public double getTotalFlightTime()
+    {
+        return totalFlightTime;
     }
     @NotNull
     public boolean getCanFly()
     {
         return canFly;
     }
-    public void setFlightTime(double flightTime)
+    public void setAvaiableFlightTime(double avaiableFlightTime)
     {
-        this.flightTime = flightTime;
+        this.avaiableFlightTime = avaiableFlightTime;
+    }
+    public void setTotalFlightTime(double totalFlightTime)
+    {
+        this.totalFlightTime = totalFlightTime;
+    }
+    public void flightDuration(double flightDuration)
+    {
+        this.totalFlightTime = flightDuration;
     }
     public void setCanFly(boolean canFly)
     {
@@ -33,8 +47,9 @@ public class CapabilityData
     }
     public void copyFrom(CapabilityData source)
     {
-        flightTime = source.flightTime;
+        avaiableFlightTime = source.avaiableFlightTime;
         canFly = source.canFly;
+        totalFlightTime = source.totalFlightTime;
     }
 
 

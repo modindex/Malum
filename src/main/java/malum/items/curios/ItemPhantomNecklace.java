@@ -62,12 +62,15 @@ public class ItemPhantomNecklace extends Item implements ICurio
                 {
                     this.left_wing_model = new ModelPhantomWingLeft();
                 }
-                float rotationX = 0f;//-5f - (float) Math.sin(livingEntity.world.getGameTime() * 0.25f) * 2f;
-                float rotationY = 40f - (float) Math.sin(livingEntity.world.getGameTime() * (PlayerProperties.getCanFly((PlayerEntity) livingEntity) && PlayerProperties.getFlightTime((PlayerEntity) livingEntity) != 25 ? 0.4 : 0.25)) * (PlayerProperties.getCanFly((PlayerEntity) livingEntity)  && PlayerProperties.getFlightTime((PlayerEntity) livingEntity) != 25 ? 4 : 1);
-                float rotationZ = 10f - (float) Math.sin(livingEntity.world.getGameTime() * (PlayerProperties.getCanFly((PlayerEntity) livingEntity) && PlayerProperties.getFlightTime((PlayerEntity) livingEntity) != 25 ? 0.4 : 0.25)) * (PlayerProperties.getCanFly((PlayerEntity) livingEntity)  && PlayerProperties.getFlightTime((PlayerEntity) livingEntity) != 25 ? 12 : 4);
+                float totalFlightTime = (float)PlayerProperties.getTotalFlightTime((PlayerEntity) livingEntity);
+                float rotationX = 60 - (totalFlightTime > 30 ? 60 : totalFlightTime * 2);
+                float rotationY = 20f + (totalFlightTime > 23 ? 23 : totalFlightTime);
+                float rotationZ = 10f - (totalFlightTime > 20 ? 20 : totalFlightTime)
+                                  - (float)Math.sin(livingEntity.world.getGameTime()
+                                      * 0.4f)
+                                        * (totalFlightTime > 36 ? 36 : totalFlightTime);
 
-                GlStateManager.rotatef(rotationX, 1.0F, 0.0F, 0.0F);
-
+                GlStateManager.rotatef(-rotationX, 0.0F, 0.0F, 1.0F);
                 GlStateManager.rotatef(-rotationZ, 0.0F, 0.0F, 1.0F);
                 GlStateManager.rotatef(rotationY, 0.0F, 1.0F, 0.0F);
 
@@ -76,7 +79,9 @@ public class ItemPhantomNecklace extends Item implements ICurio
 
                 GlStateManager.rotatef(-rotationY, 0.0F, 1.0F, 0.0F);
                 GlStateManager.rotatef(rotationZ, 0.0F, 0.0F, 1.0F);
+                GlStateManager.rotatef(rotationX, 0.0F, 0.0F, 1.0F);
 
+                GlStateManager.rotatef(rotationX, 0.0F, 0.0F, 1.0F);
                 GlStateManager.rotatef(rotationZ, 0.0F, 0.0F, 1.0F);
                 GlStateManager.rotatef(-rotationY, 0.0F, 1.0F, 0.0F);
 
@@ -85,6 +90,7 @@ public class ItemPhantomNecklace extends Item implements ICurio
 
                 GlStateManager.rotatef(rotationY, 0.0F, 1.0F, 0.0F);
                 GlStateManager.rotatef(-rotationZ, 0.0F, 0.0F, 1.0F);
+                GlStateManager.rotatef(-rotationX, 0.0F, 0.0F, 1.0F);
             }
 
             @Override
@@ -94,7 +100,7 @@ public class ItemPhantomNecklace extends Item implements ICurio
                 {
                     GameSettings settings = ClientRefferences.getClientSettings();
                     KeyBinding jump = settings.keyBindJump;
-                    double flightTime = PlayerProperties.getFlightTime((PlayerEntity) entityLivingBase);
+                    double flightTime = PlayerProperties.getAvaiableFlightTime((PlayerEntity) entityLivingBase);
                     boolean canFly = PlayerProperties.getCanFly((PlayerEntity) entityLivingBase);
 
                     if (!entityLivingBase.onGround)
@@ -109,24 +115,28 @@ public class ItemPhantomNecklace extends Item implements ICurio
                     }
                     if (entityLivingBase.onGround)
                     {
+                        PlayerProperties.setTotalFlightTime((PlayerEntity) entityLivingBase, PlayerProperties.getTotalFlightTime((PlayerEntity) entityLivingBase) > 0 ? PlayerProperties.getTotalFlightTime((PlayerEntity) entityLivingBase) - 2d : 0d);
                         PlayerProperties.setCanFly((PlayerEntity) entityLivingBase, false);
-                        PlayerProperties.setFlightTime((PlayerEntity) entityLivingBase, 25d);
+                        PlayerProperties.setAvaiableFlightTime((PlayerEntity) entityLivingBase, 25d);
                     }
                     else
                     {
-                        if (jump.isKeyDown())
+                        if (canFly)
                         {
-                            entityLivingBase.world.addParticle(ParticleTypes.MYCELIUM, MalumMod.randomize(entityLivingBase.posX, 0.5), MalumMod.randomize(entityLivingBase.posY + (entityLivingBase.getHeight() * 0.75f), 0.5), MalumMod.randomize(entityLivingBase.posZ, 0.5), 0,0,0);
-                            if (canFly)
+                            PlayerProperties.setTotalFlightTime((PlayerEntity) entityLivingBase, PlayerProperties.getTotalFlightTime((PlayerEntity) entityLivingBase) < 60 ? PlayerProperties.getTotalFlightTime((PlayerEntity) entityLivingBase) + 1.5d : 60);
+                            if (jump.isKeyDown())
                             {
+                                entityLivingBase.world.addParticle(ParticleTypes.MYCELIUM, MalumMod.randomize(entityLivingBase.posX, 0.5), MalumMod.randomize(entityLivingBase.posY + (entityLivingBase.getHeight() * 0.75f), 0.5), MalumMod.randomize(entityLivingBase.posZ, 0.5), 0, 0, 0);
                                 if (flightTime > 0d)
                                 {
                                     if (entityLivingBase.getMotion().y < 0.2)
                                     {
-                                        entityLivingBase.addVelocity(0, 0.1, 0);
+                                        double cappedTotalFlightTime = (PlayerProperties.getTotalFlightTime((PlayerEntity) entityLivingBase) > 140 ? 0.05 : 0.1 - (PlayerProperties.getTotalFlightTime((PlayerEntity) entityLivingBase) - 120) / 400);
+                                        entityLivingBase.addVelocity(0,
+                                            PlayerProperties.getTotalFlightTime((PlayerEntity) entityLivingBase) < 120 ? 0.1f : cappedTotalFlightTime, 0);
                                     }
-                                    entityLivingBase.addVelocity(0, 0.05, 0);
-                                    PlayerProperties.setFlightTime((PlayerEntity) entityLivingBase, flightTime -1);
+                                    entityLivingBase.addVelocity(0, 0.06, 0);
+                                    PlayerProperties.setAvaiableFlightTime((PlayerEntity) entityLivingBase, flightTime - 1);
                                 }
                                 else
                                 {
