@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "block": "malum:drained_steel_block"
+      "item": "malum:drained_steel_block"
     }
   ],
   "result": {

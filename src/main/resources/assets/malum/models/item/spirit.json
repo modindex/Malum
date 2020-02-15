@@ -1,0 +1,50 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "malum:items/spirit/spirit_0"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "b": 1
+      },
+      "model": "malum:item/spirit_1"
+    },
+    {
+      "predicate": {
+        "b": 2
+      },
+      "model": "malum:item/spirit_2"
+    },
+    {
+      "predicate": {
+        "b": 3
+      },
+      "model": "malum:item/spirit_3"
+    },
+    {
+      "predicate": {
+        "b": 4
+      },
+      "model": "malum:item/spirit_4"
+    },
+    {
+      "predicate": {
+        "b": 5
+      },
+      "model": "malum:item/spirit_5"
+    },
+    {
+      "predicate": {
+        "b": 6
+      },
+      "model": "malum:item/spirit_6"
+    },
+    {
+      "predicate": {
+        "b": 7
+      },
+      "model": "malum:item/spirit_7"
+    }
+  ]
+}

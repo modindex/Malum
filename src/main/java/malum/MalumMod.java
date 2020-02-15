@@ -1,9 +1,7 @@
 package malum;
 
 import malum.event.ServerPlayerEventHandler;
-import malum.renderer.CraftingBlockRenderer;
 import malum.renderer.RitualBlockRenderer;
-import malum.tileentities.CraftingBlockTileEntity;
 import malum.tileentities.RitualBlockTileEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -46,7 +44,6 @@ public class MalumMod
     @OnlyIn(Dist.CLIENT)
     private void doClientStuff(final FMLClientSetupEvent event)
     {
-        ClientRegistry.bindTileEntitySpecialRenderer(CraftingBlockTileEntity.class, new CraftingBlockRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(RitualBlockTileEntity.class, new RitualBlockRenderer());
     }
     public static double randomize(double value, double power)

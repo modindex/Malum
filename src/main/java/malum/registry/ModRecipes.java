@@ -10,15 +10,14 @@ import java.util.List;
 public class ModRecipes
 {
 
-    private static ArrayList<ResourceFormingRecipe> resourceFormingRecipes = new ArrayList<>();
+    public static ArrayList<ResourceFormingRecipe> resourceFormingRecipes = new ArrayList<>();
 
-    private static ArrayList<CraftingRecipe> craftingRecipes = new ArrayList<>();
 
-    private static ArrayList<RitualRecipe> ritualRecipes = new ArrayList<>();
+    public static ArrayList<RitualRecipe> ritualRecipes = new ArrayList<>();
 
-    private static List<BlockTransmutationRecipe> blockTransmutationRecipes = new ArrayList<>();
+    public static List<BlockTransmutationRecipe> blockTransmutationRecipes = new ArrayList<>();
 
-    private static List<SpiritInfusionRecipe> spiritInfusionRecipes = new ArrayList<>();
+    public static List<SpiritInfusionRecipe> spiritInfusionRecipes = new ArrayList<>();
 
     public static void addBlockTransmutationRecipe(BlockTransmutationRecipe recipe)
     {
@@ -37,11 +36,6 @@ public class ModRecipes
     public static void addRitualRecipe(RitualRecipe recipe)
     {
         ritualRecipes.add(recipe);
-    }
-
-    public static void addCraftingRecipe(CraftingRecipe recipe)
-    {
-        craftingRecipes.add(recipe);
     }
 
     public static ResourceFormingRecipe getResourceFormingRecipe(Item formItem)
@@ -94,21 +88,6 @@ public class ModRecipes
         if (ingredients != null)
         {
             for (RitualRecipe recipe : ritualRecipes)
-            {
-                if (recipe.getIngredients().equals(ingredients))
-                {
-                    return recipe;
-                }
-            }
-        }
-        return null;
-    }
-
-    public static CraftingRecipe getCraftingRecipe(ArrayList<Item> ingredients)
-    {
-        if (ingredients != null)
-        {
-            for (CraftingRecipe recipe : craftingRecipes)
             {
                 if (recipe.getIngredients().equals(ingredients))
                 {

@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "ingot": "malum:drained_steel_ingot"
+      "item": "malum:drained_steel_ingot"
     }
   ],
   "result": {

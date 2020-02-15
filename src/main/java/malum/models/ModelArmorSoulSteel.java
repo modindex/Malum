@@ -141,6 +141,7 @@ public class ModelArmorSoulSteel extends ModelArmor
         boot_wing_l2.showModel = slot == EquipmentSlotType.FEET;
 
         bipedHeadwear.showModel = false;
+
         bipedHead = head;
 
         bipedBody = torso;

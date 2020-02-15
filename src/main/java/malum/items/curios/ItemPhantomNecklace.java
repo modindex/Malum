@@ -14,6 +14,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -95,6 +96,7 @@ public class ItemPhantomNecklace extends Item implements ICurio
                     KeyBinding jump = settings.keyBindJump;
                     double flightTime = PlayerProperties.getFlightTime((PlayerEntity) entityLivingBase);
                     boolean canFly = PlayerProperties.getCanFly((PlayerEntity) entityLivingBase);
+
                     if (!entityLivingBase.onGround)
                     {
                         if (!canFly)
@@ -114,6 +116,7 @@ public class ItemPhantomNecklace extends Item implements ICurio
                     {
                         if (jump.isKeyDown())
                         {
+                            entityLivingBase.world.addParticle(ParticleTypes.MYCELIUM, MalumMod.randomize(entityLivingBase.posX, 0.5), MalumMod.randomize(entityLivingBase.posY + (entityLivingBase.getHeight() * 0.75f), 0.5), MalumMod.randomize(entityLivingBase.posZ, 0.5), 0,0,0);
                             if (canFly)
                             {
                                 if (flightTime > 0d)

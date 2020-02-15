@@ -22,8 +22,6 @@ public class ModTileEntities
     @ObjectHolder("malum:arcane_bore_tile_entity")
     public static TileEntityType<?> arcane_bore_tile_entity;
 
-    @ObjectHolder("malum:crafting_block_tile_entity")
-    public static TileEntityType<?> crafting_block_tile_entity;
 
     @ObjectHolder("malum:resource_refinery_tile_entity")
     public static TileEntityType<?> resource_refinery_tile_entity;
@@ -33,7 +31,6 @@ public class ModTileEntities
         e.getRegistry().registerAll(
             TileEntityType.Builder.create((Supplier<TileEntity>) RitualBlockTileEntity::new, ModBlocks.ritual_block).build(null).setRegistryName("ritual_block_tile_entity"),
             TileEntityType.Builder.create((Supplier<TileEntity>) ResourceRefineryTileEntity::new, ModBlocks.resource_refinery).build(null).setRegistryName("resource_refinery_tile_entity"),
-            TileEntityType.Builder.create((Supplier<TileEntity>) CraftingBlockTileEntity::new, ModBlocks.crafting_block).build(null).setRegistryName("crafting_block_tile_entity"),
             TileEntityType.Builder.create((Supplier<TileEntity>) SpiritAltarTileEntity::new, ModBlocks.spirit_altar).build(null).setRegistryName("spirit_altar_tile_entity"),
             TileEntityType.Builder.create((Supplier<TileEntity>) ArcaneBoreTileEntity::new, ModBlocks.arcane_bore).build(null).setRegistryName("arcane_bore_tile_entity")
         );

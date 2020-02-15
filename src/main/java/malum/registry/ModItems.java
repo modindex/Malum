@@ -6,6 +6,7 @@ import malum.items.armor.ItemArmorSoulSteel;
 import malum.items.curios.*;
 import malum.items.gadgets.ItemEnderArtifact;
 import malum.items.gadgets.ItemEvilLantern;
+import malum.items.gadgets.ItemSpirit;
 import malum.items.gadgets.ItemSpiritContainer;
 import malum.items.tools.*;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -80,9 +81,8 @@ public class ModItems
     public static Item phantom_ring;
     public static Item arcane_bore;
     public static Item spirit_altar;
-    public static Item ritual_block;
     public static Item resource_refinery;
-    public static Item crafting_block;
+    public static Item ritual_block;
     public static Item drained_steel_block;
     public static Item soul_steel_block;
     public static Item wooden_planks;
@@ -99,15 +99,16 @@ public class ModItems
     public static Item refined_smooth_stone;
     public static Item refined_smooth_stone_slab;
     public static Item refined_smooth_stone_stairs;
-    public static Item evil_pumpkin;
-    public static Item lit_evil_pumpkin;
     public static Item dark_roofing;
     public static Item dark_roofing_slab;
     public static Item dark_roofing_stairs;
+    public static Item evil_pumpkin;
+    public static Item lit_evil_pumpkin;
     public static Item refined_glowstone_block;
     public static Item refined_glowstone_lamp;
     public static Item healing_flower;
     public static Item smooth_stone_stairs;
+    public static Item spirit;
     @SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event)
     {
@@ -194,9 +195,8 @@ public class ModItems
 
             arcane_bore = setup(new BlockItem(ModBlocks.arcane_bore, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "arcane_bore"),
             spirit_altar = setup(new BlockItem(ModBlocks.spirit_altar, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "spirit_altar"),
-            ritual_block = setup(new BlockItem(ModBlocks.ritual_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ritual_block"),
             resource_refinery = setup(new BlockItem(ModBlocks.resource_refinery, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "resource_refinery"),
-            crafting_block = setup(new BlockItem(ModBlocks.crafting_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "crafting_block"),
+            ritual_block = setup(new BlockItem(ModBlocks.ritual_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ritual_block"),
 
             //BUILDING BLOCKS
 
@@ -222,19 +222,20 @@ public class ModItems
             refined_smooth_stone_slab = setup(new BlockItem(ModBlocks.refined_smooth_stone_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_smooth_stone_slab"),
             refined_smooth_stone_stairs = setup(new BlockItem(ModBlocks.refined_smooth_stone_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_smooth_stone_stairs"),
 
-            evil_pumpkin = setup(new BlockItem(ModBlocks.evil_pumpkin, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_pumpkin"),
-            lit_evil_pumpkin = setup(new BlockItem(ModBlocks.lit_evil_pumpkin, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "lit_evil_pumpkin"),
-
             dark_roofing = setup(new BlockItem(ModBlocks.dark_roofing, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing"),
             dark_roofing_slab = setup(new BlockItem(ModBlocks.dark_roofing_slab, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing_slab"),
             dark_roofing_stairs = setup(new BlockItem(ModBlocks.dark_roofing_stairs, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "dark_roofing_stairs"),
+
+            evil_pumpkin = setup(new BlockItem(ModBlocks.evil_pumpkin, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "evil_pumpkin"),
+            lit_evil_pumpkin = setup(new BlockItem(ModBlocks.lit_evil_pumpkin, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "lit_evil_pumpkin"),
 
             refined_glowstone_block = setup(new BlockItem(ModBlocks.refined_glowstone_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_glowstone_block"),
             refined_glowstone_lamp = setup(new BlockItem(ModBlocks.refined_glowstone_lamp, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "refined_glowstone_lamp"),
 
             //NOT MOD TAB ITEMS
             healing_flower = setup(new BlockItem(ModBlocks.healing_flower, new Item.Properties().group(ItemGroup.DECORATIONS)), "healing_flower"),
-            smooth_stone_stairs = setup(new BlockItem(ModBlocks.smooth_stone_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)), "smooth_stone_stairs")
+            smooth_stone_stairs = setup(new BlockItem(ModBlocks.smooth_stone_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)), "smooth_stone_stairs"),
+            spirit = setup(new ItemSpirit(new Item.Properties()), "spirit")
         );
     }
 

@@ -1,7 +1,6 @@
 package malum.items.gadgets;
 
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,15 +12,15 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemSpiritContainer extends Item
+public class ItemSpirit extends Item
 {
-    private static final IItemPropertyGetter SPIRIT_GETTER = (stack, world, entity) ->
-        stack.getTag() != null && stack.getTag().contains("spirit") && entity instanceof PlayerEntity ? 1 : 0;
+    private static final IItemPropertyGetter TYPE_GETTER = (stack, world, entity) ->
+        stack.getTag() != null && stack.getTag().contains("type") ? stack.getTag().getInt("type") : 0;
 
-    public ItemSpiritContainer(Properties builder)
+    public ItemSpirit(Properties builder)
     {
         super(builder);
-        this.addPropertyOverride(new ResourceLocation("spirit"), SPIRIT_GETTER);
+        this.addPropertyOverride(new ResourceLocation("b"), TYPE_GETTER);
     }
 
     @Override

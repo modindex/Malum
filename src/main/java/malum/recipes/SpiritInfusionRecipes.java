@@ -38,5 +38,18 @@ public class SpiritInfusionRecipes
                 ("minecraft:cow",
                     "minecraft:zombie")
         ));
+        ModRecipes.addSpiritInfusionRecipe(new SpiritInfusionRecipe(
+            Items.DIRT,
+            Items.DIAMOND,
+            SpiritInfusionRecipe.createSpiritList
+                ("minecraft:ender_dragon",
+                    "minecraft:ender_dragon",
+                    "minecraft:ender_dragon",
+                    "minecraft:ender_dragon",
+                    "minecraft:ender_dragon",
+                    "minecraft:ender_dragon",
+                    "minecraft:ender_dragon",
+                    "minecraft:ender_dragon")
+        ));
     }
 }

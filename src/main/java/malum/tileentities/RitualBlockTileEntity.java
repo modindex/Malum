@@ -131,7 +131,11 @@ public class RitualBlockTileEntity extends TileEntity implements ITickableTileEn
             }
             crafting += 1;
             assert world != null;
-            MalumMod.LOGGER.info(crafting);
+        }
+        if (crafting == 315)
+        {
+            ClientRefferences.minecraft.getSoundHandler().stop(new ResourceLocation(MalumMod.MODID, "ritual_loop"), SoundCategory.BLOCKS);
+            world.playSound(null, pos, ModSounds.ritual_end, SoundCategory.PLAYERS, 1F, 1F);
         }
         if (crafting >= 320)
         {
@@ -141,8 +145,6 @@ public class RitualBlockTileEntity extends TileEntity implements ITickableTileEn
                 assert world != null;
                 doRitualEffect(pos, recipe.getRitualEffect());
             }
-            ClientRefferences.minecraft.getSoundHandler().stop(new ResourceLocation(MalumMod.MODID, "ritual_loop"), SoundCategory.BLOCKS);
-            world.playSound(null, pos, ModSounds.ritual_end, SoundCategory.PLAYERS, 1F, 1F);
             crafting = 0;
             emptyInventory(inventory);
         }
