@@ -5,13 +5,37 @@ import org.antlr.v4.runtime.misc.NotNull;
 
 public class CapabilityData
 {
+    //phantom necklace
     double avaiableFlightTime;
     boolean canFly;
     double totalFlightTime;
 
-
+    //ender staff
+    boolean canTeleport;
+    double teleportChargeTime;
     public CapabilityData()
     {
+    }
+
+
+    @NotNull
+    public double getTeleortChargeTime()
+    {
+        return teleportChargeTime;
+    }
+    @NotNull
+    public boolean getCanTeleport()
+    {
+        return canTeleport;
+    }
+
+    public void setCanTeleport(boolean canTeleport)
+    {
+        this.canTeleport = canTeleport;
+    }
+    public void setTeleportChargeTime(double teleportChargeTime)
+    {
+        this.teleportChargeTime = teleportChargeTime;
     }
 
     @NotNull

@@ -5,6 +5,7 @@ import malum.items.armor.ItemArmorSoulCrystal;
 import malum.items.armor.ItemArmorSoulSteel;
 import malum.items.curios.*;
 import malum.items.gadgets.ItemEnderArtifact;
+import malum.items.gadgets.ItemEnderStaff;
 import malum.items.gadgets.ItemSpirit;
 import malum.items.gadgets.ItemSpiritContainer;
 import malum.items.tools.*;
@@ -66,7 +67,7 @@ public class ModItems
     public static Item soul_steel_leggings;
     public static Item soul_steel_chestplate;
     public static Item soul_steel_helm;
-    public static Item evil_lantern;
+    public static Item ender_staff;
     public static Item ender_artifact;
     public static Item thorns_belt;
     public static Item healing_belt;
@@ -168,6 +169,7 @@ public class ModItems
             soul_steel_helm = setup(new ItemArmorSoulSteel(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_steel_helm"),
 
             //USEFUL TOOLS
+            ender_staff = setup(new ItemEnderStaff(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxDamage(100)), "ender_staff"),
 
             ender_artifact = setup(new ItemEnderArtifact(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxDamage(250)), "ender_artifact"),
 

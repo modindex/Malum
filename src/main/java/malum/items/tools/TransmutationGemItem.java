@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUseContext;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -26,6 +27,8 @@ public class TransmutationGemItem extends Item
         BlockState state = world.getBlockState(pos);
         BlockTransmutationRecipe.transmutateBlock(state, world, pos);
         BlockTransmutationRecipe.makeTransmutationVisuals(state, world, pos);
+        playerEntity.addStat(Stats.ITEM_USED.get(this));
+
         return super.onItemUse(context);
     }
 }

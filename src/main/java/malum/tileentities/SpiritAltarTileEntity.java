@@ -1,6 +1,5 @@
 package malum.tileentities;
 
-import malum.MalumMod;
 import malum.blocks.SpiritAltarBlock;
 import malum.registry.ModTileEntities;
 import net.minecraft.block.BlockState;
@@ -72,7 +71,6 @@ public class SpiritAltarTileEntity extends TileEntity implements ITickableTileEn
     @Override
     public void tick()
     {
-        MalumMod.LOGGER.info(this.spirits.size());
         if (!this.world.isRemote())
         {
             BlockState state = world.getBlockState(this.pos);

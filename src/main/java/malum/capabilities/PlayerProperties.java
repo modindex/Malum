@@ -9,6 +9,29 @@ public class PlayerProperties {
     @CapabilityInject(CapabilityData.class)
     public static Capability<CapabilityData> CAPABILITY;
 
+    public static boolean getCanTeleport(PlayerEntity player)
+    {
+        return player.getCapability(PlayerProperties.CAPABILITY).map(CapabilityData::getCanTeleport).orElse(false);
+    }
+    public static double getTeleportChargeTime(PlayerEntity player)
+    {
+        return player.getCapability(PlayerProperties.CAPABILITY).map(CapabilityData::getTeleortChargeTime).orElse(0d);
+    }
+    public static void setCanTeleport(PlayerEntity playerEntity, boolean canTeleport)
+    {
+        playerEntity.getCapability(PlayerProperties.CAPABILITY).ifPresent(note ->
+        {
+            note.setCanTeleport(canTeleport);
+        });
+    }
+    public static void setTeleportChargeTime(PlayerEntity playerEntity, double teleportChargeTime)
+    {
+        playerEntity.getCapability(PlayerProperties.CAPABILITY).ifPresent(note ->
+        {
+            note.setTeleportChargeTime(teleportChargeTime);
+        });
+    }
+
     public static double getAvaiableFlightTime(PlayerEntity player)
     {
         return player.getCapability(PlayerProperties.CAPABILITY).map(CapabilityData::getAvaiableFlightTime).orElse(0d);
