@@ -26,9 +26,9 @@ public class ItemSpirit extends Item
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
     {
-        if (stack.getTag() != null && stack.getTag().contains("spirit"))
+        if (stack.getTag() != null && stack.getTag().contains("tooltip"))
         {
-            tooltip.add(component(stack.getTag().getString("spirit")));
+            tooltip.add(component(stack.getTag().getString("tooltip")));
         }
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }

@@ -9,19 +9,19 @@ public class PlayerProperties {
     @CapabilityInject(CapabilityData.class)
     public static Capability<CapabilityData> CAPABILITY;
 
-    public static boolean getCanTeleport(PlayerEntity player)
+    public static boolean getIsTeleporting(PlayerEntity player)
     {
-        return player.getCapability(PlayerProperties.CAPABILITY).map(CapabilityData::getCanTeleport).orElse(false);
+        return player.getCapability(PlayerProperties.CAPABILITY).map(CapabilityData::getTeleporting).orElse(false);
     }
     public static double getTeleportChargeTime(PlayerEntity player)
     {
         return player.getCapability(PlayerProperties.CAPABILITY).map(CapabilityData::getTeleortChargeTime).orElse(0d);
     }
-    public static void setCanTeleport(PlayerEntity playerEntity, boolean canTeleport)
+    public static void setIsTeleporting(PlayerEntity playerEntity, boolean isTeleporting)
     {
         playerEntity.getCapability(PlayerProperties.CAPABILITY).ifPresent(note ->
         {
-            note.setCanTeleport(canTeleport);
+            note.setIsTeleporting(isTeleporting);
         });
     }
     public static void setTeleportChargeTime(PlayerEntity playerEntity, double teleportChargeTime)

@@ -1,14 +1,18 @@
 package malum.spirit_augmentation;
 
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.text.ITextComponent;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public interface AugmentingSpirit
 {
     String augmentTag();
-    public void handleNBT(CompoundNBT nbt);
-    String auagmentDescription();
-    String augmentTooltip(CompoundNBT nbt);
-    List<String> acceptableSpirits();
+    int maxAmount();
+    public void handleNBT(@Nonnull CompoundNBT nbt);
+    String augmentDescription();
+    String augmentTooltip();
+    public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip);
+    String spirit();
 }

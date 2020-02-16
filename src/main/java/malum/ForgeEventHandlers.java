@@ -4,6 +4,7 @@ import malum.capabilities.CapabilityData;
 import malum.capabilities.PlayerProperties;
 import malum.capabilities.PropertiesDispatcher;
 import malum.recipes.*;
+import malum.spirit_augmentation.SpiritAugmentationDataBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;

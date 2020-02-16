@@ -12,10 +12,11 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
+
+import static malum.integration.jei.JEIHandler.newSpirit;
 
 public class SpiritInfusionRecipeCategory implements IRecipeCategory<SpiritInfusionRecipe>
 {
@@ -138,16 +139,5 @@ public class SpiritInfusionRecipeCategory implements IRecipeCategory<SpiritInfus
             iRecipeLayout.getItemStacks().init(9, true, 75, 57);
             iRecipeLayout.getItemStacks().set(9, newSpirit(spiritInfusionRecipe.spirits.get(7)));
         }
-    }
-
-    public ItemStack newSpirit(String spirit)
-    {
-        ItemStack stack = new ItemStack(ModItems.spirit);
-        CompoundNBT nbt = new CompoundNBT();
-        nbt.putString("spirit", spirit);
-        nbt.putInt("type", (int)(Math.random() * 8));
-        stack.setTag(nbt);
-
-        return stack;
     }
 }

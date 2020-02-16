@@ -11,7 +11,7 @@ public class CapabilityData
     double totalFlightTime;
 
     //ender staff
-    boolean canTeleport;
+    boolean isTeleporting;
     double teleportChargeTime;
     public CapabilityData()
     {
@@ -24,14 +24,14 @@ public class CapabilityData
         return teleportChargeTime;
     }
     @NotNull
-    public boolean getCanTeleport()
+    public boolean getTeleporting()
     {
-        return canTeleport;
+        return isTeleporting;
     }
 
-    public void setCanTeleport(boolean canTeleport)
+    public void setIsTeleporting(boolean canTeleport)
     {
-        this.canTeleport = canTeleport;
+        this.isTeleporting = canTeleport;
     }
     public void setTeleportChargeTime(double teleportChargeTime)
     {

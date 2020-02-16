@@ -20,29 +20,22 @@ import java.util.Random;
 @Mod("malum")
 public class MalumMod
 {
-    // Directly reference a log4j logger.
-    public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "malum";
+    public static final Logger LOGGER = LogManager.getLogger();
+    public static final String ender_staff_distance_augment = MODID+"ender_staff_distance";
+    public static final String ender_staff_cooldown_augment = MODID+"ender_staff_cooldown";
     public MalumMod() {
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::bindTERenderers);
         MinecraftForge.EVENT_BUS.register(this);
     }
     private void setup(final FMLCommonSetupEvent event)
     {
-        /* register packets
-        int packetID=0;
-        NetworkManager.INSTANCE.registerMessage(packetID++,
-            DummyPacket.class,
-            DummyPacket::encode,
-            DummyPacket::decode,
-            DummyPacket::whenThisPacketIsReceived
-        );*/
         new ServerPlayerEventHandler();
     }
     @OnlyIn(Dist.CLIENT)
-    private void doClientStuff(final FMLClientSetupEvent event)
+    private void bindTERenderers(final FMLClientSetupEvent event)
     {
         ClientRegistry.bindTileEntitySpecialRenderer(RitualBlockTileEntity.class, new RitualBlockRenderer());
     }

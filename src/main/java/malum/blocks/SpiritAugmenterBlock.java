@@ -1,7 +1,7 @@
 package malum.blocks;
 
 import malum.items.gadgets.ItemSpiritContainer;
-import malum.recipes.SpiritAugmentationData;
+import malum.spirit_augmentation.SpiritAugmentationData;
 import malum.registry.ModRecipes;
 import malum.tileentities.SpiritAugmenterTileEntity;
 import net.minecraft.block.Block;
@@ -86,18 +86,26 @@ public class SpiritAugmenterBlock extends Block
                             {
                                 ItemStack augment_stack = inventory.getStackInSlot(0);
                                 CompoundNBT augment_nbt = augment_stack.getOrCreateTag();
-                                SpiritAugmentationData data = ModRecipes.getSpiritAugmentationData(augment_stack.getItem());
-                                if (data != null)
+                                for (SpiritAugmentationData data : ModRecipes.spiritAugmentationData)
                                 {
-                                    String spirit = spirit_bottle.getTag().getString("spirit");
-                                    if (data.getSpirit().acceptableSpirits().contains(spirit))
+                                    if (data != null)
                                     {
-                                        data.getSpirit().handleNBT(augment_nbt);
-                                        
-                                        ItemStack newStack = spirit_bottle.getItem().getDefaultInstance();
-                                        spirit_bottle.shrink(1);
-                                        player.inventory.addItemStackToInventory(newStack);
-                                        return true;
+                                        if (data.getItem() == augment_stack.getItem())
+                                        {
+                                            String spirit = spirit_bottle.getTag().getString("spirit");
+                                            if (data.getSpirit().spirit().equals(spirit))
+                                            {
+                                                if (augment_nbt.getInt(data.getSpirit().augmentTag()) < data.getSpirit().maxAmount())
+                                                {
+                                                    data.getSpirit().handleNBT(augment_nbt);
+
+                                                    ItemStack newStack = spirit_bottle.getItem().getDefaultInstance();
+                                                    spirit_bottle.shrink(1);
+                                                    player.inventory.addItemStackToInventory(newStack);
+                                                }
+                                                return true;
+                                            }
+                                        }
                                     }
                                 }
                             }

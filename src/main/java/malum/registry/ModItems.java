@@ -83,6 +83,7 @@ public class ModItems
     public static Item spirit_altar;
     public static Item resource_refinery;
     public static Item ritual_block;
+    public static Item spirit_augmenter;
     public static Item drained_steel_block;
     public static Item soul_steel_block;
     public static Item wooden_planks;
@@ -109,6 +110,7 @@ public class ModItems
     public static Item healing_flower;
     public static Item smooth_stone_stairs;
     public static Item spirit;
+    public static Item spirit_augment;
     @SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event)
     {
@@ -197,6 +199,7 @@ public class ModItems
             spirit_altar = setup(new BlockItem(ModBlocks.spirit_altar, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "spirit_altar"),
             resource_refinery = setup(new BlockItem(ModBlocks.resource_refinery, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "resource_refinery"),
             ritual_block = setup(new BlockItem(ModBlocks.ritual_block, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ritual_block"),
+            spirit_augmenter = setup(new BlockItem(ModBlocks.spirit_augmenter, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "spirit_augmenter"),
 
             //BUILDING BLOCKS
 
@@ -235,7 +238,8 @@ public class ModItems
             //NOT MOD TAB ITEMS
             healing_flower = setup(new BlockItem(ModBlocks.healing_flower, new Item.Properties().group(ItemGroup.DECORATIONS)), "healing_flower"),
             smooth_stone_stairs = setup(new BlockItem(ModBlocks.smooth_stone_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)), "smooth_stone_stairs"),
-            spirit = setup(new ItemSpirit(new Item.Properties()), "spirit")
+            spirit = setup(new ItemSpirit(new Item.Properties()), "spirit"),
+            spirit_augment = setup(new ItemSpirit(new Item.Properties()), "spirit_augment")
         );
     }
 

@@ -1,6 +1,7 @@
 package malum.registry;
 
 import malum.recipes.*;
+import malum.spirit_augmentation.SpiritAugmentationData;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 

@@ -1,6 +1,5 @@
-package malum.recipes;
+package malum.spirit_augmentation;
 
-import malum.spirit_augmentation.AugmentingSpirit;
 import net.minecraft.item.Item;
 
 public class SpiritAugmentationData
