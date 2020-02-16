@@ -1,8 +1,8 @@
 package malum.spirit_augmentation;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class EnderStaffAugmentingSpirit implements AugmentingSpirit
     }
 
     @Override
-    public void handleNBT(CompoundNBT nbt, ItemStack stack)
+    public void handleNBT(@Nonnull CompoundNBT nbt)
     {
         if (nbt.contains(augmentTag()))
         {

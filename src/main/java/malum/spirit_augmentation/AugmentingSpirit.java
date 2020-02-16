@@ -1,6 +1,5 @@
 package malum.spirit_augmentation;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 
 import java.util.List;
@@ -8,7 +7,7 @@ import java.util.List;
 public interface AugmentingSpirit
 {
     String augmentTag();
-    public void handleNBT(CompoundNBT nbt, ItemStack stack);
+    public void handleNBT(CompoundNBT nbt);
     String auagmentDescription();
     String augmentTooltip(CompoundNBT nbt);
     List<String> acceptableSpirits();

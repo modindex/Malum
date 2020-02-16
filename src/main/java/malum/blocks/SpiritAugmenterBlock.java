@@ -11,6 +11,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Hand;
@@ -76,27 +77,34 @@ public class SpiritAugmenterBlock extends Block
                 if (handIn != Hand.OFF_HAND)
                 {
                     ItemStackHandler inventory = ((SpiritAugmenterTileEntity) entity).inventory;
-                    ItemStack stack = player.inventory.getCurrentItem();
-                    if (stack.getItem() instanceof ItemSpiritContainer)
+                    ItemStack spirit_bottle = player.inventory.getCurrentItem();
+                    if (spirit_bottle.getItem() instanceof ItemSpiritContainer)
                     {
-                        if (!inventory.getStackInSlot(0).isEmpty())
+                        if (spirit_bottle.getTag() != null)
                         {
-                            SpiritAugmentationData data = ModRecipes.getSpiritAugmentationData(inventory.getStackInSlot(0).getItem());
-                            if (data != null)
+                            if (!inventory.getStackInSlot(0).isEmpty())
                             {
-                                if (stack.getTag() != null)
+                                ItemStack augment_stack = inventory.getStackInSlot(0);
+                                CompoundNBT augment_nbt = augment_stack.getOrCreateTag();
+                                SpiritAugmentationData data = ModRecipes.getSpiritAugmentationData(augment_stack.getItem());
+                                if (data != null)
                                 {
-                                    String spirit = stack.getTag().getString("spirit");
+                                    String spirit = spirit_bottle.getTag().getString("spirit");
                                     if (data.getSpirit().acceptableSpirits().contains(spirit))
                                     {
-                                        data.getSpirit().handleNBT(stack.getTag(), stack);
+                                        data.getSpirit().handleNBT(augment_nbt);
+                                        
+                                        ItemStack newStack = spirit_bottle.getItem().getDefaultInstance();
+                                        spirit_bottle.shrink(1);
+                                        player.inventory.addItemStackToInventory(newStack);
+                                        return true;
                                     }
                                 }
                             }
                         }
                         return true;
                     }
-                    if (stack.isEmpty())
+                    if (spirit_bottle.isEmpty())
                     {
                         if (!inventory.getStackInSlot(0).isEmpty())
                         {
@@ -108,7 +116,7 @@ public class SpiritAugmenterBlock extends Block
                     {
                         if (inventory.getStackInSlot(0).isEmpty())
                         {
-                            inventory.setStackInSlot(0, stack);
+                            inventory.setStackInSlot(0, spirit_bottle);
                             player.setHeldItem(handIn, ItemStack.EMPTY);
                             return true;
                         }

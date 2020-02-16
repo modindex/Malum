@@ -100,27 +100,15 @@ public class SpiritAltarBlock extends Block
                             if (((SpiritAltarTileEntity) entity).spirits.size() < 8)
                             {
                                 player.swingArm(handIn);
-                                if (stack.getCount() == 1)
+                                if (nbt.contains("spirit"))
                                 {
-                                    if (nbt.contains("spirit"))
-                                    {
-                                        ((SpiritAltarTileEntity) entity).spirits.add(nbt.getString("spirit"));
-                                        nbt.remove("spirit");
-                                        return true;
-                                    }
+                                    ((SpiritAltarTileEntity) entity).spirits.add(nbt.getString("spirit"));
+
+                                    ItemStack newStack = stack.getItem().getDefaultInstance();
+                                    stack.shrink(1);
+                                    player.inventory.addItemStackToInventory(newStack);
+                                    return true;
                                 }
-                                else
-                                {
-                                    if (nbt.contains("spirit"))
-                                    {
-                                        stack.shrink(1);
-                                        ItemStack newStack = stack.getItem().getDefaultInstance();
-                                        player.inventory.addItemStackToInventory(newStack);
-                                        ((SpiritAltarTileEntity) entity).spirits.add(nbt.getString("spirit"));
-                                        return true;
-                                    }
-                                }
-                                return true;
                             }
                         }
                     }

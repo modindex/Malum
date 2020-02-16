@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -23,13 +22,7 @@ public class ItemEnderStaff extends Item
     {
         super(builder);
     }
-    public int getUseDuration(ItemStack stack) {
-        return 14;
-    }
 
-    public UseAction getUseAction(ItemStack stack) {
-        return UseAction.BOW;
-    }
 
     @Override
     public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)

@@ -66,8 +66,8 @@ public class EnderStaffFOVEvents
                 }
             }
             playerEntity.teleportKeepLoaded(newPosition.x, newPosition.y, newPosition.z);
-            playerEntity.world.playSound(playerEntity, playerEntity.getPosition(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1f, 1.5f);
             PlayerProperties.setTeleportChargeTime(playerEntity, -200);
+            playerEntity.world.playSound(playerEntity, playerEntity.getPosition(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1f, 1.5f);
             playerEntity.addStat(Stats.ITEM_USED.get(playerEntity.getActiveItemStack().getItem()));
         }
         if (PlayerProperties.getTeleportChargeTime(playerEntity) < 0)
