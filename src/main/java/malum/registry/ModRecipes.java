@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ModRecipes
 {
+    public static ArrayList<SpiritAugmentationData> spiritAugmentationData = new ArrayList<>();
 
     public static ArrayList<ResourceFormingRecipe> resourceFormingRecipes = new ArrayList<>();
 
@@ -18,6 +19,11 @@ public class ModRecipes
     public static List<BlockTransmutationRecipe> blockTransmutationRecipes = new ArrayList<>();
 
     public static List<SpiritInfusionRecipe> spiritInfusionRecipes = new ArrayList<>();
+
+    public static void addSpiritAugmentationData(SpiritAugmentationData data)
+    {
+        spiritAugmentationData.add(data);
+    }
 
     public static void addBlockTransmutationRecipe(BlockTransmutationRecipe recipe)
     {
@@ -38,6 +44,20 @@ public class ModRecipes
         ritualRecipes.add(recipe);
     }
 
+    public static SpiritAugmentationData getSpiritAugmentationData(Item dataHoldingItem)
+    {
+        if (dataHoldingItem != null)
+        {
+            for (SpiritAugmentationData data : spiritAugmentationData)
+            {
+                if (data.getItem() == dataHoldingItem)
+                {
+                    return data;
+                }
+            }
+        }
+        return null;
+    }
     public static ResourceFormingRecipe getResourceFormingRecipe(Item formItem)
     {
         if (formItem != null)

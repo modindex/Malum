@@ -3,10 +3,7 @@ package malum;
 import malum.capabilities.CapabilityData;
 import malum.capabilities.PlayerProperties;
 import malum.capabilities.PropertiesDispatcher;
-import malum.recipes.BlockTransmutationRecipes;
-import malum.recipes.ResourceFormingRecipes;
-import malum.recipes.RitualRecipes;
-import malum.recipes.SpiritInfusionRecipes;
+import malum.recipes.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
@@ -52,5 +49,6 @@ public class ForgeEventHandlers
         RitualRecipes.initRecipes();
         ResourceFormingRecipes.initRecipes();
         SpiritInfusionRecipes.initRecipes();
+        SpiritAugmentationDataBinding.bindItemsToAugmenters();
     }
 }

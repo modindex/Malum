@@ -28,6 +28,7 @@ public class TransmutationGemItem extends Item
         BlockTransmutationRecipe.transmutateBlock(state, world, pos);
         BlockTransmutationRecipe.makeTransmutationVisuals(state, world, pos);
         playerEntity.addStat(Stats.ITEM_USED.get(this));
+        playerEntity.swingArm(playerEntity.getActiveHand());
 
         return super.onItemUse(context);
     }

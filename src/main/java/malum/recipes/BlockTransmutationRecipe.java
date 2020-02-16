@@ -10,8 +10,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.Objects;
-
 import static malum.MalumMod.randomize;
 
 /**
@@ -22,13 +20,11 @@ public class BlockTransmutationRecipe
 
     private Block block;
     private Block replacementBlock;
-    private String name;
 
     public BlockTransmutationRecipe(Block block, Block replacementBlock)
     {
         this.block = block;
         this.replacementBlock = replacementBlock;
-        this.name = Objects.requireNonNull(block.getRegistryName()).toString();
     }
     public Block getBlock()
     {
@@ -38,11 +34,6 @@ public class BlockTransmutationRecipe
     public Block getReplacementBlock()
     {
         return replacementBlock;
-    }
-
-    public String getName()
-    {
-        return name;
     }
 
     public static void transmutateBlock(BlockState state, World world, BlockPos pos)

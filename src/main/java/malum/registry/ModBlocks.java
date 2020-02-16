@@ -15,6 +15,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks
 {
+    public static Block spirit_augmenter;
     public static Block dark_roofing;
     public static Block dark_roofing_stairs;
     public static Block dark_roofing_slab;
@@ -50,7 +51,6 @@ public class ModBlocks
     public static Block refined_glowstone_lamp;
 
     public static Block ritual_block;
-    public static Block crafting_block;
     public static Block resource_refinery;
     public static Block arcane_bore;
     public static Block healing_flower;
@@ -76,7 +76,7 @@ public class ModBlocks
     {
         IForgeRegistry<Block> registry = event.getRegistry();
         ritual_block = registerBlock(registry, new RitualBlock(metal_properties), "ritual_block");
-        crafting_block = registerBlock(registry, new CraftingBlock(metal_properties), "crafting_block");
+        spirit_augmenter = registerBlock(registry, new SpiritAugmenterBlock(metal_properties), "spirit_augmenter");
 
         resource_crystal_coal = registerBlock(registry, new ResourceCrystalBlock(Block.Properties.from(Blocks.GLASS)), "resource_crystal_coal");
         resource_crystal_iron = registerBlock(registry, new ResourceCrystalBlock(Block.Properties.from(Blocks.GLASS)), "resource_crystal_iron");
