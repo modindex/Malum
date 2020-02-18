@@ -44,5 +44,15 @@ public class SpiritAugmentationDataBinding
       ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.soul_steel_chestplate, new BlazeArmorAugment()));
       ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.soul_steel_leggings, new BlazeArmorAugment()));
       ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.soul_steel_shoes, new BlazeArmorAugment()));
+
+      ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.soul_crystal_helm, new WitchArmorAugment()));
+      ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.soul_crystal_chestplate, new WitchArmorAugment()));
+      ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.soul_crystal_leggings, new WitchArmorAugment()));
+      ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.soul_crystal_shoes, new WitchArmorAugment()));
+
+      ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.soul_steel_helm, new WitchArmorAugment()));
+      ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.soul_steel_chestplate, new WitchArmorAugment()));
+      ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.soul_steel_leggings, new WitchArmorAugment()));
+      ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.soul_steel_shoes, new WitchArmorAugment()));
   }
 }

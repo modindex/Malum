@@ -6,10 +6,13 @@ import malum.items.armor.ItemArmorSoulSteel;
 import malum.registry.ModRecipes;
 import malum.spirit_augmentation.SpiritAugmentationData;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -85,14 +88,13 @@ public class SpiritAugmentationEvents
                     {
                         playerEntity.setAir(playerEntity.getAir() + 15 * drownedAugmentStrenght);
                     }
-                    MalumMod.LOGGER.info(drownedAugmentStrenght);
                 }
             }
         }
     }
 
     @SubscribeEvent
-    public static void handleBlazeEffect(LivingAttackEvent event)
+    public static void handleBlazeEffect(LivingDamageEvent event)
     {
         if (event.getEntityLiving() instanceof PlayerEntity)
         {
@@ -102,13 +104,39 @@ public class SpiritAugmentationEvents
                 int blazeAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.blaze_armor_augment);
                 if (blazeAugmentStrenght != 0)
                 {
-                    if (MathHelper.nextInt(new Random(), 0, 20 - blazeAugmentStrenght) == 0)
+                    if (MathHelper.nextInt(new Random(), 0, 99) <= blazeAugmentStrenght * 5)
                     {
-                        MalumMod.LOGGER.info(MathHelper.nextInt(new Random(), 0, 20 - blazeAugmentStrenght));
                         playerEntity.extinguish();
                     }
                 }
-                MalumMod.LOGGER.info(blazeAugmentStrenght);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void handleWitchEffect(PotionEvent.PotionExpiryEvent event)
+    {
+        if (event.getEntityLiving() instanceof PlayerEntity)
+        {
+            if (event.getPotionEffect() != null)
+            {
+                if (event.getPotionEffect().getPotion().isBeneficial())
+                {
+                    PlayerEntity playerEntity = (PlayerEntity) event.getEntityLiving();
+                    int witchAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.witch_armor_augment);
+                    if (witchAugmentStrenght != 0)
+                    {
+                        int a = MathHelper.nextInt(new Random(), 0, 99);
+                        MalumMod.LOGGER.info(a);
+                        if (a <= witchAugmentStrenght * 2)
+                        {
+                            MalumMod.LOGGER.info("success");
+                            EffectInstance instance = new EffectInstance(event.getPotionEffect().getPotion(), 200, event.getPotionEffect().getAmplifier());
+                            playerEntity.removeActivePotionEffect(event.getPotionEffect().getPotion());
+                            playerEntity.addPotionEffect(instance);
+                        }
+                    }
+                }
             }
         }
     }

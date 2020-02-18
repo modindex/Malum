@@ -9,18 +9,18 @@ import net.minecraft.util.text.StringTextComponent;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class SoulEaterBoostGainAugment implements AugmentingSpirit
+public class WitchArmorAugment implements AugmentingSpirit
 {
     @Override
     public String augmentTag()
     {
-        return MalumMod.soul_eater_boost_gain_augment;
+        return MalumMod.witch_armor_augment;
     }
 
     @Override
     public int maxAmount()
     {
-        return 100;
+        return 10;
     }
 
     @Override
@@ -40,18 +40,18 @@ public class SoulEaterBoostGainAugment implements AugmentingSpirit
     @Override
     public String augmentDescription()
     {
-        return "Increases the amount of damage boost you gain when killing or hitting an enemy";
+        return "Grants a chance to regain a positive potion effect upon losing said potion effect";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent("Damage boost gain increased by " + nbt.getInt(augmentTag()) / 100 + "%"));
+        tooltip.add(new StringTextComponent((nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment)) * 2 + "% " + "Chance to recover a lost potion effect"));
     }
 
     @Override
     public String spirit()
     {
-        return "minecraft:enderman";
+        return "minecraft:witch";
     }
 }

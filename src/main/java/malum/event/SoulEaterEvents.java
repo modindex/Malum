@@ -32,7 +32,6 @@ public class SoulEaterEvents
                     amount = 0;
                 }
                 PlayerProperties.setSoulEaterDamageBoost(playerEntity, PlayerProperties.getSoulEaterDamageBoost(playerEntity) * amount);
-                MalumMod.LOGGER.info(PlayerProperties.getSoulEaterDamageBoost(playerEntity));
             }
         }
     }

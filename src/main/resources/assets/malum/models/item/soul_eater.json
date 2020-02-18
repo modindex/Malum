@@ -1,38 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "malum:items/soul_eater/soul_eater_0"
-  },
-  "overrides": [
-    {
-      "predicate": {
-        "damage": 1
-      },
-      "model": "malum:item/soul_eater_1"
-    },
-    {
-      "predicate": {
-        "damage": 2
-      },
-      "model": "malum:item/soul_eater_2"
-    },
-    {
-      "predicate": {
-        "damage": 3
-      },
-      "model": "malum:item/soul_eater_3"
-    },
-    {
-      "predicate": {
-        "damage": 4
-      },
-      "model": "malum:item/soul_eater_4"
-    },
-    {
-      "predicate": {
-        "damage": 5
-      },
-      "model": "malum:item/soul_eater_5"
-    }
-  ]
+    "layer0": "malum:items/soul_eater"
+  }
 }

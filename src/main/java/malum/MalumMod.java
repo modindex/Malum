@@ -20,6 +20,7 @@ public class MalumMod
 {
     public static final String MODID = "malum";
     public static final Logger LOGGER = LogManager.getLogger();
+    public static final String witch_armor_augment = MODID+"witch";
     public static final String drowned_armor_augment = MODID+"drowned";
     public static final String blaze_armor_augment = MODID+"blaze";
     public static final String ender_dragon_armor_augment = MODID+"ender_dragon";
