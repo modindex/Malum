@@ -2,6 +2,7 @@ package malum.event;
 
 import malum.items.curios.ItemSpiritRing;
 import malum.items.gadgets.ItemSpiritContainer;
+import malum.items.tools.SoulEaterSwordItem;
 import malum.registry.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -28,8 +29,11 @@ public class SpiritEvents
         if (attacking instanceof PlayerEntity)
         {
             PlayerEntity attackingPlayer = (PlayerEntity) attacking;
-            if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemSpiritRing, attackingPlayer).isPresent()
-                || attackingPlayer.getHeldItem((attackingPlayer).swingingHand).getItem() == ModItems.sacrificial_dagger)
+            if (attackingPlayer.getHeldItem(attackingPlayer.getActiveHand()).getItem() instanceof SoulEaterSwordItem)
+            {
+                return;
+            }
+            if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemSpiritRing, attackingPlayer).isPresent() || attackingPlayer.getHeldItem((attackingPlayer).swingingHand).getItem() == ModItems.sacrificial_dagger)
             {
                 for (ItemStack stack : attackingPlayer.inventory.mainInventory)
                 {
@@ -61,5 +65,4 @@ public class SpiritEvents
             }
         }
     }
-
 }

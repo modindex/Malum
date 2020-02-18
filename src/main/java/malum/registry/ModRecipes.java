@@ -1,6 +1,9 @@
 package malum.registry;
 
-import malum.recipes.*;
+import malum.recipes.BlockTransmutationRecipe;
+import malum.recipes.ResourceFormingRecipe;
+import malum.recipes.RitualRecipe;
+import malum.recipes.SpiritInfusionRecipe;
 import malum.spirit_augmentation.SpiritAugmentationData;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;

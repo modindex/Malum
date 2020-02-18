@@ -9,18 +9,18 @@ import net.minecraft.util.text.StringTextComponent;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class EnderStaffCooldownAugment implements AugmentingSpirit
+public class DrownedArmorAugment implements AugmentingSpirit
 {
     @Override
     public String augmentTag()
     {
-        return MalumMod.ender_staff_cooldown_augment;
+        return MalumMod.drowned_armor_augment;
     }
 
     @Override
     public int maxAmount()
     {
-        return 10;
+        return 5;
     }
 
     @Override
@@ -40,18 +40,18 @@ public class EnderStaffCooldownAugment implements AugmentingSpirit
     @Override
     public String augmentDescription()
     {
-        return "Decreases the teleport cooldown";
+        return "Grants air bubbles when drowning";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent("Teleport cooldown decreased by " + nbt.getInt(augmentTag()) + (nbt.getInt(augmentTag()) == 1 ? " second" : " seconds")));
+        tooltip.add(new StringTextComponent("Drowning grants " + (((nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment)) * 15d) / 20d) + (nbt.getInt(augmentTag()) == 1 ? " second" : " seconds") + " of breathing time"));
     }
 
     @Override
     public String spirit()
     {
-        return "minecraft:endermite";
+        return "minecraft:drowned";
     }
 }

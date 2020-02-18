@@ -1,10 +1,6 @@
-package malum;
+package malum.capabilities;
 
-import malum.capabilities.CapabilityData;
-import malum.capabilities.PlayerProperties;
-import malum.capabilities.PropertiesDispatcher;
-import malum.recipes.*;
-import malum.spirit_augmentation.SpiritAugmentationDataBinding;
+import malum.MalumMod;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
@@ -13,10 +9,9 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 
 @Mod.EventBusSubscriber
-public class ForgeEventHandlers
+public class CapabilityEvents
 {
     @SubscribeEvent
     public static void onEntityConstructing(AttachCapabilitiesEvent<Entity> event)
@@ -41,15 +36,5 @@ public class ForgeEventHandlers
                 });
             });
         }
-    }
-
-    @SubscribeEvent
-    public static void registerRecipes(FMLServerStartedEvent event)
-    {
-        BlockTransmutationRecipes.initRecipes();
-        RitualRecipes.initRecipes();
-        ResourceFormingRecipes.initRecipes();
-        SpiritInfusionRecipes.initRecipes();
-        SpiritAugmentationDataBinding.bindItemsToAugmenters();
     }
 }

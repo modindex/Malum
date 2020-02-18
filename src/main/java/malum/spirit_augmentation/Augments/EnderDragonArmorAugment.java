@@ -9,18 +9,18 @@ import net.minecraft.util.text.StringTextComponent;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class EnderStaffCooldownAugment implements AugmentingSpirit
+public class EnderDragonArmorAugment implements AugmentingSpirit
 {
     @Override
     public String augmentTag()
     {
-        return MalumMod.ender_staff_cooldown_augment;
+        return MalumMod.ender_dragon_armor_augment;
     }
 
     @Override
     public int maxAmount()
     {
-        return 10;
+        return 1;
     }
 
     @Override
@@ -40,18 +40,18 @@ public class EnderStaffCooldownAugment implements AugmentingSpirit
     @Override
     public String augmentDescription()
     {
-        return "Decreases the teleport cooldown";
+        return "Increases efficiency of all other augments on the armor piece its applied to";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent("Teleport cooldown decreased by " + nbt.getInt(augmentTag()) + (nbt.getInt(augmentTag()) == 1 ? " second" : " seconds")));
+        tooltip.add(new StringTextComponent("All other augments are extra effective"));
     }
 
     @Override
     public String spirit()
     {
-        return "minecraft:endermite";
+        return "minecraft:ender_dragon";
     }
 }

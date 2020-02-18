@@ -22,7 +22,6 @@ public class ItemSpirit extends Item
         super(builder);
         this.addPropertyOverride(new ResourceLocation("b"), TYPE_GETTER);
     }
-
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
     {

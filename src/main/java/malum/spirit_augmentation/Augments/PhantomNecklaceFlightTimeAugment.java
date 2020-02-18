@@ -9,18 +9,18 @@ import net.minecraft.util.text.StringTextComponent;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class EnderStaffCooldownAugment implements AugmentingSpirit
+public class PhantomNecklaceFlightTimeAugment implements AugmentingSpirit
 {
     @Override
     public String augmentTag()
     {
-        return MalumMod.ender_staff_cooldown_augment;
+        return MalumMod.phantom_necklace_flight_time_augment;
     }
 
     @Override
     public int maxAmount()
     {
-        return 10;
+        return 80;
     }
 
     @Override
@@ -40,18 +40,18 @@ public class EnderStaffCooldownAugment implements AugmentingSpirit
     @Override
     public String augmentDescription()
     {
-        return "Decreases the teleport cooldown";
+        return "Increases the time you can boost yourself upwards";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent("Teleport cooldown decreased by " + nbt.getInt(augmentTag()) + (nbt.getInt(augmentTag()) == 1 ? " second" : " seconds")));
+        tooltip.add(new StringTextComponent((double)(nbt.getInt(augmentTag())) / 20 + (nbt.getInt(augmentTag()) == 1 ? " Second" : " Seconds")+ " of extra boost time"));
     }
 
     @Override
     public String spirit()
     {
-        return "minecraft:endermite";
+        return "minecraft:phantom";
     }
 }

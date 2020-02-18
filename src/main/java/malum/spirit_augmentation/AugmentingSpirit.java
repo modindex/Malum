@@ -12,7 +12,6 @@ public interface AugmentingSpirit
     int maxAmount();
     public void handleNBT(@Nonnull CompoundNBT nbt);
     String augmentDescription();
-    String augmentTooltip();
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip);
     String spirit();
 }

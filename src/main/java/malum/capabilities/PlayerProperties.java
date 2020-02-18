@@ -8,6 +8,10 @@ public class PlayerProperties {
 
     @CapabilityInject(CapabilityData.class)
     public static Capability<CapabilityData> CAPABILITY;
+    public static float getSoulEaterDamageBoost(PlayerEntity player)
+    {
+        return player.getCapability(PlayerProperties.CAPABILITY).map(CapabilityData::getSoulEaterDamageBoost).orElse(0f);
+    }
 
     public static boolean getIsTeleporting(PlayerEntity player)
     {
@@ -22,6 +26,13 @@ public class PlayerProperties {
         playerEntity.getCapability(PlayerProperties.CAPABILITY).ifPresent(note ->
         {
             note.setIsTeleporting(isTeleporting);
+        });
+    }
+    public static void setSoulEaterDamageBoost(PlayerEntity playerEntity, float damageBoost)
+    {
+        playerEntity.getCapability(PlayerProperties.CAPABILITY).ifPresent(note ->
+        {
+            note.setSoulEaterDamageBoost(damageBoost);
         });
     }
     public static void setTeleportChargeTime(PlayerEntity playerEntity, double teleportChargeTime)

@@ -67,6 +67,7 @@ public class ModItems
     public static Item soul_steel_leggings;
     public static Item soul_steel_chestplate;
     public static Item soul_steel_helm;
+    public static Item soul_eater;
     public static Item ender_staff;
     public static Item ender_artifact;
     public static Item thorns_belt;
@@ -143,9 +144,9 @@ public class ModItems
             soul_steel_ring = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "soul_steel_ring"),
 
             //PROGRESSION TIED TOOLS
-            sacrificial_dagger = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "sacrificial_dagger"),
-            ritual_activator = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ritual_activator"),
-            transmutation_gem = setup(new TransmutationGemItem(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "transmutation_gem"),
+            sacrificial_dagger = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "sacrificial_dagger"),
+            ritual_activator = setup(new Item(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "ritual_activator"),
+            transmutation_gem = setup(new TransmutationGemItem(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "transmutation_gem"),
 
             //TOOLS AND ARMOR
             soul_crystal_hoe = setup(new ModHoeItem(SOUL_CRYSTAL, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_hoe"),
@@ -171,9 +172,11 @@ public class ModItems
             soul_steel_helm = setup(new ItemArmorSoulSteel(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_steel_helm"),
 
             //USEFUL TOOLS
-            ender_staff = setup(new ItemEnderStaff(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxDamage(100)), "ender_staff"),
+            soul_eater = setup(new SoulEaterSwordItem(CATASTROPHE, 2, -0.1f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_eater"),
 
-            ender_artifact = setup(new ItemEnderArtifact(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxDamage(250)), "ender_artifact"),
+            ender_staff = setup(new ItemEnderStaff(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ender_staff"),
+
+            ender_artifact = setup(new ItemEnderArtifact(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "ender_artifact"),
 
             //BELTS
 

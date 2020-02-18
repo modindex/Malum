@@ -43,16 +43,11 @@ public class EnderStaffDistanceAugment implements AugmentingSpirit
         return "Increases the teleport distance";
     }
 
-    @Override
-    public String augmentTooltip()
-    {
-        return "Teleport distance increased by ";
-    }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent(augmentTooltip() + nbt.getInt(augmentTag()) + ((nbt.getInt(augmentTag()) == 1 ? " block" : " blocks"))));
+        tooltip.add(new StringTextComponent("Teleport distance increased by " + nbt.getInt(augmentTag()) + ((nbt.getInt(augmentTag()) == 1 ? " block" : " blocks"))));
     }
 
     @Override

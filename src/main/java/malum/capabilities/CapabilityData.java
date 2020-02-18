@@ -13,6 +13,8 @@ public class CapabilityData
     //ender staff
     boolean isTeleporting;
     double teleportChargeTime;
+
+    float soulEaterDamageBoost;
     public CapabilityData()
     {
     }
@@ -22,6 +24,11 @@ public class CapabilityData
     public double getTeleortChargeTime()
     {
         return teleportChargeTime;
+    }
+    @NotNull
+    public float getSoulEaterDamageBoost()
+    {
+        return soulEaterDamageBoost;
     }
     @NotNull
     public boolean getTeleporting()
@@ -36,6 +43,10 @@ public class CapabilityData
     public void setTeleportChargeTime(double teleportChargeTime)
     {
         this.teleportChargeTime = teleportChargeTime;
+    }
+    public void setSoulEaterDamageBoost(float soulEaterDamageBoost)
+    {
+        this.soulEaterDamageBoost = soulEaterDamageBoost;
     }
 
     @NotNull
@@ -74,6 +85,9 @@ public class CapabilityData
         avaiableFlightTime = source.avaiableFlightTime;
         canFly = source.canFly;
         totalFlightTime = source.totalFlightTime;
+        teleportChargeTime = source.teleportChargeTime;
+        isTeleporting = source.isTeleporting;
+        soulEaterDamageBoost = source.soulEaterDamageBoost;
     }
 
 

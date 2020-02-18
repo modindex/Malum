@@ -9,18 +9,18 @@ import net.minecraft.util.text.StringTextComponent;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class EnderStaffCooldownAugment implements AugmentingSpirit
+public class SoulEaterBoostUpkeepAugment implements AugmentingSpirit
 {
     @Override
     public String augmentTag()
     {
-        return MalumMod.ender_staff_cooldown_augment;
+        return MalumMod.soul_eater_boost_upkeep_augment;
     }
 
     @Override
     public int maxAmount()
     {
-        return 10;
+        return 20;
     }
 
     @Override
@@ -40,13 +40,13 @@ public class EnderStaffCooldownAugment implements AugmentingSpirit
     @Override
     public String augmentDescription()
     {
-        return "Decreases the teleport cooldown";
+        return "Decreases the rate at which the damage boost decreases";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent("Teleport cooldown decreased by " + nbt.getInt(augmentTag()) + (nbt.getInt(augmentTag()) == 1 ? " second" : " seconds")));
+        tooltip.add(new StringTextComponent("Decreases the rate at which damage boost decreases by " + nbt.getInt(augmentTag()) + "%"));
     }
 
     @Override

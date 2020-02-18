@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "malum:items/soul_eater/soul_eater_5"
+  }
+}

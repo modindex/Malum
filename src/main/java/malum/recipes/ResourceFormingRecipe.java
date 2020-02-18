@@ -1,14 +1,7 @@
 package malum.recipes;
 
-import malum.registry.ModRecipes;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
-import net.minecraft.state.IProperty;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-
-import java.util.Objects;
 
 /**
  * Transmutation recipe for Runic Shears

@@ -8,7 +8,6 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.event.FOVUpdateEvent;
@@ -69,7 +68,7 @@ public class EnderStaffEvents
 
             if (playerEntity.isSneaking())
             {
-                for (int i = (distance+1)*4; i > 0; i--)
+                for (int i = 8+(distance)*4; i >= 8; i--)
                 {
                     newPosition = attemptTeleport(playerEntity,direction,newPosition,i/4);
                 }
@@ -95,7 +94,7 @@ public class EnderStaffEvents
     public static Vec3d attemptTeleport(PlayerEntity playerEntity, Vec3d direction, Vec3d newPosition, int i)
     {
         Vec3d testPosition = (playerEntity.getPositionVec()).add(direction.mul(i, i, i));
-        if (!playerEntity.world.checkBlockCollision(new AxisAlignedBB(new BlockPos(testPosition.x, testPosition.y, testPosition.z))))
+        if (!playerEntity.world.checkBlockCollision(new AxisAlignedBB(new Vec3d(testPosition.x, testPosition.y, testPosition.z), new Vec3d(testPosition.x, testPosition.y, testPosition.z))))
         {
             newPosition = testPosition;
         }

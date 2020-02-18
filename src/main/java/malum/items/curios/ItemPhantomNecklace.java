@@ -6,6 +6,7 @@ import malum.MalumMod;
 import malum.capabilities.PlayerProperties;
 import malum.models.ModelPhantomWingLeft;
 import malum.models.ModelPhantomWingRight;
+import malum.spirit_augmentation.SpiritAugmentationData;
 import net.minecraft.client.GameSettings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -18,8 +19,12 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import top.theillusivec4.curios.api.capability.ICurio;
+
+import java.util.Random;
 
 public class ItemPhantomNecklace extends Item implements ICurio
 {
@@ -117,7 +122,7 @@ public class ItemPhantomNecklace extends Item implements ICurio
                     {
                         PlayerProperties.setTotalFlightTime((PlayerEntity) entityLivingBase, PlayerProperties.getTotalFlightTime((PlayerEntity) entityLivingBase) > 0 ? PlayerProperties.getTotalFlightTime((PlayerEntity) entityLivingBase) - 2d : 0d);
                         PlayerProperties.setCanFly((PlayerEntity) entityLivingBase, false);
-                        PlayerProperties.setAvaiableFlightTime((PlayerEntity) entityLivingBase, 25d);
+                        PlayerProperties.setAvaiableFlightTime((PlayerEntity) entityLivingBase, (double)(20 + SpiritAugmentationData.getAugmentAmountFromStack(stack, MalumMod.phantom_necklace_flight_time_augment)));
                     }
                     else
                     {
@@ -126,7 +131,14 @@ public class ItemPhantomNecklace extends Item implements ICurio
                             PlayerProperties.setTotalFlightTime((PlayerEntity) entityLivingBase, PlayerProperties.getTotalFlightTime((PlayerEntity) entityLivingBase) < 50 ? PlayerProperties.getTotalFlightTime((PlayerEntity) entityLivingBase) + 1.5d : 60);
                             if (jump.isKeyDown())
                             {
-                                entityLivingBase.world.addParticle(ParticleTypes.MYCELIUM, MalumMod.randomize(entityLivingBase.posX, 0.5), MalumMod.randomize(entityLivingBase.posY + (entityLivingBase.getHeight() * 0.75f), 0.5), MalumMod.randomize(entityLivingBase.posZ, 0.5), 0, 0, 0);
+                                float yaw = entityLivingBase.rotationYaw;
+                                float pitch = entityLivingBase.rotationPitch;
+                                float f = -MathHelper.sin(yaw * ((float) Math.PI / 180F)) * MathHelper.cos(pitch * ((float) Math.PI / 180F));
+                                float f1 = -MathHelper.sin(pitch * ((float) Math.PI / 180F));
+                                float f2 = MathHelper.cos(yaw * ((float) Math.PI / 180F)) * MathHelper.cos(pitch * ((float) Math.PI / 180F));
+                                Vec3d direction = new Vec3d(f, f1, f2);
+                                Vec3d particlePosition = entityLivingBase.getPositionVec().add(MathHelper.nextDouble(new Random(), -0.5, 0.5), MathHelper.nextDouble(new Random(), -0.15, 0.15), MathHelper.nextDouble(new Random(), -0.5, 0.5)).subtract(direction);
+                                entityLivingBase.world.addParticle(ParticleTypes.MYCELIUM, particlePosition.x, particlePosition.y, particlePosition.z,0,0,0);
                                 if (flightTime > 0d)
                                 {
                                     if (entityLivingBase.getMotion().y < 0.2)

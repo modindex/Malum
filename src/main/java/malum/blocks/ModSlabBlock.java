@@ -4,7 +4,6 @@ package malum.blocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.BlockRenderLayer;
@@ -14,11 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
@@ -28,11 +23,11 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class ModSlabBlock extends SlabBlock {
-    private final Supplier<BlockState> stateSupplier;
+    private final Supplier<BlockState> supplier;
 
-    public ModSlabBlock(Supplier<BlockState> stateSupplier, Properties properties) {
+    public ModSlabBlock(Supplier<BlockState> supplier, Properties properties) {
         super(properties);
-        this.stateSupplier = stateSupplier;
+        this.supplier = supplier;
     }
 
     @Override
@@ -43,38 +38,38 @@ public class ModSlabBlock extends SlabBlock {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        this.stateSupplier.get().getBlock().animateTick(stateIn, worldIn, pos, rand);
+        this.supplier.get().getBlock().animateTick(stateIn, worldIn, pos, rand);
     }
 
     @Override
     public void onBlockClicked(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
-        this.stateSupplier.get().onBlockClicked(worldIn, pos, player);
+        this.supplier.get().onBlockClicked(worldIn, pos, player);
     }
 
     @Override
     public void onPlayerDestroy(IWorld worldIn, BlockPos pos, BlockState state) {
-        this.stateSupplier.get().getBlock().onPlayerDestroy(worldIn, pos, state);
+        this.supplier.get().getBlock().onPlayerDestroy(worldIn, pos, state);
     }
 
     @Override
     public float getExplosionResistance() {
-        return this.stateSupplier.get().getBlock().getExplosionResistance();
+        return this.supplier.get().getBlock().getExplosionResistance();
     }
 
     @Override
     public BlockRenderLayer getRenderLayer() {
-        return this.stateSupplier.get().getBlock().getRenderLayer();
+        return this.supplier.get().getBlock().getRenderLayer();
     }
 
     @Override
     public int tickRate(IWorldReader worldIn) {
-        return this.stateSupplier.get().getBlock().tickRate(worldIn);
+        return this.supplier.get().getBlock().tickRate(worldIn);
     }
 
     @Override
     public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
         if (state.getBlock() != oldState.getBlock()) { // super test is strange
-            BlockState currentState = this.stateSupplier.get();
+            BlockState currentState = this.supplier.get();
             currentState.neighborChanged(worldIn, pos, Blocks.AIR, pos, false);
             currentState.getBlock().onBlockAdded(currentState, worldIn, pos, oldState, false);
         }
@@ -83,48 +78,48 @@ public class ModSlabBlock extends SlabBlock {
     @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            this.stateSupplier.get().onReplaced(worldIn, pos, newState, isMoving);
+            this.supplier.get().onReplaced(worldIn, pos, newState, isMoving);
         }
     }
 
     @Override
     public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
-        this.stateSupplier.get().getBlock().onEntityWalk(worldIn, pos, entityIn);
+        this.supplier.get().getBlock().onEntityWalk(worldIn, pos, entityIn);
     }
 
     @Override
     public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
-        this.stateSupplier.get().getBlock().tick(state, worldIn, pos, random);
+        this.supplier.get().getBlock().tick(state, worldIn, pos, random);
     }
 
     @Override
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        return this.stateSupplier.get().onBlockActivated(worldIn, player, handIn, hit);
+        return this.supplier.get().onBlockActivated(worldIn, player, handIn, hit);
     }
 
     @Override
     public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn) {
-        this.stateSupplier.get().getBlock().onExplosionDestroy(worldIn, pos, explosionIn);
+        this.supplier.get().getBlock().onExplosionDestroy(worldIn, pos, explosionIn);
     }
 
     @Override
     public int getHarvestLevel(BlockState state) {
-        return this.stateSupplier.get().getHarvestLevel();
+        return this.supplier.get().getHarvestLevel();
     }
 
     @Nullable
     @Override
     public ToolType getHarvestTool(BlockState state) {
-        return this.stateSupplier.get().getHarvestTool();
+        return this.supplier.get().getHarvestTool();
     }
 
     @Override
     public int getFireSpreadSpeed(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
-        return this.stateSupplier.get().getBlock().getFireSpreadSpeed(state, world, pos, face);
+        return this.supplier.get().getBlock().getFireSpreadSpeed(state, world, pos, face);
     }
 
     @Override
     public int getFlammability(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
-        return this.stateSupplier.get().getBlock().getFlammability(state, world, pos, face);
+        return this.supplier.get().getBlock().getFlammability(state, world, pos, face);
     }
 }

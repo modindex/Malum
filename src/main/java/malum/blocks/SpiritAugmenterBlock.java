@@ -1,8 +1,10 @@
 package malum.blocks;
 
+import malum.items.armor.ItemArmorSoulCrystal;
+import malum.items.armor.ItemArmorSoulSteel;
 import malum.items.gadgets.ItemSpiritContainer;
-import malum.spirit_augmentation.SpiritAugmentationData;
 import malum.registry.ModRecipes;
+import malum.spirit_augmentation.SpiritAugmentationData;
 import malum.tileentities.SpiritAugmenterTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -95,6 +97,21 @@ public class SpiritAugmenterBlock extends Block
                                             String spirit = spirit_bottle.getTag().getString("spirit");
                                             if (data.getSpirit().spirit().equals(spirit))
                                             {
+                                                if ((augment_stack.getItem() instanceof ItemArmorSoulSteel || augment_stack.getItem() instanceof ItemArmorSoulCrystal))
+                                                {
+                                                    int maxAugments = (augment_stack.getItem() instanceof ItemArmorSoulCrystal) ? 20 : 30;
+                                                    if (data.getItem() == augment_stack.getItem())
+                                                    {
+                                                        if (augment_nbt.contains(data.getSpirit().augmentTag()))
+                                                        {
+                                                            maxAugments -= augment_nbt.getInt(data.getSpirit().augmentTag());
+                                                        }
+                                                    }
+                                                    if (maxAugments <= 0)
+                                                    {
+                                                        return true;
+                                                    }
+                                                }
                                                 if (augment_nbt.getInt(data.getSpirit().augmentTag()) < data.getSpirit().maxAmount())
                                                 {
                                                     data.getSpirit().handleNBT(augment_nbt);
@@ -132,6 +149,6 @@ public class SpiritAugmenterBlock extends Block
                 }
             }
         }
-        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+        return true;
     }
 }

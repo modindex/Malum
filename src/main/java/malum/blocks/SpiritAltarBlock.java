@@ -30,7 +30,8 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static net.minecraft.state.properties.BlockStateProperties.*;
+import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FACING;
+import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 public class SpiritAltarBlock extends Block
 {
     public SpiritAltarBlock(Properties properties)

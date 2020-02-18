@@ -8,9 +8,10 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.IProperty;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-import static malum.MalumMod.randomize;
+import java.util.Random;
 
 /**
  * Transmutation recipe for Runic Shears
@@ -54,16 +55,16 @@ public class BlockTransmutationRecipe
             Block replacementBlock = recipe.getReplacementBlock();
             BlockState replacementState = replacementBlock.getDefaultState();
             setBlockStateWithExistingProperties(world, pos, replacementState);
-            world.playSound(null, pos, ModSounds.transmutate, SoundCategory.PLAYERS, 1F, (float) (0.2F + randomize(1, 1)));
+            world.playSound(null, pos, ModSounds.transmutate, SoundCategory.PLAYERS, 1F, MathHelper.nextFloat(new Random(), 0.2f, 0.4f) );
             world.playSound(null, pos, state.getSoundType().getBreakSound(), SoundCategory.PLAYERS, 1F, 0.8F);
             for (int a = 0; a <= 10; a++)
             {
-                double posX = randomize(pos.getX() + 0.5, 0.6);
-                double posY = randomize(pos.getY() + 0.5, 0.6);
-                double posZ = randomize(pos.getZ() + 0.5, 0.6);
-                double velX = randomize(0, 0.1);
-                double velY = randomize(0, 0.1);
-                double velZ = randomize(0, 0.1);
+                double posX = pos.getX() + MathHelper.nextDouble(new Random(), -0.5, 0.5);
+                double posY = pos.getY() + MathHelper.nextDouble(new Random(), -0.5, 0.5);
+                double posZ = pos.getZ() + MathHelper.nextDouble(new Random(), -0.5, 0.5);
+                double velX = MathHelper.nextDouble(new Random(), -0.1, 0.1);
+                double velY = MathHelper.nextDouble(new Random(), -0.1, 0.1);
+                double velZ = MathHelper.nextDouble(new Random(), -0.1, 0.1);
                 world.addParticle(ParticleTypes.LARGE_SMOKE, posX, posY, posZ, velX, velY, velZ);
             }
         }
