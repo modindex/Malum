@@ -18,6 +18,12 @@ public class EnderStaffDistanceAugment implements AugmentingSpirit
     }
 
     @Override
+    public boolean isGrand()
+    {
+        return false;
+    }
+
+    @Override
     public int maxAmount()
     {
         return 20;

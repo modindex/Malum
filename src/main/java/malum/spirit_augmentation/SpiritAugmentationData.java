@@ -1,6 +1,7 @@
 package malum.spirit_augmentation;
 
 import malum.MalumMod;
+import malum.registry.ModRecipes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -47,6 +48,23 @@ public class SpiritAugmentationData
             }
         }
         return result;
+    }
+    public static boolean doesItemHaveGrandAugment(ItemStack stack)
+    {
+        if (stack.getTag() != null)
+        {
+            for (SpiritAugmentationData data : ModRecipes.spiritAugmentationData)
+            {
+                if (data.getSpirit().isGrand())
+                {
+                    if (stack.getTag().contains(data.spirit.augmentTag()))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
     public static int getAugmentAmountFromStack(ItemStack stack, String string)
     {

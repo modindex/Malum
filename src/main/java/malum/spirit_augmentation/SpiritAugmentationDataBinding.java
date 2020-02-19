@@ -15,12 +15,14 @@ public class SpiritAugmentationDataBinding
       ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.soul_eater, new SoulEaterBoostGainAugment()));
       ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.soul_eater, new SoulEaterBoostUpkeepAugment()));
       addAugmentToArmor(new DrownedArmorAugment());
-      addAugmentToArmor(new EnderDragonArmorAugment());
       addAugmentToArmor(new BlazeArmorAugment());
       addAugmentToArmor(new WitchArmorAugment());
       addAugmentToArmor(new PillagerArmorAugment());
       addAugmentToArmor(new VindicatorArmorAugment());
       addAugmentToArmor(new RavagerArmorAugment());
+      addAugmentToArmor(new EvokerArmorAugment());
+      addAugmentToArmor(new EnderDragonArmorAugment());
+      addAugmentToArmor(new ElderGuardianArmorAugment());
   }
   public static void addAugmentToArmor(AugmentingSpirit spirit)
   {

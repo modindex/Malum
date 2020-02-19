@@ -5,8 +5,10 @@ import malum.items.armor.ItemArmorSoulCrystal;
 import malum.items.armor.ItemArmorSoulSteel;
 import malum.registry.ModRecipes;
 import malum.spirit_augmentation.SpiritAugmentationData;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.entity.projectile.EvokerFangsEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
@@ -115,6 +117,27 @@ public class SpiritAugmentationEvents
                     if (MathHelper.nextInt(new Random(), 0, 99) <= blazeAugmentStrenght * 5)
                     {
                         playerEntity.extinguish();
+                    }
+                }
+            }
+        }
+    }
+    @SubscribeEvent
+    public static void handleEvokerEffect(LivingDamageEvent event)
+    {
+        if (event.getEntityLiving() instanceof PlayerEntity)
+        {
+            if (event.getSource().getTrueSource() instanceof LivingEntity)
+            {
+                PlayerEntity playerEntity = (PlayerEntity) event.getEntityLiving();
+                int evokerAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.evoker_armor_augment);
+                if (evokerAugmentStrenght != 0)
+                {
+                    if (MathHelper.nextInt(new Random(), 0, 99) <= evokerAugmentStrenght * 5)
+                    {
+                        LivingEntity entity = (LivingEntity) event.getSource().getTrueSource();
+                        EvokerFangsEntity fangsEntity = new EvokerFangsEntity(playerEntity.world, entity.posX, entity.posY, entity.posZ, entity.rotationYaw, 0, playerEntity);
+                        playerEntity.world.addEntity(fangsEntity);
                     }
                 }
             }

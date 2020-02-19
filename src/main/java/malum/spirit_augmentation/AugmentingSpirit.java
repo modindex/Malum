@@ -9,9 +9,10 @@ import java.util.List;
 public interface AugmentingSpirit
 {
     String augmentTag();
+    boolean isGrand();
     int maxAmount();
-    public void handleNBT(@Nonnull CompoundNBT nbt);
+    void handleNBT(@Nonnull CompoundNBT nbt);
     String augmentDescription();
-    public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip);
+    void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip);
     String spirit();
 }

@@ -18,6 +18,12 @@ public class EnderDragonArmorAugment implements AugmentingSpirit
     }
 
     @Override
+    public boolean isGrand()
+    {
+        return true;
+    }
+
+    @Override
     public int maxAmount()
     {
         return 1;

@@ -28,7 +28,11 @@ public class MalumMod
     public static final String witch_armor_augment = MODID+"witch";
     public static final String drowned_armor_augment = MODID+"drowned";
     public static final String blaze_armor_augment = MODID+"blaze";
+
     public static final String ender_dragon_armor_augment = MODID+"ender_dragon";
+    public static final String elder_guardian_armor_augment = MODID+"elder_guardian";
+    public static final String wither_armor_augment = MODID+"wither";
+
     public static final String ender_staff_distance_augment = MODID+"ender_staff_distance";
     public static final String ender_staff_cooldown_augment = MODID+"ender_staff_cooldown";
     public static final String phantom_necklace_flight_time_augment = MODID+"phantom_necklace_flight_time";

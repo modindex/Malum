@@ -18,6 +18,12 @@ public class EnderStaffCooldownAugment implements AugmentingSpirit
     }
 
     @Override
+    public boolean isGrand()
+    {
+        return false;
+    }
+
+    @Override
     public int maxAmount()
     {
         return 10;

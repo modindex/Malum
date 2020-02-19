@@ -9,24 +9,24 @@ import net.minecraft.util.text.StringTextComponent;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class PillagerArmorAugment implements AugmentingSpirit
+public class ElderGuardianArmorAugment implements AugmentingSpirit
 {
     @Override
     public String augmentTag()
     {
-        return MalumMod.pillager_armor_augment;
+        return MalumMod.elder_guardian_armor_augment;
     }
 
     @Override
     public boolean isGrand()
     {
-        return false;
+        return true;
     }
 
     @Override
     public int maxAmount()
     {
-        return 5;
+        return 1;
     }
 
     @Override
@@ -46,18 +46,18 @@ public class PillagerArmorAugment implements AugmentingSpirit
     @Override
     public String augmentDescription()
     {
-        return "Grants a chance to reload a held crossbow upon hitting an enemy with an arrow fired from said crossbow";
+        return "Shoots an elder guardian laser at nearby enemies";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent((nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment)) * 2 + "% " + "Chance to reload held crossbow on hit"));
+        tooltip.add(new StringTextComponent("Shoots a laser at nearby enemies"));
     }
 
     @Override
     public String spirit()
     {
-        return "minecraft:pillager";
+        return "minecraft:elder_guardian";
     }
 }

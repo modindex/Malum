@@ -107,7 +107,7 @@ public class SpiritAugmenterBlock extends Block
                                                             maxAugments -= augment_nbt.getInt(data.getSpirit().augmentTag());
                                                         }
                                                     }
-                                                    if (maxAugments <= 0)
+                                                    if (maxAugments <= 0 || SpiritAugmentationData.doesItemHaveGrandAugment(augment_stack))
                                                     {
                                                         return true;
                                                     }
