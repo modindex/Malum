@@ -19,6 +19,8 @@ public class SpiritAugmentationDataBinding
       addAugmentToArmor(new BlazeArmorAugment());
       addAugmentToArmor(new WitchArmorAugment());
       addAugmentToArmor(new PillagerArmorAugment());
+      addAugmentToArmor(new VindicatorArmorAugment());
+      addAugmentToArmor(new RavagerArmorAugment());
   }
   public static void addAugmentToArmor(AugmentingSpirit spirit)
   {

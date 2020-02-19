@@ -9,18 +9,18 @@ import net.minecraft.util.text.StringTextComponent;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class PillagerArmorAugment implements AugmentingSpirit
+public class RavagerArmorAugment implements AugmentingSpirit
 {
     @Override
     public String augmentTag()
     {
-        return MalumMod.pillager_armor_augment;
+        return MalumMod.ravager_armor_augment;
     }
 
     @Override
     public int maxAmount()
     {
-        return 5;
+        return 10;
     }
 
     @Override
@@ -40,18 +40,18 @@ public class PillagerArmorAugment implements AugmentingSpirit
     @Override
     public String augmentDescription()
     {
-        return "Grants a chance to reload a held crossbow upon hitting an enemy with an arrow fired from said crossbow";
+        return "While below 25% of your max health, damage dealt is increased";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent((nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment)) * 2 + "% " + "Chance to reload held crossbow on hit"));
+        tooltip.add(new StringTextComponent((nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment)) + "% " + "extra damage when at low heaalth"));
     }
 
     @Override
     public String spirit()
     {
-        return "minecraft:pillager";
+        return "minecraft:ravager";
     }
 }

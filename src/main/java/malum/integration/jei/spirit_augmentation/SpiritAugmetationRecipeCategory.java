@@ -13,7 +13,6 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -79,11 +78,7 @@ public class SpiritAugmetationRecipeCategory implements IRecipeCategory<SpiritAu
     @Override
     public void setIngredients(SpiritAugmentationData data, IIngredients iIngredients)
     {
-        ItemStack bottle = new ItemStack(ModItems.spirit_augment);
-        CompoundNBT nbt = new CompoundNBT();
-        nbt.putString("spirit", data.getSpirit().spirit());
-        bottle.setTag(nbt);
-        iIngredients.setInput(VanillaTypes.ITEM, bottle);
+        iIngredients.setInput(VanillaTypes.ITEM, new ItemStack(ModItems.spirit_bottle));
         iIngredients.setOutput(VanillaTypes.ITEM, new ItemStack(data.getItem()));
     }
 

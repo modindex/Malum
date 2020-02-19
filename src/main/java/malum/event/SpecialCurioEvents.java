@@ -28,7 +28,7 @@ import java.util.Random;
 public class SpecialCurioEvents
 {
     @SubscribeEvent
-    public static void Heal(LivingHealEvent event)
+    public static void heal(LivingHealEvent event)
     {
         LivingEntity entity = event.getEntityLiving();
         if (entity instanceof PlayerEntity)
@@ -75,7 +75,7 @@ public class SpecialCurioEvents
     }
 
     @SubscribeEvent
-    public static void AddPotion(PotionEvent.PotionAddedEvent event)
+    public static void addPotion(PotionEvent.PotionAddedEvent event)
     {
         if (event.getEntityLiving().getLastDamageSource() != null)
         {
@@ -96,7 +96,7 @@ public class SpecialCurioEvents
     }
 
     @SubscribeEvent
-    public static void RemoveLevitate(LivingEvent.LivingUpdateEvent event)
+    public static void removeLevitate(LivingEvent.LivingUpdateEvent event)
     {
         if (event.getEntityLiving().getTags().contains("removeLevitate"))
         {
@@ -105,7 +105,7 @@ public class SpecialCurioEvents
         }
     }
     @SubscribeEvent
-    public static void PhantomTargetEvent(LivingSetAttackTargetEvent event)
+    public static void phantomTargetEvent(LivingSetAttackTargetEvent event)
     {
         if (event.getTarget() instanceof PlayerEntity)
         {
@@ -121,7 +121,7 @@ public class SpecialCurioEvents
     }
 
     @SubscribeEvent
-    public static void NetherNecklaceCancelJumpEvent(LivingEvent.LivingJumpEvent event)
+    public static void netherNecklaceCancelJumpEvent(LivingEvent.LivingJumpEvent event)
     {
         LivingEntity entityLivingBase = event.getEntityLiving();
         if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemNetherNecklace, entityLivingBase).isPresent())
@@ -131,7 +131,7 @@ public class SpecialCurioEvents
     }
 
     @SubscribeEvent
-    public static void CancelFallDamage(LivingAttackEvent event)
+    public static void cancelFallDamage(LivingAttackEvent event)
     {
         LivingEntity attacked = event.getEntityLiving();
 
@@ -146,7 +146,20 @@ public class SpecialCurioEvents
     }
 
     @SubscribeEvent
-    public static void RemoveNauseaAndHunger(LivingEvent.LivingUpdateEvent event)
+    public static void cancelBerryDamage(LivingAttackEvent event)
+    {
+        LivingEntity attacked = event.getEntityLiving();
+
+        if (event.getSource() == DamageSource.SWEET_BERRY_BUSH)
+        {
+            if (CuriosAPI.getCurioEquipped(stack1 -> stack1.getItem() instanceof ItemBerryRing, attacked).isPresent())
+            {
+                event.setCanceled(true);
+            }
+        }
+    }
+    @SubscribeEvent
+    public static void removeNauseaAndHunger(LivingEvent.LivingUpdateEvent event)
     {
         if (event.getEntityLiving() instanceof PlayerEntity)
         {
@@ -165,7 +178,7 @@ public class SpecialCurioEvents
     }
 
     @SubscribeEvent
-    public static void ThornsAndHealing(LivingHurtEvent event)
+    public static void thornsAndHealing(LivingHurtEvent event)
     {
         LivingEntity livingEntity = event.getEntityLiving();
 

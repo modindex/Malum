@@ -1,6 +1,5 @@
 package malum.tileentities;
 
-import malum.MalumMod;
 import malum.registry.ModTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
@@ -75,9 +74,5 @@ public class SpiritAugmenterTileEntity extends TileEntity implements ITickableTi
     @Override
     public void tick()
     {
-        if (!this.world.isRemote())
-        {
-            MalumMod.LOGGER.info(inventory.getStackInSlot(0).getItem());
-        }
     }
 }

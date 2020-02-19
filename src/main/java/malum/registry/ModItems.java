@@ -79,6 +79,7 @@ public class ModItems
     public static Item wither_necklace;
     public static Item shulker_necklace;
     public static Item spirit_ring;
+    public static Item berry_ring;
     public static Item phantom_ring;
     public static Item arcane_bore;
     public static Item spirit_altar;
@@ -195,6 +196,7 @@ public class ModItems
             //RINGS
 
             spirit_ring = setup(new ItemSpiritRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "spirit_ring"),
+            berry_ring = setup(new ItemSpiritRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "berry_ring"),
             phantom_ring = setup(new ItemPhantomRing(new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP).maxStackSize(1)), "phantom_ring"),
             //PROGRESSION BLOCKS
 

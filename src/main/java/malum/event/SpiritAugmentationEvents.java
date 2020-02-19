@@ -7,6 +7,7 @@ import malum.registry.ModRecipes;
 import malum.spirit_augmentation.SpiritAugmentationData;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.item.AxeItem;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -18,6 +19,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -118,6 +120,32 @@ public class SpiritAugmentationEvents
             }
         }
     }
+    @SubscribeEvent
+    public static void handleVindicatorEffect(LivingHurtEvent event)
+    {
+        if (event.getSource().getTrueSource() instanceof PlayerEntity)
+        {
+            PlayerEntity playerEntity = (PlayerEntity) event.getSource().getTrueSource();
+            if (playerEntity.getHeldItemMainhand().getItem() instanceof AxeItem)
+            {
+                int vindicatorAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.vindicator_armor_augment);
+                event.setAmount(event.getAmount() * (1f + vindicatorAugmentStrenght / 100f));
+            }
+        }
+    }
+    @SubscribeEvent
+    public static void handleRavagerEffect(LivingHurtEvent event)
+    {
+        if (event.getSource().getTrueSource() instanceof PlayerEntity)
+        {
+            PlayerEntity playerEntity = (PlayerEntity) event.getSource().getTrueSource();
+            int ravagerAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.ravager_armor_augment);
+            if (playerEntity.getHealth() <= playerEntity.getMaxHealth() * 0.25f)
+            {
+                event.setAmount(event.getAmount() + event.getAmount() * ravagerAugmentStrenght / 100);
+            }
+        }
+    }
 
     @SubscribeEvent
     public static void handlePillagerEffect(LivingDamageEvent event)
@@ -130,8 +158,7 @@ public class SpiritAugmentationEvents
                 int pillagerAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.pillager_armor_augment);
                 if (pillagerAugmentStrenght != 0)
                 {
-
-                    if (MathHelper.nextInt(new Random(), 0, 99) <= pillagerAugmentStrenght)
+                    if (MathHelper.nextInt(new Random(), 0, 99) <= pillagerAugmentStrenght * 2)
                     {
                         if (playerEntity.getHeldItemMainhand().getItem() instanceof CrossbowItem)
                         {
