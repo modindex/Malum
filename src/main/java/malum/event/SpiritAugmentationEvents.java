@@ -6,6 +6,12 @@ import malum.items.armor.ItemArmorSoulSteel;
 import malum.registry.ModRecipes;
 import malum.spirit_augmentation.SpiritAugmentationData;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.item.CrossbowItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
@@ -112,6 +118,40 @@ public class SpiritAugmentationEvents
             }
         }
     }
+
+    @SubscribeEvent
+    public static void handlePillagerEffect(LivingDamageEvent event)
+    {
+        if (event.getSource().getImmediateSource() instanceof ArrowEntity)
+        {
+            if (event.getSource().getTrueSource() instanceof PlayerEntity)
+            {
+                PlayerEntity playerEntity = (PlayerEntity) event.getSource().getTrueSource();
+                int pillagerAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.pillager_armor_augment);
+                if (pillagerAugmentStrenght != 0)
+                {
+
+                    if (MathHelper.nextInt(new Random(), 0, 99) <= pillagerAugmentStrenght)
+                    {
+                        if (playerEntity.getHeldItemMainhand().getItem() instanceof CrossbowItem)
+                        {
+                            ItemStack crossbow = playerEntity.getHeldItemMainhand();
+                            if (crossbow.getTag() != null)
+                            {
+                                ListNBT listnbt = new ListNBT();
+                                crossbow.getTag().putBoolean("Charged", true);
+                                CompoundNBT compoundnbt1 = new CompoundNBT();
+                                Items.ARROW.getDefaultInstance().write(compoundnbt1);
+                                listnbt.add(compoundnbt1);
+                                crossbow.getTag().put("ChargedProjectiles", listnbt);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     @SubscribeEvent
     public static void handleWitchEffect(PotionEvent.PotionExpiryEvent event)
