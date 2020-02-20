@@ -16,6 +16,7 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.StringTextComponent;
@@ -185,6 +186,19 @@ public class SpiritAugmentationEvents
                 {
                     event.setAmount(event.getAmount() + event.getAmount() * zombieAugmentStrenght / 50);
                 }
+            }
+        }
+    }
+    @SubscribeEvent
+    public static void handleHuskEffect(LivingHurtEvent event)
+    {
+        if (event.getSource().getTrueSource() instanceof PlayerEntity)
+        {
+            PlayerEntity playerEntity = (PlayerEntity) event.getSource().getTrueSource();
+            int huskAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.husk_armor_augment);
+            if (huskAugmentStrenght != 0)
+            {
+                event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.HUNGER,20, huskAugmentStrenght -1));
             }
         }
     }

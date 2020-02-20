@@ -15,6 +15,7 @@ public class SpiritAugmentationDataBinding
       ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.soul_eater, new SoulEaterBoostGainAugment()));
       ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.soul_eater, new SoulEaterBoostUpkeepAugment()));
       addAugmentToArmor(new ZombieArmorAugment());
+      addAugmentToArmor(new HuskArmorAugment());
       addAugmentToArmor(new DrownedArmorAugment());
       addAugmentToArmor(new BlazeArmorAugment());
       addAugmentToArmor(new WitchArmorAugment());
