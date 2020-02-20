@@ -18,11 +18,12 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -122,6 +123,7 @@ public class SpiritAugmentationEvents
             }
         }
     }
+
     @SubscribeEvent
     public static void handleEvokerEffect(LivingDamageEvent event)
     {
@@ -143,6 +145,7 @@ public class SpiritAugmentationEvents
             }
         }
     }
+
     @SubscribeEvent
     public static void handleVindicatorEffect(LivingHurtEvent event)
     {
@@ -156,6 +159,7 @@ public class SpiritAugmentationEvents
             }
         }
     }
+
     @SubscribeEvent
     public static void handleRavagerEffect(LivingHurtEvent event)
     {
@@ -163,7 +167,7 @@ public class SpiritAugmentationEvents
         {
             PlayerEntity playerEntity = (PlayerEntity) event.getSource().getTrueSource();
             int ravagerAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.ravager_armor_augment);
-            if  (ravagerAugmentStrenght != 0)
+            if (ravagerAugmentStrenght != 0)
             {
                 if (playerEntity.getHealth() <= playerEntity.getMaxHealth() * 0.25f)
                 {
@@ -172,6 +176,7 @@ public class SpiritAugmentationEvents
             }
         }
     }
+
     @SubscribeEvent
     public static void handleZombieEffect(LivingHurtEvent event)
     {
@@ -188,6 +193,7 @@ public class SpiritAugmentationEvents
             }
         }
     }
+
     @SubscribeEvent
     public static void handleHuskEffect(LivingHurtEvent event)
     {
@@ -197,7 +203,7 @@ public class SpiritAugmentationEvents
             int huskAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.husk_armor_augment);
             if (huskAugmentStrenght != 0)
             {
-                event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.HUNGER,20, huskAugmentStrenght -1));
+                event.getEntityLiving().addPotionEffect(new EffectInstance(Effects.HUNGER, 20, huskAugmentStrenght - 1));
             }
         }
     }
@@ -252,36 +258,11 @@ public class SpiritAugmentationEvents
                         MalumMod.LOGGER.info(a);
                         if (a <= witchAugmentStrenght * 2)
                         {
-                            MalumMod.LOGGER.info("success");
                             EffectInstance instance = new EffectInstance(event.getPotionEffect().getPotion(), 200, event.getPotionEffect().getAmplifier());
                             playerEntity.removeActivePotionEffect(event.getPotionEffect().getPotion());
                             playerEntity.addPotionEffect(instance);
                         }
                     }
-                }
-            }
-        }
-    }
-    @SubscribeEvent
-    public static void handleTurtleAndSquidEffects(LivingEvent.LivingUpdateEvent event)
-    {
-        if (event.getEntityLiving() instanceof PlayerEntity)
-        {
-            PlayerEntity playerEntity = (PlayerEntity) event.getEntityLiving();
-            int squidAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.squid_armor_augment);
-            int turtleAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.turtle_armor_augment);
-            if (squidAugmentStrenght != 0 || turtleAugmentStrenght != 0)
-            {
-                float yaw = playerEntity.rotationYawHead;
-                float pitch = playerEntity.rotationPitch;
-                float f = -MathHelper.sin(yaw * ((float) Math.PI / 180F)) * MathHelper.cos(pitch * ((float) Math.PI / 180F));
-                float f1 = -MathHelper.sin(pitch * ((float) Math.PI / 180F));
-                float f2 = MathHelper.cos(yaw * ((float) Math.PI / 180F)) * MathHelper.cos(pitch * ((float) Math.PI / 180F));
-                Vec3d direction = new Vec3d(f, f1, f2).mul(squidAugmentStrenght / 20, turtleAugmentStrenght / 20, squidAugmentStrenght / 20);
-                Vec3d newPosition = playerEntity.getPositionVec().add(direction);
-                if (!playerEntity.world.checkBlockCollision(new AxisAlignedBB(newPosition,newPosition)))
-                {
-                    playerEntity.setPosition(newPosition.x, newPosition.y, newPosition.z);
                 }
             }
         }

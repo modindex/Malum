@@ -52,7 +52,7 @@ public class ZombieArmorAugment implements AugmentingSpirit
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent("Grave robber " + nbt.getInt(augmentDescription() + nbt.getInt(MalumMod.ender_dragon_armor_augment))));
+        tooltip.add(new StringTextComponent("Grave robber " + nbt.getInt(augmentTag() + nbt.getInt(MalumMod.ender_dragon_armor_augment))));
     }
 
     @Override

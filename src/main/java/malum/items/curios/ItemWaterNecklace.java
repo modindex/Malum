@@ -1,5 +1,6 @@
 package malum.items.curios;
 
+import malum.MalumMod;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -11,8 +12,6 @@ import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import top.theillusivec4.curios.api.capability.ICurio;
 
-import java.util.UUID;
-
 import static net.minecraft.entity.LivingEntity.SWIM_SPEED;
 
 public class ItemWaterNecklace extends Item implements ICurio
@@ -21,7 +20,6 @@ public class ItemWaterNecklace extends Item implements ICurio
         super(builder);
     }
 
-    private static final UUID ID = UUID.fromString("6d3be89e-37e6-453f-8654-2fd37d85b2ab");
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT unused) {
         return CapCurioItem.createProvider(new ICurio() {
@@ -40,16 +38,16 @@ public class ItemWaterNecklace extends Item implements ICurio
                 {
                     IAttributeInstance attributeInstance = entityLivingBase.getAttributes().getAttributeInstance(SWIM_SPEED);
                     assert attributeInstance != null;
-                    final AttributeModifier SWIM_SPEED_INCREASE = new AttributeModifier(ID, "Swim Speed modifier", getSwimSpeed(entityLivingBase), AttributeModifier.Operation.ADDITION);
+                    final AttributeModifier SWIM_SPEED_INCREASE = new AttributeModifier(MalumMod.WATER_NECKLACE_ID, "Swim Speed modifier", getSwimSpeed(entityLivingBase), AttributeModifier.Operation.ADDITION);
 
                     if (!entityLivingBase.getEntityWorld().isRemote && entityLivingBase.ticksExisted % 19 == 0)
                     {
-                        if (attributeInstance.getModifier(ID) != null)
+                        if (attributeInstance.getModifier(MalumMod.WATER_NECKLACE_ID) != null)
                         {
                             attributeInstance.removeModifier(SWIM_SPEED_INCREASE);
                         }
                     }
-                    if (attributeInstance.getModifier(ID) == null)
+                    if (attributeInstance.getModifier(MalumMod.WATER_NECKLACE_ID) == null)
                     {
                         attributeInstance.applyModifier(SWIM_SPEED_INCREASE);
                     }
@@ -61,9 +59,9 @@ public class ItemWaterNecklace extends Item implements ICurio
             {
                 IAttributeInstance attributeInstance = entityLivingBase.getAttributes().getAttributeInstance(SWIM_SPEED);
                 assert attributeInstance != null;
-                final AttributeModifier SWIM_SPEED_INCREASE = new AttributeModifier(ID, "Swim Speed modifier", getSwimSpeed(entityLivingBase), AttributeModifier.Operation.ADDITION);
+                final AttributeModifier SWIM_SPEED_INCREASE = new AttributeModifier(MalumMod.WATER_NECKLACE_ID, "Swim Speed modifier", getSwimSpeed(entityLivingBase), AttributeModifier.Operation.ADDITION);
 
-                if (attributeInstance.getModifier(ID) != null)
+                if (attributeInstance.getModifier(MalumMod.WATER_NECKLACE_ID) != null)
                 {
                     attributeInstance.removeModifier(SWIM_SPEED_INCREASE);
                 }

@@ -14,11 +14,16 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.UUID;
+
 
 @Mod("malum")
 public class MalumMod
 {
     public static final String MODID = "malum";
+
+    public static final UUID WATER_NECKLACE_ID = UUID.fromString("6d3be89e-37e6-453f-8654-2fd37d85b2ab");
+
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String husk_armor_augment = MODID+"husk";
     public static final String squid_armor_augment = MODID+"squid";
