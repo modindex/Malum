@@ -18,6 +18,8 @@ public class SpiritAugmentationDataBinding
       addAugmentToArmor(new HuskArmorAugment());
       addAugmentToArmor(new DrownedArmorAugment());
       addAugmentToArmor(new BlazeArmorAugment());
+      addAugmentToArmor(new SquidArmorAugment());
+      addAugmentToArmor(new TurtleArmorAugment());
       addAugmentToArmor(new WitchArmorAugment());
       addAugmentToArmor(new PillagerArmorAugment());
       addAugmentToArmor(new VindicatorArmorAugment());

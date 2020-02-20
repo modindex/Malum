@@ -18,12 +18,11 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.living.PotionEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -263,5 +262,28 @@ public class SpiritAugmentationEvents
             }
         }
     }
-
+    @SubscribeEvent
+    public static void handleTurtleAndSquidEffects(LivingEvent.LivingUpdateEvent event)
+    {
+        if (event.getEntityLiving() instanceof PlayerEntity)
+        {
+            PlayerEntity playerEntity = (PlayerEntity) event.getEntityLiving();
+            int squidAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.squid_armor_augment);
+            int turtleAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.turtle_armor_augment);
+            if (squidAugmentStrenght != 0 || turtleAugmentStrenght != 0)
+            {
+                float yaw = playerEntity.rotationYawHead;
+                float pitch = playerEntity.rotationPitch;
+                float f = -MathHelper.sin(yaw * ((float) Math.PI / 180F)) * MathHelper.cos(pitch * ((float) Math.PI / 180F));
+                float f1 = -MathHelper.sin(pitch * ((float) Math.PI / 180F));
+                float f2 = MathHelper.cos(yaw * ((float) Math.PI / 180F)) * MathHelper.cos(pitch * ((float) Math.PI / 180F));
+                Vec3d direction = new Vec3d(f, f1, f2).mul(squidAugmentStrenght / 20, turtleAugmentStrenght / 20, squidAugmentStrenght / 20);
+                Vec3d newPosition = playerEntity.getPositionVec().add(direction);
+                if (!playerEntity.world.checkBlockCollision(new AxisAlignedBB(newPosition,newPosition)))
+                {
+                    playerEntity.setPosition(newPosition.x, newPosition.y, newPosition.z);
+                }
+            }
+        }
+    }
 }
