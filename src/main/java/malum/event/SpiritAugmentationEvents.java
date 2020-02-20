@@ -188,7 +188,7 @@ public class SpiritAugmentationEvents
             {
                 if (event.getEntityLiving().isEntityUndead())
                 {
-                    event.setAmount(event.getAmount() + event.getAmount() * zombieAugmentStrenght / 50);
+                    event.setAmount(event.getAmount() + event.getAmount() * zombieAugmentStrenght / 40);
                 }
             }
         }
