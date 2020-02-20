@@ -9,12 +9,12 @@ import net.minecraft.util.text.StringTextComponent;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class WitchArmorAugment implements AugmentingSpirit
+public class ZombieArmorAugment implements AugmentingSpirit
 {
     @Override
     public String augmentTag()
     {
-        return MalumMod.witch_armor_augment;
+        return MalumMod.zombie_armor_augment;
     }
 
     @Override
@@ -42,22 +42,22 @@ public class WitchArmorAugment implements AugmentingSpirit
             nbt.putInt(augmentTag(), 1);
         }
     }
-
+    
     @Override
     public String augmentDescription()
     {
-        return "Alchemical: Grants a chance to regain a positive potion effect upon losing said potion effect";
+        return "Grave robber: Deal more damage to undead enemies";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent("Alchemical " + nbt.getInt(augmentDescription() + nbt.getInt(MalumMod.ender_dragon_armor_augment))));
+        tooltip.add(new StringTextComponent("Grave robber " + nbt.getInt(augmentDescription() + nbt.getInt(MalumMod.ender_dragon_armor_augment))));
     }
 
     @Override
     public String spirit()
     {
-        return "minecraft:witch";
+        return "minecraft:zombie";
     }
 }

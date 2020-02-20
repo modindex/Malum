@@ -163,9 +163,28 @@ public class SpiritAugmentationEvents
         {
             PlayerEntity playerEntity = (PlayerEntity) event.getSource().getTrueSource();
             int ravagerAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.ravager_armor_augment);
-            if (playerEntity.getHealth() <= playerEntity.getMaxHealth() * 0.25f)
+            if  (ravagerAugmentStrenght != 0)
             {
-                event.setAmount(event.getAmount() + event.getAmount() * ravagerAugmentStrenght / 100);
+                if (playerEntity.getHealth() <= playerEntity.getMaxHealth() * 0.25f)
+                {
+                    event.setAmount(event.getAmount() + event.getAmount() * ravagerAugmentStrenght / 100);
+                }
+            }
+        }
+    }
+    @SubscribeEvent
+    public static void handleZombieEffect(LivingHurtEvent event)
+    {
+        if (event.getSource().getTrueSource() instanceof PlayerEntity)
+        {
+            PlayerEntity playerEntity = (PlayerEntity) event.getSource().getTrueSource();
+            int zombieAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.zombie_armor_augment);
+            if (zombieAugmentStrenght != 0)
+            {
+                if (event.getEntityLiving().isEntityUndead())
+                {
+                    event.setAmount(event.getAmount() + event.getAmount() * zombieAugmentStrenght / 50);
+                }
             }
         }
     }

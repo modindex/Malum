@@ -42,17 +42,16 @@ public class VindicatorArmorAugment implements AugmentingSpirit
             nbt.putInt(augmentTag(), 1);
         }
     }
-
     @Override
     public String augmentDescription()
     {
-        return "Hitting an enemy with a critical axe attack deals extra damage";
+        return "Brutal: Hitting an enemy with a critical axe attack deals extra damage";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent((nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment)) + "% " + "extra critical axe damage"));
+        tooltip.add(new StringTextComponent("Brutal " + (nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment))));
     }
 
     @Override

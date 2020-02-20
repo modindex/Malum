@@ -46,13 +46,13 @@ public class PillagerArmorAugment implements AugmentingSpirit
     @Override
     public String augmentDescription()
     {
-        return "Grants a chance to reload a held crossbow upon hitting an enemy with an arrow fired from said crossbow";
+        return "Field hunter: Grants a chance to reload a held crossbow upon hitting an enemy with an arrow fired from said crossbow";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent((nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment)) * 2 + "% " + "Chance to reload held crossbow on hit"));
+        tooltip.add(new StringTextComponent("Field hunter " + (nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment))));
     }
 
     @Override

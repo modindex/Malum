@@ -46,13 +46,13 @@ public class RavagerArmorAugment implements AugmentingSpirit
     @Override
     public String augmentDescription()
     {
-        return "While below 25% of your max health, damage dealt is increased";
+        return "Resurgence: While below 25% of your max health, damage dealt is increased";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent((nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment)) + "% " + "extra damage when at low heaalth"));
+        tooltip.add(new StringTextComponent("Resurgence" + (nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment))));
     }
 
     @Override

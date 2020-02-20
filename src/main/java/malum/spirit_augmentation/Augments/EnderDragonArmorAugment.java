@@ -46,13 +46,13 @@ public class EnderDragonArmorAugment implements AugmentingSpirit
     @Override
     public String augmentDescription()
     {
-        return "Increases efficiency of all other augments on the armor piece its applied to";
+        return "United: Increases efficiency of all other augments on the armor piece its applied to";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent("All other augments are extra effective"));
+        tooltip.add(new StringTextComponent("United"));
     }
 
     @Override

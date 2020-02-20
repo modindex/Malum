@@ -46,13 +46,13 @@ public class BlazeArmorAugment implements AugmentingSpirit
     @Override
     public String augmentDescription()
     {
-        return "Grants a chance to extinguish when damaged by fire";
+        return "Firefighter: Grants a chance to extinguish when damaged by fire";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent((nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment)) * 5 + "% " + "Chance to extinguish when damaged by fire"));
+        tooltip.add(new StringTextComponent("Firefighter " + (nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment))));
     }
 
     @Override

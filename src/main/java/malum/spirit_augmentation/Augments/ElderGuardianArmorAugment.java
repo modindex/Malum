@@ -46,13 +46,13 @@ public class ElderGuardianArmorAugment implements AugmentingSpirit
     @Override
     public String augmentDescription()
     {
-        return "Shoots an elder guardian laser at nearby enemies";
+        return "King of the sea: Makes all water augments stronger, grants extra damage and damage reduction while in water";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent("Shoots a laser at nearby enemies"));
+        tooltip.add(new StringTextComponent("King of the sea " + nbt.getInt(augmentTag())));
     }
 
     @Override

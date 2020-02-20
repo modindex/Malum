@@ -46,13 +46,13 @@ public class DrownedArmorAugment implements AugmentingSpirit
     @Override
     public String augmentDescription()
     {
-        return "Grants air bubbles when drowning";
+        return "Breath of pain: Grants air bubbles when drowning";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent("Drowning grants " + (((nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment)) * 15d) / 20d) + (nbt.getInt(augmentTag()) == 1 ? " second" : " seconds") + " of breathing time"));
+        tooltip.add(new StringTextComponent("Breath of pain " + (nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment))));
     }
 
     @Override

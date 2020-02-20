@@ -14,6 +14,7 @@ public class SpiritAugmentationDataBinding
       ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.phantom_necklace, new PhantomNecklaceFlightTimeAugment()));
       ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.soul_eater, new SoulEaterBoostGainAugment()));
       ModRecipes.addSpiritAugmentationData(new SpiritAugmentationData(ModItems.soul_eater, new SoulEaterBoostUpkeepAugment()));
+      addAugmentToArmor(new ZombieArmorAugment());
       addAugmentToArmor(new DrownedArmorAugment());
       addAugmentToArmor(new BlazeArmorAugment());
       addAugmentToArmor(new WitchArmorAugment());

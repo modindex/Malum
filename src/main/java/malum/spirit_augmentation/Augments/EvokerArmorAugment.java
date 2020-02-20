@@ -47,13 +47,13 @@ public class EvokerArmorAugment implements AugmentingSpirit
     @Override
     public String augmentDescription()
     {
-        return "Hitting or getting hit by enemies has a chance to spawn an evoker fang at their location";
+        return "Summoner: Hitting or getting hit by enemies has a chance to spawn an evoker fang at their location";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent((nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment)) * 5 + "% chance to summon an evoker fang when hitting, or hit by enemies"));
+        tooltip.add(new StringTextComponent("Summoner " + (nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment))));
 
     }
 
