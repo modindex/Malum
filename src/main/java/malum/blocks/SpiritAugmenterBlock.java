@@ -27,6 +27,8 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import java.util.Objects;
+
 import static net.minecraft.block.ChestBlock.WATERLOGGED;
 
 public class SpiritAugmenterBlock extends Block
@@ -107,7 +109,7 @@ public class SpiritAugmenterBlock extends Block
                                                             maxAugments -= augment_nbt.getInt(data.getSpirit().augmentTag());
                                                         }
                                                     }
-                                                    if (maxAugments <= 0 || SpiritAugmentationData.doesItemHaveGrandAugment(augment_stack) && data.getSpirit().isGrand())
+                                                    if (maxAugments <= 0 || SpiritAugmentationData.doesItemHaveGrandAugment(augment_stack) && data.getSpirit().isGrand() && !data.getSpirit().spirit().equals(Objects.requireNonNull(SpiritAugmentationData.getGrandAugmentFromStack(augment_stack)).spirit()))
                                                     {
                                                         return true;
                                                     }

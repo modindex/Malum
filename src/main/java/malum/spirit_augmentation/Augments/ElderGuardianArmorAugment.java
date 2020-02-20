@@ -26,7 +26,7 @@ public class ElderGuardianArmorAugment implements AugmentingSpirit
     @Override
     public int maxAmount()
     {
-        return 1;
+        return 5;
     }
 
     @Override
@@ -46,13 +46,13 @@ public class ElderGuardianArmorAugment implements AugmentingSpirit
     @Override
     public String augmentDescription()
     {
-        return "King of the sea: Makes all water augments stronger, grants extra damage and damage reduction while in water";
+        return "King of the sea: Doubles the power of the guardian augment";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent("King of the sea " + nbt.getInt(augmentTag())));
+        tooltip.add(new StringTextComponent("King of the sea " + (nbt.getInt(augmentTag()))));
     }
 
     @Override

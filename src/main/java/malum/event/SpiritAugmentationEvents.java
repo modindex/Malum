@@ -9,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.EvokerFangsEntity;
+import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
@@ -20,10 +21,7 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.living.PotionEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -147,6 +145,40 @@ public class SpiritAugmentationEvents
     }
 
     @SubscribeEvent
+    public static void handleIronGolemEffect(LivingDamageEvent event)
+    {
+        if (event.getEntityLiving() instanceof PlayerEntity)
+        {
+            if (event.getSource().getTrueSource() instanceof LivingEntity)
+            {
+                PlayerEntity playerEntity = (PlayerEntity) event.getEntityLiving();
+                int ironGolemAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.iron_golem_armor_augment);
+                if (ironGolemAugmentStrenght != 0)
+                {
+                    event.setAmount(event.getAmount() * 1 - (ironGolemAugmentStrenght / 100f));
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void handleIronGolemEffect(LivingKnockBackEvent event)
+    {
+        if (event.getEntityLiving() instanceof PlayerEntity)
+        {
+            if (event.getAttacker() instanceof LivingEntity)
+            {
+                PlayerEntity playerEntity = (PlayerEntity) event.getEntityLiving();
+                int ironGolemAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.iron_golem_armor_augment);
+                if (ironGolemAugmentStrenght != 0)
+                {
+                    event.setRatioX(event.getRatioX() * 1 - (ironGolemAugmentStrenght / 20f));
+                    event.setRatioZ(event.getRatioZ() * 1 - (ironGolemAugmentStrenght / 20f));
+                }
+            }
+        }
+    }
+    @SubscribeEvent
     public static void handleVindicatorEffect(LivingHurtEvent event)
     {
         if (event.getSource().getTrueSource() instanceof PlayerEntity)
@@ -208,6 +240,28 @@ public class SpiritAugmentationEvents
         }
     }
 
+    @SubscribeEvent
+    public static void handleGuardianEffect(LivingDamageEvent event)
+    {
+        if (event.getSource().getImmediateSource() instanceof TridentEntity)
+        {
+            if (event.getSource().getTrueSource() instanceof PlayerEntity)
+            {
+                PlayerEntity playerEntity = (PlayerEntity) event.getSource().getTrueSource();
+                int guardianAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.guardian_armor_augment);
+                int elderGuardianAugmentStrenght = SpiritAugmentationData.getAugmentAmountFromArmor(playerEntity.inventory.armorInventory, MalumMod.elder_guardian_armor_augment);
+                if (elderGuardianAugmentStrenght != 0)
+                {
+                    guardianAugmentStrenght *= 1+ (elderGuardianAugmentStrenght / 20);
+                }
+                if (guardianAugmentStrenght != 0)
+                {
+                    event.setAmount(event.getAmount() + (event.getAmount() * (guardianAugmentStrenght) / 80));
+                }
+                MalumMod.LOGGER.info(event.getAmount());
+            }
+        }
+    }
     @SubscribeEvent
     public static void handlePillagerEffect(LivingDamageEvent event)
     {

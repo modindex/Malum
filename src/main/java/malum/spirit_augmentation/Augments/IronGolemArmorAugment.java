@@ -9,24 +9,24 @@ import net.minecraft.util.text.StringTextComponent;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class HuskArmorAugment implements AugmentingSpirit
+public class IronGolemArmorAugment implements AugmentingSpirit
 {
     @Override
     public String augmentTag()
     {
-        return MalumMod.husk_armor_augment;
+        return MalumMod.iron_golem_armor_augment;
     }
 
     @Override
     public boolean isGrand()
     {
-        return false;
+        return true;
     }
 
     @Override
     public int maxAmount()
     {
-        return 2;
+        return 5;
     }
 
     @Override
@@ -42,22 +42,22 @@ public class HuskArmorAugment implements AugmentingSpirit
             nbt.putInt(augmentTag(), 1);
         }
     }
-    
+
     @Override
     public String augmentDescription()
     {
-        return "Famine: Hurting enemies brings them immense hunger";
+        return "Big iron: Grants damage and knockback resistance";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent("Famine " + (nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment))));
+        tooltip.add(new StringTextComponent("Big iron " + (nbt.getInt(augmentTag()))));
     }
 
     @Override
     public String spirit()
     {
-        return "minecraft:husk";
+        return "minecraft:iron_golem";
     }
 }

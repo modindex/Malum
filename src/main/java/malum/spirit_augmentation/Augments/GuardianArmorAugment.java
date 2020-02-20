@@ -9,12 +9,12 @@ import net.minecraft.util.text.StringTextComponent;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class HuskArmorAugment implements AugmentingSpirit
+public class GuardianArmorAugment implements AugmentingSpirit
 {
     @Override
     public String augmentTag()
     {
-        return MalumMod.husk_armor_augment;
+        return MalumMod.guardian_armor_augment;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class HuskArmorAugment implements AugmentingSpirit
     @Override
     public int maxAmount()
     {
-        return 2;
+        return 20;
     }
 
     @Override
@@ -42,22 +42,22 @@ public class HuskArmorAugment implements AugmentingSpirit
             nbt.putInt(augmentTag(), 1);
         }
     }
-    
+
     @Override
     public String augmentDescription()
     {
-        return "Famine: Hurting enemies brings them immense hunger";
+        return "Sea protector: Increases the damage a thrown trident deals";
     }
 
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent("Famine " + (nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment))));
+        tooltip.add(new StringTextComponent("Sea protector " + (nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment))));
     }
 
     @Override
     public String spirit()
     {
-        return "minecraft:husk";
+        return "minecraft:guardian";
     }
 }

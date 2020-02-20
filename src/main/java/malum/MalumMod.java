@@ -26,8 +26,6 @@ public class MalumMod
 
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String husk_armor_augment = MODID+"husk";
-    public static final String squid_armor_augment = MODID+"squid";
-    public static final String turtle_armor_augment = MODID+"turtle";
     public static final String zombie_armor_augment = MODID+"zombie";
     public static final String evoker_armor_augment = MODID+"evoker";
     public static final String ravager_armor_augment = MODID+"ravager";
@@ -36,7 +34,9 @@ public class MalumMod
     public static final String witch_armor_augment = MODID+"witch";
     public static final String drowned_armor_augment = MODID+"drowned";
     public static final String blaze_armor_augment = MODID+"blaze";
+    public static final String guardian_armor_augment = MODID+"guardian";
 
+    public static final String iron_golem_armor_augment = MODID+"iron_golem";
     public static final String ender_dragon_armor_augment = MODID+"ender_dragon";
     public static final String elder_guardian_armor_augment = MODID+"elder_guardian";
     public static final String wither_armor_augment = MODID+"wither";

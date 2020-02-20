@@ -66,6 +66,23 @@ public class SpiritAugmentationData
         }
         return false;
     }
+    public static AugmentingSpirit getGrandAugmentFromStack(ItemStack stack)
+    {
+        if (stack.getTag() != null)
+        {
+            for (SpiritAugmentationData data : ModRecipes.spiritAugmentationData)
+            {
+                if (data.getSpirit().isGrand())
+                {
+                    if (stack.getTag().contains(data.spirit.augmentTag()))
+                    {
+                        return data.getSpirit();
+                    }
+                }
+            }
+        }
+        return null;
+    }
     public static int getAugmentAmountFromStack(ItemStack stack, String string)
     {
         if (stack.getTag() != null)

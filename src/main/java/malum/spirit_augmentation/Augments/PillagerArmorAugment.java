@@ -52,7 +52,7 @@ public class PillagerArmorAugment implements AugmentingSpirit
     @Override
     public void handleTooltip(@Nonnull CompoundNBT nbt, List<ITextComponent> tooltip)
     {
-        tooltip.add(new StringTextComponent("Field hunter " + (nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment))));
+        tooltip.add(new StringTextComponent("Field Hunter " + (nbt.getInt(augmentTag()) + nbt.getInt(MalumMod.ender_dragon_armor_augment))));
     }
 
     @Override

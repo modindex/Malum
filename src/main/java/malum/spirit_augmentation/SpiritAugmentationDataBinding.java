@@ -18,13 +18,13 @@ public class SpiritAugmentationDataBinding
       addAugmentToArmor(new HuskArmorAugment());
       addAugmentToArmor(new DrownedArmorAugment());
       addAugmentToArmor(new BlazeArmorAugment());
-      addAugmentToArmor(new SquidArmorAugment());
-      addAugmentToArmor(new TurtleArmorAugment());
+      addAugmentToArmor(new GuardianArmorAugment());
       addAugmentToArmor(new WitchArmorAugment());
       addAugmentToArmor(new PillagerArmorAugment());
       addAugmentToArmor(new VindicatorArmorAugment());
       addAugmentToArmor(new RavagerArmorAugment());
       addAugmentToArmor(new EvokerArmorAugment());
+      addAugmentToArmor(new IronGolemArmorAugment());
       addAugmentToArmor(new EnderDragonArmorAugment());
       addAugmentToArmor(new ElderGuardianArmorAugment());
   }
