@@ -82,7 +82,7 @@ public class ModRecipes
         {
             for (SpiritInfusionRecipe recipe : spiritInfusionRecipes)
             {
-                if (spirits.containsAll(recipe.getSpirits()) && spirits.size() == recipe.getSpirits().size())
+                if (spirits.equals(recipe.getSpirits()))
                 {
                     if (recipe.getInput_item() == formItem)
                     {

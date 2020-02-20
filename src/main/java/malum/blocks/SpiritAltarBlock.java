@@ -101,16 +101,33 @@ public class SpiritAltarBlock extends Block
                             if (((SpiritAltarTileEntity) entity).spirits.size() < 8)
                             {
                                 player.swingArm(handIn);
-                                if (nbt.contains("spirit"))
-                                {
-                                    ((SpiritAltarTileEntity) entity).spirits.add(nbt.getString("spirit"));
+                                ((SpiritAltarTileEntity) entity).spirits.add(nbt.getString("spirit"));
 
-                                    ItemStack newStack = stack.getItem().getDefaultInstance();
-                                    stack.shrink(1);
-                                    player.inventory.addItemStackToInventory(newStack);
-                                    return true;
+                                ItemStack newStack = stack.getItem().getDefaultInstance();
+                                stack.shrink(1);
+                                player.inventory.addItemStackToInventory(newStack);
+                            }
+                            return true;
+                        }
+
+                        if (((SpiritAltarTileEntity) entity).spirits.size() > 0)
+                        {
+                            int slot = 0;
+                            for (int a = 0; a < 8; a++)
+                            {
+                                if (!((SpiritAltarTileEntity) entity).spirits.get(a).isEmpty())
+                                {
+                                    slot = a;
+                                    break;
                                 }
                             }
+                            ItemStack newStack = stack.getItem().getDefaultInstance();
+                            stack.shrink(1);
+                            CompoundNBT newNbt = new CompoundNBT();
+                            newNbt.putString("spirit", ((SpiritAltarTileEntity) entity).spirits.get(slot));
+                            newStack.setTag(newNbt);
+                            player.addItemStackToInventory(newStack);
+                            ((SpiritAltarTileEntity) entity).spirits.remove(slot);
                         }
                     }
                     else
