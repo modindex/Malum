@@ -67,6 +67,8 @@ public class ModBlocks
     public static Block drained_steel_block;
     public static Block soul_steel_block;
 
+    public static Block drill;
+
     public static Block.Properties wood_properties = Block.Properties.from(Blocks.OAK_WOOD);
     public static Block.Properties metal_properties = Block.Properties.from(Blocks.IRON_BLOCK);
 
@@ -126,6 +128,8 @@ public class ModBlocks
 
         spirit_altar = registerBlock(registry, new SpiritAltarBlock(refined_stone_properties), "spirit_altar");
         arcane_bore = registerBlock(registry, new ArcaneBoreBlock(refined_stone_properties), "arcane_bore");
+        drill = registerBlock(registry, new Block(refined_stone_properties), "drill");
+
     }
 
     private static <T extends Block> T registerBlock(IForgeRegistry<Block> registry, T newBlock, String name)

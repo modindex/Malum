@@ -53,6 +53,22 @@ public class RitualBlockTileEntity extends TileEntity implements ITickableTileEn
     };
 
     @Override
+    public CompoundNBT write(CompoundNBT compound)
+    {
+        super.write(compound);
+        compound.put("inventory", inventory.serializeNBT());
+        compound.putInt("crafting", crafting);
+        return compound;
+    }
+
+    @Override
+    public void read(CompoundNBT compound)
+    {
+        inventory.deserializeNBT((CompoundNBT) Objects.requireNonNull(compound.get("inventory")));
+        crafting = compound.getInt("crafting");
+        super.read(compound);
+    }
+    @Override
     public CompoundNBT getUpdateTag()
     {
         return this.write(new CompoundNBT());
@@ -77,23 +93,6 @@ public class RitualBlockTileEntity extends TileEntity implements ITickableTileEn
         handleUpdateTag(pkt.getNbtCompound());
     }
 
-
-    @Override
-    public CompoundNBT write(CompoundNBT compound)
-    {
-        super.write(compound);
-        compound.put("inventory", inventory.serializeNBT());
-        compound.putInt("crafting", crafting);
-        return compound;
-    }
-
-    @Override
-    public void read(CompoundNBT compound)
-    {
-        inventory.deserializeNBT((CompoundNBT) Objects.requireNonNull(compound.get("inventory")));
-        crafting = compound.getInt("crafting");
-        super.read(compound);
-    }
     public ArrayList<Item> listEveryItem(ItemStackHandler inventory)
     {
         ArrayList<Item> ingredients = new ArrayList<>();

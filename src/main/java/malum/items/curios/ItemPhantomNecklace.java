@@ -81,7 +81,6 @@ public class ItemPhantomNecklace extends Item implements ICurio
 
                 ((ModelPhantomWingRight) right_wing_model).render(livingEntity, limbSwing, limbSwingAmount, ageInTicks,
                     netHeadYaw, headPitch, scale);
-
                 GlStateManager.rotatef(-rotationY, 0.0F, 1.0F, 0.0F);
                 GlStateManager.rotatef(rotationZ, 0.0F, 0.0F, 1.0F);
                 GlStateManager.rotatef(rotationX, 0.0F, 0.0F, 1.0F);

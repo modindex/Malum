@@ -1,7 +1,9 @@
 package malum;
 
 import malum.event.ServerPlayerEventHandler;
+import malum.renderer.ArcaneBoreRenderer;
 import malum.renderer.RitualBlockRenderer;
+import malum.tileentities.ArcaneBoreTileEntity;
 import malum.tileentities.RitualBlockTileEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -61,6 +63,7 @@ public class MalumMod
     private void bindTERenderers(final FMLClientSetupEvent event)
     {
         ClientRegistry.bindTileEntitySpecialRenderer(RitualBlockTileEntity.class, new RitualBlockRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(ArcaneBoreTileEntity.class, new ArcaneBoreRenderer());
     }
 
 }

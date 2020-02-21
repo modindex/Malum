@@ -113,6 +113,7 @@ public class ModItems
     public static Item smooth_stone_stairs;
     public static Item spirit;
     public static Item spirit_augment;
+    public static Item drill_render;
     @SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event)
     {
@@ -244,7 +245,8 @@ public class ModItems
             healing_flower = setup(new BlockItem(ModBlocks.healing_flower, new Item.Properties().group(ItemGroup.DECORATIONS)), "healing_flower"),
             smooth_stone_stairs = setup(new BlockItem(ModBlocks.smooth_stone_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)), "smooth_stone_stairs"),
             spirit = setup(new ItemSpirit(new Item.Properties()), "spirit"),
-            spirit_augment = setup(new ItemSpirit(new Item.Properties()), "spirit_augment")
+            spirit_augment = setup(new ItemSpirit(new Item.Properties()), "spirit_augment"),
+            drill_render = setup(new Item(new Item.Properties()), "drill_render")
         );
     }
 
