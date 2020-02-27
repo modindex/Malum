@@ -162,7 +162,7 @@ public class ModItems
             soul_crystal_chestplate = setup(new ItemArmorSoulCrystal(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_chestplate"),
             soul_crystal_helm = setup(new ItemArmorSoulCrystal(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_crystal_helm"),
 
-            soul_steel_hoe = setup(new ModHoeItem(CATASTROPHE, 0f, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_steel_hoe"),
+            soul_steel_hoe = setup(new ModHoeItem(CATASTROPHE, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_steel_hoe"),
             soul_steel_axe = setup(new ModAxeItem(CATASTROPHE, 0, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_steel_axe"),
             soul_steel_sword = setup(new ModSwordItem(CATASTROPHE, 0, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_steel_sword"),
             soul_steel_shovel = setup(new ModShovelItem(CATASTROPHE, 0, 0, new Item.Properties().group(ModItemGroups.MALUM_MOD_GROUP)), "soul_steel_shovel"),

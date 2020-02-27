@@ -1,17 +1,24 @@
 package kittykitcatcat.malum.renderer;
 
-import com.mojang.blaze3d.platform.GLX;
-import com.mojang.blaze3d.platform.GlStateManager;
-import kittykitcatcat.malum.ClientRefferences;
-import kittykitcatcat.malum.registry.ModItems;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import kittykitcatcat.malum.tileentities.ArcaneBoreTileEntity;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 
 public class ArcaneBoreRenderer extends TileEntityRenderer<ArcaneBoreTileEntity>
 {
+    public ArcaneBoreRenderer(TileEntityRendererDispatcher rendererDispatcherIn)
+    {
+        super(rendererDispatcherIn);
+    }
 
+    @Override
+    public void render(ArcaneBoreTileEntity arcaneBoreTileEntity, float v, MatrixStack matrixStack, IRenderTypeBuffer iRenderTypeBuffer, int i, int i1)
+    {
+
+    }
+/*
     @Override
     public void render(ArcaneBoreTileEntity blockEntity, double x, double y, double z, float partialTicks, int destroyStage)
     {
@@ -28,5 +35,5 @@ public class ArcaneBoreRenderer extends TileEntityRenderer<ArcaneBoreTileEntity>
             itemRenderer.renderItem(ModItems.drill_render.getDefaultInstance(), ItemCameraTransforms.TransformType.FIXED);
             GlStateManager.popMatrix();
         }
-    }
+    }*/
 }

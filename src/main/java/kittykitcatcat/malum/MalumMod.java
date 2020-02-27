@@ -1,12 +1,8 @@
 package kittykitcatcat.malum;
 
 import kittykitcatcat.malum.event.ServerPlayerEventHandler;
-import kittykitcatcat.malum.renderer.ArcaneBoreRenderer;
-import kittykitcatcat.malum.renderer.ResourceCrystalRenderer;
+import kittykitcatcat.malum.registry.ModTileEntities;
 import kittykitcatcat.malum.renderer.RitualBlockRenderer;
-import kittykitcatcat.malum.tileentities.ArcaneBoreTileEntity;
-import kittykitcatcat.malum.tileentities.ResourceCrystalTileEntity;
-import kittykitcatcat.malum.tileentities.RitualBlockTileEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -68,9 +64,9 @@ public class MalumMod
     @OnlyIn(Dist.CLIENT)
     private void bindTERenderers(final FMLClientSetupEvent event)
     {
-        ClientRegistry.bindTileEntitySpecialRenderer(RitualBlockTileEntity.class, new RitualBlockRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(ArcaneBoreTileEntity.class, new ArcaneBoreRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(ResourceCrystalTileEntity.class, new ResourceCrystalRenderer());
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.ritual_block_tile_entity, RitualBlockRenderer::new);
+        //ClientRegistry.bindTileEntityRenderer(ArcaneBoreTileEntity.class, new ArcaneBoreRenderer());
+        //ClientRegistry.bindTileEntityRenderer(ResourceCrystalTileEntity.class, new ResourceCrystalRenderer());
     }
 
 }

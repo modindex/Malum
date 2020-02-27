@@ -1,28 +1,23 @@
 package kittykitcatcat.malum.renderer;
 
-import com.mojang.blaze3d.platform.GLX;
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import kittykitcatcat.malum.ClientRefferences;
-import kittykitcatcat.malum.MalumMod;
 import kittykitcatcat.malum.tileentities.RitualBlockTileEntity;
-import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.items.ItemStackHandler;
-import org.lwjgl.opengl.GL11;
-
-import static com.mojang.blaze3d.platform.GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA;
-import static com.mojang.blaze3d.platform.GlStateManager.SourceFactor.SRC_ALPHA;
 
 public class RitualBlockRenderer extends TileEntityRenderer<RitualBlockTileEntity>
 {
-    public static final ResourceLocation RING_PURPLE = new ResourceLocation(MalumMod.MODID, "textures/visuals/ritual_ring_1.png");
+
+    public RitualBlockRenderer(TileEntityRendererDispatcher rendererDispatcherIn)
+    {
+        super(rendererDispatcherIn);
+    }
 
     public int getItemCount(ItemStackHandler inventory)
     {
@@ -37,7 +32,7 @@ public class RitualBlockRenderer extends TileEntityRenderer<RitualBlockTileEntit
         return amountOfItems;
     }
 
-    @Override
+    /*@Override
     public void render(RitualBlockTileEntity blockEntity, double x, double y, double z, float partialTicks, int destroyStage)
     {
         if (this.rendererDispatcher.renderInfo != null && blockEntity.getDistanceSq(this.rendererDispatcher.renderInfo.getProjectedView().x, this.rendererDispatcher.renderInfo.getProjectedView().y, this.rendererDispatcher.renderInfo.getProjectedView().z) < 1024d)
@@ -94,6 +89,38 @@ public class RitualBlockRenderer extends TileEntityRenderer<RitualBlockTileEntit
                 GlStateManager.scaled(0.25, 0.25, 0.25);
                 itemRenderer.renderItem(item, ItemCameraTransforms.TransformType.FIXED);
                 GlStateManager.popMatrix();
+            }
+        }
+    }
+*/
+    @Override
+    public void render(RitualBlockTileEntity blockEntity, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer iRenderTypeBuffer, int i, int i1)
+    {
+        if (this.renderDispatcher.renderInfo != null && blockEntity.getDistanceSq(this.renderDispatcher.renderInfo.getProjectedView().x, this.renderDispatcher.renderInfo.getProjectedView().y, this.renderDispatcher.renderInfo.getProjectedView().z) < 128d)
+        {
+            ItemRenderer itemRenderer = ClientRefferences.minecraft.getItemRenderer();
+            for (int a = 0; a < blockEntity.inventory.getSlots(); a += 1)
+            {
+                ItemStack item = blockEntity.inventory.getStackInSlot(a);
+                if (item.isEmpty())
+                {
+                    break;
+                }
+                matrixStack.push();
+                float rot = a / (float) getItemCount(blockEntity.inventory) * 6.28f + ((blockEntity.getWorld().getGameTime() + blockEntity.crafting) % 700f / 700f) * 6.28f;
+                double dist = 0.4;
+                double posY = blockEntity.getPos().getY() + 1.2 + Math.sin(blockEntity.getWorld().getGameTime() / 20f) / 64;
+
+                dist -= (blockEntity.crafting / 300f) * 0.2f;
+                posY += blockEntity.crafting / 450;
+                double posX = blockEntity.getPos().getX() + 0.5 - (Math.cos(rot) * dist);
+                double posZ = blockEntity.getPos().getZ() + 0.5 - (Math.sin(rot) * dist);
+
+                matrixStack.translate(posX, posY, posZ);
+                matrixStack.scale(0.25f, 0.25f, 0.25f);
+
+                itemRenderer.renderItem(item, ItemCameraTransforms.TransformType.FIXED, i, i1, matrixStack, iRenderTypeBuffer);
+                matrixStack.pop();
             }
         }
     }

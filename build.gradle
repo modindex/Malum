@@ -15,9 +15,9 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0-1.14.4'
-group = 'com.example.malumb' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'malumb'
+version = '1.0-1.15.2'
+group = 'com.kittykitcatcat.malum' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'malum'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -27,7 +27,7 @@ minecraft {
     // stable_#            Stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not always work.
     // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings channel: 'snapshot', version: '20190719-1.14.3'
+    mappings channel: 'snapshot', version: '20200225-1.15.1'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
     
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -106,24 +106,20 @@ repositories
 dependencies {
     //compile fg.deobf("vazkii.patchouli:Patchouli:1.1-25.116") { transitive = false }
 	
-    compileOnly fg.deobf("top.theillusivec4.curios:curios:FORGE-1.14.4-1.0.6.1:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios:FORGE-1.14.4-1.0.6.1")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios:FORGE-1.15.1-2.0-beta:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios:FORGE-1.15.1-2.0-beta")
 
-	compileOnly fg.deobf("mezz.jei:jei-1.14.4:6.0.0.27:api")
-	runtimeOnly fg.deobf("mezz.jei:jei-1.14.4:6.0.0.27")
+	compileOnly fg.deobf("mezz.jei:jei-1.15.2-6.0.0.2:api")
+	runtimeOnly fg.deobf("mezz.jei:jei-1.15.2-6.0.0.2")
 	
-
-    //compile "epicsquid.mysticallib:mysticallib:1.14.4-1.7.0"
-    //compile "epicsquid.mysticalworld:mysticalworld:1.14.4-1.6.9"
-	
-    minecraft 'net.minecraftforge:forge:1.14.4-28.2.0'
+    minecraft 'net.minecraftforge:forge:1.15.2-31.1.18'
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
         attributes([
-            "Specification-Title": "malumb",
+            "Specification-Title": "malum",
             "Specification-Vendor": "malumsareus",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,

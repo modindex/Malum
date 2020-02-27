@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 public class ModTileEntities
 {
     @ObjectHolder("malum:ritual_block_tile_entity")
-    public static TileEntityType<?> ritual_block_tile_entity;
+    public static TileEntityType<RitualBlockTileEntity> ritual_block_tile_entity;
 
     @ObjectHolder("malum:spirit_altar_tile_entity")
     public static TileEntityType<?> spirit_altar_tile_entity;

@@ -1,20 +1,25 @@
 package kittykitcatcat.malum.renderer;
 
-import com.mojang.blaze3d.platform.GLX;
-import com.mojang.blaze3d.platform.GlStateManager;
-import kittykitcatcat.malum.ClientRefferences;
-import kittykitcatcat.malum.registry.ModItems;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import kittykitcatcat.malum.tileentities.ResourceCrystalTileEntity;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 
 public class ResourceCrystalRenderer extends TileEntityRenderer<ResourceCrystalTileEntity>
 {
+    public ResourceCrystalRenderer(TileEntityRendererDispatcher rendererDispatcherIn)
+    {
+        super(rendererDispatcherIn);
+    }
 
     @Override
+    public void render(ResourceCrystalTileEntity resourceCrystalTileEntity, float v, MatrixStack matrixStack, IRenderTypeBuffer iRenderTypeBuffer, int i, int i1)
+    {
+
+    }
+
+   /* @Override
     public void render(ResourceCrystalTileEntity blockEntity, double x, double y, double z, float partialTicks, int destroyStage)
     {
         if (this.rendererDispatcher.renderInfo != null && blockEntity.getDistanceSq(this.rendererDispatcher.renderInfo.getProjectedView().x, this.rendererDispatcher.renderInfo.getProjectedView().y, this.rendererDispatcher.renderInfo.getProjectedView().z) < 1024d)
@@ -38,5 +43,5 @@ public class ResourceCrystalRenderer extends TileEntityRenderer<ResourceCrystalT
             itemRenderer.renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
             GlStateManager.popMatrix();
         }
-    }
+    }*/
 }
