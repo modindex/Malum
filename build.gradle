@@ -16,8 +16,8 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 version = '1.0-1.14.4'
-group = 'com.example.malum' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'malum'
+group = 'com.example.malumb' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'malumb'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -76,7 +76,7 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'malum', '--all', '--output', file('src/generated/resources/')
+            args '--mod', 'malumb', '--all', '--output', file('src/generated/resources/')
 
             mods {
                 malum {
@@ -123,7 +123,7 @@ dependencies {
 jar {
     manifest {
         attributes([
-            "Specification-Title": "malum",
+            "Specification-Title": "malumb",
             "Specification-Vendor": "malumsareus",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,

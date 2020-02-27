@@ -1,9 +1,0 @@
-{
-    "variants": {
-        "tier=0": { "model": "malum:block/resource_refinery/iron/crystal_1"},
-        "tier=1": { "model": "malum:block/resource_refinery/iron/crystal_2"},
-        "tier=2": { "model": "malum:block/resource_refinery/iron/crystal_3"},
-        "tier=3": { "model": "malum:block/resource_refinery/iron/crystal_4"},
-        "tier=4": { "model": "malum:block/resource_refinery/iron/crystal_5"}
-    }
-}
