@@ -61,7 +61,6 @@ public class SpecialCurioEvents
                             ShulkerBulletEntity shulkerBulletEntity = new ShulkerBulletEntity(entity.world, entity, target, Direction.Axis.Y);
                             double xVel = MathHelper.nextDouble(random, -0.5, 0.5);
                             double zVel = MathHelper.nextDouble(random, -0.5, 0.5);
-                            shulkerBulletEntity.posY += 1;
                             shulkerBulletEntity.addVelocity(xVel, 0.1, zVel);
                             entity.world.addEntity(shulkerBulletEntity);
                             entity.setAIMoveSpeed(entity.getAIMoveSpeed() * 2);

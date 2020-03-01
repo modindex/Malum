@@ -34,7 +34,7 @@ public class CapabilityEvents
             LazyOptional<CapabilityData> capability = event.getOriginal().getCapability(PlayerProperties.CAPABILITY);
             capability.ifPresent(oldStore ->
             {
-                event.getEntityPlayer().getCapability(PlayerProperties.CAPABILITY).ifPresent(newStore ->
+                event.getOriginal().getCapability(PlayerProperties.CAPABILITY).ifPresent(newStore ->
                 {
                     newStore.copyFrom(oldStore);
                 });

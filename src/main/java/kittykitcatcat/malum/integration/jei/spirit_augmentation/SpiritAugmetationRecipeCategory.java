@@ -33,7 +33,7 @@ public class SpiritAugmetationRecipeCategory implements IRecipeCategory<SpiritAu
     {
         background = guiHelper.createBlankDrawable(100, 24);
         localizedName = I18n.format("malum.jei.spirit_augmetation");
-        overlay = guiHelper.createDrawable(new ResourceLocation("malum", "textures/gui/spirit_augmetation_overlay.png"),
+        overlay = guiHelper.createDrawable(new ResourceLocation(MalumMod.MODID, "textures/gui/spirit_augmetation_overlay.png"),
             0, 0, 120, 30);
         icon = guiHelper.createDrawableIngredient(new ItemStack(ModBlocks.spirit_augmenter));
     }

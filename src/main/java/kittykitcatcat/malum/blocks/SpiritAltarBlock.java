@@ -16,6 +16,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -87,7 +88,7 @@ public class SpiritAltarBlock extends Block
     }
 
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
         TileEntity entity = worldIn.getTileEntity(pos);
         if (!worldIn.isRemote())
@@ -111,7 +112,7 @@ public class SpiritAltarBlock extends Block
                                 stack.shrink(1);
                                 player.inventory.addItemStackToInventory(newStack);
                             }
-                            return true;
+                            return ActionResultType.SUCCESS;
                         }
 
                         if (((SpiritAltarTileEntity) entity).spirits.size() > 0)
@@ -132,6 +133,7 @@ public class SpiritAltarBlock extends Block
                             newStack.setTag(newNbt);
                             player.addItemStackToInventory(newStack);
                             ((SpiritAltarTileEntity) entity).spirits.remove(slot);
+                            return ActionResultType.SUCCESS;
                         }
                     }
                     else
@@ -142,6 +144,7 @@ public class SpiritAltarBlock extends Block
                             stack.shrink(1);
                             player.addItemStackToInventory(recipe.getOutput_item().getDefaultInstance());
                             ((SpiritAltarTileEntity) entity).spirits.clear();
+                            return ActionResultType.SUCCESS;
                         }
                     }
                 }

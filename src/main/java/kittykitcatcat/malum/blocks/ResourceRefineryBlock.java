@@ -13,6 +13,7 @@ import net.minecraft.item.Items;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -60,7 +61,7 @@ public class ResourceRefineryBlock extends Block
     }
 
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
         if (!worldIn.isRemote())
         {
@@ -85,6 +86,7 @@ public class ResourceRefineryBlock extends Block
                                 tileEntity.red = resourceFormingRecipe.getRed();
                                 tileEntity.green = resourceFormingRecipe.getGreen();
                                 tileEntity.blue = resourceFormingRecipe.getBlue();
+                                return ActionResultType.SUCCESS;
                             }
                         }
                     }
@@ -95,12 +97,13 @@ public class ResourceRefineryBlock extends Block
                             ResourceRefineryTileEntity tileEntity = (ResourceRefineryTileEntity) worldIn.getTileEntity(pos);
                             tileEntity.fuel += 12000;
                             player.getHeldItem(handIn).shrink(1);
+                            return ActionResultType.SUCCESS;
                         }
                     }
                 }
-                return true;
+                return ActionResultType.FAIL;
             }
         }
-        return true;
+        return ActionResultType.PASS;
     }
 }

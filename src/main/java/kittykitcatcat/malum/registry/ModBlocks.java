@@ -76,7 +76,7 @@ public class ModBlocks
 
         resource_crystal = registerBlock(registry, new ResourceCrystalBlock(Block.Properties.from(Blocks.GLASS)), "resource_crystal");
 
-        smooth_stone_stairs = registerBlock(registry, new ModStairsBlock(Blocks.SMOOTH_STONE::getDefaultState, Block.Properties.from(Blocks.SMOOTH_STONE)), "smooth_stone_stairs");
+        smooth_stone_stairs = registerBlock(registry, new ModStairsBlock(Block.Properties.from(Blocks.SMOOTH_STONE)), "smooth_stone_stairs");
 
         resource_refinery = registerBlock(registry, new ResourceRefineryBlock(metal_properties), "resource_refinery");
 
@@ -88,27 +88,27 @@ public class ModBlocks
         evil_pumpkin = registerBlock(registry, new ModHorizontalBlock(Block.Properties.from(Blocks.CARVED_PUMPKIN)), "evil_pumpkin");
         lit_evil_pumpkin = registerBlock(registry, new ModHorizontalBlock(Block.Properties.from(Blocks.JACK_O_LANTERN)), "lit_evil_pumpkin");
         dark_roofing = registerBlock(registry, new Block(metal_properties), "dark_roofing");
-        dark_roofing_slab = registerBlock(registry, new ModSlabBlock(() -> dark_roofing.getDefaultState(), metal_properties), "dark_roofing_slab");
-        dark_roofing_stairs = registerBlock(registry, new ModStairsBlock(() -> dark_roofing.getDefaultState(), metal_properties), "dark_roofing_stairs");
+        dark_roofing_slab = registerBlock(registry, new ModSlabBlock(metal_properties), "dark_roofing_slab");
+        dark_roofing_stairs = registerBlock(registry, new ModStairsBlock(metal_properties), "dark_roofing_stairs");
 
         refined_glowstone_block = registerBlock(registry, new Block(Block.Properties.from(Blocks.GLOWSTONE)), "refined_glowstone_block");
         refined_glowstone_lamp = registerBlock(registry, new RedstoneLampBlock(Block.Properties.from(Blocks.REDSTONE_LAMP)), "refined_glowstone_lamp");
 
         refined_smooth_stone = registerBlock(registry, new Block(refined_stone_properties), "refined_smooth_stone");
-        refined_smooth_stone_slab = registerBlock(registry, new ModSlabBlock(() -> dark_roofing.getDefaultState(), refined_stone_properties), "refined_smooth_stone_slab");
-        refined_smooth_stone_stairs = registerBlock(registry, new ModStairsBlock(() -> dark_roofing.getDefaultState(), refined_stone_properties), "refined_smooth_stone_stairs");
+        refined_smooth_stone_slab = registerBlock(registry, new ModSlabBlock(refined_stone_properties), "refined_smooth_stone_slab");
+        refined_smooth_stone_stairs = registerBlock(registry, new ModStairsBlock(refined_stone_properties), "refined_smooth_stone_stairs");
 
         refined_pathway = registerBlock(registry, new Block(refined_stone_properties), "refined_pathway");
-        refined_pathway_slab = registerBlock(registry, new ModSlabBlock(() -> refined_pathway.getDefaultState(), refined_stone_properties), "refined_pathway_slab");
-        refined_pathway_stairs = registerBlock(registry, new ModStairsBlock(() -> refined_pathway.getDefaultState(), refined_stone_properties), "refined_pathway_stairs");
+        refined_pathway_slab = registerBlock(registry, new ModSlabBlock(refined_stone_properties), "refined_pathway_slab");
+        refined_pathway_stairs = registerBlock(registry, new ModStairsBlock(refined_stone_properties), "refined_pathway_stairs");
 
         wooden_planks = registerBlock(registry, new Block(wood_properties), "wooden_planks");
-        wooden_planks_slab = registerBlock(registry, new ModSlabBlock(() -> wooden_planks.getDefaultState(), wood_properties), "wooden_planks_slab");
-        wooden_planks_stairs = registerBlock(registry, new ModStairsBlock(() -> wooden_planks.getDefaultState(), wood_properties), "wooden_planks_stairs");
+        wooden_planks_slab = registerBlock(registry, new ModSlabBlock(wood_properties), "wooden_planks_slab");
+        wooden_planks_stairs = registerBlock(registry, new ModStairsBlock(wood_properties), "wooden_planks_stairs");
 
         refined_bricks = registerBlock(registry, new Block(refined_stone_properties), "refined_bricks");
-        refined_bricks_slab = registerBlock(registry, new ModSlabBlock(() -> refined_bricks.getDefaultState(), refined_stone_properties), "refined_bricks_slab");
-        refined_bricks_stairs = registerBlock(registry, new ModStairsBlock(() -> refined_bricks.getDefaultState(), refined_stone_properties), "refined_bricks_stairs");
+        refined_bricks_slab = registerBlock(registry, new ModSlabBlock(refined_stone_properties), "refined_bricks_slab");
+        refined_bricks_stairs = registerBlock(registry, new ModStairsBlock(refined_stone_properties), "refined_bricks_stairs");
 
         wooden_beam = registerBlock(registry, new LogBlock(MaterialColor.BROWN, wood_properties), "wooden_beam");
         wooden_casing = registerBlock(registry, new LogBlock(MaterialColor.BROWN, wood_properties), "wooden_casing");

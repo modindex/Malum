@@ -34,9 +34,9 @@ public class SpiritAugmentationEvents
     @SubscribeEvent
     public static void addTooltip(ItemTooltipEvent event)
     {
-        if (event.getEntityPlayer() != null)
+        if (event.getPlayer() != null)
         {
-            if (event.getEntityPlayer().world.isRemote())
+            if (event.getPlayer().world.isRemote())
             {
                 for (SpiritAugmentationData augmentationData : ModRecipes.spiritAugmentationData)
                 {
@@ -136,7 +136,7 @@ public class SpiritAugmentationEvents
                     if (MathHelper.nextInt(new Random(), 0, 99) <= evokerAugmentStrenght * 5)
                     {
                         LivingEntity entity = (LivingEntity) event.getSource().getTrueSource();
-                        EvokerFangsEntity fangsEntity = new EvokerFangsEntity(playerEntity.world, entity.posX, entity.posY, entity.posZ, entity.rotationYaw, 0, playerEntity);
+                        EvokerFangsEntity fangsEntity = new EvokerFangsEntity(playerEntity.world, entity.getPosX(), entity.getPosY(), entity.getPosZ(), entity.rotationYaw, 0, playerEntity);
                         playerEntity.world.addEntity(fangsEntity);
                     }
                 }

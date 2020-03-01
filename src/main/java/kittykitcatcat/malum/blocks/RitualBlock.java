@@ -15,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -65,7 +66,7 @@ public class RitualBlock extends Block
     }
 
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
         TileEntity entity = worldIn.getTileEntity(pos);
         if (!worldIn.isRemote())
@@ -88,15 +89,15 @@ public class RitualBlock extends Block
                                 player.swingArm(handIn);
                                 Objects.requireNonNull(entity.getWorld()).notifyBlockUpdate(pos, state, state, 3);
                             }
-                            return true;
+                            return ActionResultType.SUCCESS;
                         }
                         //TAKING ITEMS OUT
-                        if (player.isSneaking())
+                        if (player.isCrouching())
                         {
                             int firstNotEmptyStack = getFirstNotEmptySlot(inventory);
                             if (firstNotEmptyStack == -1)
                             {
-                                return true;
+                                return ActionResultType.FAIL;
                             }
                             ItemStack stackToAdd = inventory.getStackInSlot(firstNotEmptyStack);
                             stackToAdd.setCount(1);
@@ -104,7 +105,7 @@ public class RitualBlock extends Block
                             inventory.setStackInSlot(firstNotEmptyStack, ItemStack.EMPTY);
                             player.swingArm(handIn);
                             Objects.requireNonNull(entity.getWorld()).notifyBlockUpdate(pos, state, state, 3);
-                            return true;
+                            return ActionResultType.SUCCESS;
                         }
                         //PUTTING ITEMS IN
                         else
@@ -112,7 +113,7 @@ public class RitualBlock extends Block
                             int firstEmptySlot = getFirstEmptySlot(inventory);
                             if (firstEmptySlot == -1)
                             {
-                                return true;
+                                return ActionResultType.FAIL;
                             }
 
                             ItemStack stackToAdd = stack.copy();
@@ -120,7 +121,7 @@ public class RitualBlock extends Block
                             stack.split(1);
                             player.swingArm(handIn);
                             Objects.requireNonNull(entity.getWorld()).notifyBlockUpdate(pos, state, state, 3);
-                            return true;
+                            return ActionResultType.SUCCESS;
                         }
                     }
                 }

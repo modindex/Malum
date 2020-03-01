@@ -16,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -71,7 +72,7 @@ public class SpiritAugmenterBlock extends Block
     }
 
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
         TileEntity entity = worldIn.getTileEntity(pos);
         if (!worldIn.isRemote())
@@ -111,7 +112,7 @@ public class SpiritAugmenterBlock extends Block
                                                     }
                                                     if (maxAugments <= 0 || SpiritAugmentationData.doesItemHaveGrandAugment(augment_stack) && data.getSpirit().isGrand() && !data.getSpirit().spirit().equals(Objects.requireNonNull(SpiritAugmentationData.getGrandAugmentFromStack(augment_stack)).spirit()))
                                                     {
-                                                        return true;
+                                                        return ActionResultType.FAIL;
                                                     }
                                                 }
                                                 if (augment_nbt.getInt(data.getSpirit().augmentTag()) < data.getSpirit().maxAmount())
@@ -121,22 +122,23 @@ public class SpiritAugmenterBlock extends Block
                                                     ItemStack newStack = spirit_bottle.getItem().getDefaultInstance();
                                                     spirit_bottle.shrink(1);
                                                     player.inventory.addItemStackToInventory(newStack);
+                                                    return ActionResultType.SUCCESS;
                                                 }
-                                                return true;
+                                                return ActionResultType.PASS;
                                             }
                                         }
                                     }
                                 }
                             }
                         }
-                        return true;
+                        return ActionResultType.PASS;
                     }
                     if (spirit_bottle.isEmpty())
                     {
                         if (!inventory.getStackInSlot(0).isEmpty())
                         {
                             player.addItemStackToInventory(inventory.getStackInSlot(0));
-                            return true;
+                            return ActionResultType.SUCCESS;
                         }
                     }
                     else
@@ -145,12 +147,12 @@ public class SpiritAugmenterBlock extends Block
                         {
                             inventory.setStackInSlot(0, spirit_bottle);
                             player.setHeldItem(handIn, ItemStack.EMPTY);
-                            return true;
+                            return ActionResultType.SUCCESS;
                         }
                     }
                 }
             }
         }
-        return true;
+        return ActionResultType.PASS;
     }
 }

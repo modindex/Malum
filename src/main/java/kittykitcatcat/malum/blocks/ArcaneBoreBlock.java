@@ -10,6 +10,7 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Items;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -43,7 +44,7 @@ public class ArcaneBoreBlock extends Block
     }
 
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
         if (!worldIn.isRemote())
         {
@@ -57,7 +58,7 @@ public class ArcaneBoreBlock extends Block
                         entity.fuel += 240;
                         player.inventory.getCurrentItem().shrink(1);
                         player.swingArm(handIn);
-                        return true;
+                        return ActionResultType.SUCCESS;
                     }
                 }
             }

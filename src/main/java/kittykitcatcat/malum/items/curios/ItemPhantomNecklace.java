@@ -1,6 +1,7 @@
 package kittykitcatcat.malum.items.curios;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 import kittykitcatcat.malum.ClientRefferences;
 import kittykitcatcat.malum.MalumMod;
 import kittykitcatcat.malum.capabilities.PlayerProperties;
@@ -9,6 +10,9 @@ import kittykitcatcat.malum.models.ModelPhantomWingRight;
 import kittykitcatcat.malum.spirit_augmentation.SpiritAugmentationData;
 import net.minecraft.client.GameSettings;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,6 +29,8 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import top.theillusivec4.curios.api.capability.ICurio;
 
 import java.util.Random;
+
+import static net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY;
 
 public class ItemPhantomNecklace extends Item implements ICurio
 {
@@ -58,11 +64,8 @@ public class ItemPhantomNecklace extends Item implements ICurio
             }
 
             @Override
-            public void doRender(String identifier, LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
+            public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch)
             {
-                Minecraft.getInstance().getTextureManager().bindTexture(WING_TEXTURE);
-                ICurio.RenderHelper.rotateIfSneaking(livingEntity);
-
                 if (!(this.right_wing_model instanceof ModelPhantomWingRight))
                 {
                     this.right_wing_model = new ModelPhantomWingRight();
@@ -71,36 +74,41 @@ public class ItemPhantomNecklace extends Item implements ICurio
                 {
                     this.left_wing_model = new ModelPhantomWingLeft();
                 }
+                ModelPhantomWingLeft wing_model = (ModelPhantomWingLeft) this.left_wing_model;
+                IVertexBuilder vertexBuilder = ItemRenderer.getBuffer(renderTypeBuffer, wing_model.getRenderType(WING_TEXTURE), false, false);
+
+
+                Minecraft.getInstance().getTextureManager().bindTexture(WING_TEXTURE);
+
+                ICurio.RenderHelper.translateIfSneaking(matrixStack, livingEntity);
+                ICurio.RenderHelper.rotateIfSneaking(matrixStack, livingEntity);
+
                 float totalFlightTime = (float) PlayerProperties.getTotalFlightTime((PlayerEntity) livingEntity);
                 float rotationX = 60 - (totalFlightTime > 30 ? 60 : totalFlightTime * 2);
                 float rotationY = 20f + (totalFlightTime > 25 ? 25 : totalFlightTime);
-                float rotationZ = 10f - (totalFlightTime > 20 ? 20 : totalFlightTime)
-                                  - (float) Math.sin(livingEntity.world.getGameTime()
-                                                     * 0.4f)
-                                    * (totalFlightTime > 36 ? 36 : totalFlightTime);
+                float rotationXAgain = 10f - (totalFlightTime > 20 ? 20 : totalFlightTime) - (float) Math.sin(livingEntity.world.getGameTime() * 0.4f) * (totalFlightTime > 36 ? 36 : totalFlightTime);
 
-                GlStateManager.rotatef(-rotationX, 0.0F, 0.0F, 1.0F);
-                GlStateManager.rotatef(-rotationZ, 0.0F, 0.0F, 1.0F);
-                GlStateManager.rotatef(rotationY, 0.0F, 1.0F, 0.0F);
+                matrixStack.rotate(Vector3f.ZP.rotationDegrees(-rotationX));
+                matrixStack.rotate(Vector3f.ZP.rotationDegrees(-rotationXAgain));
+                matrixStack.rotate(Vector3f.YP.rotationDegrees(rotationY));
 
-                ((ModelPhantomWingRight) right_wing_model).render(livingEntity, limbSwing, limbSwingAmount, ageInTicks,
-                    netHeadYaw, headPitch, scale);
-                GlStateManager.rotatef(-rotationY, 0.0F, 1.0F, 0.0F);
-                GlStateManager.rotatef(rotationZ, 0.0F, 0.0F, 1.0F);
-                GlStateManager.rotatef(rotationX, 0.0F, 0.0F, 1.0F);
+                ((ModelPhantomWingRight) right_wing_model).render(matrixStack, vertexBuilder, NO_OVERLAY, light, 1.0F,
+                    1.0F, 1.0F, 1.0F);
 
-                GlStateManager.rotatef(rotationX, 0.0F, 0.0F, 1.0F);
-                GlStateManager.rotatef(rotationZ, 0.0F, 0.0F, 1.0F);
-                GlStateManager.rotatef(-rotationY, 0.0F, 1.0F, 0.0F);
+                matrixStack.rotate(Vector3f.YP.rotationDegrees(-rotationY));
+                matrixStack.rotate(Vector3f.ZP.rotationDegrees(rotationXAgain));
+                matrixStack.rotate(Vector3f.ZP.rotationDegrees(rotationX));
 
-                ((ModelPhantomWingLeft) left_wing_model).render(livingEntity, limbSwing, limbSwingAmount, ageInTicks,
-                    netHeadYaw, headPitch, scale);
+                matrixStack.rotate(Vector3f.ZP.rotationDegrees(rotationX));
+                matrixStack.rotate(Vector3f.ZP.rotationDegrees(rotationXAgain));
+                matrixStack.rotate(Vector3f.YP.rotationDegrees(-rotationY));
+                ((ModelPhantomWingLeft) left_wing_model).render(matrixStack, vertexBuilder, NO_OVERLAY, light, 1.0F,
+                    1.0F, 1.0F, 1.0F);
 
-                GlStateManager.rotatef(rotationY, 0.0F, 1.0F, 0.0F);
-                GlStateManager.rotatef(-rotationZ, 0.0F, 0.0F, 1.0F);
-                GlStateManager.rotatef(-rotationX, 0.0F, 0.0F, 1.0F);
+                matrixStack.rotate(Vector3f.YP.rotationDegrees(rotationY));
+                matrixStack.rotate(Vector3f.ZP.rotationDegrees(-rotationXAgain));
+                matrixStack.rotate(Vector3f.ZP.rotationDegrees(-rotationX));
             }
-
             @Override
             public void onCurioTick(String identifier, int index, LivingEntity entityLivingBase)
             {

@@ -106,7 +106,6 @@ public class RitualBlockRenderer extends TileEntityRenderer<RitualBlockTileEntit
                 {
                     break;
                 }
-                matrixStack.push();
                 float rot = a / (float) getItemCount(blockEntity.inventory) * 6.28f + ((blockEntity.getWorld().getGameTime() + blockEntity.crafting) % 700f / 700f) * 6.28f;
                 double dist = 0.4;
                 double posY = blockEntity.getPos().getY() + 1.2 + Math.sin(blockEntity.getWorld().getGameTime() / 20f) / 64;
@@ -116,6 +115,7 @@ public class RitualBlockRenderer extends TileEntityRenderer<RitualBlockTileEntit
                 double posX = blockEntity.getPos().getX() + 0.5 - (Math.cos(rot) * dist);
                 double posZ = blockEntity.getPos().getZ() + 0.5 - (Math.sin(rot) * dist);
 
+                matrixStack.push();
                 matrixStack.translate(posX, posY, posZ);
                 matrixStack.scale(0.25f, 0.25f, 0.25f);
 

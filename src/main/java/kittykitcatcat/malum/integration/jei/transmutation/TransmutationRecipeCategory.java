@@ -29,7 +29,7 @@ public class TransmutationRecipeCategory implements IRecipeCategory<BlockTransmu
     {
         background = guiHelper.createBlankDrawable(80, 24);
         localizedName = I18n.format("malum.jei.transmutation");
-        overlay = guiHelper.createDrawable(new ResourceLocation("malum", "textures/gui/transmutation_overlay.png"),
+        overlay = guiHelper.createDrawable(new ResourceLocation(MalumMod.MODID, "textures/gui/transmutation_overlay.png"),
             0, 0, 86, 30);
         icon = guiHelper.createDrawableIngredient(new ItemStack(ModItems.transmutation_gem));
     }

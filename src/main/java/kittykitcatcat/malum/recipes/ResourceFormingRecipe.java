@@ -2,9 +2,6 @@ package kittykitcatcat.malum.recipes;
 
 import net.minecraft.item.Item;
 
-/**
- * Transmutation recipe for Runic Shears
- */
 public class ResourceFormingRecipe
 {
 

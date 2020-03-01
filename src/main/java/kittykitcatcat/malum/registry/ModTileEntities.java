@@ -17,19 +17,19 @@ public class ModTileEntities
     public static TileEntityType<RitualBlockTileEntity> ritual_block_tile_entity;
 
     @ObjectHolder("malum:spirit_altar_tile_entity")
-    public static TileEntityType<?> spirit_altar_tile_entity;
+    public static TileEntityType<SpiritAltarTileEntity> spirit_altar_tile_entity;
 
     @ObjectHolder("malum:arcane_bore_tile_entity")
-    public static TileEntityType<?> arcane_bore_tile_entity;
+    public static TileEntityType<ArcaneBoreTileEntity> arcane_bore_tile_entity;
 
     @ObjectHolder("malum:spirit_augmenter_tile_entity")
-    public static TileEntityType<?> spirit_augmenter_tile_entity;
+    public static TileEntityType<SpiritAugmenterTileEntity> spirit_augmenter_tile_entity;
 
     @ObjectHolder("malum:resource_refinery_tile_entity")
-    public static TileEntityType<?> resource_refinery_tile_entity;
+    public static TileEntityType<ResourceRefineryTileEntity> resource_refinery_tile_entity;
 
     @ObjectHolder("malum:resource_crystal_tile_entity")
-    public static TileEntityType<?> resource_crystal_tile_entity;
+    public static TileEntityType<ResourceCrystalTileEntity> resource_crystal_tile_entity;
 
     @SubscribeEvent
     public static void onTileEntityRegistry(final RegistryEvent.Register<TileEntityType<?>> e)

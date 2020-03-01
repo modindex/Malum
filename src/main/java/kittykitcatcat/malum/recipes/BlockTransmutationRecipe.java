@@ -13,9 +13,6 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-/**
- * Transmutation recipe for Runic Shears
- */
 public class BlockTransmutationRecipe
 {
 

@@ -32,7 +32,7 @@ public class SpiritInfusionRecipeCategory implements IRecipeCategory<SpiritInfus
     {
         background = guiHelper.createBlankDrawable(120, 112);
         localizedName = I18n.format("malum.jei.spirit_infusion");
-        overlay = guiHelper.createDrawable(new ResourceLocation("malum", "textures/gui/spirit_infusion_overlay.png"),
+        overlay = guiHelper.createDrawable(new ResourceLocation(MalumMod.MODID, "textures/gui/spirit_infusion_overlay.png"),
             0, 0, 112, 112);
         icon = guiHelper.createDrawableIngredient(new ItemStack(ModItems.spirit_altar));
     }

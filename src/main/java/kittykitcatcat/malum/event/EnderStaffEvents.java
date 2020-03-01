@@ -67,7 +67,7 @@ public class EnderStaffEvents
                 }
             }
 
-            if (playerEntity.isSneaking())
+            if (playerEntity.isCrouching())
             {
                 for (int i = 8 + (distance) * 4; i >= 8; i--)
                 {
